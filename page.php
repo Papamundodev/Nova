@@ -8,9 +8,8 @@ $title = get_the_title();
 
     <main id="main-<?=$theme_template_name?>">
 
-    <div class="container">
+        <section class="section">
 
-        <section>
             <!-- Page Title -->
             <div class="wrapper">
                 <div class="page-title">
@@ -18,20 +17,11 @@ $title = get_the_title();
                 </div><!-- End Page Title -->
             </div>
 
-        </section>
-
-        <section>
-            <div class="wrapper">
-                <div class=""><?=$content;?></div>
+            <div class="wrapper content">
+                <div class="content"><?=$content;?></div>
             </div>
+
         </section>
-
-
-
-
-    </div>
-
-
 
     </main>
 

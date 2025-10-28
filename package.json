@@ -9,7 +9,7 @@
   ],
   "config": {
     "browsersync": {
-      "proxy": "http://vite.local",
+      "proxy": "http://nova.local",
       "port": 3000
     },
     "js": {

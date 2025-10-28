@@ -3,7 +3,6 @@ $object= get_queried_object();
 $theme_template_name = basename(__FILE__, ".php");
 $theme_location = $args['theme_location'] ?? "header";
 $page_for_posts = get_option('page_for_posts');
-$theme_location = "header";
 $menu_items = \Theme_base\Base::wp_get_menu_array($theme_location);
 ?>
 

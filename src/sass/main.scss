@@ -1,15 +1,11 @@
 @use "reset";
+@use "design-tokens/fonts" as *;
+@use "design-tokens/colors" as *;
+@use "design-tokens/tokens" as *;
+@use "utilities/container-wrapper" as *;
+@use "utilities/flex" as *;
+@use "design-system" as *;
 
-@layer components,  base;
-
-@layer base {
-  body {
-    color: red;
-  }
-}
-
-@layer components {
-  body {
-    color: blue;
-  }
+body {
+  font-family: $text-font;
 }

@@ -13,36 +13,36 @@ $content = wpautop($object->post_content);
 <section class="design-system">
     <div class="container">
         <h1 class="page-title">Design System</h1>
-        <div class="wrapper wrapper-border-inline table-component">
+        <div class="wrapper  table-component">
             <div class="logo-system">
                 <div class="design-system-header ">
                     <h2 class="">Logo</h2>
                 </div>
                 <div class="grid-table">
-                <div class="site-logo img-container-logo-sm">
+                <div class="site-logo logo">
                     <a class="" href="<?=home_url();?>" rel="home" aria-label="Page d'accueil">
                         <img src="<?=get_template_directory_uri();?>/assets/images/logo.jpg" alt="logo du site">
                     </a>
                 </div>
-                <a class="fs-xxl" href="<?=home_url();?>" rel="home" aria-label="Page d'accueil">
+                <a class="fs-xl" href="<?=home_url();?>" rel="home" aria-label="Page d'accueil">
                         <?=get_bloginfo('name');?>
                     </a>
                 </div>
             </div>
         </div>
 
-        <div class="wrapper wrapper-border-inline table-component">
+        <div class="wrapper  table-component">
             <div class="font-system ">
                 <div class="design-system-header ">
                     <h2 class="">Font</h2>
                 </div>
                 <div class="grid-table">
-                    <p class="">fs-xs</p>
-                    <p class="fs-xs">Lorem ipsum dolor.</p>
-                </div>
-                <div class="grid-table">
                     <p class="">fs-sm</p>
                     <p class="fs-sm">Lorem ipsum dolor.</p>
+                </div>
+                <div class="grid-table">
+                    <p class="">fs-default</p>
+                    <p class="fs-default">Lorem ipsum dolor.</p>
                 </div>
                 <div class="grid-table">
                     <p class="">fs-md</p>
@@ -61,30 +61,22 @@ $content = wpautop($object->post_content);
 
         
 
-        <div class="wrapper wrapper-border-inline table-component">
+        <div class="wrapper  table-component">
             <div class="font-family-system ">
                 <div class="design-system-header ">
                     <h2 class="">Font Family</h2>
                 </div>
                 <div class="grid-table">
-                    <p class="">Fira Sans</p>
+                    <p class="">Gerbil</p>
                     <p class="text-font fs-lg">Lorem ipsum DOLOR.</p>
                 </div>
                 <div class="grid-table">
-                    <p class="">EB Garamond</p>
-                    <p class="primary-font fs-lg">Lorem ipsum DOLOR.</p>
-                </div>
-                <div class="grid-table">
-                    <p class="">Outfit</p>
-                    <p class="secondary-font fs-lg">Lorem ipsum DOLOR.</p>
-                </div>
-                <div class="grid-table">
-                    <p class="">Oswald</p>  
+                    <p class="">Gerbil</p>
                     <p class="heading-font fs-lg">Lorem ipsum DOLOR.</p>
                 </div>
             </div>
         </div>
-        <div class="wrapper wrapper-border-inline table-component font-weight-system">
+        <div class="wrapper  table-component font-weight-system">
             <div class="font-family-system ">
                 <div class="design-system-header ">
                     <h2 class="">Font Weight</h2>
@@ -92,117 +84,85 @@ $content = wpautop($object->post_content);
                 <div class="grid-table">
                     <p class="">Text font weight</p>
                     <div class="text-font">
-                        <p class="weight-100">Weight 100 - The quick brown fox jumps over the lazy dog</p>
-                        <p class="weight-200">Weight 200 - The quick brown fox jumps over the lazy dog</p>
-                        <p class="weight-300">Weight 300 - The quick brown fox jumps over the lazy dog</p>
                         <p class="weight-400">Weight 400 - The quick brown fox jumps over the lazy dog</p>
-                        <p class="weight-500">Weight 500 - The quick brown fox jumps over the lazy dog</p>
-                        <p class="weight-600">Weight 600 - The quick brown fox jumps over the lazy dog</p>
-                        <p class="weight-700">Weight 700 - The quick brown fox jumps over the lazy dog</p>
-                        <p class="weight-800">Weight 800 - The quick brown fox jumps over the lazy dog</p>
-                        <p class="weight-900">Weight 900 - The quick brown fox jumps over the lazy dog</p>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="wrapper wrapper-border-inline table-component color-text-system">
-                <div class="design-system-header ">
-                    <h2 class="">Color</h2>
-                </div>
-                <div class="grid-table">
-                    <div class="gap-xs element-ratio-calculating">
-                        <div class="flex-column-center">
-                            <p class="default-color">default-color</p>
-                            <div class="text-color default-color">
-                                <p class="color-computed"></p>
-                            </div>
-                        </div>
-                    </div>
-                    <p class="default-color fs-lg">Lorem ipsum dolor.</p>
-                </div>
-                <div class="grid-table">
-                    <div class="gap-xs element-ratio-calculating">
-                        <div class="flex-column-center">
-                            <p class="gray-color">gray-color</p>
-                            <div class="text-color gray-color">
-                                <p class="color-computed"></p>
-                            </div>
-                        </div>
-                    </div>
-                    <p class="gray-color fs-lg">Lorem ipsum dolor.</p>
-                </div>
-                <div class="grid-table">
-                    <div class="gap-xs element-ratio-calculating">
-                        <div class="flex-column-center">
-                            <p class="heading-color">heading-color</p>
-                            <div class="text-color heading-color">
-                                <p class="color-computed"></p>
-                            </div>
-                        </div>
-                    </div>
-                    <p class="heading-color fs-lg">Lorem ipsum dolor.</p>
-                </div>
-                <div class="grid-table">
-                    <div class="gap-xs element-ratio-calculating">
-                        <div class="flex-column-center">
-                            <p class="accent-color">accent-color</p>
-                            <div class="text-color accent-color">
-                                <p class="color-computed"></p>
-                            </div>
-                        </div>
-                    </div>
-                    <p class="accent-color fs-lg">Lorem ipsum dolor.</p>
-                </div>
-                <div class="grid-table">
-                    <div class="gap-xs element-ratio-calculating">
-                        <div class="flex-column-center">
-                            <p class="link-color">link-color</p>
-                            <div class="text-color link-color">
-                                <p class="color-computed"></p>
-                            </div>
-                        </div>
-                    </div>
-                    <p class="link-color fs-lg">Lorem ipsum dolor.</p>
-                </div>
-                <div class="grid-table">
-                    <div class="gap-xs element-ratio-calculating">
-                        <div class="flex-column-center">
-                            <p class="link-hover-color">link-hover-color</p>
-                            <div class="text-color link-hover-color">
-                                <p class="color-computed"></p>
-                            </div>
-                        </div>
-                    </div>
-                    <p class="link-hover-color fs-lg">Lorem ipsum dolor.</p>
-                </div>
-                <div class="grid-table">
-                    <div class="gap-xs element-ratio-calculating">
-                        <div class="flex-column-center">
-                            <p class="link-active-color">link-active-color</p>
-                            <div class="text-color link-active-color">
-                                <p class="color-computed"></p>
-                            </div>
-                        </div>
-                    </div>
-                    <p class="link-active-color fs-lg">Lorem ipsum dolor.</p>
-                </div>
-                <div class="bg-background-color element-ratio-calculating grid-table">
+        <div class="wrapper  table-component color-text-system">
+            <div class="design-system-header ">
+                <h2 class="">Color</h2>
+            </div>
+            <div class="grid-table">
+                <div class="gap-xs element-ratio-calculating">
                     <div class="flex-column-center">
-                        <p class="">Background Color</p>
-                        <div class="bg-color-computed"></div>
-                    </div>
-                    <div class="gap-lg flex-center fs-sm">
-                        <p class=" default-color text-color"><span class="ratio"></span></p>
-                        <p class=" gray-color text-color"><span class="ratio"></span></p>
-                        <p class=" heading-color text-color"><span class="ratio"></span></p>
-                        <p class=" accent-color text-color"><span class="ratio"></span></p>
+                        <p class="default-color">default-color</p>
+                        <div class="text-color default-color">
+                            <p class="color-computed"></p>
+                        </div>
                     </div>
                 </div>
-        
+                <p class="default-color fs-lg">Lorem ipsum dolor.</p>
+            </div>
+            <div class="grid-table">
+                <div class="gap-xs element-ratio-calculating">
+                    <div class="flex-column-center">
+                        <p class="gray-color">gray-color</p>
+                        <div class="text-color gray-color">
+                            <p class="color-computed"></p>
+                        </div>
+                    </div>
+                </div>
+                <p class="gray-color fs-lg">Lorem ipsum dolor.</p>
+            </div>
+            <div class="grid-table">
+                <div class="gap-xs element-ratio-calculating">
+                    <div class="flex-column-center">
+                        <p class="primary-color">primary-color</p>
+                        <div class="text-color primary-color">
+                            <p class="color-computed"></p>
+                        </div>
+                    </div>
+                </div>
+                <p class="primary-color fs-lg">Lorem ipsum dolor.</p>
+            </div>
+            <div class="grid-table">
+                <div class="gap-xs element-ratio-calculating">
+                    <div class="flex-column-center">
+                        <p class="accent-color">accent-color</p>
+                        <div class="text-color accent-color">
+                            <p class="color-computed"></p>
+                        </div>
+                    </div>
+                </div>
+                <p class="accent-color fs-lg">Lorem ipsum dolor.</p>
+            </div>
+            <div class="grid-table">
+                <div class="gap-xs element-ratio-calculating">
+                    <div class="flex-column-center">
+                        <p class="secondary-color">secondary-color</p>
+                        <div class="text-color secondary-color">
+                            <p class="color-computed"></p>
+                        </div>
+                    </div>
+                </div>
+                <p class="secondary-color fs-lg">Lorem ipsum dolor.</p>
+            </div>
+            <div class="grid-table">
+                <div class="gap-xs element-ratio-calculating">
+                    <div class="flex-column-center">
+                        <p class="tertiary-color">tertiary-color</p>
+                        <div class="text-color tertiary-color">
+                            <p class="color-computed"></p>
+                        </div>
+                    </div>
+                </div>
+                <p class="tertiary-color fs-lg">Lorem ipsum dolor.</p>
+            </div>
         </div>
 
-        <div class="wrapper wrapper-border-inline background-color-system ">
+        <div class="wrapper  background-color-system ">
             <div class="design-system-header ">
                 <h2 class="">Background Color</h2>
             </div>
@@ -215,137 +175,128 @@ $content = wpautop($object->post_content);
                         </div>
                         <p class="default-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p>
                         <p class="gray-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p>
-                        <p class="heading-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p>
+                        <p class="primary-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p>
                         <p class="accent-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p>
-                        <p class="link-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p> 
-                        <p class="link-hover-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p>
-                        <p class="link-active-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p>
+                        <p class="secondary-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p> 
+                        <p class="tertiary-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p>
                     </div>
                 </div>
                 <div>
-                    <div class="bg-background-color-2 element-ratio-calculating">
+                    <div class="bg-primary-color element-ratio-calculating">
                         <div class="flex-column-center gap-xs">
-                            <p class="fs-sm">background-color-2</p>
+                            <p class="fs-sm">primary-color</p>
                             <div class="bg-color-computed"></div>
                         </div>  
                         <p class="default-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p>
                         <p class="gray-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p>
-                        <p class="heading-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p>
+                        <p class="primary-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p>
                         <p class="accent-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p>
-                        <p class="link-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p>
-                        <p class="link-hover-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p>
-                        <p class="link-active-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p>
+                        <p class="secondary-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p>
+                        <p class="tertiary-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p>
                     </div>
                 </div>
                 <div>
-                    <div class="bg-background-color-3 element-ratio-calculating">
+                    <div class="bg-secondary-color element-ratio-calculating">
                         <div class="flex-column-center gap-xs">
-                            <p class="fs-sm">background-color-3</p>
+                            <p class="fs-sm">secondary-color</p>
                             <div class="bg-color-computed"></div>
                         </div>
                         <p class="default-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p>
                         <p class="gray-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p>
-                        <p class="heading-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p>
+                        <p class="primary-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p>
                         <p class="accent-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p>
-                        <p class="link-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p>
-                        <p class="link-hover-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p>
-                        <p class="link-active-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p>
+                        <p class="secondary-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p>
+                        <p class="tertiary-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p>
                     </div>
                 </div>
                 <div>
-                    <div class="bg-background-color-4 element-ratio-calculating">
+                    <div class="bg-tertiary-color element-ratio-calculating">
                         <div class="flex-column-center gap-xs">
-                            <p class="fs-sm">background-color-4</p>
+                            <p class="fs-sm">tertiary-color</p>
                             <div class="bg-color-computed"></div>
                         </div>
                         <p class="default-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p>
                         <p class="gray-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p>
-                        <p class="heading-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p>
+                        <p class="primary-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p>
                         <p class="accent-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p>
-                        <p class="link-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p>
-                        <p class="link-hover-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p>
-                        <p class="link-active-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p>
+                        <p class="secondary-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p>
+                        <p class="tertiary-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p>
                     </div>
                 </div>
                 <div>
-                    <div class="bg-surface-color element-ratio-calculating">
+                    <div class="bg-accent-color element-ratio-calculating">
                         <div class="flex-column-center gap-xs">
-                            <p class="fs-sm">surface-color</p>
+                            <p class="fs-sm">accent-color</p>
                             <div class="bg-color-computed"></div>
                         </div>
                         <p class="default-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p>
                         <p class="gray-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p>
-                        <p class="heading-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p>
+                        <p class="primary-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p>
                         <p class="accent-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p>
-                        <p class="link-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p>
-                        <p class="link-hover-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p>
-                        <p class="link-active-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p>
+                        <p class="secondary-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p>
+                        <p class="tertiary-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p>
                     </div>
                 </div>
                 <div>
-                    <div class="bg-surface-color-2 element-ratio-calculating">
+                    <div class="bg-purple-color element-ratio-calculating">
                         <div class="flex-column-center gap-xs">
-                            <p class="fs-sm">surface-color-2</p>
+                            <p class="fs-sm">purple-color</p>
                             <div class="bg-color-computed"></div>
                         </div>
                         <p class="default-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p>
                         <p class="gray-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p>
-                        <p class="heading-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p>
+                        <p class="primary-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p>
                         <p class="accent-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p>
-                        <p class="link-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p>
-                        <p class="link-hover-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p>
-                        <p class="link-active-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p>
+                        <p class="secondary-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p>
+                        <p class="tertiary-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p>
                     </div>
                 </div>
                 <div>
-                    <div class="bg-surface-color-3 element-ratio-calculating">
+                    <div class="bg-blue-color element-ratio-calculating">
                         <div class="flex-column-center gap-xs">
-                            <p class="fs-sm">surface-color-3</p>
+                            <p class="fs-sm">blue-color</p>
                             <div class="bg-color-computed"></div>
                         </div>
                         <p class="default-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p>
                         <p class="gray-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p>
-                        <p class="heading-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p>
+                        <p class="primary-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p>
                         <p class="accent-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p>
-                        <p class="link-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p>
-                        <p class="link-hover-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p>
-                        <p class="link-active-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p>
+                        <p class="secondary-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p>
+                        <p class="tertiary-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p>
                     </div>
                 </div>
                 <div>
-                    <div class="bg-surface-color-4 element-ratio-calculating">
+                    <div class="bg-pink-blur element-ratio-calculating">
                        <div class="flex-column-center gap-xs">
-                            <p class="fs-sm">surface-color-4</p>
+                            <p class="fs-sm">pink-blur</p>
                             <div class="bg-color-computed"></div>
                         </div>
                         <p class="default-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p>
                         <p class="gray-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p>
-                        <p class="heading-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p>
+                        <p class="primary-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p>
                         <p class="accent-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p>
-                        <p class="link-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p>
-                        <p class="link-hover-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p>
-                        <p class="link-active-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p>
+                        <p class="secondary-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p>
+                        <p class="tertiary-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p>
                     </div>
                 </div>
                 <div>
-                    <div class="bg-surface-color-5 element-ratio-calculating">
+                    <div class="bg-orange-color element-ratio-calculating">
                         <div class="flex-column-center gap-xs">
-                            <p class="fs-sm">surface-color-5</p>
+                            <p class="fs-sm">orange-color</p>
                             <div class="bg-color-computed"></div>
                         </div>
                         <p class="default-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p>
                         <p class="gray-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p>
-                        <p class="heading-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p>
+                        <p class="primary-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p>
                         <p class="accent-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p>
-                        <p class="link-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p>
-                        <p class="link-hover-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p>
-                        <p class="link-active-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p>
+                        <p class="secondary-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p>
+                        <p class="tertiary-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p>
                     </div>
                 </div>
             </div>
         </div>
 
-         <div class="wrapper wrapper-border-inline text-system ">
+         <div class="wrapper  text-system ">
             <div class="design-system-header ">
                 <h2 class="">Text</h2>
             </div>
@@ -473,7 +424,7 @@ $content = wpautop($object->post_content);
             </div>
         </div>
 
-        <div class="wrapper wrapper-border-inline border-radius-system">
+        <div class="wrapper  border-radius-system">
             <div class="design-system-header ">
                 <h2 class="">Border Radius</h2>
             </div>
@@ -534,7 +485,7 @@ $content = wpautop($object->post_content);
 
 
 
-        <div class="wrapper wrapper-border-inline img-sizes-system">
+        <div class="wrapper  img-sizes-system">
             <div class="design-system-header ">
                 <h2 class="">Img Sizes</h2>
             </div>
@@ -588,7 +539,7 @@ $content = wpautop($object->post_content);
         </div>
 
 
-        <div class="wrapper wrapper-border-inline button-system ">
+        <div class="wrapper  button-system ">
             <div class="design-system-header ">
                 <h2 class="">Buttons</h2>
             </div>
@@ -617,7 +568,7 @@ $content = wpautop($object->post_content);
         </div>
 
     
-        <div class="wrapper wrapper-border-inline dropdown-system">
+        <div class="wrapper  dropdown-system">
             <div class="design-system-header ">
                 <h2 class="">Dropdowns</h2>
             </div>
@@ -725,7 +676,7 @@ $content = wpautop($object->post_content);
             </div>
         </div>
 
-        <div class="wrapper wrapper-border-inline nav-system ">
+        <div class="wrapper  nav-system ">
             <div class="design-system-header ">
                 <h2 class="">Nav</h2>
             </div>
@@ -753,7 +704,7 @@ $content = wpautop($object->post_content);
             </header>
         </div>
 
-        <div class="wrapper wrapper-border-inline test-layer-system">
+        <div class="wrapper  test-layer-system">
             <div class="design-system-header ">
                 <h2 class="">Texts</h2>
             </div>

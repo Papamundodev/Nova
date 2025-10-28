@@ -1,0 +1,90 @@
+/* Colors */
+:root {
+  /* black and white */
+  --color-scheme: light dark;
+  --white-color: #ffffff;
+  --black-color: #1e1e1e;
+  --background-color: var(--white-color);
+  --contrast-color: var(--secondary-color);
+  --default-color: var(--primary-color);
+  --gray-color: #f5f5f5;
+
+  /* primary colors */
+  --primary-color: #17194a;
+
+  /* secondary colors */
+  --secondary-color: #e9fe5f;
+
+  /* tertiary colors */
+  --tertiary-color: #f5b5ee;
+
+  /* accent colors */
+  --accent-color: var(--primary-color);
+
+  --purple-color: #d497ec;
+  --blue-color: #99c2fe;
+  --pink-blur: #f4e6fb;
+  --orange-color: #ffbe99;
+}
+
+.dark-theme {
+  --white-color: #f5f5f5;
+  --black-color: #1e1e1e;
+  --background-color: var(--primary-color);
+  --contrast-color: var(--primary-color);
+  --default-color: var(--white-color);
+  --gray-color: #f5f5f5;
+
+  /* primary colors */
+  --primary-color: #17194a;
+
+  /* secondary colors */
+  --secondary-color: #e9fe5f;
+
+  /* tertiary colors */
+  --tertiary-color: #f5b5ee;
+
+  /* accent colors */
+  --accent-color: var(--secondary-color);
+}
+
+$black-color: var(--black-color);
+$white-color: var(--white-color);
+$background-color: var(--background-color);
+$contrast-color: var(--contrast-color);
+$default-color: var(--default-color);
+$gray-color: var(--gray-color);
+$primary-color: var(--primary-color);
+$secondary-color: var(--secondary-color);
+$tertiary-color: var(--tertiary-color);
+$accent-color: var(--accent-color);
+$purple-color: var(--purple-color);
+$blue-color: var(--blue-color);
+$pink-blur: var(--pink-blur);
+$orange-color: var(--orange-color);
+
+$colors: (
+  "background-color": $background-color,
+  "contrast-color": $contrast-color,
+  "default-color": $default-color,
+  "primary-color": $primary-color,
+  "secondary-color": $secondary-color,
+  "tertiary-color": $tertiary-color,
+  "accent-color": $accent-color,
+  "gray-color": $gray-color,
+  "purple-color": $purple-color,
+  "blue-color": $blue-color,
+  "pink-blur": $pink-blur,
+  "orange-color": $orange-color,
+);
+
+@each $key, $value in $colors {
+  .#{$key} {
+    color: $value;
+  }
+}
+@each $key, $value in $colors {
+  .bg-#{$key} {
+    background-color: $value;
+  }
+}

@@ -1,0 +1,76 @@
+@use "utilities/flex" as *;
+@use "utilities/container-wrapper" as *;
+@use "design-tokens/tokens" as *;
+@use "design-tokens/colors" as *;
+
+@mixin grid-table-2-columns {
+  // mobile
+  @include flex-column-center($spacer-md);
+  padding-block: $spacer-md;
+  // responsive
+  @media (width >= $breakpoint-sm) {
+    display: grid;
+    grid-template-columns: minmax(150px, auto) 1fr;
+    & > *:not(:first-child) {
+      align-self: center;
+      justify-self: center;
+    }
+  }
+}
+
+@mixin grid-col-3 {
+  //mobile
+  .flex-auto {
+    @include flex-column-center($spacer-md);
+    & > * {
+      width: 100%;
+      @content;
+    }
+  }
+  // responsive
+  @each $key, $value in $breakpoints {
+    @media (width >= $value) and (width <= $breakpoint-xxl) and (width >= $breakpoint-md) {
+      .flex-auto {
+        width: calc($value - 26%);
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: $spacer-md;
+        & > * {
+          @content;
+        }
+      }
+    }
+  }
+  // desktop
+  @media (width >= $breakpoint-xxl) {
+    .flex-auto {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: $spacer-md;
+      width: calc(1200px - 26%);
+      & > * {
+        @content;
+      }
+    }
+  }
+}
+
+@mixin card_column_center {
+  & > * {
+    @include flex-column-center;
+    margin-inline: auto;
+    padding: $spacer-md;
+  }
+}
+
+.table-component {
+  .grid-table {
+    @include grid-table-2-columns;
+  }
+}
+
+.background-color-system {
+  @include grid-col-3 {
+    @include card_column_center;
+  }
+}

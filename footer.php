@@ -1,4 +1,4 @@
-<footer class="flex-column-center gap-lg">
+<footer class="">
     <div class="wrapper">
         <?php get_template_part('partials/header/navbar-desktop', "navbar", ['theme_location' => 'footer']); ?>
     </div>

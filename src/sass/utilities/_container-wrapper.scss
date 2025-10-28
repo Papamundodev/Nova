@@ -1,0 +1,69 @@
+/* ------- Breakpoint ------- */
+$breakpoint-sm: 576px;
+$breakpoint-md: 768px;
+$breakpoint-lg: 992px;
+$breakpoint-xl: 1200px;
+$breakpoint-xxl: 1440px;
+
+$breakpoints: (
+  "sm": $breakpoint-sm,
+  "md": $breakpoint-md,
+  "lg": $breakpoint-lg,
+  "xl": $breakpoint-xl,
+  "xxl": $breakpoint-xxl,
+);
+
+/* ------- Spacer ------- */
+$spacer-xs: 5px;
+$spacer-sm: 12px;
+$spacer-md: 15px;
+$spacer-lg: 20px;
+$spacer-xl: 26px;
+$spacer-xxl: 100px;
+
+$spacer-vi-xs: calc($spacer-xs + 0.5vi);
+$spacer-vi-sm: calc($spacer-sm + 0.5vi);
+$spacer-vi-md: calc($spacer-md + 0.5vi);
+$spacer-vi-lg: calc($spacer-lg + 0.5vi);
+$spacer-vi-xl: calc($spacer-xl + 0.5vi);
+$spacer-vi-xxl: calc($spacer-xxl + 0.5vi);
+
+$spacers: (
+  "xs": $spacer-xs,
+  "sm": $spacer-sm,
+  "md": $spacer-md,
+  "lg": $spacer-lg,
+  "xl": $spacer-xl,
+);
+
+@each $key, $value in $spacers {
+  .gap-#{$key} {
+    gap: $value;
+  }
+}
+
+/* ------- Wrapper ------- */
+
+$wrapper-padding-inline: $spacer-md;
+
+.container {
+  .wrapper {
+    padding-inline: $wrapper-padding-inline;
+  }
+}
+
+/* ------- Container ------- */
+
+@mixin container() {
+  width: 100%;
+  @each $key, $value in $breakpoints {
+    @media (width >= $value) and (width >= $breakpoint-sm) {
+      width: calc($value - 26%);
+    }
+  }
+}
+
+.container {
+  margin-inline: auto;
+  @include container;
+}

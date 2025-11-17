@@ -14,35 +14,37 @@ if (function_exists('wp_body_open')){
 }
 ?>
 
-<header class=" header">
+<header class="header">
         <!-- Logo -->
-    <div class="wrapper">
+    <div class="wrapper logo-container">
         <?php get_template_part('partials/header/logo'); ?>
     </div>
 
-    <div class="wrapper-navbar">
-        <?php get_template_part('partials/header/navbar-desktop', null, ['theme_location' => 'header']); ?>
-    </div>
-    <div class="wrapper-navbar">
-        <?php get_template_part('partials/header/navbar-mobile', null, ['theme_location' => 'header']); ?>
+    <div class="nav-container">
+        <div class="wrapper-navbar">
+            <?php get_template_part('partials/header/navbar-desktop', null, ['theme_location' => 'header']); ?>
+        </div>
+        <div class="wrapper-navbar">
+            <?php get_template_part('partials/header/navbar-mobile', null, ['theme_location' => 'header']); ?>
+        </div>
     </div>
 
 
-            <?php if (function_exists('theme_light_dark_form')): ?>
-            <div class="wrapper-theme-light-dark">
-                <?=do_shortcode('[theme_light_dark]'); ?>
+    <div class="wrapper burger-menu-container">
+        <button class="burger-container btn" popovertarget="navmenu-header-mobile" id="theme-navbar-toggler">  
+            <div id="burger-menu" class="burger-menu">
+                <span class="custom-burger"></span>
+                <span class="custom-burger"></span>
+                <span class="custom-burger"></span  >
+                <span class="custom-burger"></span>
             </div>
-        <?php endif; ?>
-
-    <div class="wrapper">
-        <button popovertarget="navmenu-header-mobile" id="theme-navbar-toggler">
-            <span class="custom-burger"></span>
-            <span class="custom-burger"></span>
-            <span class="custom-burger"></span>
-            <span class="custom-burger"></span>
         </button>
     </div>
 
-
 </header>
 
+    <?php if (function_exists('theme_light_dark_form')): ?>
+        <div class="wrapper-theme-light-dark">
+            <?=do_shortcode('[theme_light_dark]'); ?>
+        </div>
+    <?php endif; ?>

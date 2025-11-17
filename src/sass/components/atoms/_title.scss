@@ -1,6 +1,6 @@
-@use "../design-tokens/fonts" as *;
-@use "../design-tokens/colors" as *;
-@use "../utilities/container-wrapper" as *;
+@use "../../design-tokens/fonts" as *;
+@use "../../design-tokens/colors" as *;
+@use "../../utilities/container-wrapper" as *;
 
 @mixin heading-big-1 {
   font-family: $text-font;

@@ -9,10 +9,10 @@ $menu_items = \Theme_base\Base::wp_get_menu_array($theme_location);
 
 <?php if(is_array($menu_items) && count($menu_items) > 0): ?>
 <nav id="navmenu-<?=$theme_location?>" class="navmenu navmenu-desktop">
-<ul class="flex-center gap-xl">
+<ul class="">
     <?php foreach($menu_items as $item): ?>
     <?php if(empty($item['children'])):?>
-        <li class="<?= \Theme_base\Base::get_active_class($item) ?> <?= \Theme_base\Base::get_parent_active_class($item, $object) ?>">
+        <li class="<?= \Theme_base\Base::get_active_class($item) ?> <?= \Theme_base\Base::get_parent_active_class($item, $object) ?> nav-item">
         <a class="nav-link" 
         href="<?=$item['url']?>"
         target="<?=$item['target']?>"
@@ -20,7 +20,7 @@ $menu_items = \Theme_base\Base::wp_get_menu_array($theme_location);
         ><?=$item['title']?></a>
         </li>
     <?php else: ?>
-        <li class="<?= \Theme_base\Base::get_active_class($item) ?> <?= \Theme_base\Base::get_parent_active_class($item, $object) ?>">
+        <li class="<?= \Theme_base\Base::get_active_class($item) ?> <?= \Theme_base\Base::get_parent_active_class($item, $object) ?> nav-item">
             <nav aria-label="navigation" tabindex="0" class="dropdown-header dropdown">
                 <div class="dropdown-link ">
                     <div class="svg-container">
@@ -30,7 +30,7 @@ $menu_items = \Theme_base\Base::wp_get_menu_array($theme_location);
                 </div>
                 <ul class="dropdown-menu">
                     <?php foreach($item['children'] as $child): ?>
-                    <li class="<?= \Theme_base\Base::get_active_class($child) ?>">
+                    <li class="<?= \Theme_base\Base::get_active_class($child) ?> nav-item">
                         <a  class="nav-link"
                         href="<?=$child['url']?>"
                         title="<?=$child['title']?>"

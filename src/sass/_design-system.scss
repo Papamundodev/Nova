@@ -2,8 +2,8 @@
 @use "utilities/container-wrapper" as *;
 @use "design-tokens/tokens" as *;
 @use "design-tokens/colors" as *;
-@use "components/title" as *;
-@use "components/text" as *;
+@use "components/atoms/title" as *;
+@use "components/atoms/text" as *;
 
 @mixin grid-table-2-columns {
   // mobile

@@ -1,7 +1,7 @@
-@use "../design-tokens/colors" as *;
-@use "../design-tokens/tokens" as *;
-@use "../utilities/container-wrapper" as *;
-@use "../components/text" as *;
+@use "../../design-tokens/colors" as *;
+@use "../../design-tokens/tokens" as *;
+@use "../../utilities/container-wrapper" as *;
+@use "../../components/atoms/text" as *;
 /* ------- BUTTONS  ------- */
 
 @mixin btn {
@@ -28,7 +28,7 @@
   background-color: $primary-color;
   button {
     color: $contrast-color;
-    @include text-button-primary;
+    @include text-button;
     padding-block: $spacer-sm;
     padding-inline: $spacer-lg;
   }
@@ -48,14 +48,16 @@
 @mixin button-background-secondary {
   width: fit-content;
   background-color: $secondary-color;
+  transition: background-color 0.3s ease-in-out;
   button {
     color: $contrast-color;
-    @include text-button-primary;
+    @include text-button;
     padding-block: $spacer-sm;
     padding-inline: $spacer-md;
     border: 2px solid $secondary-color;
   }
   &:hover {
+    transition: background-color 0.3s ease-in-out;
     background-color: $contrast-color;
     button {
       color: $secondary-color;
@@ -82,7 +84,7 @@
         stroke: $contrast-color;
         fill: $contrast-color;
       }
-      animation: arrow-animation-down 0.35s ease-in-out forwards;
+      animation: arrow-animation-down 0.4s ease-in-out forwards;
     }
   }
   &:hover {
@@ -91,7 +93,7 @@
         stroke: $secondary-color;
         fill: $secondary-color;
       }
-      animation: arrow-animation-up 0.35s ease-in-out forwards;
+      animation: arrow-animation-up 0.4s ease-in-out forwards;
     }
   }
   &:active,
@@ -183,8 +185,8 @@
       z-index: 10;
     }
     .hover-bg {
-      width: 80em;
-      height: 80em;
+      width: 60em;
+      height: 60em;
       background-color: $default-color;
     }
   }

@@ -1,7 +1,7 @@
-@use "../design-tokens/fonts" as *;
-@use "../design-tokens/colors" as *;
-@use "../utilities/container-wrapper" as *;
-@use "../design-tokens/tokens" as *;
+@use "../../design-tokens/fonts" as *;
+@use "../../design-tokens/colors" as *;
+@use "../../utilities/container-wrapper" as *;
+@use "../../design-tokens/tokens" as *;
 
 @mixin text-paragraph-1 {
   font-family: $text-font;
@@ -21,7 +21,7 @@
   text-wrap: pretty;
 }
 
-@mixin text-button-primary {
+@mixin text-button {
   font-family: $heading-font;
   font-size: $font-size-default;
   line-height: $line-height-heading;
@@ -29,12 +29,11 @@
   text-box-trim: trim-both;
 }
 
-@mixin text-button-icon {
-  font-family: $heading-font;
+@mixin text-nav {
+  font-family: $text-font;
   font-size: $font-size-xs;
-  line-height: $icon-md;
-  font-weight: $font-weight-400;
-  letter-spacing: $letter-spacing-heading;
+  line-height: $line-height-paragraph;
+  letter-spacing: $letter-spacing-paragraph;
   text-box-trim: trim-both;
 }
 

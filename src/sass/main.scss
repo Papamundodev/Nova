@@ -5,9 +5,12 @@
 @use "utilities/flex" as *;
 @use "utilities/container-wrapper" as *;
 @use "design-system" as *;
-@use "components/title" as *;
-@use "components/text" as *;
-@use "components/button" as *;
+@use "components/atoms/title" as *;
+@use "components/atoms/burger" as *;
+@use "components/atoms/text" as *;
+@use "components/atoms/button" as *;
+@use "components/atoms/nav-items" as *;
+@use "components/organisms/header" as *;
 
 body {
   font-family: $text-font;

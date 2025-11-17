@@ -1,0 +1,46 @@
+@use "../../components/atoms/text" as *;
+@use "../../design-tokens/colors" as *;
+@use "../../utilities/container-wrapper" as *;
+.navmenu {
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+}
+
+@media (width <= $breakpoint-md) {
+  .navmenu {
+    ul {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: $spacer-vi-md;
+      justify-content: flex-start;
+      align-items: center;
+    }
+  }
+}
+
+.nav-item {
+  .nav-link {
+    @include text-nav;
+    text-decoration: none;
+    color: $default-color;
+    padding-inline: $spacer-vi-xl;
+    padding-block: $spacer-xs;
+    transition: background-color 0.2s ease-in-out;
+  }
+  &:hover .nav-link {
+    transition: background-color 0.2s ease-in-out;
+    background-color: $gray-color;
+  }
+  &.active .nav-link {
+    background-color: initial;
+    text-decoration: underline;
+    text-underline-offset: $spacer-xs;
+    text-decoration-thickness: 2px;
+    text-decoration-color: $primary-color;
+    color: $primary-color;
+  }
+}

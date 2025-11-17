@@ -12,8 +12,8 @@ $theme_location = $args['theme_location'] ?? "header";
   <ul class="">
     <?php foreach($menu_items as $item): ?>
       <?php if(empty($item['children'])):?>
-        <li class="<?= \Theme_base\Base::get_active_class($item) ?>">
-          <a class="" 
+        <li class="<?= \Theme_base\Base::get_active_class($item) ?> nav-item">
+          <a class="nav-link" 
           href="<?=$item['url']?>"
           target="<?=$item['target']?>"
           rel="<?= $item['target'] === '_blank' ? 'noopener ' : '' ?>"
@@ -36,8 +36,8 @@ $theme_location = $args['theme_location'] ?? "header";
 
           <ul class="dropdown-menu">
             <?php foreach($item['children'] as $child): ?>
-              <li class="<?= \Theme_base\Base::get_active_class($child) ?>">
-                <a  class=""
+              <li class="<?= \Theme_base\Base::get_active_class($child) ?> nav-item">
+                <a  class="nav-link"
                 href="<?=$child['url']?>"
                 title="<?=$child['title']?>"
                 target="<?=$child['target']?>"

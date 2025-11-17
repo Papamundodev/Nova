@@ -2,6 +2,8 @@
 @use "utilities/container-wrapper" as *;
 @use "design-tokens/tokens" as *;
 @use "design-tokens/colors" as *;
+@use "components/title" as *;
+@use "components/text" as *;
 
 @mixin grid-table-2-columns {
   // mobile
@@ -47,7 +49,6 @@
       display: grid;
       grid-template-columns: 1fr 1fr 1fr;
       gap: $spacer-md;
-      width: calc(1200px - 26%);
       & > * {
         @content;
       }
@@ -66,11 +67,59 @@
 .table-component {
   .grid-table {
     @include grid-table-2-columns;
+    & > p:first-child {
+      @include text-paragraph-lead;
+      color: $primary-color;
+      text-transform: uppercase;
+    }
+    & code {
+      color: $secondary-color;
+    }
   }
+  border-block-end: $spacer-xs solid $gray-color;
 }
 
 .background-color-system {
   @include grid-col-3 {
     @include card_column_center;
   }
+}
+
+.design-system {
+  h1 {
+    margin-block: $spacer-lg $spacer-xxl;
+    margin-inline: auto;
+  }
+  .table-component,
+  .background-color-system {
+    padding-block: $spacer-xl;
+    h2 {
+      margin-block: $spacer-md $spacer-lg;
+      @include heading-medium-2;
+      color: $primary-color;
+      text-align: center;
+    }
+  }
+}
+
+.button-system {
+  .button-wrapper {
+    margin-block-end: $spacer-lg;
+  }
+}
+
+.site-logo {
+  display: flex;
+  justify-content: space-between;
+  margin-block: $spacer-xl;
+  a {
+    max-width: 200px;
+  }
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+  margin-inline: auto;
 }

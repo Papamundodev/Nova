@@ -1,15 +1,24 @@
 @font-face {
-  font-family: "Gerbil";
-  src: url("../fonts/gerbil.otf") format("opentype");
+  font-family: "Coda";
+  src: url("../fonts/Coda.ttf") format("truetype");
   font-weight: 100 900;
   font-display: swap;
   font-stretch: 100%;
   font-style: normal;
 }
 
+@font-face {
+  font-family: "Russo one";
+  src: url("../fonts/RussoOne.ttf") format("truetype");
+  font-weight: 400;
+  font-display: swap;
+  font-stretch: 100%;
+  font-style: normal;
+}
+
 :root {
-  --text-font: "Gerbil", system-ui, -apple-system, "Segoe UI", sans-serif;
-  --heading-font: "Gerbil", serif;
+  --text-font: "Coda", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --heading-font: "Russo one", serif;
   --font-size-base: 16px;
 }
 
@@ -27,13 +36,24 @@ $fonts: (
   }
 }
 
-$font-size-sm: clamp(0.8125rem, 0.90625rem + 0.09375vi, 1rem);
-$font-size-default: clamp(1rem, 1.125rem + 0.125vi, 1.25rem);
-$font-size-md: clamp(2rem, 2.0625rem + 0.0625vi, 2.125rem);
-$font-size-lg: clamp(3rem, 3.25rem + 0.25vi, 3.5rem);
-$font-size-xl: clamp(5rem, 5.5rem + 0.5vi, 6rem);
+:root {
+  --font-size-xs: clamp(0.8125rem, 0.90625rem + 0.09375vi, 1rem);
+  --font-size-default: clamp(1rem, 1.125rem + 0.125vi, 1.25rem);
+  --font-size-sm: clamp(1.25rem, 1.4375rem + 0.1875vi, 1.5rem);
+  --font-size-md: clamp(2rem, 2.0625rem + 0.0625vi, 2.125rem);
+  --font-size-lg: clamp(3rem, 3.25rem + 0.25vi, 3.5rem);
+  --font-size-xl: clamp(5rem, 5.5rem + 0.5vi, 6rem);
+}
+
+$font-size-xs: var(--font-size-xs);
+$font-size-default: var(--font-size-default);
+$font-size-sm: var(--font-size-sm);
+$font-size-md: var(--font-size-md);
+$font-size-lg: var(--font-size-lg);
+$font-size-xl: var(--font-size-xl);
 
 $font-sizes: (
+  "xs": $font-size-xs,
   "sm": $font-size-sm,
   "default": $font-size-default,
   "md": $font-size-md,
@@ -82,5 +102,5 @@ $line-height-heading: 1.1;
 $line-height-paragraph: 1.5;
 
 /* letter spacing */
-// $letter-spacing-heading: 0.02em;
-// $letter-spacing-paragraph: 0.04em;
+$letter-spacing-heading: 0.02em;
+$letter-spacing-paragraph: 0.04em;

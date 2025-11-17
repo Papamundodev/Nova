@@ -27,6 +27,13 @@ if (function_exists('wp_body_open')){
         <?php get_template_part('partials/header/navbar-mobile', null, ['theme_location' => 'header']); ?>
     </div>
 
+
+            <?php if (function_exists('theme_light_dark_form')): ?>
+            <div class="wrapper-theme-light-dark">
+                <?=do_shortcode('[theme_light_dark]'); ?>
+            </div>
+        <?php endif; ?>
+
     <div class="wrapper">
         <button popovertarget="navmenu-header-mobile" id="theme-navbar-toggler">
             <span class="custom-burger"></span>

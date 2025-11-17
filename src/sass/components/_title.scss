@@ -1,0 +1,95 @@
+@use "../design-tokens/fonts" as *;
+@use "../design-tokens/colors" as *;
+@use "../utilities/container-wrapper" as *;
+
+@mixin heading-big-1 {
+  font-family: $text-font;
+  font-size: $font-size-xl;
+  line-height: $line-height-heading;
+  font-weight: $font-weight-400;
+  letter-spacing: $letter-spacing-heading;
+  text-wrap: balance;
+}
+
+@mixin heading-big-2 {
+  font-family: $heading-font;
+  font-size: $font-size-xl;
+  line-height: $line-height-heading;
+  font-weight: $font-weight-400;
+  letter-spacing: $letter-spacing-heading;
+  text-wrap: balance;
+}
+
+@mixin heading-medium-1 {
+  font-family: $text-font;
+  font-size: $font-size-lg;
+  line-height: $line-height-heading;
+  font-weight: $font-weight-400;
+  letter-spacing: $letter-spacing-heading;
+  text-wrap: balance;
+}
+
+@mixin heading-medium-2 {
+  font-family: $heading-font;
+  font-size: $font-size-lg;
+  line-height: $line-height-heading;
+  font-weight: $font-weight-400;
+  letter-spacing: $letter-spacing-heading;
+  text-wrap: balance;
+}
+
+@mixin heading-small-1 {
+  font-family: $text-font;
+  font-size: $font-size-md;
+  line-height: $line-height-heading;
+  font-weight: $font-weight-400;
+  letter-spacing: $letter-spacing-heading;
+  text-wrap: balance;
+}
+
+@mixin heading-small-2 {
+  font-family: $text-font;
+  font-size: $font-size-sm;
+  line-height: $line-height-heading;
+  font-weight: $font-weight-400;
+  letter-spacing: $letter-spacing-heading;
+  text-wrap: balance;
+}
+
+.title-gradient {
+  @include heading-big-1;
+  background-image: $linear-gradient-color;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-fill-color: transparent;
+  background-size: 100% 100%;
+  background-position: 0 0;
+  background-repeat: no-repeat;
+  width: fit-content;
+  margin-block-end: $spacer-xl;
+}
+
+.heading-big-1 {
+  @include heading-big-1;
+}
+
+.heading-big-2 {
+  @include heading-big-2;
+}
+
+.heading-medium-1 {
+  @include heading-medium-1;
+}
+
+.heading-medium-2 {
+  @include heading-medium-2;
+}
+
+.heading-small-1 {
+  @include heading-small-1;
+}
+
+.heading-small-2 {
+  @include heading-small-2;
+}

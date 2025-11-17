@@ -1,0 +1,220 @@
+@use "../design-tokens/colors" as *;
+@use "../design-tokens/tokens" as *;
+@use "../utilities/container-wrapper" as *;
+@use "../components/text" as *;
+/* ------- BUTTONS  ------- */
+
+@mixin btn {
+  outline: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  background-color: transparent;
+  &:focus {
+    outline: 2px solid $blue-color;
+    outline-offset: $spacer-xs;
+  }
+}
+
+.btn {
+  @include btn;
+}
+
+// PRIMARY BUTTON
+
+@mixin button-background-primary {
+  width: fit-content;
+  background-color: $primary-color;
+  button {
+    color: $contrast-color;
+    @include text-button-primary;
+    padding-block: $spacer-sm;
+    padding-inline: $spacer-lg;
+  }
+  &:hover {
+    background-color: $default-color;
+    button {
+      color: $contrast-color;
+    }
+  }
+}
+
+.button-background-primary {
+  @include button-background-primary;
+}
+
+// SECONDARY BUTTON
+@mixin button-background-secondary {
+  width: fit-content;
+  background-color: $secondary-color;
+  button {
+    color: $contrast-color;
+    @include text-button-primary;
+    padding-block: $spacer-sm;
+    padding-inline: $spacer-md;
+    border: 2px solid $secondary-color;
+  }
+  &:hover {
+    background-color: $contrast-color;
+    button {
+      color: $secondary-color;
+    }
+  }
+}
+
+.button-background-secondary {
+  @include button-background-secondary;
+}
+
+// ICON BUTTON
+
+@mixin button-icon-container {
+  button {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: end;
+    svg {
+      width: var(--font-size-default);
+      height: var(--font-size-default);
+      margin-inline-start: $spacer-sm;
+      path {
+        stroke: $contrast-color;
+        fill: $contrast-color;
+      }
+      animation: arrow-animation-down 0.35s ease-in-out forwards;
+    }
+  }
+  &:hover {
+    svg {
+      path {
+        stroke: $secondary-color;
+        fill: $secondary-color;
+      }
+      animation: arrow-animation-up 0.35s ease-in-out forwards;
+    }
+  }
+  &:active,
+  &:focus {
+    background: $active-color;
+  }
+}
+
+.button-background-secondary-icon {
+  @include button-background-secondary;
+  @include button-icon-container;
+}
+
+@keyframes arrow-animation-up {
+  0% {
+    transform: translateX(0);
+  }
+  25% {
+    opacity: 0;
+  }
+  50% {
+    transform: translateY(calc(var(--font-size-default) * -1))
+      translateX(var(--font-size-default));
+    opacity: 0;
+  }
+  75% {
+    transform: translateY(calc(var(--font-size-default) * 1))
+      translateX(calc(var(--font-size-default) * -1));
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0) translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes arrow-animation-down {
+  0% {
+    transform: translateX(0);
+  }
+  25% {
+    opacity: 0;
+  }
+  50% {
+    transform: translateY(calc(var(--font-size-default) * 1))
+      translateX(calc(var(--font-size-default) * -1));
+    opacity: 0;
+  }
+  75% {
+    transform: translateY(calc(var(--font-size-default) * -1))
+      translateX(var(--font-size-default));
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0) translateY(0);
+    opacity: 1;
+  }
+}
+
+@mixin button-background-animation {
+  position: relative;
+  overflow: hidden;
+  .hover-bg {
+    --tw-translate-x: -70%;
+    --tw-translate-y: -70%;
+    translate: var(--tw-translate-x) var(--tw-translate-y);
+    transform-origin: 50% 50%;
+    inset-inline-start: 50%;
+    top: 50%;
+    inset-inline-start: var(--creative-hover-left);
+    top: var(--creative-hover-top);
+    z-index: 5;
+    height: calc($spacer-vi-sm * 0);
+    width: calc($spacer-vi-sm * 0);
+    border-radius: 3.40282e38px;
+    transition: width 0.6s, height 0.6s;
+    display: block;
+    position: absolute;
+    background-color: $default-color;
+  }
+  button {
+    position: relative;
+    z-index: 10;
+  }
+  &:hover {
+    background-color: $primary-color;
+    button {
+      position: relative;
+      z-index: 10;
+    }
+    .hover-bg {
+      width: 80em;
+      height: 80em;
+      background-color: $default-color;
+    }
+  }
+}
+
+.button-background-animation {
+  @include button-background-animation;
+}
+
+.button-wave-animation {
+  & .btn {
+    text-shadow: 0 calc(var(--font-size-md) * 1) 0 $secondary-color;
+    display: inline-block;
+    width: fit-content;
+    overflow: hidden;
+    &:hover {
+      color: $contrast-color;
+    }
+    svg {
+      vertical-align: bottom;
+    }
+  }
+
+  & span {
+    display: inline-block;
+    transition: transform 0.3s ease-in-out;
+    transform: translate(0, 0);
+  }
+
+  & button:hover span {
+    transform: translate(0, -150%);
+  }
+}

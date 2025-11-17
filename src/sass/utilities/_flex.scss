@@ -58,8 +58,8 @@
   }
 }
 .flex-start-desktop {
-  @include flex-start-desktop;
   max-width: 900px;
+  @include flex-start-desktop;
   ul {
     padding-inline: $spacer-xs;
     list-style: none;

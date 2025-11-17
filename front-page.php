@@ -4,6 +4,9 @@ $object = get_queried_object();
 $theme_template_name = basename(__FILE__, ".php");
 $featured_image = get_the_post_thumbnail_url($object->ID);
 $content = wpautop($object->post_content);
+$logo_landscape = get_field('logo_landscape', 'option');
+$logo_square = get_field('logo_square', 'option');
+$logo = get_field('logo', 'option');
 ?>
 
 
@@ -12,21 +15,24 @@ $content = wpautop($object->post_content);
 
 <section class="design-system">
     <div class="container">
-        <h1 class="page-title">Design System</h1>
+        <h1 class="page-title title-gradient">Design System</h1>
         <div class="wrapper  table-component">
             <div class="logo-system">
                 <div class="design-system-header ">
-                    <h2 class="">Logo</h2>
+                    <h2 class="">Logos</h2>
                 </div>
-                <div class="grid-table">
-                <div class="site-logo logo">
-                    <a class="" href="<?=home_url();?>" rel="home" aria-label="Page d'accueil">
-                        <img src="<?=get_template_directory_uri();?>/assets/images/logo.jpg" alt="logo du site">
-                    </a>
-                </div>
-                <a class="fs-xl" href="<?=home_url();?>" rel="home" aria-label="Page d'accueil">
-                        <?=get_bloginfo('name');?>
-                    </a>
+                <div class="">
+                    <div class="site-logo logo">
+                        <a class="" href="<?=home_url();?>" rel="home" aria-label="Page d'accueil">
+                            <img src="<?=$logo_landscape['sizes']['large'];?>" alt="logo du site">
+                        </a>
+                        <a class="" href="<?=home_url();?>" rel="home" aria-label="Page d'accueil">
+                            <img src="<?=$logo['sizes']['large'];?>" alt="logo du site">
+                        </a>
+                        <a class="" href="<?=home_url();?>" rel="home" aria-label="Page d'accueil">
+                            <img src="<?=$logo_square['sizes']['large'];?>" alt="logo du site">
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -37,24 +43,46 @@ $content = wpautop($object->post_content);
                     <h2 class="">Font</h2>
                 </div>
                 <div class="grid-table">
-                    <p class="">fs-sm</p>
-                    <p class="fs-sm">Lorem ipsum dolor.</p>
+                    <p class="">fs-xs</p>
+                    <div class="flex-column-center">
+                        <p class="fs-xs">Lorem ipsum dolor.</p>
+                        <code class="fs-xs">clamp(0.8125rem, 0.90625rem + 0.09375vi, 1rem)</code>
+                    </div>
                 </div>
                 <div class="grid-table">
                     <p class="">fs-default</p>
-                    <p class="fs-default">Lorem ipsum dolor.</p>
+                    <div class="flex-column-center">
+                        <p class="fs-default">Lorem ipsum dolor.</p>
+                        <code class="fs-xs">clamp(1rem, 1.125rem + 0.125vi, 1.25rem)</code>
+                    </div>
+                </div>
+                <div class="grid-table">
+                    <p class="">fs-sm</p>
+                    <div class="flex-column-center">
+                        <p class="fs-sm">Lorem ipsum dolor.</p>
+                        <code class="fs-xs">clamp(1.25rem, 1.4375rem + 0.1875vi, 1.5rem)</code>
+                    </div>
                 </div>
                 <div class="grid-table">
                     <p class="">fs-md</p>
-                    <p class="fs-md">Lorem ipsum dolor.</p>
+                    <div class="flex-column-center">
+                        <p class="fs-md">Lorem ipsum dolor.</p>
+                        <code class="fs-xs">clamp(2rem, 2.0625rem + 0.0625vi, 2.125rem)</code>
+                    </div>
                 </div>
                 <div class="grid-table">
                     <p class="">fs-lg</p>  
-                    <p class="fs-lg">Lorem ipsum dolor.</p>
+                    <div class="flex-column-center">
+                        <p class="fs-lg">Lorem ipsum dolor.</p>
+                        <code class="fs-xs">clamp(3rem, 3.25rem + 0.25vi, 3.5rem)</code>
+                    </div>
                 </div>
                 <div class="grid-table">
                     <p class="">fs-xl</p>
-                    <p class="fs-xl">Lorem ipsum dolor.</p>
+                    <div class="flex-column-center">
+                        <p class="fs-xl">Lorem ipsum dolor.</p>
+                        <code class="fs-xs">clamp(5rem, 5.5rem + 0.5vi, 6rem)</code>
+                    </div>
                 </div>
             </div>
         </div>
@@ -67,11 +95,11 @@ $content = wpautop($object->post_content);
                     <h2 class="">Font Family</h2>
                 </div>
                 <div class="grid-table">
-                    <p class="">Gerbil</p>
+                    <p class="">Coda</p>
                     <p class="text-font fs-lg">Lorem ipsum DOLOR.</p>
                 </div>
                 <div class="grid-table">
-                    <p class="">Gerbil</p>
+                    <p class="">Russo one</p>
                     <p class="heading-font fs-lg">Lorem ipsum DOLOR.</p>
                 </div>
             </div>
@@ -83,8 +111,9 @@ $content = wpautop($object->post_content);
                 </div>
                 <div class="grid-table">
                     <p class="">Text font weight</p>
-                    <div class="text-font">
-                        <p class="weight-400">Weight 400 - The quick brown fox jumps over the lazy dog</p>
+                    <div class="">
+                        <p class="weight-400 text-font">Weight 400 - The quick brown fox jumps over the lazy dog</p>
+                        <p class="weight-400 heading-font">Weight 400 - The quick brown fox jumps over the lazy dog</p>
                     </div>
                 </div>
             </div>
@@ -149,17 +178,6 @@ $content = wpautop($object->post_content);
                 </div>
                 <p class="secondary-color fs-lg">Lorem ipsum dolor.</p>
             </div>
-            <div class="grid-table">
-                <div class="gap-xs element-ratio-calculating">
-                    <div class="flex-column-center">
-                        <p class="tertiary-color">tertiary-color</p>
-                        <div class="text-color tertiary-color">
-                            <p class="color-computed"></p>
-                        </div>
-                    </div>
-                </div>
-                <p class="tertiary-color fs-lg">Lorem ipsum dolor.</p>
-            </div>
         </div>
 
         <div class="wrapper  background-color-system ">
@@ -178,7 +196,7 @@ $content = wpautop($object->post_content);
                         <p class="primary-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p>
                         <p class="accent-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p>
                         <p class="secondary-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p> 
-                        <p class="tertiary-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p>
+                        <p class="contrast-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p>
                     </div>
                 </div>
                 <div>
@@ -192,7 +210,7 @@ $content = wpautop($object->post_content);
                         <p class="primary-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p>
                         <p class="accent-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p>
                         <p class="secondary-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p>
-                        <p class="tertiary-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p>
+                        <p class="contrast-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p>
                     </div>
                 </div>
                 <div>
@@ -206,49 +224,7 @@ $content = wpautop($object->post_content);
                         <p class="primary-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p>
                         <p class="accent-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p>
                         <p class="secondary-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p>
-                        <p class="tertiary-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p>
-                    </div>
-                </div>
-                <div>
-                    <div class="bg-tertiary-color element-ratio-calculating">
-                        <div class="flex-column-center gap-xs">
-                            <p class="fs-sm">tertiary-color</p>
-                            <div class="bg-color-computed"></div>
-                        </div>
-                        <p class="default-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p>
-                        <p class="gray-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p>
-                        <p class="primary-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p>
-                        <p class="accent-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p>
-                        <p class="secondary-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p>
-                        <p class="tertiary-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p>
-                    </div>
-                </div>
-                <div>
-                    <div class="bg-accent-color element-ratio-calculating">
-                        <div class="flex-column-center gap-xs">
-                            <p class="fs-sm">accent-color</p>
-                            <div class="bg-color-computed"></div>
-                        </div>
-                        <p class="default-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p>
-                        <p class="gray-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p>
-                        <p class="primary-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p>
-                        <p class="accent-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p>
-                        <p class="secondary-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p>
-                        <p class="tertiary-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p>
-                    </div>
-                </div>
-                <div>
-                    <div class="bg-purple-color element-ratio-calculating">
-                        <div class="flex-column-center gap-xs">
-                            <p class="fs-sm">purple-color</p>
-                            <div class="bg-color-computed"></div>
-                        </div>
-                        <p class="default-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p>
-                        <p class="gray-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p>
-                        <p class="primary-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p>
-                        <p class="accent-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p>
-                        <p class="secondary-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p>
-                        <p class="tertiary-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p>
+                        <p class="contrast-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p>
                     </div>
                 </div>
                 <div>
@@ -262,13 +238,13 @@ $content = wpautop($object->post_content);
                         <p class="primary-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p>
                         <p class="accent-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p>
                         <p class="secondary-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p>
-                        <p class="tertiary-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p>
+                        <p class="contrast-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p>
                     </div>
                 </div>
                 <div>
-                    <div class="bg-pink-blur element-ratio-calculating">
-                       <div class="flex-column-center gap-xs">
-                            <p class="fs-sm">pink-blur</p>
+                    <div class="bg-green-color element-ratio-calculating">
+                        <div class="flex-column-center gap-xs">
+                            <p class="fs-sm">green-color</p>
                             <div class="bg-color-computed"></div>
                         </div>
                         <p class="default-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p>
@@ -276,7 +252,21 @@ $content = wpautop($object->post_content);
                         <p class="primary-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p>
                         <p class="accent-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p>
                         <p class="secondary-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p>
-                        <p class="tertiary-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p>
+                        <p class="contrast-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p>
+                    </div>
+                </div>
+                <div>
+                    <div class="bg-purple-color element-ratio-calculating">
+                        <div class="flex-column-center gap-xs">
+                            <p class="fs-sm">purple-color-background</p>
+                            <div class="bg-color-computed"></div>
+                        </div>
+                        <p class="default-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p>
+                        <p class="gray-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p>
+                        <p class="primary-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p>
+                        <p class="accent-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p>
+                        <p class="secondary-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p>
+                        <p class="contrast-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p>
                     </div>
                 </div>
                 <div>
@@ -290,15 +280,57 @@ $content = wpautop($object->post_content);
                         <p class="primary-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p>
                         <p class="accent-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p>
                         <p class="secondary-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p>
-                        <p class="tertiary-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p>
+                        <p class="contrast-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p>
+                    </div>
+                </div>
+                <div>
+                    <div class="bg-dark-blue-color element-ratio-calculating">
+                       <div class="flex-column-center gap-xs">
+                            <p class="fs-sm">dark-blue-color</p>
+                            <div class="bg-color-computed"></div>
+                        </div>
+                        <p class="default-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p>
+                        <p class="gray-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p>
+                        <p class="primary-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p>
+                        <p class="accent-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p>
+                        <p class="secondary-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p>
+                        <p class="contrast-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p>
                     </div>
                 </div>
             </div>
         </div>
 
-         <div class="wrapper  text-system ">
+        <div class="wrapper  button-system table-component ">
             <div class="design-system-header ">
-                <h2 class="">Text</h2>
+                <h2 class="">Buttons</h2>
+            </div>
+            <div class="flex-auto">
+                <div class="button-wrapper">
+                    <div class="button-container button-background-primary button-background-animation">
+                        <button class="btn">Button primary</button>
+                        <span class="hover-bg"></span>
+                    </div>
+                </div>
+                <div class="button-wrapper">
+                    <div class="button-container button-background-secondary-icon">
+                        <button class=" btn">Button secondary
+                            <?php echo file_get_contents(get_template_directory() . '/assets/images/arrow-up-right-bold.svg'); ?>
+                        </button>
+                    </div>
+                </div> 
+                <div class="button-wrapper">
+                    <div class="button-container button-background-secondary-icon button-wave-animation">
+                        <button class="btn" data-name="Button background animation">
+                        <?php echo file_get_contents(get_template_directory() . '/assets/images/arrow-up-right-bold.svg'); ?>
+                        </button>
+                    </div>
+                </div> 
+            </div>
+        </div>
+
+         <div class="wrapper Layout-title-text-button ">
+            <div class="design-system-header ">
+                <h2 class="heading-1">Layout Title - text - button</h2>
             </div>
             <div class="flex-auto">
                 <div class="bg-surface-color-2">
@@ -539,33 +571,6 @@ $content = wpautop($object->post_content);
         </div>
 
 
-        <div class="wrapper  button-system ">
-            <div class="design-system-header ">
-                <h2 class="">Buttons</h2>
-            </div>
-            <div class="flex-auto">
-                <div class="button-wrapper">
-                    <div class="button-container">
-                        <button class="button text-font">Button</button>
-                    </div>
-                </div>
-                <div class="button-wrapper">
-                    <div class="button-container">
-                        <button class=" button primary-font">Button medium</button>
-                    </div>
-                </div>
-                <div class="button-wrapper">
-                    <div class="button-container">
-                        <button class=" button secondary-font">Button large text</button>
-                    </div>
-                </div>
-                <div class="button-wrapper">
-                    <div class="button-container">
-                        <button class=" button heading-font">Button even larger text</button>
-                    </div>
-                </div>
-            </div>
-        </div>
 
     
         <div class="wrapper  dropdown-system">

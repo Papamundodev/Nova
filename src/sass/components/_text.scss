@@ -1,0 +1,47 @@
+@use "../design-tokens/fonts" as *;
+@use "../design-tokens/colors" as *;
+@use "../utilities/container-wrapper" as *;
+@use "../design-tokens/tokens" as *;
+
+@mixin text-paragraph-1 {
+  font-family: $text-font;
+  font-size: $font-size-default;
+  line-height: $line-height-paragraph;
+  font-weight: $font-weight-400;
+  letter-spacing: $letter-spacing-paragraph;
+  text-wrap: pretty;
+}
+
+@mixin text-paragraph-lead {
+  font-family: $text-font;
+  font-size: $font-size-xs;
+  line-height: $line-height-paragraph;
+  font-weight: $font-weight-400;
+  letter-spacing: $letter-spacing-paragraph;
+  text-wrap: pretty;
+}
+
+@mixin text-button-primary {
+  font-family: $heading-font;
+  font-size: $font-size-default;
+  line-height: $line-height-heading;
+  letter-spacing: $letter-spacing-heading;
+  text-box-trim: trim-both;
+}
+
+@mixin text-button-icon {
+  font-family: $heading-font;
+  font-size: $font-size-xs;
+  line-height: $icon-md;
+  font-weight: $font-weight-400;
+  letter-spacing: $letter-spacing-heading;
+  text-box-trim: trim-both;
+}
+
+.text-paragraph-1 {
+  @include text-paragraph-1;
+}
+
+.text-paragraph-lead {
+  @include text-paragraph-lead;
+}

@@ -3,49 +3,56 @@
   /* black and white */
   --color-scheme: light dark;
   --white-color: #ffffff;
-  --black-color: #1e1e1e;
+  --black-color: #000000;
   --background-color: var(--white-color);
-  --contrast-color: var(--secondary-color);
-  --default-color: var(--primary-color);
+  --contrast-color: var(--white-color);
+  --default-color: #17194a;
   --gray-color: #f5f5f5;
 
   /* primary colors */
-  --primary-color: #17194a;
+  --primary-color: #6785ff;
 
   /* secondary colors */
-  --secondary-color: #e9fe5f;
+  --secondary-color: #f5b5ee;
 
   /* tertiary colors */
-  --tertiary-color: #f5b5ee;
+  --blue-color: #99c2fe;
+  --green-color: #5cdec8;
+  --purple-color: #9278ff;
+  --orange-color: #ffbe99;
+  --dark-blue-color: #0801a2;
 
   /* accent colors */
   --accent-color: var(--primary-color);
-
-  --purple-color: #d497ec;
-  --blue-color: #99c2fe;
-  --pink-blur: #f4e6fb;
-  --orange-color: #ffbe99;
+  --linear-gradient-color: linear-gradient(
+    to right,
+    var(--blue-color),
+    var(--secondary-color),
+    var(--orange-color)
+  );
 }
 
 .dark-theme {
-  --white-color: #f5f5f5;
   --black-color: #1e1e1e;
-  --background-color: var(--primary-color);
-  --contrast-color: var(--primary-color);
+  --background-color: var(--black-color);
+  --contrast-color: #17194a;
   --default-color: var(--white-color);
   --gray-color: #f5f5f5;
 
   /* primary colors */
-  --primary-color: #17194a;
+  --primary-color: #e9fe5f;
 
   /* secondary colors */
-  --secondary-color: #e9fe5f;
+  --secondary-color: #d497ec;
 
   /* tertiary colors */
-  --tertiary-color: #f5b5ee;
-
+  --blue-color: #a2ecff;
+  --green-color: #beff9d;
+  --purple-color: #ffd8f3;
+  --orange-color: #ffb88f;
+  --dark-blue-color: #99c2fe;
   /* accent colors */
-  --accent-color: var(--secondary-color);
+  --accent-color: var(--primary-color);
 }
 
 $black-color: var(--black-color);
@@ -56,12 +63,14 @@ $default-color: var(--default-color);
 $gray-color: var(--gray-color);
 $primary-color: var(--primary-color);
 $secondary-color: var(--secondary-color);
-$tertiary-color: var(--tertiary-color);
-$accent-color: var(--accent-color);
-$purple-color: var(--purple-color);
 $blue-color: var(--blue-color);
-$pink-blur: var(--pink-blur);
+$green-color: var(--green-color);
+$purple-color: var(--purple-color);
 $orange-color: var(--orange-color);
+$dark-blue-color: var(--dark-blue-color);
+$accent-color: var(--accent-color);
+$linear-gradient-color: var(--linear-gradient-color);
+$active-color: var(--orange-color);
 
 $colors: (
   "background-color": $background-color,
@@ -69,13 +78,15 @@ $colors: (
   "default-color": $default-color,
   "primary-color": $primary-color,
   "secondary-color": $secondary-color,
-  "tertiary-color": $tertiary-color,
+  "blue-color": $blue-color,
+  "green-color": $green-color,
+  "purple-color": $purple-color,
+  "orange-color": $orange-color,
+  "dark-blue-color": $dark-blue-color,
   "accent-color": $accent-color,
   "gray-color": $gray-color,
-  "purple-color": $purple-color,
-  "blue-color": $blue-color,
-  "pink-blur": $pink-blur,
-  "orange-color": $orange-color,
+  "linear-gradient-color": $linear-gradient-color,
+  "active-color": $active-color,
 );
 
 @each $key, $value in $colors {

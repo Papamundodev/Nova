@@ -5,20 +5,19 @@
 
 @mixin text-paragraph-1 {
   font-family: $text-font;
-  font-size: $font-size-default;
+  font-size: $font-size-xs;
   line-height: $line-height-paragraph;
   font-weight: $font-weight-400;
   letter-spacing: $letter-spacing-paragraph;
   text-wrap: pretty;
 }
 
+@mixin text-paragraph-bold {
+  font-family: $heading-font;
+}
+
 @mixin text-paragraph-lead {
-  font-family: $text-font;
-  font-size: $font-size-xs;
-  line-height: $line-height-paragraph;
-  font-weight: $font-weight-400;
-  letter-spacing: $letter-spacing-paragraph;
-  text-wrap: pretty;
+  font-size: $font-size-lead;
 }
 
 @mixin text-button {
@@ -37,10 +36,14 @@
   text-box-trim: trim-both;
 }
 
-.text-paragraph-1 {
+p {
   @include text-paragraph-1;
 }
 
-.text-paragraph-lead {
+.text-bold {
+  @include text-paragraph-bold;
+}
+
+.text-lead {
   @include text-paragraph-lead;
 }

@@ -6,7 +6,7 @@
 
 .header {
   display: grid;
-  grid-template-columns: $spacer-xxl 1fr auto;
+  grid-template-columns: $spacer-xxl 1fr auto auto;
   align-items: center;
   gap: $spacer-vi-md;
   margin: $spacer-vi-sm;
@@ -70,6 +70,7 @@
 
 @media (width >= 768px) {
   .header {
+    grid-template-rows: 30px;
   }
   .burger-menu-container .burger-container {
     display: none;

@@ -26,15 +26,19 @@
 @mixin button-background-primary {
   width: fit-content;
   background-color: $primary-color;
-  button {
+  button,
+  a {
     color: $contrast-color;
     @include text-button;
     padding-block: $spacer-sm;
     padding-inline: $spacer-lg;
+    display: inline-block;
+    text-decoration: none;
   }
   &:hover {
     background-color: $default-color;
-    button {
+    button,
+    a {
       color: $contrast-color;
     }
   }
@@ -49,17 +53,21 @@
   width: fit-content;
   background-color: $secondary-color;
   transition: background-color 0.3s ease-in-out;
-  button {
+  button,
+  a {
     color: $contrast-color;
     @include text-button;
     padding-block: $spacer-sm;
     padding-inline: $spacer-md;
     border: 2px solid $secondary-color;
+    display: inline-block;
+    text-decoration: none;
   }
   &:hover {
     transition: background-color 0.3s ease-in-out;
     background-color: $contrast-color;
-    button {
+    button,
+    a {
       color: $secondary-color;
     }
   }
@@ -72,14 +80,17 @@
 // ICON BUTTON
 
 @mixin button-icon-container {
-  button {
+  button,
+  a {
     display: grid;
     grid-template-columns: 1fr auto;
     align-items: end;
+    display: inline-block;
     svg {
       width: var(--font-size-default);
       height: var(--font-size-default);
       margin-inline-start: $spacer-sm;
+      vertical-align: bottom;
       path {
         stroke: $contrast-color;
         fill: $contrast-color;
@@ -174,13 +185,20 @@
     position: absolute;
     background-color: $default-color;
   }
-  button {
+  button,
+  a {
     position: relative;
     z-index: 10;
+    display: inline-block;
+    text-decoration: none;
+    &:focus {
+      outline-offset: calc($spacer-xs * -1);
+    }
   }
   &:hover {
     background-color: $primary-color;
-    button {
+    button,
+    a {
       position: relative;
       z-index: 10;
     }
@@ -205,18 +223,17 @@
     &:hover {
       color: $contrast-color;
     }
-    svg {
-      vertical-align: bottom;
-    }
   }
 
   & span {
     display: inline-block;
-    transition: transform 0.3s ease-in-out;
+    transition: transform 0.1s ease-in-out;
     transform: translate(0, 0);
   }
 
-  & button:hover span {
+  & button:hover span,
+  a:hover span {
     transform: translate(0, -150%);
+    transition: transform 0.1s ease-in-out;
   }
 }

@@ -1,0 +1,15 @@
+@use "../../design-tokens/colors" as *;
+
+.img-container-logo-sm {
+  a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  svg {
+    fill: $primary-color;
+    path {
+      fill: $primary-color;
+    }
+  }
+}

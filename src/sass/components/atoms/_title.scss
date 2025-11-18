@@ -2,62 +2,45 @@
 @use "../../design-tokens/colors" as *;
 @use "../../utilities/container-wrapper" as *;
 
-@mixin heading-big-1 {
-  font-family: $text-font;
-  font-size: $font-size-xl;
+@mixin heading-base {
+  font-family: $heading-font;
   line-height: $line-height-heading;
   font-weight: $font-weight-400;
   letter-spacing: $letter-spacing-heading;
   text-wrap: balance;
+}
+
+@mixin heading-big-1 {
+  font-size: $font-size-xxl;
+  @include heading-base;
 }
 
 @mixin heading-big-2 {
-  font-family: $heading-font;
   font-size: $font-size-xl;
-  line-height: $line-height-heading;
-  font-weight: $font-weight-400;
-  letter-spacing: $letter-spacing-heading;
-  text-wrap: balance;
+  @include heading-base;
+}
+
+@mixin heading-large-1 {
+  font-size: $font-size-lg;
+  @include heading-base;
+}
+
+@mixin heading-medium-large-1 {
+  font-size: $font-size-md-lg;
+  @include heading-base;
 }
 
 @mixin heading-medium-1 {
-  font-family: $text-font;
-  font-size: $font-size-lg;
-  line-height: $line-height-heading;
-  font-weight: $font-weight-400;
-  letter-spacing: $letter-spacing-heading;
-  text-wrap: balance;
-}
-
-@mixin heading-medium-2 {
-  font-family: $heading-font;
-  font-size: $font-size-lg;
-  line-height: $line-height-heading;
-  font-weight: $font-weight-400;
-  letter-spacing: $letter-spacing-heading;
-  text-wrap: balance;
+  font-size: $font-size-md;
+  @include heading-base;
 }
 
 @mixin heading-small-1 {
-  font-family: $text-font;
-  font-size: $font-size-md;
-  line-height: $line-height-heading;
-  font-weight: $font-weight-400;
-  letter-spacing: $letter-spacing-heading;
-  text-wrap: balance;
-}
-
-@mixin heading-small-2 {
-  font-family: $text-font;
   font-size: $font-size-sm;
-  line-height: $line-height-heading;
-  font-weight: $font-weight-400;
-  letter-spacing: $letter-spacing-heading;
-  text-wrap: balance;
+  @include heading-base;
 }
 
-.title-gradient {
-  @include heading-big-1;
+@mixin title-gradient {
   background-image: $linear-gradient-color;
   -webkit-background-clip: text;
   background-clip: text;
@@ -70,6 +53,11 @@
   margin-block-end: $spacer-xl;
 }
 
+.title-gradient {
+  @include heading-big-1;
+  @include title-gradient;
+}
+
 .heading-big-1 {
   @include heading-big-1;
 }
@@ -78,18 +66,18 @@
   @include heading-big-2;
 }
 
+.heading-large-1 {
+  @include heading-large-1;
+}
+
+.heading-medium-large-1 {
+  @include heading-medium-large-1;
+}
+
 .heading-medium-1 {
   @include heading-medium-1;
 }
 
-.heading-medium-2 {
-  @include heading-medium-2;
-}
-
 .heading-small-1 {
   @include heading-small-1;
-}
-
-.heading-small-2 {
-  @include heading-small-2;
 }

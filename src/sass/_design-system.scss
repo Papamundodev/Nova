@@ -90,12 +90,18 @@
     margin-block: $spacer-lg $spacer-xxl;
     margin-inline: auto;
   }
+  h2 {
+    @include heading-medium-1;
+    color: $primary-color;
+    text-align: center;
+    margin-block: $spacer-xl;
+  }
   .table-component,
   .background-color-system {
     padding-block: $spacer-xl;
     h2 {
       margin-block: $spacer-md $spacer-lg;
-      @include heading-medium-2;
+      @include heading-medium-1;
       color: $primary-color;
       text-align: center;
     }
@@ -122,4 +128,15 @@
     object-fit: contain;
   }
   margin-inline: auto;
+}
+
+.text-system {
+  p {
+    max-width: 75ch;
+    margin-inline: auto;
+    margin-block: $spacer-xl;
+  }
+  h3 {
+    margin-block: $spacer-lg;
+  }
 }

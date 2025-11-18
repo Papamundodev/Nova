@@ -14,9 +14,10 @@ if (function_exists('wp_body_open')){
 }
 ?>
 
+<div class="container">
 <header class="header">
         <!-- Logo -->
-    <div class="wrapper logo-container">
+    <div class="logo-container">
         <?php get_template_part('partials/header/logo'); ?>
     </div>
 
@@ -30,7 +31,7 @@ if (function_exists('wp_body_open')){
     </div>
 
 
-    <div class="wrapper burger-menu-container">
+    <div class="burger-menu-container">
         <button class="burger-container btn" popovertarget="navmenu-header-mobile" id="theme-navbar-toggler">  
             <div id="burger-menu" class="burger-menu">
                 <span class="custom-burger"></span>
@@ -40,11 +41,11 @@ if (function_exists('wp_body_open')){
             </div>
         </button>
     </div>
-
-</header>
-
-    <?php if (function_exists('theme_light_dark_form')): ?>
+        <?php if (function_exists('theme_light_dark_form')): ?>
         <div class="wrapper-theme-light-dark">
             <?=do_shortcode('[theme_light_dark]'); ?>
         </div>
     <?php endif; ?>
+
+</header>
+</div>

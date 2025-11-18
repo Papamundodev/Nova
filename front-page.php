@@ -15,7 +15,7 @@ $logo = get_field('logo', 'option');
 
 <section class="design-system">
     <div class="container">
-        <h1 class="page-title title-gradient">Design System</h1>
+        <h1 class="title-gradient">Design System</h1>
         <div class="wrapper  table-component">
             <div class="logo-system">
                 <div class="design-system-header ">
@@ -301,13 +301,13 @@ $logo = get_field('logo', 'option');
         </div>
 
         <div class="wrapper  button-system table-component ">
-            <div class="design-system-header ">
+            <div class="">
                 <h2 class="">Buttons</h2>
             </div>
             <div class="flex-auto">
                 <div class="button-wrapper">
                     <div class="button-container button-background-primary button-background-animation">
-                        <button class="btn">Button primary</button>
+                        <a href="<?=home_url() . '/contact';?>" class="btn">Button primary</a>
                         <span class="hover-bg"></span>
                     </div>
                 </div>
@@ -328,130 +328,68 @@ $logo = get_field('logo', 'option');
             </div>
         </div>
 
-         <div class="wrapper Layout-title-text-button ">
-            <div class="design-system-header ">
-                <h2 class="heading-1">Layout Title - text - button</h2>
+         <div class="wrapper text-system table-component">
+            <div class="">
+                <h2 class="">Paragraphes</h2>
             </div>
             <div class="flex-auto">
-                <div class="bg-surface-color-2">
-                    <div class="">
-                        <div class="text-content">
-                            <h3 class="">La couleur du background est surface-color-2.</h3>
-                            <p class="">Max line length: Limit paragraphs to ~60–75 characters (including spaces). In CSS, this often translates to max-width: 60ch; for the text container. As CSS-Tricks notes, “typographers will recommend that a paragraph have a width of around 75 characters for legibility” css-tricks.com. Too-long lines make the eye work harder; break at natural points (see bullet on vertical rhythm below).</p>
-                            <ul class="bg-surface-color">
-                                <li>Max line length: Limit paragraphs to ~60–75 characters (including spaces).</li>
-                                <li>In CSS, this often translates to max-width: 60ch; for the text container. As CSS-Tricks notes, “typographers will recommend that a paragraph have a width of around 75 characters for legibility” css-tricks.com.</li>
-                                <li>Too-long lines make the eye work harder; break at natural points (see bullet on vertical rhythm below).</li>
-                            </ul>
-                            <div class="button-wrapper">
-                                <div class="button-container">
-                                    <button class=" button heading-font">Button even larger text</button>
-                                </div>
-                            </div>
-                            <a href="" class="accent-color">Too-long lines make the eye work harder; break at natural points (see bullet on vertical rhythm below)</a>
-                        </div>
+                <div class="">
+                    <div class="grid-table">
+                        <p class="">Regular~16px</p>
+                        <p>
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.
+                            Lorem <span class="text-bold">ipsum dolor</span> sit amet consectetur adipisicing elit. Quisquam, quos.
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.
+                        </p>
+                    </div>
+                    <div class="grid-table">
+                        <p class="">Bold ~16px</p>
+                        <p class="text-bold">
+                            Text bold - Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.
+                        </p>
+                    </div>
+                    <div class="grid-table">
+                        <p class="">Lead ~14px</p>
+                        <p class="text-lead">
+                            Text paragraph lead - Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.
+                        </p>
                     </div>
                 </div>
-                <div class="bg-surface-color">
-                    <div class="">
-                        <div class="text-content">
-                            <h3 class="">La couleur du background est surface-color.</h3>
-                            <p class="">Max line length: Limit paragraphs to ~60–75 characters (including spaces). In CSS, this often translates to max-width: 60ch; for the text container. As CSS-Tricks notes, “typographers will recommend that a paragraph have a width of around 75 characters for legibility” css-tricks.com. Too-long lines make the eye work harder; break at natural points (see bullet on vertical rhythm below).</p>
-                            <ul class="bg-surface-color-3">
-                                <li>On aura le default-color pour le texte.</li>
-                                <li>On aura le heading-color pour les titres.</li>
-                                <li>On aura l'accent-color pour les boutons.</li>
-                            </ul>
-                            <div class="button-wrapper">
-                                <div class="button-container">
-                                    <button class=" button heading-font">Button even larger text</button>
-                                </div>
-                            </div>
-                            <a href="" class="">Link</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="bg-surface-color-3">
-                    <div class="">
-                        <div class="text-content ">
-                            <h3 class="">La couleur du background est surface-color-3.</h3>
-                            <p class="">Max line length: Limit paragraphs to ~60–75 characters (including spaces). In CSS, this often translates to max-width: 60ch; for the text container. As CSS-Tricks notes, “typographers will recommend that a paragraph have a width of around 75 characters for legibility” css-tricks.com. Too-long lines make the eye work harder; break at natural points (see bullet on vertical rhythm below).</p>
-                            <ul class="bg-surface-color-2">
-                                <li>On aura le default-color pour le texte.</li>
-                                <li>On aura le heading-color pour les titres.</li>
-                                <li>On aura pas d'accent-color.</li>
-                            </ul>
-                            <div class="button-wrapper">
-                                <div class="button-container">
-                                    <button class=" button heading-font">Button even larger text</button>
-                                </div>
-                            </div>
-                            <a href="" class="">Link</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="bg-background-color-4">
-                    <div class="">
-                        <div class="text-content">
-                            <h3 class="">La couleur du background est background-color-4.</h3>
-                            <p class="">Max line length: Limit paragraphs to ~60–75 characters (including spaces). In CSS, this often translates to max-width: 60ch; for the text container. As CSS-Tricks notes, “typographers will recommend that a paragraph have a width of around 75 characters for legibility”
-                            <ul class="">
-                                <li>On aura le default-color pour le texte.</li>
-                                <li>On aura le heading-color pour les titres.</li>
-                                <li>On aura l'accent-color pour les boutons.</li>
-                            </ul>
-                            <div class="button-wrapper">
-                                <div class="button-container">
-                                    <button class=" button heading-font">Button even larger text</button>
-                                </div>
-                            </div>
-                            <a href="" class="">Link</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="bg-background-color-3">
-                    <div class="">
-                        <div class="text-content">
-                            <h3 class="">La couleur du background est background-color-3.</h3>
-                            <p class="">Max line length: Limit paragraphs to ~60–75 characters (including spaces). In CSS, this often translates to max-width: 60ch; for the text container. As CSS-Tricks notes, “typographers will recommend that a paragraph have a width of around 75 characters for legibility” css-tricks.com. Too-long lines make the eye work harder; break at natural points (see bullet on vertical rhythm below).</p>
-                            <ul class="">
-                                <li>On aura le default-color pour le texte.</li>
-                                <li>On aura le heading-color pour les titres.</li>
-                                <li>pas d'accent color.</li>
-                            </ul>
-                            <div class="button-wrapper">
-                                <div class="button-container">
-                                    <button class=" button heading-font">Button even larger text</button>
-                                </div>
-                            </div>
-                            <a href="" class="">Link</a>
-                        </div>
-                    </div>
-                </div>
+            </div>
+        </div>
 
-                <div class="bg-accent-color">
-                    <div class="">
-                        <div class="bg-accent-color-3">
-                            <div class="">
-                                <p class="default-color">Cet color n'a pas de bon contrast donc on ne peut pas l'utiliser pour le texte. seulement pour les decors.</p>
-                            </div>
-                        </div>
-                        <div class="bg-accent-color-4">
-                            <div class="">
-                                <p class="default-color">Cet color n'a pas de bon contrast donc on ne peut pas l'utiliser pour le texte. seulement pour les decors.</p>
-                            </div>
-                        </div>
-                        <div class="bg-surface-color-4">
-                            <div class="">
-                                <p class="default-color">Cet color n'a pas de bon contrast donc on ne peut pas l'utiliser pour le texte. seulement pour les decors.</p>
-                            </div>
-                        </div>
-                        <div class="bg-surface-color-5">
-                            <div class="">
-                                <p class="default-color">Cet color n'a pas de bon contrast donc on ne peut pas l'utiliser pour le texte. seulement pour les decors.</p>
-                            </div>
-                        </div>
-                    </div>
+        <div class="wrapper text-system table-component">
+            <div class="">
+                <h2 class="">Titles</h2>
+            </div>
+            <div class="flex-auto">
+                <div class="grid-table">
+                    <p class="">~100px</p>
+                    <h3 class="title-gradient">Digital & Communication</h3>
+                </div>
+                <div class="grid-table">
+                    <p class="">~80px</p>
+                    <h3 class="heading-big-1">Branding Design</h3>
+                </div>
+                <div class="grid-table">
+                    <p class="">~60px</p>
+                    <h3 class="heading-big-2">Travaillons ensemble</h3>
+                </div>
+                <div class="grid-table">
+                    <p class="">~56px</p>
+                    <h3 class="heading-large-1">Un collectif de freelances experts</h3>
+                </div>
+                <div class="grid-table">
+                    <p class="">~44px</p>
+                    <h3 class="heading-medium-large-1">Qui sommes-nous ?</h3>
+                </div>
+                <div class="grid-table">
+                    <p class="">~34px</p>
+                    <h3 class="heading-medium-1">Projet 2</h3>  
+                </div>
+                <div class="grid-table">
+                    <p class="">~24px</p>
+                    <h3 class="heading-small-1">Branding Design</h3>
                 </div>
             </div>
         </div>

@@ -37,28 +37,37 @@ $fonts: (
 }
 
 :root {
-  --font-size-xs: clamp(0.8125rem, 0.90625rem + 0.09375vi, 1rem);
-  --font-size-default: clamp(1rem, 1.125rem + 0.125vi, 1.25rem);
-  --font-size-sm: clamp(1.25rem, 1.4375rem + 0.1875vi, 1.5rem);
-  --font-size-md: clamp(2rem, 2.0625rem + 0.0625vi, 2.125rem);
-  --font-size-lg: clamp(3rem, 3.25rem + 0.25vi, 3.5rem);
-  --font-size-xl: clamp(5rem, 5.5rem + 0.5vi, 6rem);
+  --font-size-lead: clamp(0.8rem, 0.75rem + 0.125vi, 0.925rem); // 12px
+  --font-size-xs: clamp(0.8125rem, 0.90625rem + 0.09375vi, 1rem); // 13px
+  --font-size-default: clamp(1rem, 1.125rem + 0.125vi, 1.25rem); // 16px
+  --font-size-sm: clamp(1.5rem, 1.625rem + 0.125vi, 1.75rem); // 24px
+  --font-size-md: clamp(2rem, 2.0625rem + 0.0625vi, 2.125rem); // 34px
+  --font-size-md-lg: clamp(2.5rem, 2.625rem + 0.125vi, 2.75rem); // 44px
+  --font-size-lg: clamp(3rem, 3.25rem + 0.25vi, 3.5rem); // 56px
+  --font-size-xl: clamp(4rem, 4.5rem + 0.5vi, 5rem); // 80px
+  --font-size-xxl: clamp(5rem, 5.5rem + 0.5vi, 6rem); // 100px
 }
 
+$font-size-lead: var(--font-size-lead);
 $font-size-xs: var(--font-size-xs);
 $font-size-default: var(--font-size-default);
 $font-size-sm: var(--font-size-sm);
 $font-size-md: var(--font-size-md);
+$font-size-md-lg: var(--font-size-md-lg);
 $font-size-lg: var(--font-size-lg);
 $font-size-xl: var(--font-size-xl);
+$font-size-xxl: var(--font-size-xxl);
 
 $font-sizes: (
+  "lead": $font-size-lead,
   "xs": $font-size-xs,
   "sm": $font-size-sm,
   "default": $font-size-default,
   "md": $font-size-md,
+  "md-lg": $font-size-md-lg,
   "lg": $font-size-lg,
   "xl": $font-size-xl,
+  "xxl": $font-size-xxl,
 );
 
 @each $key, $value in $font-sizes {

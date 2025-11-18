@@ -25,19 +25,31 @@ document.addEventListener("DOMContentLoaded", () => {
     const segments = Array.from(segmenter.segment(text));
     return segments.map((segment) => segment.segment);
   }
+  function mouseOver(element) {
+    element.addEventListener("mouseover", function(event) {
+      getLetters(element.dataset.name);
+      let letterIndex = 0;
+      const spans = element.querySelectorAll("span");
+      spans.forEach((span) => {
+        span.style.transitionDelay = `${letterIndex * 0.015}s`;
+        letterIndex++;
+      });
+    });
+  }
   document.querySelectorAll(".button-wave-animation button").forEach((a) => {
     const letters = getLetters(a.dataset.name);
-    let letterIndex = 0;
     let htmlContent = "";
     letters.forEach((letter) => {
       if (letter === " ") {
         htmlContent += `<span>&nbsp;</span>`;
       } else {
-        htmlContent += `<span style="transition-delay: ${letterIndex * 0.015}s;">${letter}</span>`;
-        letterIndex++;
+        htmlContent += `<span>${letter}</span>`;
       }
     });
     a.innerHTML = htmlContent + a.innerHTML;
+  });
+  document.querySelectorAll(".button-wave-animation button").forEach((a) => {
+    mouseOver(a);
   });
 });
 //# sourceMappingURL=main.js.map

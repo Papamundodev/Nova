@@ -1,8 +1,9 @@
+@use "../utilities/container-wrapper" as *;
 /* ----- ANIMATIONS ----- */
 @keyframes fade-in {
   from {
     opacity: 0;
-    transform: translateY(-10px);
+    transform: translateY(-50px);
   }
   to {
     opacity: 1;
@@ -17,7 +18,7 @@
   }
   to {
     opacity: 0;
-    transform: translateY(-10px);
+    transform: translateY(-50px);
   }
 }
 
@@ -41,4 +42,20 @@
     opacity: 0;
     transform: translateX(-10px);
   }
+}
+
+@keyframes scroll {
+  to {
+    transform: translateY($spacer-big);
+  }
+}
+
+.fade-in {
+  opacity: 1;
+  animation: fade-in 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.fade-out {
+  opacity: 0;
+  animation: fade-out 0.8s cubic-bezier(0.4, 0, 0.2, 1);
 }

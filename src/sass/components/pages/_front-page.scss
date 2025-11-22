@@ -1,0 +1,202 @@
+@use "../../utilities/container-wrapper" as *;
+@use "../../design-tokens/colors" as *;
+@use "../../design-tokens/fonts" as *;
+@use "../../components/atoms/title" as *;
+@use "../../components/molecules/layouts" as *;
+@use "../../components/atoms/text" as *;
+@use "../../components/molecules/layouts" as *;
+
+#main-front-page {
+  .section-title {
+    @include heading-big-2;
+    color: $primary-color;
+    text-align: center;
+    margin-block: $spacer-xxl;
+  }
+  .section-intro {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: start;
+    gap: $spacer-xxl;
+    margin-block-end: calc($spacer-big * 2);
+    @media (width <= $breakpoint-xl) {
+      margin-block-end: $spacer-xxl;
+    }
+
+    .intro-content-container {
+      max-width: 50ch;
+      h1 {
+        margin-block-end: $spacer-xxl;
+      }
+    }
+  }
+  .section-our_values {
+    background-color: $secondary-color;
+    @include layout-left-right;
+    .layout-content {
+      color: $contrast-color;
+      h2 {
+        @include heading-big-2;
+      }
+      p {
+        max-width: 50ch;
+      }
+    }
+  }
+
+  .section-expertise {
+    position: relative;
+    .expertise {
+      position: sticky;
+      top: 0;
+      background-color: $background-color;
+      display: grid;
+      grid-template-columns: calc($spacer-xxl * 1.5) auto auto;
+      grid-template-rows: $spacer-big auto;
+      align-items: center;
+      padding-block: $spacer-xl;
+      border-block-end: 1px solid $default-color;
+      &:first-child {
+        border-block-start: 1px solid $default-color;
+      }
+      p {
+        grid-row: 2;
+        grid-column: 2 / 4;
+      }
+      span {
+        @include heading-small-1;
+        padding-inline-start: $spacer-sm;
+      }
+      h3 {
+        @include heading-medium-1;
+        padding-inline-start: $spacer-lg;
+      }
+      a {
+        vertical-align: top;
+        @include stretched-link;
+      }
+      svg {
+        width: var(--font-size-default);
+        height: var(--font-size-default);
+        align-self: flex-start;
+        margin-inline-start: auto;
+        path {
+          stroke: $default-color;
+          fill: $default-color;
+        }
+      }
+      &:hover {
+        svg {
+          animation: arrow-animation-up 0.4s ease-in-out forwards;
+        }
+      }
+      @media (width >= $breakpoint-xxl) {
+        grid-template-columns:
+          calc($spacer-xxl * 2) minmax(500px, auto) 1fr calc($spacer-xxl * 2)
+          0;
+        grid-template-rows: $spacer-big;
+        p {
+          grid-row: 1;
+          grid-column: 3 / 4;
+        }
+      }
+    }
+  }
+}
+
+.projects-container {
+  @include column-layout;
+  .cat-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $spacer-sm;
+    .expertise-number {
+      @include text-lead;
+    }
+  }
+  h3 {
+    @include heading-medium-1;
+  }
+}
+
+.team-container {
+  @include card-layout;
+}
+
+.blog-container {
+  @include card-layout;
+  .blog-item {
+    position: relative;
+    @media (width >= $breakpoint-xxl) {
+      .cat-container {
+        min-height: 3.3em;
+      }
+      h3 {
+        min-height: 2.5em;
+      }
+    }
+  }
+}
+
+.section-reviews {
+  margin-block: $spacer-xxl;
+  h2 {
+    @include heading-big-2;
+  }
+  .review-content {
+    color: $contrast-color;
+  }
+  .review-name {
+    @include text-base;
+    font-size: $font-size-sm;
+  }
+}
+
+.slider {
+  position: relative;
+  .slide-button-container {
+    position: absolute;
+    bottom: 20%;
+    left: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .slide-button {
+      width: 50px;
+      aspect-ratio: 1/1;
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+    .slide-button-next {
+      transform: rotate(180deg);
+    }
+  }
+  .slide-button-container-prev {
+    left: 40%;
+  }
+  .slide-button-container-next {
+    left: 4 5%;
+  }
+  .slider-wrapper {
+    padding-block: $spacer-big;
+    overflow-x: hidden;
+    overflow-y: visible;
+    display: grid;
+    grid-template-columns: repeat(var(--slider-pages), 100%);
+    grid-template-rows: 1fr;
+    scroll-snap-type: x proximity;
+    scroll-behavior: smooth;
+  }
+
+  .slide {
+    scroll-snap-align: start;
+    display: grid;
+    grid-template-rows: 1fr;
+    background-color: $purple-color;
+    @include layout-right-left;
+  }
+}

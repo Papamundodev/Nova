@@ -6,10 +6,9 @@
 
 .header {
   display: grid;
-  grid-template-columns: $spacer-xxl 1fr auto auto;
+  grid-template-columns: $spacer-big 1fr auto auto;
   align-items: center;
-  gap: $spacer-vi-md;
-  margin: $spacer-vi-sm;
+  margin-block: $spacer-vi-md $spacer-vi-xxl;
 }
 
 /* ----- NAVBAR DESKTOP ----- */
@@ -24,7 +23,6 @@
       width: fit-content;
       margin-inline: auto;
       display: flex;
-      gap: $spacer-vi-md;
     }
   }
 }

@@ -1,6 +1,6 @@
 /* ------- IMG  ------- */
 $icon-xs: 10px;
-$icon-sm: 18.3px;
+$icon-sm: 24px;
 $icon-md: 31px;
 $icon-lg: 44px;
 $logo: 74px;
@@ -22,6 +22,7 @@ $border-radius-sharp: 0.02em;
 $border-radius-sm: 3px;
 $border-radius-md: 5px;
 $border-radius-rounded: 10px;
+$border-radius-rounded-lg: 30px;
 $border-radius-pill: 999px;
 $border-radius-circle: 50%;
 $border-radius-retro: 10px 20px 30px 40px;
@@ -32,6 +33,7 @@ $border-radius: (
   "sm": $border-radius-sm,
   "md": $border-radius-md,
   "rounded": $border-radius-rounded,
+  "rounded-lg": $border-radius-rounded-lg,
   "pill": $border-radius-pill,
   "circle": $border-radius-circle,
   "retro": $border-radius-retro,

@@ -3,13 +3,17 @@
 @use "../../utilities/container-wrapper" as *;
 @use "../../design-tokens/tokens" as *;
 
-@mixin text-paragraph-1 {
+@mixin text-base {
   font-family: $text-font;
-  font-size: $font-size-xs;
   line-height: $line-height-paragraph;
   font-weight: $font-weight-400;
   letter-spacing: $letter-spacing-paragraph;
   text-wrap: pretty;
+}
+
+@mixin text-paragraph-1 {
+  font-size: $font-size-default;
+  @include text-base;
 }
 
 @mixin text-paragraph-bold {
@@ -26,14 +30,19 @@
   line-height: $line-height-heading;
   letter-spacing: $letter-spacing-heading;
   text-box-trim: trim-both;
+  @media (width <= $breakpoint-xl) {
+    font-size: $font-size-xs;
+  }
 }
 
 @mixin text-nav {
-  font-family: $text-font;
+  @include text-base;
   font-size: $font-size-xs;
-  line-height: $line-height-paragraph;
-  letter-spacing: $letter-spacing-paragraph;
-  text-box-trim: trim-both;
+}
+
+@mixin text-lead {
+  @include text-paragraph-1;
+  @include text-paragraph-lead;
 }
 
 p {
@@ -41,9 +50,33 @@ p {
 }
 
 .text-bold {
+  @include text-paragraph-1;
   @include text-paragraph-bold;
 }
 
 .text-lead {
+  @include text-paragraph-1;
   @include text-paragraph-lead;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@mixin stretched-link {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1;
+  content: "";
 }

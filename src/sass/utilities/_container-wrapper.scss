@@ -1,3 +1,5 @@
+@use "../design-tokens/colors" as *;
+
 /* ------- Breakpoint ------- */
 $breakpoint-sm: 576px;
 $breakpoint-md: 768px;
@@ -14,12 +16,23 @@ $breakpoints: (
 );
 
 /* ------- Spacer ------- */
-$spacer-xs: 5px;
-$spacer-sm: 12px;
-$spacer-md: 15px;
-$spacer-lg: 20px;
-$spacer-xl: 26px;
-$spacer-xxl: 100px;
+:root {
+  --spacer-xs: 5px;
+  --spacer-sm: 12px;
+  --spacer-md: 15px;
+  --spacer-lg: 20px;
+  --spacer-xl: 26px;
+  --spacer-xxl: 50px;
+  --spacer-big: 100px;
+}
+
+$spacer-xs: var(--spacer-xs);
+$spacer-sm: var(--spacer-sm);
+$spacer-md: var(--spacer-md);
+$spacer-lg: var(--spacer-lg);
+$spacer-xl: var(--spacer-xl);
+$spacer-xxl: var(--spacer-xxl);
+$spacer-big: var(--spacer-big);
 
 $spacer-vi-xs: calc($spacer-xs + 0.5vi);
 $spacer-vi-sm: calc($spacer-sm + 0.5vi);
@@ -27,6 +40,7 @@ $spacer-vi-md: calc($spacer-md + 0.5vi);
 $spacer-vi-lg: calc($spacer-lg + 0.5vi);
 $spacer-vi-xl: calc($spacer-xl + 0.5vi);
 $spacer-vi-xxl: calc($spacer-xxl + 0.5vi);
+$spacer-vi-big: calc($spacer-big + 0.5vi);
 
 $spacers: (
   "xs": $spacer-xs,
@@ -34,6 +48,8 @@ $spacers: (
   "md": $spacer-md,
   "lg": $spacer-lg,
   "xl": $spacer-xl,
+  "xxl": $spacer-xxl,
+  "big": $spacer-big,
 );
 
 @each $key, $value in $spacers {
@@ -56,9 +72,10 @@ $wrapper-padding-inline: $spacer-md;
 
 @mixin container() {
   width: 100%;
+  padding-inline: $spacer-xl;
   @each $key, $value in $breakpoints {
     @media (width >= $value) and (width >= $breakpoint-sm) {
-      width: calc($value - 26%);
+      width: calc($value - 10%);
     }
   }
 }

@@ -11,7 +11,7 @@
   margin: 0;
   cursor: pointer;
   background-color: transparent;
-  &:focus {
+  &:not(.burger-container, .slide-button):focus {
     outline: 2px solid $blue-color;
     outline-offset: $spacer-xs;
   }
@@ -29,11 +29,11 @@
   button,
   a {
     color: $contrast-color;
-    @include text-button;
     padding-block: $spacer-sm;
     padding-inline: $spacer-lg;
     display: inline-block;
     text-decoration: none;
+    @include text-button;
   }
   &:hover {
     background-color: $default-color;
@@ -56,12 +56,12 @@
   button,
   a {
     color: $contrast-color;
-    @include text-button;
     padding-block: $spacer-sm;
     padding-inline: $spacer-md;
     border: 2px solid $secondary-color;
     display: inline-block;
     text-decoration: none;
+    @include text-button;
   }
   &:hover {
     transition: background-color 0.3s ease-in-out;
@@ -95,7 +95,7 @@
         stroke: $contrast-color;
         fill: $contrast-color;
       }
-      animation: arrow-animation-down 0.4s ease-in-out forwards;
+      animation: arrow-animation-down 0.3s ease-in-out forwards;
     }
   }
   &:hover {
@@ -104,7 +104,7 @@
         stroke: $secondary-color;
         fill: $secondary-color;
       }
-      animation: arrow-animation-up 0.4s ease-in-out forwards;
+      animation: arrow-animation-up 0.3s ease-in-out forwards;
     }
   }
   &:active,
@@ -203,8 +203,8 @@
       z-index: 10;
     }
     .hover-bg {
-      width: 60em;
-      height: 60em;
+      width: 80em;
+      height: 80em;
       background-color: $default-color;
     }
   }
@@ -217,11 +217,16 @@
 .button-wave-animation {
   & .btn {
     text-shadow: 0 calc(var(--font-size-md) * 1) 0 $secondary-color;
-    display: inline-block;
+    display: flex;
     width: fit-content;
     overflow: hidden;
     &:hover {
       color: $contrast-color;
+    }
+  }
+  @media (width <= $breakpoint-xl) {
+    & .btn {
+      text-shadow: 0 calc(var(--font-size-sm) * 1) 0 $secondary-color;
     }
   }
 
@@ -235,5 +240,17 @@
   a:hover span {
     transform: translate(0, -150%);
     transition: transform 0.1s ease-in-out;
+  }
+}
+
+.icon-button {
+  background-color: transparent;
+  cursor: pointer;
+  display: flex;
+  svg {
+    width: $icon-sm;
+    height: $icon-sm;
+    fill: $primary-color;
+    display: block;
   }
 }

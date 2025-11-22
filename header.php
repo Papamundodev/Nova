@@ -30,6 +30,12 @@ if (function_exists('wp_body_open')){
         </div>
     </div>
 
+    <div class="button-wrapper">
+        <div class="button-container button-background-primary button-background    -animation">
+            <a href="<?=home_url() . '/contact';?>" class="">C’est super</a>
+            <span class="hover-bg"></span>
+        </div>
+    </div>
 
     <div class="burger-menu-container">
         <button class="burger-container btn" popovertarget="navmenu-header-mobile" id="theme-navbar-toggler">  
@@ -41,11 +47,14 @@ if (function_exists('wp_body_open')){
             </div>
         </button>
     </div>
-        <?php if (function_exists('theme_light_dark_form')): ?>
-        <div class="wrapper-theme-light-dark">
-            <?=do_shortcode('[theme_light_dark]'); ?>
-        </div>
-    <?php endif; ?>
+
 
 </header>
+
+
+<aside class="right-drawer">
+    <?php get_template_part('partials/tool-kit'); ?>
+</aside>
+
+
 </div>

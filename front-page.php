@@ -12,690 +12,195 @@ $logo = get_field('logo', 'option');
 
 <main id="main-<?=$theme_template_name?>" class="main">
 
+    
+        <section aria-labelledby="intro-title" class="section-intro container">
+            <?php 
+            $intro = get_field('intro', $object);
+            ?>
+            <div class="intro-content-container">
+                <h1 id="intro-title" class="title-gradient"><?= $intro['title']; ?></h1>
+                <p><?= $intro['text']; ?></p>
+            </div>
+            <div class="button-background-primary button-background-animation">
+                <a href="<?= $intro['button_link']; ?>" class="btn"><?= $intro['button_text']; ?></a>
+                <span class="hover-bg"></span>
+            </div>
+        </section>
 
-<section class="design-system">
-    <div class="container">
-        <h1 class="title-gradient">Design System</h1>
-        <div class="wrapper  table-component">
-            <div class="logo-system">
-                <div class="design-system-header ">
-                    <h2 class="">Logos</h2>
-                </div>
-                <div class="">
-                    <div class="site-logo logo">
-                        <a class="" href="<?=home_url();?>" rel="home" aria-label="Page d'accueil">
-                            <img src="<?=$logo_landscape['sizes']['large'];?>" alt="logo du site">
-                        </a>
-                        <a class="" href="<?=home_url();?>" rel="home" aria-label="Page d'accueil">
-                            <img src="<?=$logo['sizes']['large'];?>" alt="logo du site">
-                        </a>
-                        <a class="" href="<?=home_url();?>" rel="home" aria-label="Page d'accueil">
-                            <img src="<?=$logo_square['sizes']['large'];?>" alt="logo du site">
-                        </a>
-                    </div>
-                </div>
+        <section aria-labelledby="section-our_values-title layout-left-right" class="section-our_values">
+            <?php 
+            $our_values = get_field('our_values', $object);
+            ?>
+            <div class="layout-img">
+                <img src="<?= $our_values['image']['url']; ?>" alt="<?= $our_values['image']['alt']; ?>">
             </div>
-        </div>
-
-        <div class="wrapper  table-component">
-            <div class="font-system ">
-                <div class="design-system-header ">
-                    <h2 class="">Font</h2>
-                </div>
-                <div class="grid-table">
-                    <p class="">fs-xs</p>
-                    <div class="flex-column-center">
-                        <p class="fs-xs">Lorem ipsum dolor.</p>
-                        <code class="fs-xs">clamp(0.8125rem, 0.90625rem + 0.09375vi, 1rem)</code>
-                    </div>
-                </div>
-                <div class="grid-table">
-                    <p class="">fs-default</p>
-                    <div class="flex-column-center">
-                        <p class="fs-default">Lorem ipsum dolor.</p>
-                        <code class="fs-xs">clamp(1rem, 1.125rem + 0.125vi, 1.25rem)</code>
-                    </div>
-                </div>
-                <div class="grid-table">
-                    <p class="">fs-sm</p>
-                    <div class="flex-column-center">
-                        <p class="fs-sm">Lorem ipsum dolor.</p>
-                        <code class="fs-xs">clamp(1.25rem, 1.4375rem + 0.1875vi, 1.5rem)</code>
-                    </div>
-                </div>
-                <div class="grid-table">
-                    <p class="">fs-md</p>
-                    <div class="flex-column-center">
-                        <p class="fs-md">Lorem ipsum dolor.</p>
-                        <code class="fs-xs">clamp(2rem, 2.0625rem + 0.0625vi, 2.125rem)</code>
-                    </div>
-                </div>
-                <div class="grid-table">
-                    <p class="">fs-lg</p>  
-                    <div class="flex-column-center">
-                        <p class="fs-lg">Lorem ipsum dolor.</p>
-                        <code class="fs-xs">clamp(3rem, 3.25rem + 0.25vi, 3.5rem)</code>
-                    </div>
-                </div>
-                <div class="grid-table">
-                    <p class="">fs-xl</p>
-                    <div class="flex-column-center">
-                        <p class="fs-xl">Lorem ipsum dolor.</p>
-                        <code class="fs-xs">clamp(5rem, 5.5rem + 0.5vi, 6rem)</code>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        
-
-        <div class="wrapper  table-component">
-            <div class="font-family-system ">
-                <div class="design-system-header ">
-                    <h2 class="">Font Family</h2>
-                </div>
-                <div class="grid-table">
-                    <p class="">Coda</p>
-                    <p class="text-font fs-lg">Lorem ipsum DOLOR.</p>
-                </div>
-                <div class="grid-table">
-                    <p class="">Russo one</p>
-                    <p class="heading-font fs-lg">Lorem ipsum DOLOR.</p>
-                </div>
-            </div>
-        </div>
-        <div class="wrapper  table-component font-weight-system">
-            <div class="font-family-system ">
-                <div class="design-system-header ">
-                    <h2 class="">Font Weight</h2>
-                </div>
-                <div class="grid-table">
-                    <p class="">Text font weight</p>
-                    <div class="">
-                        <p class="weight-400 text-font">Weight 400 - The quick brown fox jumps over the lazy dog</p>
-                        <p class="weight-400 heading-font">Weight 400 - The quick brown fox jumps over the lazy dog</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="wrapper  table-component color-text-system">
-            <div class="design-system-header ">
-                <h2 class="">Color</h2>
-            </div>
-            <div class="grid-table">
-                <div class="gap-xs element-ratio-calculating">
-                    <div class="flex-column-center">
-                        <p class="default-color">default-color</p>
-                        <div class="text-color default-color">
-                            <p class="color-computed"></p>
-                        </div>
-                    </div>
-                </div>
-                <p class="default-color fs-lg">Lorem ipsum dolor.</p>
-            </div>
-            <div class="grid-table">
-                <div class="gap-xs element-ratio-calculating">
-                    <div class="flex-column-center">
-                        <p class="gray-color">gray-color</p>
-                        <div class="text-color gray-color">
-                            <p class="color-computed"></p>
-                        </div>
-                    </div>
-                </div>
-                <p class="gray-color fs-lg">Lorem ipsum dolor.</p>
-            </div>
-            <div class="grid-table">
-                <div class="gap-xs element-ratio-calculating">
-                    <div class="flex-column-center">
-                        <p class="primary-color">primary-color</p>
-                        <div class="text-color primary-color">
-                            <p class="color-computed"></p>
-                        </div>
-                    </div>
-                </div>
-                <p class="primary-color fs-lg">Lorem ipsum dolor.</p>
-            </div>
-            <div class="grid-table">
-                <div class="gap-xs element-ratio-calculating">
-                    <div class="flex-column-center">
-                        <p class="accent-color">accent-color</p>
-                        <div class="text-color accent-color">
-                            <p class="color-computed"></p>
-                        </div>
-                    </div>
-                </div>
-                <p class="accent-color fs-lg">Lorem ipsum dolor.</p>
-            </div>
-            <div class="grid-table">
-                <div class="gap-xs element-ratio-calculating">
-                    <div class="flex-column-center">
-                        <p class="secondary-color">secondary-color</p>
-                        <div class="text-color secondary-color">
-                            <p class="color-computed"></p>
-                        </div>
-                    </div>
-                </div>
-                <p class="secondary-color fs-lg">Lorem ipsum dolor.</p>
-            </div>
-        </div>
-
-        <div class="wrapper  background-color-system ">
-            <div class="design-system-header ">
-                <h2 class="">Background Color</h2>
-            </div>
-            <div class="flex-auto">
+            <div class="layout-content">
                 <div>
-                    <div class="bg-background-color element-ratio-calculating">
-                        <div class="flex-column-center gap-xs">
-                            <p class="fs-sm">background-color</p>
-                            <div class="bg-color-computed"></div>
-                        </div>
-                        <p class="default-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p>
-                        <p class="gray-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p>
-                        <p class="primary-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p>
-                        <p class="accent-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p>
-                        <p class="secondary-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p> 
-                        <p class="contrast-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p>
-                    </div>
-                </div>
-                <div>
-                    <div class="bg-primary-color element-ratio-calculating">
-                        <div class="flex-column-center gap-xs">
-                            <p class="fs-sm">primary-color</p>
-                            <div class="bg-color-computed"></div>
-                        </div>  
-                        <p class="default-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p>
-                        <p class="gray-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p>
-                        <p class="primary-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p>
-                        <p class="accent-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p>
-                        <p class="secondary-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p>
-                        <p class="contrast-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p>
-                    </div>
-                </div>
-                <div>
-                    <div class="bg-secondary-color element-ratio-calculating">
-                        <div class="flex-column-center gap-xs">
-                            <p class="fs-sm">secondary-color</p>
-                            <div class="bg-color-computed"></div>
-                        </div>
-                        <p class="default-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p>
-                        <p class="gray-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p>
-                        <p class="primary-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p>
-                        <p class="accent-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p>
-                        <p class="secondary-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p>
-                        <p class="contrast-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p>
-                    </div>
-                </div>
-                <div>
-                    <div class="bg-blue-color element-ratio-calculating">
-                        <div class="flex-column-center gap-xs">
-                            <p class="fs-sm">blue-color</p>
-                            <div class="bg-color-computed"></div>
-                        </div>
-                        <p class="default-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p>
-                        <p class="gray-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p>
-                        <p class="primary-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p>
-                        <p class="accent-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p>
-                        <p class="secondary-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p>
-                        <p class="contrast-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p>
-                    </div>
-                </div>
-                <div>
-                    <div class="bg-green-color element-ratio-calculating">
-                        <div class="flex-column-center gap-xs">
-                            <p class="fs-sm">green-color</p>
-                            <div class="bg-color-computed"></div>
-                        </div>
-                        <p class="default-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p>
-                        <p class="gray-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p>
-                        <p class="primary-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p>
-                        <p class="accent-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p>
-                        <p class="secondary-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p>
-                        <p class="contrast-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p>
-                    </div>
-                </div>
-                <div>
-                    <div class="bg-purple-color element-ratio-calculating">
-                        <div class="flex-column-center gap-xs">
-                            <p class="fs-sm">purple-color-background</p>
-                            <div class="bg-color-computed"></div>
-                        </div>
-                        <p class="default-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p>
-                        <p class="gray-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p>
-                        <p class="primary-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p>
-                        <p class="accent-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p>
-                        <p class="secondary-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p>
-                        <p class="contrast-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p>
-                    </div>
-                </div>
-                <div>
-                    <div class="bg-orange-color element-ratio-calculating">
-                        <div class="flex-column-center gap-xs">
-                            <p class="fs-sm">orange-color</p>
-                            <div class="bg-color-computed"></div>
-                        </div>
-                        <p class="default-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p>
-                        <p class="gray-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p>
-                        <p class="primary-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p>
-                        <p class="accent-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p>
-                        <p class="secondary-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p>
-                        <p class="contrast-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p>
-                    </div>
-                </div>
-                <div>
-                    <div class="bg-dark-blue-color element-ratio-calculating">
-                       <div class="flex-column-center gap-xs">
-                            <p class="fs-sm">dark-blue-color</p>
-                            <div class="bg-color-computed"></div>
-                        </div>
-                        <p class="default-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p>
-                        <p class="gray-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p>
-                        <p class="primary-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p>
-                        <p class="accent-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p>
-                        <p class="secondary-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p>
-                        <p class="contrast-color text-color">Lorem ipsum dolor. <span class="ratio"></span></p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="wrapper  button-system table-component ">
-            <div class="">
-                <h2 class="">Buttons</h2>
-            </div>
-            <div class="flex-auto">
-                <div class="button-wrapper">
-                    <div class="button-container button-background-primary button-background-animation">
-                        <a href="<?=home_url() . '/contact';?>" class="btn">Button primary</a>
+                    <h2 id="section-our_values-title" ><?= $our_values['title']; ?></h2>
+                    <p><?= wpautop($our_values['text']); ?></p>
+                    <div class="button-background-primary button-background-animation">
+                        <a href="<?= $our_values['button_link']; ?>" class="btn"><?= $our_values['button_text']; ?></a>
                         <span class="hover-bg"></span>
                     </div>
                 </div>
-                <div class="button-wrapper">
-                    <div class="button-container button-background-secondary-icon">
-                        <button class=" btn">Button secondary
-                            <?php echo file_get_contents(get_template_directory() . '/assets/images/arrow-up-right-bold.svg'); ?>
-                        </button>
-                    </div>
-                </div> 
-                <div class="button-wrapper">
-                    <div class="button-container button-background-secondary-icon button-wave-animation">
-                        <button class="btn" data-name="Button background animation">
+            </div>
+        </section>
+
+        <section aria-labelledby="section-expertise-title" class="section-expertise container">
+            <?php 
+            $expertises = get_field('expertises', $object);
+            ?>
+            <h2 id="section-expertise-title" class="section-title"><?= $expertises['title']; ?></h2>
+            <div class="expertise-container" >
+                <?php $i = 0; foreach ($expertises['expertise'] as $item) : ?>
+                    <?php 
+                    $term_id = $item['category']; 
+                    $term = get_term_by('term_id', $term_id, 'expertises');
+                    $color = get_field('color', $term);
+                    $term_link = get_term_link($term);
+                    ?>
+
+                    <div class="expertise accent-<?=$color;?>-color" aria-labelledby="expertise-title">
+                        <style>
+                            #main-<?=$theme_template_name?> .section-expertise .expertise.accent-<?=$color;?>-color:hover{
+                                svg path {
+                                    fill: var(--<?=$color;?>-color);
+                                    stroke: var(--<?=$color;?>-color);
+                                }
+                                p {
+                                    color: var(--<?=$color;?>-color);
+                                }
+                            }
+                        </style>
+                        <span class="expertise-number <?=$color;?>-color">0<?= $i + 1; ?></span>
+                        <h3 id="expertise-title-<?=$i;?>" class="expertise-title <?=$color;?>-color"><?= $item['title']; ?></h3>
+                        <p class="expertise-text"><?= $item['text']; ?></p>
                         <?php echo file_get_contents(get_template_directory() . '/assets/images/arrow-up-right-bold.svg'); ?>
-                        </button>
+                        <a href="<?= $term_link; ?>" class=""></a>
                     </div>
-                </div> 
+                <?php $i++; endforeach; ?>
             </div>
-        </div>
-
-         <div class="wrapper text-system table-component">
-            <div class="">
-                <h2 class="">Paragraphes</h2>
-            </div>
-            <div class="flex-auto">
-                <div class="">
-                    <div class="grid-table">
-                        <p class="">Regular~16px</p>
-                        <p>
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.
-                            Lorem <span class="text-bold">ipsum dolor</span> sit amet consectetur adipisicing elit. Quisquam, quos.
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.
-                        </p>
-                    </div>
-                    <div class="grid-table">
-                        <p class="">Bold ~16px</p>
-                        <p class="text-bold">
-                            Text bold - Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.
-                        </p>
-                    </div>
-                    <div class="grid-table">
-                        <p class="">Lead ~14px</p>
-                        <p class="text-lead">
-                            Text paragraph lead - Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="wrapper text-system table-component">
-            <div class="">
-                <h2 class="">Titles</h2>
-            </div>
-            <div class="flex-auto">
-                <div class="grid-table">
-                    <p class="">~100px</p>
-                    <h3 class="title-gradient">Digital & Communication</h3>
-                </div>
-                <div class="grid-table">
-                    <p class="">~80px</p>
-                    <h3 class="heading-big-1">Branding Design</h3>
-                </div>
-                <div class="grid-table">
-                    <p class="">~60px</p>
-                    <h3 class="heading-big-2">Travaillons ensemble</h3>
-                </div>
-                <div class="grid-table">
-                    <p class="">~56px</p>
-                    <h3 class="heading-large-1">Un collectif de freelances experts</h3>
-                </div>
-                <div class="grid-table">
-                    <p class="">~44px</p>
-                    <h3 class="heading-medium-large-1">Qui sommes-nous ?</h3>
-                </div>
-                <div class="grid-table">
-                    <p class="">~34px</p>
-                    <h3 class="heading-medium-1">Projet 2</h3>  
-                </div>
-                <div class="grid-table">
-                    <p class="">~24px</p>
-                    <h3 class="heading-small-1">Branding Design</h3>
-                </div>
-            </div>
-        </div>
-
-        <div class="wrapper  border-radius-system">
-            <div class="design-system-header ">
-                <h2 class="">Border Radius</h2>
-            </div>
-            <div class=" flex-auto">
-                <div class="">
-                    <div class="">
-                        <div class=""></div>
-                    </div>
-                </div>
-                <div class="">
-                    <div class="">
-                        <div class=""></div>
-                    </div>
-                </div>
-                <div class="">
-                    <div class="">
-                        <div class=""></div>
-                    </div>
-                </div>
-                <div class="">
-                    <div class="">
-                        <div class=""></div>
-                    </div>
-                </div>
-                <div class="">
-                    <div class="">
-                        <div class=""></div>
-                    </div>
-                </div>
-                <div class="">
-                    <div class="">
-                        <div class=""></div>
-                    </div>
-                </div>
-                <div class="">
-                    <div class="">
-                        <div class=""></div>
-                    </div>
-                </div>
-                <div class="">
-                    <div class="">
-                        <div class=""></div>
-                    </div>
-                </div>
-                <div class="">
-                    <div class="">
-                        <div class=""></div>
-                    </div>
-                </div>
-                <div class="">
-                    <div class="">
-                        <div class=""></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
-
-
-        <div class="wrapper  img-sizes-system">
-            <div class="design-system-header ">
-                <h2 class="">Img Sizes</h2>
-            </div>
-            <div class=" flex-auto">
-                <div class="">
-                    <div class="">
-                        <div class=""></div>
-                    </div>
-                </div>
-                <div class="">
-                    <div class="">
-                        <div class=""></div>
-                    </div>
-                </div>
-                <div class="">
-                    <div class="">
-                        <div class=""></div>
-                    </div>
-                </div>
-                <div class="">
-                    <div class="">
-                        <div class=""></div>
-                    </div>
-                </div>
-                <div class="">
-                    <div class="">
-                        <div class=""></div>
-                    </div>
-                </div>
-                <div class="">
-                    <div class="">
-                        <div class=""></div>
-                    </div>
-                </div>
-                <div class="">
-                    <div class="">
-                        <div class=""></div>
-                    </div>
-                </div>
-                <div class="">
-                    <div class="">
-                        <div class=""></div>
-                    </div>
-                </div>
-                <div class="">
-                    <div class="">
-                        <div class=""></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
-
-    
-        <div class="wrapper  dropdown-system">
-            <div class="design-system-header ">
-                <h2 class="">Dropdowns</h2>
-            </div>
-            <div class=" flex-auto">
-                <div class="">
-                    <h2 class="title-2">Mobile and accordion</h2>
-                    <div class="bg-background-color">
-                        <div class="" aria-label="dropdown-navigation">
-                            <details name="dropdown-details" class="dropdown-details dropdown">
-                                <summary class="default-color">
-                                    <div class="svg-container">
-                                        <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1000 1000'><path d='M353.8 853.1H147V646.2L.7 500 147 353.8V147h206.8L500 .7 646.2 147h206.9v206.8L999.3 500 853.1 646.2v206.9H646.2L500 999.3 353.8 853.1z' fill='currentColor'></path></svg>
-                                    </div>
-                                    <p class="dropdown-title">This element is a details</p>
-                                </summary>
-                                <ul class="dropdown-menu">
-                                    <li><p class=" " href="">its nice.</p></li>
-                                    <li><p class=" " href="">its accessible.</p></li>
-                                    <li><p class=" " href="">Still not supported in all browser and mobile.</p></li>
-                                </ul>
-                            </details>
-                            <details name="dropdown-details" class="dropdown-details dropdown">
-                                <summary class="default-color">
-                                    <div class="svg-container">
-                                        <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1000 1000'><path d='M353.8 853.1H147V646.2L.7 500 147 353.8V147h206.8L500 .7 646.2 147h206.9v206.8L999.3 500 853.1 646.2v206.9H646.2L500 999.3 353.8 853.1z' fill='currentColor'></path></svg>
-                                    </div>
-                                    <p class="dropdown-title">They are link to each other through the name attribute.</p>
-                                </summary>
-                                <ul class="dropdown-menu">
-                                    <li><a class=" " href="">Lorem ipsum dolor sit amet.</a></li>
-                                    <li><p>Lorem ipsum dolor sit amet.Lorem ipsum dolor sit amet.Lorem ipsum dolor sit amet.Lorem ipsum dolor sit amet.</p></li>
-                                    <li><a class=" " href="">Lorem ipsum dolor sit amet.</a></li>
-                                    <li><a class=" " href="">Lorem ipsum dolor sit amet.</a></li>
-                                </ul>
-                            </details>
-                            <details name="dropdown-details" class="dropdown-details dropdown">
-                                <summary class="default-color">
-                                    <div class="svg-container">
-                                        <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1000 1000'><path d='M353.8 853.1H147V646.2L.7 500 147 353.8V147h206.8L500 .7 646.2 147h206.9v206.8L999.3 500 853.1 646.2v206.9H646.2L500 999.3 353.8 853.1z' fill='currentColor'></path></svg>
-                                    </div>
-                                    <p class="dropdown-title">To do</p>
-                                </summary>
-                                <ul class="dropdown-menu">
-                                    <li><a class=" " href="">arranger l'animation after hover on the dropdown-link.</a></li>
-                                    <li><a class=" " href="">fix .ative header.</a></li>
-                                    <li><a class=" " href="">remove underline for nav , replace by gradient .</a></li>
-                                </ul>
-                            </details>
+        </section>
+        <section aria-labelledby="section-projects-title" class="section-projects container">
+            <?php $section_projet_title = get_field('section_projet_title', $object); ?>
+            <h2 id="section-projects-title" class="section-title"><?= $section_projet_title; ?></h2>
+            <div class="projects-container column-layout">
+            <?php $projects = get_field('projects', "option"); ?>
+                <?php foreach ($projects as $project) : ?>
+                    <div class="project card">
+                        <div class="img-container">
+                            <img src="<?= $project['gallery'][0]['url']; ?>" alt="<?= $project['gallery'][0]['alt']; ?>">
+                        </div>
+                        <div class="cat-container">
+                        <?php foreach ($project['expertises'] as $expertise) : ?>
+                            <?php 
+                            $color = get_field('color', $expertise);
+                            ?>
+                            <span class="expertise-number <?=$color;?>-color"><?=$expertise->name; ?></span>
+                        <?php endforeach; ?>
+                        </div>
+                        <h3><?= $project['title']; ?></h3>      
+                        <div class="button-container button-background-secondary-icon button-wave-animation">
+                            <button class="btn" data-name="<?=$project['text'];?>">
+                            <?php echo file_get_contents(get_template_directory() . '/assets/images/arrow-up-right-bold.svg'); ?>
+                            </button>
                         </div>
                     </div>
-                </div>
-                <div class="">
-                    <div class="bg-background-color w-1">
-                        <h2 class="title-2">Hover desktop</h2>
-                        <nav aria-label="navigation" tabindex="0" class="dropdown-hover dropdown">
-                            <div class="dropdown-link">
-                                <div class="svg-container">
-                                <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1000 1000'><path d='M353.8 853.1H147V646.2L.7 500 147 353.8V147h206.8L500 .7 646.2 147h206.9v206.8L999.3 500 853.1 646.2v206.9H646.2L500 999.3 353.8 853.1z' fill='currentColor'></path></svg>
-                                </div>
-                                <p class="dropdown-title" class="">this is a nice dropdown hover.</p> 
-                            </div>
-                            <ul class="dropdown-menu">
-                                <li><p>that allows the header/summary to be clickable.</p></li>
-                                <li><p>the content of the header is limited to 1 line and therefor the width of the dropdown is limited to the width of the container.
-                                    You can always add a scroll if its really needed.
-                                </p></li>
-                                <li><p>ist supported in all platform</p></li>
-                                <li><a href="">you have to be carefull of the content under it and the superposition.</a></li>
-                                 <li><a href="">links on 2 lignes look weirds, reduce the offset.</a></li>
-                            </ul>
-                        </nav>
-                    </div>
-                </div>
-                <div>
-                    <div class="bg-background-color w-1">
-                        <h2 class="title-2">Popover</h2>
-                        <nav class="dropdown-popover dropdown w-1">
-                            <div class="dropdown-link">
-                                <div class="svg-container">
-                                <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1000 1000'><path d='M353.8 853.1H147V646.2L.7 500 147 353.8V147h206.8L500 .7 646.2 147h206.9v206.8L999.3 500 853.1 646.2v206.9H646.2L500 999.3 353.8 853.1z' fill='currentColor'></path></svg>
-                                </div>
-                                <button popovertarget="dropdown-popover" class="dropdown-title btn">This is a nice dropdown popover.</button>
-                            </div>
-                            <div class="" popover id="dropdown-popover" >
-                                <ul class="dropdown-menu">
-                                <button popovertarget="dropdown-popover" popovertargetaction="hide" class="button-mobile-close-module btn-links">
-                                    <svg fill="#000000" width="20px" height="20px" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M18.8,16l5.5-5.5c0.8-0.8,0.8-2,0-2.8l0,0C24,7.3,23.5,7,23,7c-0.5,0-1,0.2-1.4,0.6L16,13.2l-5.5-5.5  c-0.8-0.8-2.1-0.8-2.8,0C7.3,8,7,8.5,7,9.1s0.2,1,0.6,1.4l5.5,5.5l-5.5,5.5C7.3,21.9,7,22.4,7,23c0,0.5,0.2,1,0.6,1.4  C8,24.8,8.5,25,9,25c0.5,0,1-0.2,1.4-0.6l5.5-5.5l5.5,5.5c0.8,0.8,2.1,0.8,2.8,0c0.8-0.8,0.8-2.1,0-2.8L18.8,16z"/>
-                                    </svg>
-                                </button>
-                                    <li class="">
-                                        <a href="" title="" target="_blank" rel="noopener" class="" >Lorem ipsum dolor sit amet.</a>
-                                    </li>
-                                    <li><p>Lorem ipsum dolor sit amet.Lorem ipsum dolor sit amet.Lorem ipsum dolor sit amet.Lorem ipsum dolor sit amet.Lorem ipsum dolor sit amet.</p></li>
-                                    <li><p>Lorem ipsum dolor sit amet.</p></li>
-                                    <li><p>Lorem ipsum dolor sit amet.</p></li>
-                                    <li><p>Lorem ipsum dolor sit amet.Lorem ipsum dolor sit amet.Lorem ipsum dolor sit amet.</p></li>
-                                    <li><a href="">Lorem ipsum dolor sit amet.</a></li>
-                                    <li><a href="">Lorem ipsum dolor sit amet.</a></li>
-                                </ul>
-                            </div>
-                        </nav>
-                    </div>
-                </div>
+            <?php endforeach; ?>
             </div>
-        </div>
+        </section>
 
-        <div class="wrapper  nav-system ">
-            <div class="design-system-header ">
-                <h2 class="">Nav</h2>
+        <section aria-labelledby="section-team-title" class="section-team container">
+            <?php 
+            $team = get_field('team', "option"); 
+            $section_team_title = get_field('section_team_title', $object); 
+            ?>
+            <h2 id="section-team-title" class="section-title"><?= $section_team_title; ?></h2>
+            <div class="team-container">
+                <?php foreach ($team as $item) : ?>
+                    <div class="team-member card">
+                        <img src="<?= $item['image']['url']; ?>" alt="<?= $item['image']['alt']; ?>">
+                        <h3><?= $item['title']; ?></h3>
+                        <p><?= $item['text']; ?></p>
+                    </div>
+                <?php endforeach; ?>
             </div>
-            <header class="bg-background-color">
-                <div class="wrapper-logo flex-start gap-xl">
-                    <?php get_template_part('partials/header/logo'); ?>
-                </div>
-
-                <div class="wrapper-navbar">
-                    <?php get_template_part('partials/header/navbar-desktop', null, ['theme_location' => 'header']); ?>
-                </div>
-
-                <div class="wrapper-header-right-content flex-end gap-md">
-                    <?php if (function_exists('aas_open_search_form')): ?>
-                        <div class="wrapper-open-search">
-                            <?=do_shortcode('[aas_open_search]'); ?>
+        </section>
+        <section aria-labelledby="section-reviews-title" class="section-reviews slider" data-slider>
+            <?php $reviews = get_field('reviews', "option"); ?>
+            <style>
+                :root {
+                    --slider-pages: <?= count($reviews); ?>;
+                }
+            </style>
+            <?php $section_reviews_title = get_field('section_reviews_title', $object); ?>
+            <nav aria-label="Slider" role="navigation" class="slider-wrapper" data-slider-wrapper >
+                <?php $i = 0; foreach ($reviews as $review) : ?>
+                    <div class="review slide  <?php if ($i === 0) { echo 'fade-in'; } else { echo 'fade-out'; } ?>">
+                        <div class="layout-img">
+                            <img src="<?= $review['image']['url']; ?>" alt="<?= $review['image']['alt']; ?>">
                         </div>
-                    <?php endif; ?>
-                    <?php if (function_exists('theme_light_dark_form')): ?>
-                        <div class="wrapper-theme-light-dark">
-                            <?=do_shortcode('[theme_light_dark]'); ?>
+                        <div class="layout-content review-content">
+                            <div>
+                                <h2 id="section-reviews-title" class=""><?= $section_reviews_title; ?></h2>
+                                <p><?= wpautop($review['text']); ?></p>
+                                <p class="review-name"><?= $review['name']; ?></p>
+                                <p><?= $review['job_title']; ?></p>
+                            </div>
                         </div>
-                    <?php endif; ?>
-                </div>
-            </header>
-        </div>
-
-        <div class="wrapper  test-layer-system">
-            <div class="design-system-header ">
-                <h2 class="">Texts</h2>
-            </div>
-            <div class=" flex-auto">
-                <div class="">
-                    <h2 class="title-2">Mobile and accordion</h2>
-                    <div class="bg-background-color">
-                        <ul>
-                            <li><p>1. Font Size and Line Height
-
-                            Font size: 16px–18px is ideal for body text.
-
-                            Line height: 1.5–1.8× the font size (e.g., 24px line height for 16px font) improves readability.</p></li>  
-                            <li><p>2. Line Length
-
-                            Ideal: 50–75 characters per line.
-
-                            Too long = tiring to read; too short = choppy and awkward.</p></li>  
-                            <li><p>3. Spacing
-
-                            Paragraph spacing: Use clear vertical spacing (e.g., margin-bottom: 1em) to separate thoughts.
-
-                            Avoid cramming multiple paragraphs together.</p></li>  
-                            <li><p>4. Contrast
-
-                            Text should be high-contrast (e.g., dark text on light background or vice versa).
-
-                            Avoid low-contrast gray-on-white, which strains the eyes.</p></li>  
-                            <li><p>5. Alignment
-
-                            Use left-aligned text (for left-to-right languages); justified text can cause uneven gaps.</p></li>  
-                            <li><p>6. Avoid Walls of Text
-
-                            Break up long paragraphs into shorter chunks (3–4 lines max).
-
-                            Use headings, bullet points, or bold key phrases to help scanning.</p></li>  
-                            <li><p>7. Readable Font
-
-                            Use a font that is easy to read, such as Arial, sans-serif, or Georgia, serif.</p></li>  
-                        </ul>
                     </div>
-                </div>
+                <?php $i++; endforeach; ?>
+            </nav>
+            <div class="slide-button-container slide-button-container-prev">
+                <button class="slide-button-prev slide-button btn" data-slider-prev>
+                    <?php echo file_get_contents(get_template_directory() . '/assets/images/spiral.svg'); ?>
+                </button>
             </div>
-        </div>
+            <div class="slide-button-container slide-button-container-next">
+                <button class="slide-button-next slide-button btn" data-slider-next>
+                    <?php echo file_get_contents(get_template_directory() . '/assets/images/spiral.svg'); ?>
+                </button>
+            </div>
 
-    </div>
-</section>
+        </section>
 
+        <section aria-labelledby="section-blog-title" class="section-blog container">
+            <?php $section_blog_title = get_field('section_blog_title', $object); ?>
+            <h2 id="section-blog-title" class="section-title"><?= $section_blog_title; ?></h2>
+            <div class="blog-container column-layout">
+                <?php 
+                $query = new WP_Query( array(
+                    'post_type' => 'post',
+                    'post_status' => 'publish',
+                    'posts_per_page' => 3,
+                    'orderby' => 'date',
+                    'order' => 'DESC'
+                ));
+                $recents_posts = $query->get_posts();
+                wp_reset_postdata();
+                 ?>
+                <?php foreach ($recents_posts as $post) : ?>
+                    <?php $link = get_the_permalink($post->ID); ?>
+                    <div class="blog-item card">
+                        <img src="<?= get_the_post_thumbnail_url($post->ID); ?>" alt="<?= get_the_title($post->ID); ?>">
+                        <div class="cat-container">
+                        <?php foreach (get_the_terms($post->ID, 'expertises') as $expertise) : ?>
+                            <?php 
+                            $color = get_field('color', $expertise);
+                            ?>
+                            <span class="expertise-number <?=$color;?>-color"><?=$expertise->name; ?></span>
+                        <?php endforeach; ?>
+                        </div>
+                        <h3><?= $post->post_title; ?></h3>
+                        <div class="button-container button-background-secondary-icon button-wave-animation">
+                            <a href="<?= $link; ?>" class="btn" data-name="En savoir plus">
+                            <?php echo file_get_contents(get_template_directory() . '/assets/images/arrow-up-right-bold.svg'); ?>
+                            </a>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+            </div>
+        </section>
 </main>
 
 

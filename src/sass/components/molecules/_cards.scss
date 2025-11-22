@@ -1,0 +1,12 @@
+@use "../../design-tokens/colors" as *;
+@use "../../design-tokens/tokens" as *;
+@use "../../utilities/container-wrapper" as *;
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: start;
+  gap: $spacer-md;
+  padding: $spacer-md;
+  background-color: $background-color;
+}

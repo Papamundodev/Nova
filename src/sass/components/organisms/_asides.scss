@@ -1,0 +1,28 @@
+@use "../../design-tokens/colors" as *;
+@use "../../design-tokens/tokens" as *;
+@use "../../utilities/container-wrapper" as *;
+
+.right-drawer {
+  position: fixed;
+  top: 50vh;
+  transform: translateY(-50%);
+  right: 0;
+  width: fit-content;
+  max-width: 150px;
+  background-color: $gray-color;
+  z-index: 1000;
+  padding: $spacer-lg;
+  border-bottom-left-radius: $border-radius-rounded-lg;
+  border-top-left-radius: $border-radius-rounded-lg;
+}
+
+.wrapper-tool-kit {
+  display: flex;
+  flex-direction: column;
+  gap: $spacer-xs;
+
+  button,
+  a {
+    padding: $spacer-xs;
+  }
+}

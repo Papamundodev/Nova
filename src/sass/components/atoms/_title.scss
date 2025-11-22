@@ -11,12 +11,18 @@
 }
 
 @mixin heading-big-1 {
-  font-size: $font-size-xxl;
+  font-size: $font-size-lg;
   @include heading-base;
+  @media (width >= $breakpoint-md) {
+    font-size: $font-size-xl;
+  }
+  @media (width >= $breakpoint-xl) {
+    font-size: $font-size-xxl;
+  }
 }
 
 @mixin heading-big-2 {
-  font-size: $font-size-xl;
+  font-size: $font-size-lg;
   @include heading-base;
 }
 
@@ -50,12 +56,11 @@
   background-position: 0 0;
   background-repeat: no-repeat;
   width: fit-content;
-  margin-block-end: $spacer-xl;
 }
 
 .title-gradient {
-  @include heading-big-1;
   @include title-gradient;
+  @include heading-big-1;
 }
 
 .heading-big-1 {

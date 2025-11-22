@@ -31,12 +31,12 @@ document.addEventListener("DOMContentLoaded", () => {
       let letterIndex = 0;
       const spans = element.querySelectorAll("span");
       spans.forEach((span) => {
-        span.style.transitionDelay = `${letterIndex * 0.015}s`;
+        span.style.transitionDelay = `${letterIndex * 0.01}s`;
         letterIndex++;
       });
     });
   }
-  document.querySelectorAll(".button-wave-animation button").forEach((a) => {
+  document.querySelectorAll(".button-wave-animation button, .button-wave-animation a").forEach((a) => {
     const letters = getLetters(a.dataset.name);
     let htmlContent = "";
     letters.forEach((letter) => {
@@ -48,8 +48,76 @@ document.addEventListener("DOMContentLoaded", () => {
     });
     a.innerHTML = htmlContent + a.innerHTML;
   });
-  document.querySelectorAll(".button-wave-animation button").forEach((a) => {
+  document.querySelectorAll(".button-wave-animation button, .button-wave-animation a").forEach((a) => {
     mouseOver(a);
   });
+  class Slider {
+    constructor(el) {
+      this.nextButton = el.querySelector("[data-slider-next]");
+      this.prevButton = el.querySelector("[data-slider-prev]");
+      this.wrapper = el.querySelector("[data-slider-wrapper]");
+      this.nextButton.addEventListener("click", () => this.move(1));
+      this.prevButton.addEventListener("click", () => this.move(-1));
+      this.updateUi();
+      this.wrapper.addEventListener("scroll", (event) => {
+        this.updateUi();
+        if (this.previousPage()) {
+          this.previousPage().classList.remove("fade-in");
+          this.previousPage().classList.add("fade-out");
+        }
+        if (this.currentPage()) {
+          this.currentPage().classList.add("fade-in");
+          this.currentPage().classList.remove("fade-out");
+        }
+        if (this.nextPage()) {
+          this.nextPage().classList.remove("fade-in");
+          this.nextPage().classList.add("fade-out");
+        }
+      });
+    }
+    get pages() {
+      return this.wrapper.children.length;
+    }
+    get page() {
+      return Math.round(this.wrapper.scrollLeft / this.wrapper.offsetWidth);
+    }
+    updateUi() {
+      if (this.page === 0) {
+        this.prevButton.setAttribute("hidden", "hidden");
+      } else {
+        this.prevButton.removeAttribute("hidden");
+      }
+      if (this.page === this.pages - 1) {
+        this.nextButton.setAttribute("hidden", "hidden");
+      } else {
+        this.nextButton.removeAttribute("hidden");
+      }
+    }
+    move(n) {
+      let newPage = this.page + n;
+      if (newPage < 0) {
+        newPage = 0;
+      }
+      if (newPage >= this.pages) {
+        newPage = this.pages - 1;
+      }
+      this.wrapper.scrollTo({
+        left: this.wrapper.children[newPage].offsetLeft,
+        behavior: "smooth"
+      });
+    }
+    currentPage() {
+      return this.wrapper.children[this.page];
+    }
+    previousPage() {
+      return this.wrapper.children[this.page - 1];
+    }
+    nextPage() {
+      return this.wrapper.children[this.page + 1];
+    }
+  }
+  if (document.querySelector("[data-slider]") !== null) {
+    new Slider(document.querySelector("[data-slider]"));
+  }
 });
 //# sourceMappingURL=main.js.map

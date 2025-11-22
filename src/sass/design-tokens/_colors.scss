@@ -21,9 +21,9 @@
   --purple-color: #9278ff;
   --orange-color: #ffbe99;
   --dark-blue-color: #0801a2;
+  --pink-color: var(--secondary-color);
 
   /* accent colors */
-  --accent-color: var(--primary-color);
   --linear-gradient-color: linear-gradient(
     to right,
     var(--primary-color),
@@ -51,8 +51,8 @@
   --purple-color: #ffd8f3;
   --orange-color: #ffb88f;
   --dark-blue-color: #99c2fe;
+  --pink-color: var(--secondary-color);
   /* accent colors */
-  --accent-color: var(--primary-color);
   --linear-gradient-color: linear-gradient(
     to right,
     var(--primary-color),
@@ -74,7 +74,7 @@ $green-color: var(--green-color);
 $purple-color: var(--purple-color);
 $orange-color: var(--orange-color);
 $dark-blue-color: var(--dark-blue-color);
-$accent-color: var(--accent-color);
+$pink-color: var(--pink-color);
 $linear-gradient-color: var(--linear-gradient-color);
 $active-color: var(--orange-color);
 
@@ -89,7 +89,7 @@ $colors: (
   "purple-color": $purple-color,
   "orange-color": $orange-color,
   "dark-blue-color": $dark-blue-color,
-  "accent-color": $accent-color,
+  "pink-color": $pink-color,
   "gray-color": $gray-color,
   "linear-gradient-color": $linear-gradient-color,
   "active-color": $active-color,

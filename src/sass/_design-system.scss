@@ -65,6 +65,7 @@
 }
 
 .table-component {
+  border-block-end: $spacer-xs solid $gray-color;
   .grid-table {
     @include grid-table-2-columns;
     & > p:first-child {
@@ -76,7 +77,6 @@
       color: $secondary-color;
     }
   }
-  border-block-end: $spacer-xs solid $gray-color;
 }
 
 .background-color-system {
@@ -87,7 +87,7 @@
 
 .design-system {
   h1 {
-    margin-block: $spacer-lg $spacer-xxl;
+    margin-block: $spacer-lg $spacer-big;
     margin-inline: auto;
   }
   h2 {

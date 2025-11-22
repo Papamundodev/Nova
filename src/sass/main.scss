@@ -11,12 +11,18 @@
 @use "components/atoms/text" as *;
 @use "components/atoms/button" as *;
 @use "components/atoms/nav-items" as *;
+@use "components/molecules/cards" as *;
 @use "components/organisms/header" as *;
+@use "components/organisms/asides" as *;
+@use "components/pages/front-page" as *;
 
 body {
   font-family: $text-font;
   background-color: $background-color;
   color: $default-color;
+  main {
+    min-height: 200vh;
+  }
 }
 
 #tld-theme-toggle-button {

@@ -8,7 +8,7 @@ $title = get_the_title();
 
     <main id="main-<?=$theme_template_name?>">
 
-        <section class="section">
+        <section class="section container">
 
             <!-- Page Title -->
             <div class="wrapper">

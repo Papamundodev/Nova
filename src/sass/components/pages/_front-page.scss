@@ -6,26 +6,13 @@
 @use "../../components/atoms/text" as *;
 @use "../../components/molecules/layouts" as *;
 @use "../../components/organisms/slider" as *;
+@use "../../components/organisms/sections" as *;
 
 #main-front-page {
   .section-intro {
-    display: flex;
-    flex-direction: column;
-    align-items: start;
-    justify-content: start;
-    gap: $spacer-xxl;
-    margin-block-end: calc($spacer-big * 2);
-    @media (width <= $breakpoint-xl) {
-      margin-block-end: $spacer-xxl;
-    }
-
-    .intro-content-container {
-      max-width: 50ch;
-      h1 {
-        margin-block-end: $spacer-xxl;
-      }
-    }
+    @include section-intro;
   }
+
   .section-our_values {
     background-color: $secondary-color;
 

@@ -19,6 +19,7 @@
 @use "components/organisms/slider" as *;
 @use "components/organisms/footer" as *;
 @use "components/pages/front-page" as *;
+@use "components/pages/about" as *;
 
 body {
   font-family: $text-font;

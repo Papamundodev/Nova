@@ -324,6 +324,7 @@ $logo = get_field('logo', 'option');
                 <div class="button-wrapper">
                     <div class="button-container button-background-secondary-icon button-wave-animation">
                         <button class="btn" data-name="Button background animation">
+                        <span class="button-text">Button background animation</span>
                         <?php echo file_get_contents(get_template_directory() . '/assets/images/arrow-up-right-bold.svg'); ?>
                         </button>
                     </div>

@@ -1,0 +1,195 @@
+@use "../../utilities/container-wrapper" as *;
+@use "../../design-tokens/colors" as *;
+@use "../../design-tokens/fonts" as *;
+@use "../../design-tokens/tokens" as *;
+@use "../../components/molecules/layouts" as *;
+@use "../../components/atoms/title" as *;
+@use "../../components/atoms/text" as *;
+
+footer {
+  padding-block-end: $spacer-xxl;
+}
+
+.section-contact-form {
+  background-color: $orange-color;
+  padding-inline: 0;
+  margin-block: calc($spacer-big * 2) $spacer-big;
+  @include layout-left-right;
+  .layout-content {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: start;
+    gap: $spacer-xl;
+    h2 {
+      @include heading-large-1;
+      color: $contrast-color;
+      text-align: start;
+    }
+    input::placeholder,
+    textarea::placeholder {
+      color: $contrast-color;
+      opacity: 1;
+    }
+
+    // Vendor prefixes for better browser support
+    input::-webkit-input-placeholder,
+    textarea::-webkit-input-placeholder {
+      color: $contrast-color;
+      opacity: 1;
+    }
+
+    input::-moz-placeholder,
+    textarea::-moz-placeholder {
+      color: $contrast-color;
+      opacity: 1;
+    }
+
+    input:-ms-input-placeholder,
+    textarea:-ms-input-placeholder {
+      color: $contrast-color;
+      opacity: 1;
+    }
+  }
+}
+
+.section-faq {
+  min-height: 60vh;
+  margin-block-end: $spacer-xxl;
+  h2 {
+    text-transform: uppercase;
+  }
+}
+
+.section-banner {
+  background-color: $primary-color;
+  color: $contrast-color;
+  overflow: hidden;
+  margin-block-end: $spacer-big;
+  .scroller {
+    max-width: 1400px;
+    margin-inline: auto;
+    .scroller-inner {
+      padding-block: $spacer-xl;
+      display: flex;
+      align-items: start;
+      justify-content: start;
+      flex-wrap: nowrap;
+      overflow: hidden;
+      gap: $spacer-lg;
+      p {
+        @include heading-big-1;
+        white-space: nowrap;
+      }
+      .svg-container {
+        align-self: start;
+        svg {
+          width: $icon-lg;
+          height: $icon-lg;
+          path {
+            fill: $flash-color;
+          }
+          @media (width <= $breakpoint-md) {
+            width: $icon-md;
+            height: $icon-md;
+          }
+        }
+        animation: infinite-rotate 1s linear infinite;
+        transform-origin: center;
+        transform: rotate(0deg);
+      }
+    }
+    &[data-infinite-scroll="true"] {
+      mask: linear-gradient(
+        to right,
+        transparent 0%,
+        white 10%,
+        white 90%,
+        transparent 100%
+      );
+      -webkit-mask: linear-gradient(
+        to right,
+        transparent 0%,
+        white 10%,
+        white 90%,
+        transparent 100%
+      );
+      .scroller-inner {
+        animation: infinite-scroll 10s linear infinite;
+        width: max-content;
+        margin-inline: auto;
+      }
+    }
+  }
+}
+
+@keyframes infinite-scroll {
+  to {
+    transform: translateX(calc((-100% / 3) - ($spacer-lg / 3)));
+  }
+}
+
+@keyframes infinite-rotate {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.section-footer {
+  padding-block: $spacer-xl $spacer-big;
+  display: grid;
+  gap: $spacer-xxl;
+  grid-template-rows: auto auto auto;
+  grid-template-columns: 1fr;
+  h2 {
+    @include heading-big-2;
+    margin-block-end: $spacer-xl;
+    line-height: 1.5;
+  }
+  h3 {
+    @include heading-small-1;
+    color: $primary-color;
+    vertical-align: bottom;
+  }
+  & > *:not(:first-child) {
+    display: grid;
+    grid-template-rows: $font-size-lg $font-size-sm $font-size-sm;
+  }
+  @media (width >= $breakpoint-lg) {
+    grid-template-columns: auto auto;
+    grid-template-rows: auto auto;
+    & > *:first-child {
+      grid-column: 1 / 3;
+      margin-block-end: $spacer-xl;
+    }
+  }
+  @media (width >= $breakpoint-xxl) {
+    grid-template-columns: 1fr auto auto;
+    & > *:first-child {
+      grid-column: 1 / 2;
+      margin-block-end: $spacer-xl;
+    }
+    & > *:not(:first-child) {
+      margin-block-start: calc(($font-size-xxl - $font-size-md));
+      margin-block-end: 0;
+      grid-template-rows: $font-size-xxl $font-size-sm $font-size-sm;
+    }
+  }
+}
+
+.section-footer-nav {
+  border-block: 2px solid $default-color;
+  padding-inline: 0;
+  .footer-nav-container {
+    padding-block: $spacer-xl;
+    display: flex;
+    flex-direction: column;
+    gap: $spacer-lg;
+    @media (width >= $breakpoint-lg) {
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0;
+    }
+  }
+}

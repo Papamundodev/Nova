@@ -4,16 +4,16 @@
 @use "../../components/atoms/text" as *;
 @use "../../utilities/animations" as *;
 
-@mixin layout-left-right() {
+@mixin layout-base {
   display: flex;
-  gap: calc($spacer-xl + 2vi);
   flex-direction: column;
-  padding-inline: $spacer-xl;
+  gap: calc($spacer-xl + 2vi);
   padding-block-start: $spacer-xxl;
   .layout-img {
     width: 100%;
     margin-inline: auto;
     max-width: 75ch;
+    height: 400px;
     img {
       width: 100%;
       height: 100%;
@@ -23,7 +23,24 @@
   .layout-content {
     width: 100%;
     padding-block-end: $spacer-xxl;
-    & > div {
+  }
+  @media (width >= $breakpoint-lg) {
+    .layout-img {
+      height: 500px;
+    }
+  }
+  @media (width >= $breakpoint-xl) {
+    padding-inline: 0;
+    .layout-img {
+      height: auto;
+    }
+  }
+}
+
+@mixin layout-left-right() {
+  @include layout-base;
+  .layout-content {
+    & > div:first-child {
       margin-inline: auto;
       max-width: 75ch;
       display: flex;
@@ -35,8 +52,7 @@
   }
   @media (width >= $breakpoint-xl) {
     flex-direction: row;
-    padding-inline: 0;
-    padding-block-start: $spacer-xxl;
+    padding-block-start: 0;
     .layout-img {
       margin-inline: 0;
       display: flex;
@@ -56,31 +72,19 @@
   }
 }
 
+.layout-left-right {
+  @include layout-left-right;
+}
+
 @mixin layout-right-left {
-  display: flex;
-  flex-direction: column;
-  padding-inline: $spacer-xl;
-  padding-block-start: $spacer-xxl;
-  gap: calc($spacer-xl + 2vi);
-  .layout-img {
-    width: 100%;
-    max-width: 75ch;
-    margin-inline: auto;
-    img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-  }
+  @include layout-base;
   .layout-content {
-    width: 100%;
-    padding-block-end: $spacer-xxl;
-    & > div {
+    & > div:first-child {
       margin-inline: auto;
       max-width: 75ch;
       display: flex;
       flex-direction: column;
-      justify-content: end;
+      justify-content: space-between;
       align-items: start;
       gap: $spacer-xl;
     }
@@ -89,7 +93,6 @@
   @media (width >= $breakpoint-xl) {
     flex-direction: row-reverse;
     justify-content: end;
-    padding-inline: 0;
     padding-block-start: 0;
     .layout-img {
       display: flex;
@@ -107,6 +110,9 @@
       padding-block: $spacer-xxl $spacer-big;
     }
   }
+}
+.layout-right-left {
+  @include layout-right-left;
 }
 
 @mixin column-layout {

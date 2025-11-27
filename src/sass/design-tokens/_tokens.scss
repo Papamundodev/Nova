@@ -3,6 +3,7 @@ $icon-xs: 10px;
 $icon-sm: 24px;
 $icon-md: 31px;
 $icon-lg: 44px;
+$icon-xl: 58px;
 $logo: 74px;
 $full: 100%;
 $img-default: $icon-md;
@@ -12,6 +13,7 @@ $img-sizes: (
   "icon-sm": $icon-sm,
   "icon-md": $icon-md,
   "icon-lg": $icon-lg,
+  "icon-xl": $icon-xl,
   "logo": $logo,
   "full": 100%,
   "default": $img-default,

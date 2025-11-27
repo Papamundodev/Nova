@@ -31,7 +31,7 @@
   letter-spacing: $letter-spacing-heading;
   text-box-trim: trim-both;
   @media (width <= $breakpoint-xl) {
-    font-size: $font-size-xs;
+    font-size: $font-size-default;
   }
 }
 
@@ -79,4 +79,18 @@ p {
   left: 0;
   z-index: 1;
   content: "";
+}
+
+@mixin list {
+  & {
+    padding-inline: $spacer-sm;
+    padding-block: $spacer-xl;
+    li {
+      margin-bottom: $spacer-md;
+      margin-inline-start: $spacer-lg;
+    }
+    li:last-child {
+      margin-bottom: 0;
+    }
+  }
 }

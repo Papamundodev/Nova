@@ -31,13 +31,17 @@ document.addEventListener("DOMContentLoaded", () => {
       let letterIndex = 0;
       const spans = element.querySelectorAll("span");
       spans.forEach((span) => {
-        span.style.transitionDelay = `${letterIndex * 0.01}s`;
+        span.style.transitionDelay = `${letterIndex * 0.012}s`;
         letterIndex++;
       });
     });
   }
   document.querySelectorAll(".button-wave-animation button, .button-wave-animation a").forEach((a) => {
-    const letters = getLetters(a.dataset.name);
+    const textElement = a.querySelector(".button-text");
+    const textContent = textElement ? textElement.textContent : a.dataset.name || "";
+    if (!textContent)
+      return;
+    const letters = getLetters(textContent);
     let htmlContent = "";
     letters.forEach((letter) => {
       if (letter === " ") {
@@ -46,78 +50,110 @@ document.addEventListener("DOMContentLoaded", () => {
         htmlContent += `<span>${letter}</span>`;
       }
     });
-    a.innerHTML = htmlContent + a.innerHTML;
+    if (textElement) {
+      textElement.outerHTML = htmlContent;
+    } else {
+      const svgContent = a.querySelector("svg") ? a.querySelector("svg").outerHTML : "";
+      a.innerHTML = htmlContent + svgContent;
+    }
   });
   document.querySelectorAll(".button-wave-animation button, .button-wave-animation a").forEach((a) => {
     mouseOver(a);
   });
   class Slider {
     constructor(el) {
-      this.nextButton = el.querySelector("[data-slider-next]");
-      this.prevButton = el.querySelector("[data-slider-prev]");
       this.wrapper = el.querySelector("[data-slider-wrapper]");
-      this.nextButton.addEventListener("click", () => this.move(1));
-      this.prevButton.addEventListener("click", () => this.move(-1));
-      this.updateUi();
-      this.wrapper.addEventListener("scroll", (event) => {
-        this.updateUi();
-        if (this.previousPage()) {
-          this.previousPage().classList.remove("fade-in");
-          this.previousPage().classList.add("fade-out");
-        }
-        if (this.currentPage()) {
-          this.currentPage().classList.add("fade-in");
-          this.currentPage().classList.remove("fade-out");
-        }
-        if (this.nextPage()) {
-          this.nextPage().classList.remove("fade-in");
-          this.nextPage().classList.add("fade-out");
-        }
+      this.bullets = Array.from(el.querySelectorAll("[data-slider-bullet]"));
+      this.slides = Array.from(this.wrapper.querySelectorAll(".slide"));
+      this.zIndex = this.slides.length;
+      this.currentPage = 0;
+      this.slides.forEach((slide, i) => slide.style.zIndex = i + 1);
+      this.updateBullets();
+      el.addEventListener("click", (e) => {
+        const bullet = e.target.closest("[data-slider-bullet]");
+        if (bullet)
+          this.goToSlide(parseInt(bullet.dataset.sliderBullet));
+      });
+      let timeout;
+      this.wrapper.addEventListener("scroll", () => {
+        clearTimeout(timeout);
+        timeout = setTimeout(() => this.updateFadeClasses(), 16);
+      });
+      this.updateBullets();
+    }
+    getSlide(number) {
+      return this.slides.find(
+        (slide) => parseInt(slide.getAttribute("slide-number")) === number
+      );
+    }
+    goToSlide(number) {
+      const slide = this.getSlide(number);
+      if (!slide || this.currentPage === number)
+        return;
+      this.zIndex++;
+      slide.style.zIndex = this.zIndex;
+      this.currentPage = number;
+      this.updateBullets();
+      this.updateFadeClasses();
+    }
+    updateBullets() {
+      this.bullets.forEach((bullet, i) => {
+        bullet.classList.toggle("slide-bullet-active", i === this.currentPage);
       });
     }
-    get pages() {
-      return this.wrapper.children.length;
-    }
-    get page() {
-      return Math.round(this.wrapper.scrollLeft / this.wrapper.offsetWidth);
-    }
-    updateUi() {
-      if (this.page === 0) {
-        this.prevButton.setAttribute("hidden", "hidden");
-      } else {
-        this.prevButton.removeAttribute("hidden");
-      }
-      if (this.page === this.pages - 1) {
-        this.nextButton.setAttribute("hidden", "hidden");
-      } else {
-        this.nextButton.removeAttribute("hidden");
-      }
-    }
-    move(n) {
-      let newPage = this.page + n;
-      if (newPage < 0) {
-        newPage = 0;
-      }
-      if (newPage >= this.pages) {
-        newPage = this.pages - 1;
-      }
-      this.wrapper.scrollTo({
-        left: this.wrapper.children[newPage].offsetLeft,
-        behavior: "smooth"
+    updateFadeClasses() {
+      this.slides.forEach((slide) => {
+        slide.classList.remove("fade-in", "fade-out");
       });
-    }
-    currentPage() {
-      return this.wrapper.children[this.page];
-    }
-    previousPage() {
-      return this.wrapper.children[this.page - 1];
-    }
-    nextPage() {
-      return this.wrapper.children[this.page + 1];
+      const prev = this.getSlide(this.currentPage - 1);
+      const current = this.getSlide(this.currentPage);
+      const next = this.getSlide(this.currentPage + 1);
+      if (prev)
+        prev.classList.add("fade-out");
+      if (current)
+        current.classList.add("fade-in");
+      if (next)
+        next.classList.add("fade-out");
     }
   }
   if (document.querySelector("[data-slider]") !== null) {
     new Slider(document.querySelector("[data-slider]"));
   }
+  scrollers = document.querySelectorAll(".scroller");
+  if (scrollers.length > 0) {
+    addInfiniteScroll();
+  }
+  function addInfiniteScroll() {
+    scrollers.forEach((scroller) => {
+      scroller.setAttribute("data-infinite-scroll", "true");
+      const scrollerInner = scroller.querySelector(".scroller-inner");
+      const scrollerContent = Array.from(scrollerInner.children);
+      scrollerContent.forEach((child) => {
+        let duplicatedChild = child.cloneNode(true);
+        duplicatedChild.setAttribute("aria-hidden", "true");
+        scrollerInner.appendChild(duplicatedChild);
+      });
+      scrollerContent.forEach((child) => {
+        let duplicatedChild = child.cloneNode(true);
+        duplicatedChild.setAttribute("aria-hidden", "true");
+        scrollerInner.appendChild(duplicatedChild);
+      });
+    });
+  }
+  let scrollTop = document.querySelector(".scroll-top");
+  function toggleScrollTop() {
+    if (scrollTop) {
+      window.scrollY > 100 ? scrollTop.classList.add("active") : scrollTop.classList.remove("active");
+    }
+  }
+  scrollTop.addEventListener("click", (e) => {
+    e.preventDefault();
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+  });
+  window.addEventListener("load", toggleScrollTop);
+  document.addEventListener("scroll", toggleScrollTop);
 });
 //# sourceMappingURL=main.js.map

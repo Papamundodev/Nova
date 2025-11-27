@@ -64,7 +64,7 @@ class CustomPostType
             'description'           => $this->desc,
             'labels'                => $this->labels,
             'supports'              => array( 'title', 'editor', 'author', 'thumbnail', 'excerpt' ),
-            'taxonomies'            => array(),
+            'taxonomies'            => array("category"),
             'hierarchical'          => false,
             'public'                => true,
             'show_ui'               => true,

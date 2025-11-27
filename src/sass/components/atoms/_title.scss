@@ -24,6 +24,9 @@
 @mixin heading-big-2 {
   font-size: $font-size-lg;
   @include heading-base;
+  @media (width >= $breakpoint-md) {
+    font-size: $font-size-xl;
+  }
 }
 
 @mixin heading-large-1 {
@@ -85,4 +88,11 @@
 
 .heading-small-1 {
   @include heading-small-1;
+}
+
+.section-title {
+  @include heading-large-1;
+  color: $primary-color;
+  text-align: center;
+  margin-block: $spacer-xxl;
 }

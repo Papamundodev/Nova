@@ -18,6 +18,9 @@
       gap: $spacer-vi-md;
       justify-content: flex-start;
       align-items: center;
+      .nav-link {
+        background-color: $gray-color;
+      }
     }
   }
 }

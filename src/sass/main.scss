@@ -11,9 +11,13 @@
 @use "components/atoms/text" as *;
 @use "components/atoms/button" as *;
 @use "components/atoms/nav-items" as *;
+@use "components/atoms/scroll-top" as *;
 @use "components/molecules/cards" as *;
+@use "components/molecules/form" as *;
 @use "components/organisms/header" as *;
 @use "components/organisms/asides" as *;
+@use "components/organisms/slider" as *;
+@use "components/organisms/footer" as *;
 @use "components/pages/front-page" as *;
 
 body {
@@ -29,4 +33,9 @@ body {
   position: fixed;
   top: $spacer-sm;
   right: $spacer-sm;
+}
+
+*:not(h1)::selection {
+  background-color: $flash-color;
+  color: $default-color;
 }

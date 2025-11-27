@@ -1,0 +1,34 @@
+@use "../../design-tokens/tokens" as *;
+@use "../../utilities/container-wrapper" as *;
+@use "../../design-tokens/colors" as *;
+
+.scroll-top {
+  position: fixed;
+  visibility: hidden;
+  opacity: 0;
+  right: $spacer-xxl;
+  bottom: calc($spacer-xxl * 1.2);
+  z-index: 999;
+  transform: translateX(50%);
+  width: $icon-xl;
+  height: $icon-xl;
+  transition: all 0.4s;
+  background-color: $primary-color;
+  border-radius: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  svg {
+    width: $icon-md;
+    height: $icon-md;
+    path {
+      fill: $contrast-color;
+      stroke: $contrast-color;
+    }
+  }
+}
+
+.scroll-top.active {
+  visibility: visible;
+  opacity: 1;
+}

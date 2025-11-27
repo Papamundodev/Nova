@@ -31,7 +31,7 @@ if (function_exists('wp_body_open')){
     </div>
 
     <div class="button-wrapper">
-        <div class="button-container button-background-primary button-background    -animation">
+        <div class="button-container button-background-primary button-background-animation">
             <a href="<?=home_url() . '/contact';?>" class="">C’est super</a>
             <span class="hover-bg"></span>
         </div>

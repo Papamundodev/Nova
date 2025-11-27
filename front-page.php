@@ -97,11 +97,13 @@ $logo = get_field('logo', 'option');
                             $color = get_field('color', $expertise);
                             ?>
                             <span class="expertise-number <?=$color;?>-color"><?=$expertise->name; ?></span>
+                            <span class="separator">|</span>
                         <?php endforeach; ?>
                         </div>
                         <h3><?= $project['title']; ?></h3>      
                         <div class="button-container button-background-secondary-icon button-wave-animation">
                             <button class="btn" data-name="<?=$project['text'];?>">
+                            <span class="button-text"><?=$project['text'];?></span>
                             <?php echo file_get_contents(get_template_directory() . '/assets/images/arrow-up-right-bold.svg'); ?>
                             </button>
                         </div>
@@ -134,9 +136,9 @@ $logo = get_field('logo', 'option');
                 }
             </style>
             <?php $section_reviews_title = get_field('section_reviews_title', $object); ?>
-            <nav aria-label="Slider" role="navigation" class="slider-wrapper" data-slider-wrapper >
-                <?php $i = 0; foreach ($reviews as $review) : ?>
-                    <div class="review slide  <?php if ($i === 0) { echo 'fade-in'; } else { echo 'fade-out'; } ?>">
+            <div  class="slider-wrapper reviews-wrapper" data-slider-wrapper >
+                <?php $i = count($reviews) - 1; foreach ($reviews as $review) : ?>
+                    <div class="review slide  <?php if ($i === 0) { echo 'fade-in'; } else { echo 'fade-out'; } ?>" slide-number="<?=$i;?>">
                         <div class="layout-img">
                             <img src="<?= $review['image']['url']; ?>" alt="<?= $review['image']['alt']; ?>">
                         </div>
@@ -149,21 +151,16 @@ $logo = get_field('logo', 'option');
                             </div>
                         </div>
                     </div>
-                <?php $i++; endforeach; ?>
-            </nav>
-            <div class="slide-button-container slide-button-container-prev">
-                <button class="slide-button-prev slide-button btn" data-slider-prev>
-                    <?php echo file_get_contents(get_template_directory() . '/assets/images/spiral.svg'); ?>
-                </button>
+                <?php $i--; endforeach; ?>
             </div>
-            <div class="slide-button-container slide-button-container-next">
-                <button class="slide-button-next slide-button btn" data-slider-next>
-                    <?php echo file_get_contents(get_template_directory() . '/assets/images/spiral.svg'); ?>
-                </button>
-            </div>
-
+           
+                <nav class="slide-button-container "  role="navigation"  aria-labelledby="section-reviews-title" >
+            <?php $i = 0; foreach ($reviews as $review) : ?>
+                    <button class="slide-bullet btn" data-slider-bullet="<?=$i;?>"></button>
+                    <?php $i++; endforeach; ?>
+                </nav>
+     
         </section>
-
         <section aria-labelledby="section-blog-title" class="section-blog container">
             <?php $section_blog_title = get_field('section_blog_title', $object); ?>
             <h2 id="section-blog-title" class="section-title"><?= $section_blog_title; ?></h2>
@@ -192,11 +189,15 @@ $logo = get_field('logo', 'option');
                         <?php endforeach; ?>
                         </div>
                         <h3><?= $post->post_title; ?></h3>
+                        <div class="flex-center">
                         <div class="button-container button-background-secondary-icon button-wave-animation">
                             <a href="<?= $link; ?>" class="btn" data-name="En savoir plus">
+                            <span class="button-text">En savoir plus</span>
                             <?php echo file_get_contents(get_template_directory() . '/assets/images/arrow-up-right-bold.svg'); ?>
                             </a>
                         </div>
+                        </div>
+
                     </div>
                 <?php endforeach; ?>
             </div>

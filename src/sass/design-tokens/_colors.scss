@@ -9,6 +9,7 @@
   --default-color: #17194a;
   --gray-color: #f5f5f5;
 
+  --flash-color: #e9fe5f;
   /* primary colors */
   --primary-color: #6785ff;
 
@@ -52,6 +53,7 @@
   --orange-color: #ffb88f;
   --dark-blue-color: #99c2fe;
   --pink-color: var(--secondary-color);
+  --flash-color: #f5b5ee;
   /* accent colors */
   --linear-gradient-color: linear-gradient(
     to right,
@@ -77,6 +79,7 @@ $dark-blue-color: var(--dark-blue-color);
 $pink-color: var(--pink-color);
 $linear-gradient-color: var(--linear-gradient-color);
 $active-color: var(--orange-color);
+$flash-color: var(--flash-color);
 
 $colors: (
   "background-color": $background-color,
@@ -93,6 +96,7 @@ $colors: (
   "gray-color": $gray-color,
   "linear-gradient-color": $linear-gradient-color,
   "active-color": $active-color,
+  "flash-color": $flash-color,
 );
 
 @each $key, $value in $colors {

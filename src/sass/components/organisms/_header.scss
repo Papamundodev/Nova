@@ -9,27 +9,32 @@
   grid-template-columns: $spacer-big 1fr auto auto;
   align-items: center;
   margin-block: $spacer-vi-md $spacer-vi-xxl;
+  position: relative;
+  .button-container {
+    position: relative;
+    z-index: 100;
+  }
 }
 
 /* ----- NAVBAR DESKTOP ----- */
-@media (width >= $breakpoint-md) {
+@media (width >= $breakpoint-lg) {
   .navmenu-mobile {
     display: none;
   }
 
   .navmenu-desktop {
     ul {
-      position: relative;
       width: fit-content;
       margin-inline: auto;
       display: flex;
+      align-items: center;
     }
   }
 }
 
 /* ----- NAVBAR MOBILE ----- */
 
-@media (width <= $breakpoint-md) {
+@media (width <= $breakpoint-lg) {
   .header {
     .burger-menu-container {
       display: flex;
@@ -66,7 +71,7 @@
   }
 }
 
-@media (width >= 768px) {
+@media (width >= $breakpoint-lg) {
   .header {
     grid-template-rows: 30px;
   }

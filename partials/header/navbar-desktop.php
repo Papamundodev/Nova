@@ -7,9 +7,45 @@ $menu_items = \Theme_base\Base::wp_get_menu_array($theme_location);
 ?>
 
 
+
 <?php if(is_array($menu_items) && count($menu_items) > 0): ?>
 <nav id="navmenu-<?=$theme_location?>" class="navmenu navmenu-desktop">
 <ul class="">
+    <li class="nav-item dropdown-hover dropdown">
+        <div class="dropdown-link nav-link">
+            <div class="svg-container">
+                <?= file_get_contents(get_template_directory() . '/assets/images/chevron.svg'); ?>
+            </div>
+            <p class="dropdown-title" class="">Expertise</p> 
+        </div>
+        <?php 
+        $expertises = get_terms( array(
+            'taxonomy'   => 'expertises',
+            'hide_empty' => false,
+        ) );
+        ?>
+        <ul class="dropdown-menu">
+            <div>
+                <?php foreach($expertises as $item): ?>
+                <?php 
+                $image = get_field('image', $item); 
+                $color = get_field('color', $item); 
+                ?>
+                <li class="card border-<?=$color;?>-color card-hover-<?=$color;?>-color">
+                    <div class="img-container bg-<?=$color;?>-color">
+                        <img src="<?= $image['url']; ?>" alt="<?=$image['alt'];?>">
+                    </div>
+                    <div class="flex-between">
+                        <a class="<?=$color;?>-color" href="<?=$item->term_link?>"><?=$item->name?></a>
+                        <div class="svg-container svg-<?=$color;?>-color">
+                            <?= file_get_contents(get_template_directory() . '/assets/images/arrow-up-right-bold.svg'); ?>
+                        </div>
+                    </div>
+                </li>
+                <?php endforeach; ?>
+            </div>
+        </ul>
+    </li>
     <?php foreach($menu_items as $item): ?>
     <?php if(empty($item['children'])):?>
         <li class="<?= \Theme_base\Base::get_active_class($item) ?> <?= \Theme_base\Base::get_parent_active_class($item, $object) ?> nav-item">

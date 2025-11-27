@@ -29,17 +29,20 @@ $content = wpautop($object->post_content);
             ?>
             <div class="container">
                 <h2 id="section-our_values-title" ><?= $advantages['title']; ?></h2>
-                <p><?= wpautop($advantages['text']); ?></p>
-                <div class="advantages-container ">
-                    <?php foreach ($advantages['value'] as $item) : ?>
-                        <div>
-                            <img src="<?= $item['image']['url']; ?>" alt="<?= $item['image']['alt']; ?>">
-                            <h3><?= $item['title']; ?></h3>
-                            <p><?= $item['text']; ?></p>
-                        </div>
-                    <?php endforeach; ?>
+                <div class="text-container">
+                <?= wpautop($advantages['text']); ?>
                 </div>
             </div>
+            <div class="advantages-container ">
+                <?php foreach ($advantages['value'] as $item) : ?>
+                    <div>
+                        <img src="<?= $item['image']['url']; ?>" alt="<?= $item['image']['alt']; ?>">
+                        <h3><?= $item['title']; ?></h3>
+                        <p><?= $item['text']; ?></p>
+                    </div>
+                <?php endforeach; ?>
+            </div>
+
         </section>
 
         <section aria-labelledby="section-our_team-title" class="section-our_team">

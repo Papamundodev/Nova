@@ -49,7 +49,7 @@
   /* tertiary colors */
   --blue-color: #a2ecff;
   --green-color: #beff9d;
-  --purple-color: #b639ff;
+  --purple-color: #e791cd;
   --orange-color: #ffb88f;
   --dark-blue-color: #99c2fe;
   --pink-color: var(--secondary-color);
@@ -107,5 +107,26 @@ $colors: (
 @each $key, $value in $colors {
   .bg-#{$key} {
     background-color: $value;
+  }
+}
+@each $key, $value in $colors {
+  .border-#{$key} {
+    border: 2px solid $value;
+  }
+}
+@each $key, $value in $colors {
+  .svg-#{$key} {
+    path {
+      fill: $value;
+      stroke: $value;
+    }
+  }
+}
+@each $key, $value in $colors {
+  .card-hover-#{$key} {
+    &:hover {
+      border-color: $value;
+      box-shadow: 8px 8px 0 0 $value;
+    }
   }
 }

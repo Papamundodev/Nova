@@ -1,3 +1,7 @@
+@use "design-tokens/colors" as *;
+@use "design-tokens/fonts" as *;
+@use "utilities/container-wrapper" as *;
+
 @view-transition {
   navigation: auto;
 }
@@ -81,4 +85,38 @@ img,
 picture {
   max-width: 100%;
   display: block;
+}
+
+ul {
+  ::marker {
+    width: $spacer-md;
+    height: $spacer-md;
+    color: $primary-color;
+  }
+}
+
+::-moz-selection {
+  color: $primary-color;
+  background: $background-color;
+}
+
+::selection {
+  color: $primary-color;
+  background: $background-color;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: $secondary-color;
+}
+
+::-webkit-scrollbar-thumb {
+  background: $primary-color;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: $primary-color;
 }

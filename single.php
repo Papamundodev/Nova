@@ -6,27 +6,17 @@ $theme_template_name = basename(__FILE__, ".php");
 
 <main id="main-<?=$theme_template_name?>" class="">
 
-    <section class="section"> 
 
-        <div class="">
+        <?php
+        if ( have_posts() ):
 
-            <div class="wrapper">
+            while ( have_posts() ):
+                the_post(); 
+                get_template_part( 'partials/article/post-full' );
+            endwhile;
 
-                <?php
-                if ( have_posts() ):
-
-                    while ( have_posts() ):
-            the_post(); 
-            get_template_part( 'partials/article/post-full' );
-        endwhile;
-
-                    endif;
-                    ?>
-            </div>
-
-        </div>
-
-    </section>
+        endif;
+        ?>
 
 </main>
 

@@ -22,7 +22,7 @@
 @use "components/pages/front-page" as *;
 @use "components/pages/about" as *;
 @use "components/pages/blog" as *;
-
+@use "components/pages/full-post" as *;
 body {
   font-family: $text-font;
   background-color: $background-color;

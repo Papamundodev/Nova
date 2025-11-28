@@ -112,18 +112,15 @@ class Base
 
     public static function get_breadcrumbs(){
         $links = array();
-        $home_link = array(
-            'url' => home_url(),
-            'text' => 'Accueil'
-        );
-        array_push($links, $home_link);
         $cats = get_the_category();
         if ( ! empty( $cats ) ) {
-            $cat_link = array(
-            'url' => get_category_link( $cats[0]->term_id ),
-            'text' => $cats[0]->name
-            );
-            array_push($links, $cat_link);
+            foreach ($cats as $cat) {
+                $cat_link = array(
+                    'url' => get_category_link( $cat->term_id ),
+                    'text' => $cat->name
+                );
+                array_push($links, $cat_link);
+            }
         }
         $current_page = array(
             'url' => get_permalink(),

@@ -14,12 +14,14 @@
 @use "components/atoms/scroll-top" as *;
 @use "components/molecules/cards" as *;
 @use "components/molecules/form" as *;
+@use "components/molecules/dropdowns" as *;
 @use "components/organisms/header" as *;
 @use "components/organisms/asides" as *;
 @use "components/organisms/slider" as *;
 @use "components/organisms/footer" as *;
 @use "components/pages/front-page" as *;
 @use "components/pages/about" as *;
+@use "components/pages/blog" as *;
 
 body {
   font-family: $text-font;

@@ -3,6 +3,7 @@
 @use "../../components/atoms/title" as *;
 @use "../../components/atoms/text" as *;
 @use "../../utilities/animations" as *;
+@use "../../components/molecules/cards" as *;
 
 @mixin layout-base {
   display: flex;
@@ -163,21 +164,6 @@
   }
 
   .card {
-    display: flex;
-    flex-direction: column;
-    margin-inline: auto;
-    width: 400px;
-    @media (width >= $breakpoint-xxl) {
-      width: 100%;
-    }
-    h3 {
-      @include heading-medium-1;
-    }
-    img {
-      width: 100%;
-      object-fit: cover;
-      width: 400px;
-      aspect-ratio: 1/1;
-    }
+    @include blog-card;
   }
 }

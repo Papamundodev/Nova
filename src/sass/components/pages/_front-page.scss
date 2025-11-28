@@ -85,6 +85,26 @@
       }
     }
   }
+
+  .blog-container {
+    @include card-layout;
+    .blog-item {
+      position: relative;
+      .cat-container {
+        span {
+          margin-inline-end: $spacer-sm;
+        }
+      }
+      @media (width >= $breakpoint-xxl) {
+        .cat-container {
+          min-height: 3.3em;
+        }
+        h3 {
+          min-height: 2.5em;
+        }
+      }
+    }
+  }
 }
 
 .projects-container {
@@ -110,29 +130,9 @@
   @include card-layout;
 }
 
-.blog-container {
-  @include card-layout;
-  .blog-item {
-    position: relative;
-    .cat-container {
-      span {
-        margin-inline-end: $spacer-sm;
-      }
-    }
-    @media (width >= $breakpoint-xxl) {
-      .cat-container {
-        min-height: 3.3em;
-      }
-      h3 {
-        min-height: 2.5em;
-      }
-    }
-  }
-}
-
 .section-reviews {
-  @include slider($purple-color);
   margin-block: $spacer-xxl;
+  @include slider($purple-color);
   h2 {
     @include heading-large-1;
   }
@@ -140,10 +140,10 @@
     padding-block-start: $spacer-big;
     .review {
       background-color: $purple-color;
+      @include layout-right-left;
       @media (width <= $breakpoint-sm) {
         padding-inline: $spacer-xl;
       }
-      @include layout-right-left;
       .review-content {
         color: $contrast-color;
         .review-name {

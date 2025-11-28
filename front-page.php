@@ -137,7 +137,7 @@ $logo = get_field('logo', 'option');
             </style>
             <?php $section_reviews_title = get_field('section_reviews_title', $object); ?>
             <div  class="slider-wrapper reviews-wrapper" data-slider-wrapper >
-                <?php $i = count($reviews) - 1; foreach ($reviews as $review) : ?>
+                <?php $i = count($reviews); foreach ($reviews as $review) : ?>
                     <div class="review slide  <?php if ($i === 0) { echo 'fade-in'; } else { echo 'fade-out'; } ?>" slide-number="<?=$i;?>">
                         <div class="layout-img">
                             <img src="<?= $review['image']['url']; ?>" alt="<?= $review['image']['alt']; ?>">
@@ -155,9 +155,9 @@ $logo = get_field('logo', 'option');
             </div>
            
                 <nav class="slide-button-container "  role="navigation"  aria-labelledby="section-reviews-title" >
-            <?php $i = 0; foreach ($reviews as $review) : ?>
+            <?php $i = count($reviews); foreach ($reviews as $review) : ?>
                     <button class="slide-bullet btn" data-slider-bullet="<?=$i;?>"></button>
-                    <?php $i++; endforeach; ?>
+                    <?php $i--; endforeach; ?>
                 </nav>
      
         </section>

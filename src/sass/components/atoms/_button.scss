@@ -108,6 +108,7 @@
       height: var(--font-size-xs);
       margin-inline-start: $spacer-sm;
       vertical-align: bottom;
+      animation: arrow-animation-down 0.3s ease-in-out forwards;
       path {
         stroke: $color;
         fill: $color;
@@ -116,7 +117,6 @@
         width: var(--font-size-default);
         height: var(--font-size-default);
       }
-      animation: arrow-animation-down 0.3s ease-in-out forwards;
     }
   }
   &:hover {

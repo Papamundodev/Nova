@@ -78,11 +78,14 @@ footer {
       overflow: hidden;
       gap: $spacer-lg;
       p {
-        @include heading-big-1;
         white-space: nowrap;
+        @include heading-big-1;
       }
       .svg-container {
         align-self: start;
+        animation: infinite-rotate 1s linear infinite;
+        transform-origin: center;
+        transform: rotate(0deg);
         svg {
           width: $icon-lg;
           height: $icon-lg;
@@ -94,9 +97,6 @@ footer {
             height: $icon-md;
           }
         }
-        animation: infinite-rotate 1s linear infinite;
-        transform-origin: center;
-        transform: rotate(0deg);
       }
     }
     &[data-infinite-scroll="true"] {
@@ -142,9 +142,9 @@ footer {
   grid-template-rows: auto auto auto;
   grid-template-columns: 1fr;
   h2 {
-    @include heading-big-2;
     margin-block-end: $spacer-xl;
     line-height: 1.5;
+    @include heading-big-2;
   }
   h3 {
     @include heading-small-1;

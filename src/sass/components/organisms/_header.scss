@@ -2,6 +2,7 @@
 @use "../../utilities/_container-wrapper" as *;
 @use "../../components/atoms/burger" as *;
 @use "../../design-tokens/_fonts" as *;
+@use "../../components/atoms/text" as *;
 @use "../../utilities/animations" as *;
 
 .header {
@@ -83,32 +84,59 @@
   }
 }
 
-.megamenu {
-  background-color: $background-color;
-  position: fixed;
-  top: 70px;
-  right: auto;
-  width: 100vw;
-  height: 100%;
-  margin: 0;
-  opacity: 0;
-  display: none;
-  transition: display 0.5s, opacity 0.5s;
-  transition-behavior: allow-discrete;
-  animation: fade-out 0.3s ease-out;
-}
-.megamenu:popover-open {
-  opacity: 1;
-  display: flex;
-  animation: fade-in 0.3s ease-out;
-}
-
-.megamenu-left {
-  top: 70px;
-  left: 50%;
-  width: 50vw;
-  animation: fade-out-left 0.3s ease-out;
-}
-.megamenu-left:popover-open {
-  animation: fade-in-left 0.3s ease-out;
+.navmenu-mobile {
+  & > ul {
+    display: flex;
+    width: 100%;
+    border: 2px solid $default-color;
+    padding: $spacer-xl $spacer-xxl;
+    align-items: initial;
+  }
+  .img-container {
+    padding: $spacer-sm;
+    width: 75px;
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+  .card {
+    width: 100%;
+    position: relative;
+    height: fit-content;
+    transition: box-shadow 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+      border-color 0.2s cubic-bezier(0.55, 0.085, 0.68, 0.53);
+    &:hover {
+      border-color: $default-color;
+      a {
+        color: $default-color;
+      }
+      .svg-container svg path {
+        fill: $default-color;
+        stroke: $default-color;
+      }
+    }
+    .flex-between {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      width: 100%;
+      a {
+        @include text-paragraph-bold;
+        text-decoration: none;
+        &::after {
+          @include stretched-link;
+        }
+      }
+      .svg-container {
+        width: $font-size-default;
+        svg {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+      }
+    }
+  }
 }

@@ -66,45 +66,40 @@ document.addEventListener("DOMContentLoaded", () => {
       this.bullets = Array.from(el.querySelectorAll("[data-slider-bullet]"));
       this.slides = Array.from(this.wrapper.querySelectorAll(".slide"));
       this.zIndex = this.slides.length;
-      this.currentPage = 0;
-      this.slides.forEach((slide, i) => slide.style.zIndex = i + 1);
-      this.updateBullets();
+      this.currentPage = 4;
+      this.slides.forEach((s) => s.style.zIndex = s.getAttribute("slide-number"));
+      this.update();
       el.addEventListener("click", (e) => {
         const bullet = e.target.closest("[data-slider-bullet]");
         if (bullet)
-          this.goToSlide(parseInt(bullet.dataset.sliderBullet));
+          this.goToSlide(parseInt(bullet.dataset.sliderBullet, 10));
       });
       let timeout;
       this.wrapper.addEventListener("scroll", () => {
         clearTimeout(timeout);
-        timeout = setTimeout(() => this.updateFadeClasses(), 16);
+        timeout = setTimeout(() => this.update(), 16);
       });
-      this.updateBullets();
     }
-    getSlide(number) {
-      return this.slides.find(
-        (slide) => parseInt(slide.getAttribute("slide-number")) === number
-      );
+    getSlide(n) {
+      return this.slides.find((s) => parseInt(s.getAttribute("slide-number"), 10) === n);
     }
-    goToSlide(number) {
-      const slide = this.getSlide(number);
-      if (!slide || this.currentPage === number)
+    goToSlide(n) {
+      const slide = this.getSlide(n);
+      if (!slide || this.currentPage === n)
         return;
-      this.zIndex++;
+      if (n === 4 && this.zIndex > 15) {
+        this.slides.forEach((s) => s.style.zIndex = s.getAttribute("slide-number"));
+        this.zIndex = this.slides.length;
+      } else {
+        this.zIndex++;
+      }
       slide.style.zIndex = this.zIndex;
-      this.currentPage = number;
-      this.updateBullets();
-      this.updateFadeClasses();
+      this.currentPage = n;
+      this.update();
     }
-    updateBullets() {
-      this.bullets.forEach((bullet, i) => {
-        bullet.classList.toggle("slide-bullet-active", i === this.currentPage);
-      });
-    }
-    updateFadeClasses() {
-      this.slides.forEach((slide) => {
-        slide.classList.remove("fade-in", "fade-out");
-      });
+    update() {
+      this.bullets.forEach((b) => b.classList.toggle("slide-bullet-active", parseInt(b.dataset.sliderBullet, 10) === this.currentPage));
+      this.slides.forEach((s) => s.classList.remove("fade-in", "fade-out"));
       const prev = this.getSlide(this.currentPage - 1);
       const current = this.getSlide(this.currentPage);
       const next = this.getSlide(this.currentPage + 1);

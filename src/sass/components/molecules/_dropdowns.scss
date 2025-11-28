@@ -1,0 +1,143 @@
+@use "../../design-tokens/tokens" as *;
+@use "../../design-tokens/colors" as *;
+@use "../../design-tokens/fonts" as *;
+@use "../../components/molecules/layouts" as *;
+@use "../../components/atoms/text" as *;
+@use "../../components/organisms/sections" as *;
+@use "../../utilities/container-wrapper" as *;
+
+@mixin dropdown-custom-hover-open($color: $primary-color) {
+  overflow: hidden;
+  //hover and focus states
+  &:focus-visible {
+    outline: $spacer-xs solid $color;
+    outline-offset: calc($spacer-xs * -1);
+  }
+  &:focus-within:has(.nav-link:focus-visible) {
+    outline: $spacer-xs solid $color;
+    .dropdown-menu {
+      outline: none;
+    }
+  }
+  .nav-link {
+    display: grid;
+    gap: $spacer-xs;
+    grid-template-columns: minmax($icon-sm, auto) 1fr;
+    align-items: center;
+    .svg-container {
+      transition: all 0.2s step-start;
+      svg {
+        width: 0;
+        transition: all 0.3s ease;
+        path {
+          fill: $default-color;
+          stroke: $default-color;
+        }
+      }
+    }
+    .dropdown-title {
+      @include text-nav;
+    }
+  }
+  .dropdown-menu {
+    //position absolute
+    position: absolute;
+    z-index: 10;
+    top: 100%;
+    left: 0;
+    opacity: 0;
+    pointer-events: none;
+    width: fit-content;
+    max-width: 100%;
+    height: fit-content;
+    background-color: $background-color;
+  }
+
+  &:has(.dropdown-link.open),
+  &:hover,
+  &:focus,
+  &:focus-within {
+    overflow: initial;
+    .dropdown-link {
+      cursor: pointer;
+      .svg-container {
+        svg {
+          width: $font-size-xs;
+          transition: all 0.3s ease;
+        }
+      }
+    }
+    .dropdown-menu {
+      // animation
+      opacity: 1;
+      pointer-events: auto;
+      transition: opacity 0.2s ease-in-out;
+      width: 100%;
+      transition: 0;
+      padding-block: $spacer-lg;
+      & > div {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: $spacer-xl;
+        width: 100%;
+        border: 2px solid $default-color;
+        padding: $spacer-xl;
+      }
+      .img-container {
+        padding: $spacer-sm;
+        width: 75px;
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+      }
+      .card {
+        gap: $spacer-xxl;
+        padding-block-end: $spacer-xl;
+        position: relative;
+        transition: box-shadow 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+          border-color 0.2s cubic-bezier(0.55, 0.085, 0.68, 0.53);
+        &:hover {
+          border-color: $default-color;
+          a {
+            color: $default-color;
+          }
+          .svg-container svg path {
+            fill: $default-color;
+            stroke: $default-color;
+          }
+        }
+        .flex-between {
+          display: flex;
+          justify-content: space-between;
+          align-items: end;
+          height: 100%;
+          width: 100%;
+          a {
+            @include text-paragraph-bold;
+            text-decoration: none;
+            max-width: 10ch;
+            height: 100%;
+            align-self: top;
+            &::after {
+              @include stretched-link;
+            }
+          }
+          .svg-container {
+            width: $font-size-default;
+            svg {
+              width: 100%;
+              height: 100%;
+              object-fit: cover;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.dropdown-hover {
+  @include dropdown-custom-hover-open;
+}

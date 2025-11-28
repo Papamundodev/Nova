@@ -1,6 +1,7 @@
 @use "../../design-tokens/colors" as *;
 @use "../../design-tokens/tokens" as *;
 @use "../../utilities/container-wrapper" as *;
+@use "../../components/atoms/title" as *;
 .card {
   display: flex;
   flex-direction: column;
@@ -9,4 +10,22 @@
   gap: $spacer-md;
   padding: $spacer-md;
   background-color: $background-color;
+}
+
+@mixin blog-card {
+  display: flex;
+  flex-direction: column;
+  margin-inline: auto;
+  max-width: 400px;
+  @media (width >= $breakpoint-xl) {
+    max-width: 100%;
+  }
+  h3 {
+    @include heading-medium-1;
+  }
+  img {
+    object-fit: cover;
+    aspect-ratio: 1/1;
+    width: 500px;
+  }
 }

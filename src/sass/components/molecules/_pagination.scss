@@ -1,0 +1,8 @@
+@use "../../utilities/container-wrapper" as *;
+
+.pagination {
+  display: flex;
+  gap: $spacer-xl;
+  align-items: center;
+  justify-content: center;
+}

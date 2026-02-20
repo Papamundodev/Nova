@@ -48,3 +48,4 @@ $reading_time = \Theme_base\Base::get_reading_time($content);
         </div>
     </div>
 </article>
+

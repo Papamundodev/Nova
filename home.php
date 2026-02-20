@@ -21,18 +21,8 @@ global $wp_query;
             <?php $section_blog_title = get_field('section_blog_title', $object); ?>
             <h2 id="section-blog-title" class="section-title"><?= $section_blog_title; ?></h2>
             <div class="blog-container ">
-                <?php 
-                $query = new WP_Query( array(
-                    'post_type' => 'post',
-                    'post_status' => 'publish',
-                    'posts_per_page' => -1,
-                    'orderby' => 'date',
-                    'order' => 'DESC'
-                ));
-                $recents_posts = $query->get_posts();
-                wp_reset_postdata();
-                 ?>
-                <?php foreach ($recents_posts as $post) : ?>
+                 <?php if(is_array($wp_query->posts) && count($wp_query->posts) > 0): ?>
+                <?php foreach ($wp_query->posts as $post) : ?>
                     <?php 
                     $link = get_the_permalink($post->ID); 
                     $excerpt = wp_trim_words(get_the_excerpt($post->ID), 30, '...');
@@ -47,8 +37,9 @@ global $wp_query;
                             <?php foreach (get_the_terms($post->ID, 'expertises') as $expertise) : ?>
                                 <?php 
                                 $color = get_field('color', $expertise);
+                                $category_link = get_term_link($expertise);
                                 ?>
-                                <span class="expertise-number <?=$color;?>-color"><?=$expertise->name; ?></span>
+                                <span class="expertise-number"><a class="<?=$color;?>-color" href="<?=$category_link;?>"><?=$expertise->name; ?></a></span>
                             <?php endforeach; ?>
                             </div>
                             <p><?= $excerpt; ?></p>
@@ -62,7 +53,9 @@ global $wp_query;
                             </div>
                         </div>
                     </div>
-                <?php endforeach; ?>
+                    <?php endforeach; wp_reset_postdata(); ?>
+                    <?php get_template_part('pagination'); ?>
+                <?php endif; ?>
             </div>
         </section>
 

@@ -13,12 +13,8 @@ $title = get_the_title();
             <!-- Page Title -->
             <div class="wrapper">
                 <div class="page-title">
-                    <h1><?=$title; ?></h1>
+                    <h1 class="title-gradient"><?=$title; ?></h1>
                 </div><!-- End Page Title -->
-            </div>
-
-            <div class="wrapper content">
-                <div class="content"><?=$content;?></div>
             </div>
 
         </section>

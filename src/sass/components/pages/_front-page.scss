@@ -85,26 +85,6 @@
       }
     }
   }
-
-  .blog-container {
-    @include card-layout;
-    .blog-item {
-      position: relative;
-      .cat-container {
-        span {
-          margin-inline-end: $spacer-sm;
-        }
-      }
-      @media (width >= $breakpoint-xxl) {
-        .cat-container {
-          min-height: 3.3em;
-        }
-        h3 {
-          min-height: 2.5em;
-        }
-      }
-    }
-  }
 }
 
 .projects-container {
@@ -114,6 +94,9 @@
     flex-wrap: wrap;
     align-items: center;
     gap: $spacer-xs;
+    a {
+      text-decoration: none;
+    }
     .expertise-number {
       @include text-lead;
     }

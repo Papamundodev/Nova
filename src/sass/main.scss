@@ -14,6 +14,7 @@
 @use "components/atoms/scroll-top" as *;
 @use "components/molecules/cards" as *;
 @use "components/molecules/form" as *;
+@use "components/molecules/pagination" as *;
 @use "components/molecules/dropdowns" as *;
 @use "components/organisms/header" as *;
 @use "components/organisms/asides" as *;
@@ -23,13 +24,11 @@
 @use "components/pages/about" as *;
 @use "components/pages/blog" as *;
 @use "components/pages/full-post" as *;
+
 body {
   font-family: $text-font;
   background-color: $background-color;
   color: $default-color;
-  main {
-    min-height: 200vh;
-  }
 }
 
 #tld-theme-toggle-button {

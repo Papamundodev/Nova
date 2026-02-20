@@ -36,7 +36,6 @@
                 );
             }
         }
-
         $args = array(
             'post_type' => 'faq',
             'post_status' => 'publish',

@@ -5,7 +5,9 @@
 @use "../../components/organisms/sections" as *;
 @use "../../utilities/container-wrapper" as *;
 
-#main-home {
+#main-home,
+#main-category,
+#main-taxonomy {
   .section-intro {
     @include section-intro;
   }
@@ -50,5 +52,13 @@
         }
       }
     }
+  }
+}
+
+#main-category,
+#main-taxonomy {
+  .section-intro {
+    margin-block-end: 0;
+    align-items: center;
   }
 }

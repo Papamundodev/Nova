@@ -2,11 +2,13 @@
 @use "../../design-tokens/fonts" as *;
 @use "../../components/atoms/text" as *;
 @use "../../components/atoms/title" as *;
+@use "../../components/molecules/cards" as *;
+@use "../../components/molecules/layouts" as *;
 @use "../../utilities/container-wrapper" as *;
 @use "../../design-tokens/tokens" as *;
 
 @mixin post-content() {
-  max-width: 80ch;
+  max-width: 100ch;
   margin-inline: auto;
   background: linear-gradient(90deg, $pink-color 80%, $orange-color 100%)
     no-repeat;
@@ -147,5 +149,25 @@
   }
   .post-content {
     @include post-content;
+  }
+}
+
+.blog-container {
+  @include card-layout;
+  .blog-item {
+    position: relative;
+    .cat-container {
+      span {
+        margin-inline-end: $spacer-sm;
+      }
+    }
+    @media (width >= $breakpoint-xxl) {
+      .cat-container {
+        min-height: 3.3em;
+      }
+      h3 {
+        min-height: 3.3em;
+      }
+    }
   }
 }

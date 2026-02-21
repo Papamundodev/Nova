@@ -71,6 +71,12 @@ header {
   animation-name: fade-in;
 }
 
+.animation-moving {
+  @media (width <= $breakpoint-sm) {
+    display: none;
+  }
+}
+
 @mixin flying-img-container(
   $color: $primary-color,
   $animation: circle-primary,
@@ -135,7 +141,7 @@ header {
     @include flying-img-container(
       $orange-color,
       circle-primary,
-      $width: 50px,
+      $width: 40px,
       $time: 100s
     );
 
@@ -148,7 +154,7 @@ header {
     @include flying-img-container(
       $secondary-color,
       circle-secondary,
-      $width: 50px,
+      $width: 40px,
       $time: 80s
     );
 
@@ -161,7 +167,7 @@ header {
     @include flying-img-container(
       $primary-color,
       circle-tertiary,
-      $width: 50px,
+      $width: 40px,
       $time: 100s
     );
 
@@ -174,28 +180,28 @@ header {
 @keyframes circle-primary {
   0% {
     transform: rotate(0deg) translate(-150px) rotate(0deg);
-    width: 80px;
+    width: 40px;
   }
 
   20% {
-    width: 80px;
+    width: 35px;
   }
 
   40% {
-    width: 50px;
+    width: 30px;
   }
 
   60% {
-    width: 80px;
+    width: 30px;
   }
 
   80% {
-    width: 80px;
+    width: 35px;
   }
 
   100% {
     transform: rotate(-360deg) translate(-150px) rotate(360deg);
-    width: 80px;
+    width: 40px;
   }
 }
 
@@ -240,11 +246,11 @@ header {
 @keyframes circle-secondary {
   0% {
     transform: rotate(0deg) translate(-250px) rotate(0deg);
-    width: 80px;
+    width: 40px;
   }
 
   20% {
-    width: 50px;
+    width: 35px;
   }
 
   40% {
@@ -252,16 +258,16 @@ header {
   }
 
   60% {
-    width: 50px;
+    width: 30px;
   }
 
   80% {
-    width: 80px;
+    width: 35px;
   }
 
   100% {
     transform: rotate(-360deg) translate(-250px) rotate(360deg);
-    width: 80px;
+    width: 40px;
   }
 }
 
@@ -306,28 +312,28 @@ header {
 @keyframes circle-tertiary {
   0% {
     transform: rotate(0deg) translate(200px) rotate(0deg);
-    width: 80px;
+    width: 40px;
   }
 
   20% {
-    width: 80px;
+    width: 35px;
   }
 
   40% {
-    width: 50px;
+    width: 30px;
   }
 
   60% {
-    width: 80px;
+    width: 35px;
   }
 
   80% {
-    width: 80px;
+    width: 40px;
   }
 
   100% {
     transform: rotate(360deg) translate(200px) rotate(-360deg);
-    width: 80px;
+    width: 40px;
   }
 }
 
@@ -382,7 +388,7 @@ header {
       @include flying-img-container(
         $blue-color,
         circle-primary-reviews,
-        $width: 40px,
+        $width: 30px,
         $time: 60s
       );
 
@@ -395,7 +401,7 @@ header {
       @include flying-img-container(
         $green-color,
         circle-secondary-reviews,
-        $width: 40px,
+        $width: 30px,
         $time: 40s
       );
 
@@ -408,7 +414,7 @@ header {
       @include flying-img-container(
         $purple-color,
         circle-tertiary-reviews,
-        $width: 40px,
+        $width: 30px,
         $time: 60s
       );
 
@@ -422,11 +428,11 @@ header {
 @keyframes circle-primary-reviews {
   0% {
     transform: rotate(0deg) translate(-150px) rotate(0deg);
-    width: 40px;
+    width: 30px;
   }
 
   20% {
-    width: 30px;
+    width: 25px;
   }
 
   40% {
@@ -434,67 +440,67 @@ header {
   }
 
   60% {
-    width: 30px;
+    width: 25px;
   }
 
   80% {
-    width: 40px;
+    width: 30px;
   }
 
   100% {
     transform: rotate(-360deg) translate(-150px) rotate(360deg);
-    width: 40px;
+    width: 30px;
   }
 }
 
 @keyframes circle-secondary-reviews {
   0% {
     transform: rotate(0deg) translate(-250px) rotate(0deg);
-    width: 40px;
+    width: 30px;
   }
 
   20% {
-    width: 30px;
+    width: 25px;
   }
 
   40% {
-    width: 20px;
+    width: 25px;
   }
 
   60% {
-    width: 30px;
+    width: 25px;
   }
 
   80% {
-    width: 40px;
+    width: 30px;
   }
 
   100% {
     transform: rotate(-360deg) translate(-250px) rotate(360deg);
-    width: 40px;
+    width: 30px;
   }
 }
 
 @keyframes circle-tertiary-reviews {
   0% {
     transform: rotate(0deg) translate(200px) rotate(0deg);
-    width: 40px;
+    width: 30px;
   }
 
   20% {
-    width: 30px;
+    width: 25px;
   }
 
   40% {
-    width: 20px;
+    width: 25px;
   }
 
   60% {
-    width: 30px;
+    width: 25px;
   }
 
   80% {
-    width: 40px;
+    width: 30px;
   }
 
   100% {
@@ -516,7 +522,7 @@ header {
       @include flying-img-container(
         $blue-color,
         circle-primary-reviews,
-        $width: 40px,
+        $width: 30px,
         $time: 60s
       );
 
@@ -529,7 +535,7 @@ header {
       @include flying-img-container(
         $green-color,
         circle-secondary-reviews,
-        $width: 40px,
+        $width: 30px,
         $time: 40s
       );
 
@@ -542,7 +548,7 @@ header {
       @include flying-img-container(
         $purple-color,
         circle-tertiary-reviews,
-        $width: 40px,
+        $width: 30px,
         $time: 60s
       );
 

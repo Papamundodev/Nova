@@ -155,6 +155,9 @@ footer {
     color: $primary-color;
     vertical-align: bottom;
   }
+  p {
+    color: $default-color;
+  }
   & > *:not(:first-child) {
     display: grid;
     grid-template-rows: $font-size-lg $font-size-sm $font-size-sm;

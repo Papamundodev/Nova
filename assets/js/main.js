@@ -19,100 +19,30 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     }
   });
-  const segmenter = new Intl.Segmenter("en", { granularity: "grapheme" });
-  function getLetters(name) {
-    const text = name;
-    const segments = Array.from(segmenter.segment(text));
-    return segments.map((segment) => segment.segment);
-  }
-  function mouseOver(element) {
-    element.addEventListener("mouseover", function(event) {
-      getLetters(element.dataset.name);
-      let letterIndex = 0;
-      const spans = element.querySelectorAll("span");
-      spans.forEach((span) => {
-        span.style.transitionDelay = `${letterIndex * 0.012}s`;
-        letterIndex++;
-      });
+  const sectionIntro = document.querySelector(".section-intro");
+  const sectionFooter = document.querySelector(".section-footer");
+  const cursorFollowItem = document.querySelector(".animation-moving-item");
+  if (sectionIntro && cursorFollowItem || sectionFooter && cursorFollowItem) {
+    sectionIntro.addEventListener("mouseenter", () => {
+      cursorFollowItem.classList.add("animation-moving-item--cursor-follow");
     });
-  }
-  document.querySelectorAll(".button-wave-animation button, .button-wave-animation a").forEach((a) => {
-    const textElement = a.querySelector(".button-text");
-    const textContent = textElement ? textElement.textContent : a.dataset.name || "";
-    if (!textContent)
-      return;
-    const letters = getLetters(textContent);
-    let htmlContent = "";
-    letters.forEach((letter) => {
-      if (letter === " ") {
-        htmlContent += `<span>&nbsp;</span>`;
-      } else {
-        htmlContent += `<span>${letter}</span>`;
-      }
+    sectionFooter.addEventListener("mouseenter", () => {
+      cursorFollowItem.classList.add("animation-moving-item--cursor-follow");
     });
-    if (textElement) {
-      textElement.outerHTML = htmlContent;
-    } else {
-      const svgContent = a.querySelector("svg") ? a.querySelector("svg").outerHTML : "";
-      a.innerHTML = htmlContent + svgContent;
-    }
-  });
-  document.querySelectorAll(".button-wave-animation button, .button-wave-animation a").forEach((a) => {
-    mouseOver(a);
-  });
-  class Slider {
-    constructor(el) {
-      this.wrapper = el.querySelector("[data-slider-wrapper]");
-      this.bullets = Array.from(el.querySelectorAll("[data-slider-bullet]"));
-      this.slides = Array.from(this.wrapper.querySelectorAll(".slide"));
-      this.zIndex = this.slides.length;
-      this.currentPage = 4;
-      this.slides.forEach((s) => s.style.zIndex = s.getAttribute("slide-number"));
-      this.update();
-      el.addEventListener("click", (e) => {
-        const bullet = e.target.closest("[data-slider-bullet]");
-        if (bullet)
-          this.goToSlide(parseInt(bullet.dataset.sliderBullet, 10));
-      });
-      let timeout;
-      this.wrapper.addEventListener("scroll", () => {
-        clearTimeout(timeout);
-        timeout = setTimeout(() => this.update(), 16);
-      });
-    }
-    getSlide(n) {
-      return this.slides.find((s) => parseInt(s.getAttribute("slide-number"), 10) === n);
-    }
-    goToSlide(n) {
-      const slide = this.getSlide(n);
-      if (!slide || this.currentPage === n)
-        return;
-      if (n === 4 && this.zIndex > 15) {
-        this.slides.forEach((s) => s.style.zIndex = s.getAttribute("slide-number"));
-        this.zIndex = this.slides.length;
-      } else {
-        this.zIndex++;
-      }
-      slide.style.zIndex = this.zIndex;
-      this.currentPage = n;
-      this.update();
-    }
-    update() {
-      this.bullets.forEach((b) => b.classList.toggle("slide-bullet-active", parseInt(b.dataset.sliderBullet, 10) === this.currentPage));
-      this.slides.forEach((s) => s.classList.remove("fade-in", "fade-out"));
-      const prev = this.getSlide(this.currentPage - 1);
-      const current = this.getSlide(this.currentPage);
-      const next = this.getSlide(this.currentPage + 1);
-      if (prev)
-        prev.classList.add("fade-out");
-      if (current)
-        current.classList.add("fade-in");
-      if (next)
-        next.classList.add("fade-out");
-    }
-  }
-  if (document.querySelector("[data-slider]") !== null) {
-    new Slider(document.querySelector("[data-slider]"));
+    sectionIntro.addEventListener("mousemove", (e) => {
+      document.documentElement.style.setProperty("--mouse-x", `${e.clientX}px`);
+      document.documentElement.style.setProperty("--mouse-y", `${e.clientY}px`);
+    });
+    sectionFooter.addEventListener("mousemove", (e) => {
+      document.documentElement.style.setProperty("--mouse-x", `${e.clientX}px`);
+      document.documentElement.style.setProperty("--mouse-y", `${e.clientY}px`);
+    });
+    sectionIntro.addEventListener("mouseleave", () => {
+      cursorFollowItem.classList.remove("animation-moving-item--cursor-follow");
+    });
+    sectionFooter.addEventListener("mouseleave", () => {
+      cursorFollowItem.classList.remove("animation-moving-item--cursor-follow");
+    });
   }
   scrollers = document.querySelectorAll(".scroller");
   if (scrollers.length > 0) {
@@ -150,5 +80,25 @@ document.addEventListener("DOMContentLoaded", () => {
   });
   window.addEventListener("load", toggleScrollTop);
   document.addEventListener("scroll", toggleScrollTop);
+});
+function scrollDetailsIntoView(details) {
+  requestAnimationFrame(() => {
+    details.scrollIntoView({ behavior: "smooth", block: "start" });
+  });
+}
+function bindMobileScrollForDetails(selector) {
+  const detailsEls = document.querySelectorAll(selector);
+  if (!detailsEls.length)
+    return;
+  detailsEls.forEach((details) => {
+    details.addEventListener("toggle", () => {
+      if (!details.open)
+        return;
+      scrollDetailsIntoView(details);
+    });
+  });
+}
+document.addEventListener("DOMContentLoaded", () => {
+  bindMobileScrollForDetails('details.dropdown-details[id^="faq-details-"]');
 });
 //# sourceMappingURL=main.js.map

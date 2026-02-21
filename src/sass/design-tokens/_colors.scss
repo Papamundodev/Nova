@@ -23,7 +23,7 @@
   --orange-color: #ffbe99;
   --dark-blue-color: #0801a2;
   --pink-color: var(--secondary-color);
-
+  --contrast-2-color: var(--flash-color);
   /* accent colors */
   --linear-gradient-color: linear-gradient(
     to right,
@@ -35,7 +35,7 @@
 
 .dark-theme {
   --black-color: #1e1e1e;
-  --background-color: var(--black-color);
+  --background-color: #17194a;
   --contrast-color: #17194a;
   --default-color: var(--white-color);
   --gray-color: #45476e;
@@ -54,6 +54,7 @@
   --dark-blue-color: #99c2fe;
   --pink-color: var(--secondary-color);
   --flash-color: #f5b5ee;
+  --contrast-2-color: var(--dark-blue-color);
   /* accent colors */
   --linear-gradient-color: linear-gradient(
     to right,
@@ -69,6 +70,7 @@ $background-color: var(--background-color);
 $contrast-color: var(--contrast-color);
 $default-color: var(--default-color);
 $gray-color: var(--gray-color);
+$contrast-2-color: var(--contrast-2-color);
 $primary-color: var(--primary-color);
 $secondary-color: var(--secondary-color);
 $blue-color: var(--blue-color);
@@ -85,6 +87,7 @@ $colors: (
   "background-color": $background-color,
   "contrast-color": $contrast-color,
   "default-color": $default-color,
+  "contrast-2-color": $contrast-2-color,
   "primary-color": $primary-color,
   "secondary-color": $secondary-color,
   "blue-color": $blue-color,

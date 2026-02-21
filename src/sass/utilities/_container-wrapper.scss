@@ -5,7 +5,9 @@ $breakpoint-sm: 576px;
 $breakpoint-md: 768px;
 $breakpoint-lg: 992px;
 $breakpoint-xl: 1200px;
-$breakpoint-xxl: 1440px;
+$breakpoint-xxl: 1400px;
+$breakpoint-xxxl: 1600px;
+$breakpoint-xxxxl: 1920px;
 
 $breakpoints: (
   "sm": $breakpoint-sm,
@@ -13,6 +15,8 @@ $breakpoints: (
   "lg": $breakpoint-lg,
   "xl": $breakpoint-xl,
   "xxl": $breakpoint-xxl,
+  "xxxl": $breakpoint-xxxl,
+  "xxxxl": $breakpoint-xxxxl,
 );
 
 /* ------- Spacer ------- */
@@ -24,6 +28,7 @@ $breakpoints: (
   --spacer-xl: 26px;
   --spacer-xxl: 50px;
   --spacer-big: 100px;
+  --spacer-bigger: 200px;
 }
 
 $spacer-xs: var(--spacer-xs);
@@ -33,7 +38,7 @@ $spacer-lg: var(--spacer-lg);
 $spacer-xl: var(--spacer-xl);
 $spacer-xxl: var(--spacer-xxl);
 $spacer-big: var(--spacer-big);
-
+$spacer-bigger: var(--spacer-bigger);
 $spacer-vi-xs: calc($spacer-xs + 0.5vi);
 $spacer-vi-sm: calc($spacer-sm + 0.5vi);
 $spacer-vi-md: calc($spacer-md + 0.5vi);
@@ -41,6 +46,7 @@ $spacer-vi-lg: calc($spacer-lg + 0.5vi);
 $spacer-vi-xl: calc($spacer-xl + 0.5vi);
 $spacer-vi-xxl: calc($spacer-xxl + 0.5vi);
 $spacer-vi-big: calc($spacer-big + 0.5vi);
+$spacer-vi-bigger: calc($spacer-bigger + 0.5vi);
 
 $spacers: (
   "xs": $spacer-xs,
@@ -50,6 +56,7 @@ $spacers: (
   "xl": $spacer-xl,
   "xxl": $spacer-xxl,
   "big": $spacer-big,
+  "bigger": $spacer-bigger,
 );
 
 @each $key, $value in $spacers {

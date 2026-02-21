@@ -56,7 +56,9 @@
     margin: 0;
     opacity: 0;
     display: none;
-    transition: display 0.5s, opacity 0.5s;
+    transition:
+      display 0.5s,
+      opacity 0.5s;
     transition-behavior: allow-discrete;
     animation: fade-out 0.3s ease-out;
     .nav-menu-item,
@@ -88,7 +90,6 @@
   & > ul {
     display: flex;
     width: 100%;
-    border: 2px solid $default-color;
     padding: $spacer-xl $spacer-xxl;
     align-items: initial;
   }
@@ -105,7 +106,8 @@
     width: 100%;
     position: relative;
     height: fit-content;
-    transition: box-shadow 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+    transition:
+      box-shadow 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94),
       border-color 0.2s cubic-bezier(0.55, 0.085, 0.68, 0.53);
     &:hover {
       border-color: $default-color;

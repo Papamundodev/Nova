@@ -13,7 +13,7 @@ footer {
 .section-contact-form {
   background-color: $orange-color;
   padding-inline: 0;
-  margin-block: calc($spacer-big * 2) $spacer-big;
+  margin-block-start: $spacer-big;
   @include layout-left-right;
   .layout-content {
     display: flex;
@@ -25,6 +25,7 @@ footer {
       @include heading-large-1;
       color: $contrast-color;
       text-align: start;
+      margin-block-end: 0;
     }
     input::placeholder,
     textarea::placeholder {
@@ -65,7 +66,10 @@ footer {
   background-color: $primary-color;
   color: $contrast-color;
   overflow: hidden;
-  margin-block-end: $spacer-big;
+  margin-block-end: $spacer-xl;
+  @media (width >= $breakpoint-lg) {
+    margin-block-end: $spacer-big;
+  }
   .scroller {
     max-width: 1400px;
     margin-inline: auto;
@@ -136,13 +140,13 @@ footer {
 }
 
 .section-footer {
-  padding-block: $spacer-xl $spacer-big;
+  padding-block: $spacer-xl $spacer-xl;
   display: grid;
   gap: $spacer-xxl;
   grid-template-rows: auto auto auto;
   grid-template-columns: 1fr;
   h2 {
-    margin-block-end: $spacer-xl;
+    margin-block-end: $spacer-xxl;
     line-height: 1.5;
     @include heading-big-2;
   }
@@ -191,5 +195,13 @@ footer {
       justify-content: space-between;
       gap: 0;
     }
+  }
+}
+
+@media (width <= $breakpoint-lg) {
+  .footer-logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 }

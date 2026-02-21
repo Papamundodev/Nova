@@ -1,4 +1,5 @@
 @use "../utilities/container-wrapper" as *;
+@use "../design-tokens/colors" as *;
 /* ----- ANIMATIONS ----- */
 @keyframes fade-in {
   from {
@@ -53,4 +54,317 @@
 
 .fade-out {
   animation: fade-out 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@view-transition {
+  navigation: auto;
+}
+
+header {
+  view-transition-name: header;
+}
+
+.team-member-picture {
+  view-transition-name: team-member;
+  animation-duration: 1s;
+  animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  animation-name: fade-in;
+}
+
+@mixin flying-img-container(
+  $color: $primary-color,
+  $animation: circle-primary,
+  $rotate: rotate(0deg),
+  $width: 80px,
+  $time: 10s
+) {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: $width;
+  height: auto;
+  z-index: -1;
+  mix-blend-mode: multiply;
+  animation: $animation $time linear infinite;
+  pointer-events: none;
+
+  svg {
+    width: 100%;
+    height: 100%;
+    transform: $rotate;
+
+    path {
+      fill: $color;
+    }
+  }
+}
+
+.dark-theme {
+  .animation-moving-item {
+    background-color: $flash-color;
+  }
+}
+
+.animation-moving-item {
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  position: relative;
+  z-index: 1;
+  display: block;
+  background-color: transparent;
+  filter: blur(80px);
+  transition: background-color 3s ease-in-out;
+
+  &.animation-moving-item--cursor-follow {
+    width: 100px;
+    height: 100px;
+    position: fixed;
+    left: var(--mouse-x);
+    top: var(--mouse-y);
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+  }
+}
+
+.animation-moving {
+  position: relative;
+  z-index: -1;
+
+  .flying-img-container-primary {
+    @include flying-img-container(
+      $orange-color,
+      circle-primary,
+      $width: 50px,
+      $time: 100s
+    );
+
+    svg {
+      animation: rotate-shift-primary 100s linear infinite;
+    }
+  }
+
+  .flying-img-container-secondary {
+    @include flying-img-container(
+      $secondary-color,
+      circle-secondary,
+      $width: 50px,
+      $time: 80s
+    );
+
+    svg {
+      animation: rotate-shift-secondary 80s linear infinite;
+    }
+  }
+
+  .flying-img-container-tertiary {
+    @include flying-img-container(
+      $primary-color,
+      circle-tertiary,
+      $width: 50px,
+      $time: 100s
+    );
+
+    svg {
+      animation: rotate-shift-tertiary 130s linear infinite;
+    }
+  }
+}
+
+@keyframes circle-primary {
+  0% {
+    transform: rotate(0deg) translate(-150px) rotate(0deg);
+    width: 80px;
+  }
+
+  20% {
+    width: 80px;
+  }
+
+  40% {
+    width: 50px;
+  }
+
+  60% {
+    width: 80px;
+  }
+
+  80% {
+    width: 80px;
+  }
+
+  100% {
+    transform: rotate(-360deg) translate(-150px) rotate(360deg);
+    width: 80px;
+  }
+}
+
+@keyframes rotate-shift-primary {
+  0% {
+    transform: rotate(0deg);
+    filter: blur(0);
+    opacity: 1;
+  }
+
+  20% {
+    transform: rotate(72deg);
+    filter: blur(0);
+    opacity: 1;
+  }
+
+  40% {
+    transform: rotate(144deg);
+    filter: blur(5px);
+    opacity: 0.8;
+  }
+
+  60% {
+    transform: rotate(216deg);
+    filter: blur(0);
+    opacity: 1;
+  }
+
+  80% {
+    transform: rotate(288deg);
+    filter: blur(0);
+    opacity: 1;
+  }
+
+  100% {
+    transform: rotate(360deg);
+    filter: blur(0);
+    opacity: 1;
+  }
+}
+
+@keyframes circle-secondary {
+  0% {
+    transform: rotate(0deg) translate(-250px) rotate(0deg);
+    width: 80px;
+  }
+
+  20% {
+    width: 50px;
+  }
+
+  40% {
+    width: 30px;
+  }
+
+  60% {
+    width: 50px;
+  }
+
+  80% {
+    width: 80px;
+  }
+
+  100% {
+    transform: rotate(-360deg) translate(-250px) rotate(360deg);
+    width: 80px;
+  }
+}
+
+@keyframes rotate-shift-secondary {
+  0% {
+    transform: rotate(0deg);
+    filter: blur(0);
+    opacity: 1;
+  }
+
+  20% {
+    transform: rotate(-72deg);
+    filter: blur(0);
+    opacity: 1;
+  }
+
+  40% {
+    transform: rotate(-144deg);
+    filter: blur(5px);
+    opacity: 0.8;
+  }
+
+  60% {
+    transform: rotate(-216deg);
+    filter: blur(0);
+    opacity: 1;
+  }
+
+  80% {
+    transform: rotate(-288deg);
+    filter: blur(0);
+    opacity: 1;
+  }
+
+  100% {
+    transform: rotate(-360deg);
+    filter: blur(0);
+    opacity: 1;
+  }
+}
+
+@keyframes circle-tertiary {
+  0% {
+    transform: rotate(0deg) translate(200px) rotate(0deg);
+    width: 80px;
+  }
+
+  20% {
+    width: 80px;
+  }
+
+  40% {
+    width: 50px;
+  }
+
+  60% {
+    width: 80px;
+  }
+
+  80% {
+    width: 80px;
+  }
+
+  100% {
+    transform: rotate(360deg) translate(200px) rotate(-360deg);
+    width: 80px;
+  }
+}
+
+@keyframes rotate-shift-tertiary {
+  0% {
+    transform: rotate(0deg);
+    filter: blur(0);
+    opacity: 1;
+  }
+
+  20% {
+    transform: rotate(72deg);
+    filter: blur(0);
+    opacity: 1;
+  }
+
+  40% {
+    transform: rotate(144deg);
+    filter: blur(5px);
+    opacity: 0.8;
+  }
+
+  60% {
+    transform: rotate(216deg);
+    filter: blur(0);
+    opacity: 1;
+  }
+
+  80% {
+    transform: rotate(288deg);
+    filter: blur(0);
+    opacity: 1;
+  }
+
+  100% {
+    transform: rotate(360deg);
+    filter: blur(0);
+    opacity: 1;
+  }
 }

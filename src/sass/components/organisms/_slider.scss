@@ -22,11 +22,18 @@
 
   .slide-button-container {
     background-color: $color;
-    padding-block: $spacer-sm $spacer-xl;
-    padding-inline: $spacer-lg;
+    padding-block: $spacer-sm $spacer-xxl;
     display: flex;
     justify-content: center;
     gap: $spacer-lg;
+    margin-inline: 0;
+    @media (width >= $breakpoint-xxxl) {
+      margin-inline-start: 10%;
+      z-index: 10;
+      width: fit-content;
+      position: relative;
+      transform: translateY(calc($spacer-big * -2));
+    }
     .slide-bullet {
       width: 25px;
       aspect-ratio: 1/1;

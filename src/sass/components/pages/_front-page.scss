@@ -11,6 +11,15 @@
 #main-front-page {
   .section-intro {
     @include section-intro;
+    display: flex;
+    flex-direction: row;
+    .section-content {
+      display: flex;
+      flex-direction: column;
+      align-items: start;
+      justify-content: start;
+      gap: $spacer-xxl;
+    }
   }
 
   .section-our_values {
@@ -19,7 +28,8 @@
     padding-inline: $spacer-xl;
     @include layout-left-right;
     .layout-content {
-      color: $contrast-color;
+      color: $white-color;
+      padding-block-start: $spacer-xxl;
       h2 {
         @include heading-large-1;
       }
@@ -30,6 +40,9 @@
   }
 
   .section-expertise {
+    @media (width >= $breakpoint-xl) {
+      margin-block-end: $spacer-bigger;
+    }
     .expertise {
       position: relative;
       background-color: $background-color;
@@ -115,24 +128,18 @@
 
 .section-reviews {
   margin-block: $spacer-xxl;
-  @include slider($purple-color);
   h2 {
     @include heading-large-1;
   }
-  .reviews-wrapper {
-    padding-block-start: $spacer-big;
-    .review {
-      background-color: $purple-color;
-      @include layout-right-left;
-      @media (width <= $breakpoint-sm) {
-        padding-inline: $spacer-xl;
-      }
-      .review-content {
-        color: $contrast-color;
-        .review-name {
-          @include text-base;
-          font-size: $font-size-sm;
-        }
+  .review {
+    background-color: $purple-color;
+    @include layout-right-left;
+
+    .review-content {
+      color: $contrast-color;
+      .review-name {
+        @include text-base;
+        font-size: $font-size-sm;
       }
     }
   }

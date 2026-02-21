@@ -14,10 +14,13 @@
   margin-block-end: calc($spacer-big * 2);
   @media (width <= $breakpoint-xl) {
     margin-block-end: $spacer-xxl;
+    padding-block-start: $spacer-xl;
   }
 
   .intro-content-container {
-    max-width: 80ch;
+    @media (width >= $breakpoint-lg) {
+      max-width: 80ch;
+    }
     h1 {
       margin-block-end: $spacer-xxl;
     }

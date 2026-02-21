@@ -41,3 +41,40 @@ body {
   background-color: $flash-color;
   color: $default-color;
 }
+
+.content-wysiwyg {
+  h2 {
+    @include heading-medium-1;
+
+    & {
+      margin-block-end: $spacer-xl;
+    }
+  }
+
+  h3 {
+    @include heading-small-1;
+    margin-block-end: $spacer-lg;
+  }
+
+  p {
+    margin-block-end: $spacer-lg;
+    @include text-paragraph-1;
+  }
+
+  ul,
+  ol {
+    @include list;
+  }
+
+  a {
+    color: $secondary-color;
+    text-decoration: none;
+
+    &:hover {
+      color: $primary-color;
+    }
+  }
+  p:last-child {
+    margin-block-end: 0;
+  }
+}

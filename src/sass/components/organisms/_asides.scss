@@ -9,11 +9,14 @@
   right: 0;
   width: fit-content;
   max-width: 150px;
-  background-color: $gray-color;
+  background-color: color-mix(in srgb, $gray-color 50%, transparent);
   z-index: 1000;
-  padding: $spacer-lg;
+  padding: $spacer-sm;
   border-bottom-left-radius: $border-radius-rounded-lg;
   border-top-left-radius: $border-radius-rounded-lg;
+  @media (width >= $breakpoint-lg) {
+    padding: $spacer-lg;
+  }
 }
 
 .wrapper-tool-kit {
@@ -24,5 +27,28 @@
   button,
   a {
     padding: $spacer-xs;
+  }
+}
+
+.tld-light-icon,
+.tld-dark-icon {
+  path {
+    fill: $primary-color;
+  }
+  &:hover {
+    path {
+      fill: $secondary-color;
+    }
+  }
+}
+.wrapper-design-system-container {
+  a {
+    &:hover {
+      svg {
+        path {
+          fill: $secondary-color;
+        }
+      }
+    }
   }
 }

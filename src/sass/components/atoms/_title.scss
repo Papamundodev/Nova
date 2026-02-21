@@ -11,7 +11,7 @@
 }
 
 @mixin heading-big-1 {
-  font-size: $font-size-lg;
+  font-size: $font-size-md-lg;
   @include heading-base;
   @media (width >= $breakpoint-md) {
     font-size: $font-size-xl;
@@ -22,7 +22,7 @@
 }
 
 @mixin heading-big-2 {
-  font-size: $font-size-lg;
+  font-size: $font-size-md;
   @include heading-base;
   @media (width >= $breakpoint-md) {
     font-size: $font-size-xl;
@@ -32,6 +32,9 @@
 @mixin heading-large-1 {
   font-size: $font-size-lg;
   @include heading-base;
+  @media (width <= $breakpoint-md) {
+    font-size: $font-size-md;
+  }
 }
 
 @mixin heading-medium-large-1 {
@@ -95,4 +98,8 @@
   color: $primary-color;
   text-align: center;
   margin-block: $spacer-xxl;
+}
+
+.page-title {
+  margin-block: $spacer-big;
 }

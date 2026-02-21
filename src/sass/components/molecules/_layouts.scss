@@ -43,7 +43,10 @@
   .layout-content {
     & > div:first-child {
       margin-inline: auto;
-      max-width: 75ch;
+      max-width: 30ch;
+      @media (width >= $breakpoint-lg) {
+        max-width: 75ch;
+      }
       display: flex;
       flex-direction: column;
       justify-content: start;
@@ -83,30 +86,35 @@
       max-width: 75ch;
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
       align-items: start;
-      gap: $spacer-xl;
+      gap: $spacer-xxl;
+      justify-content: space-around;
+    }
+    @media (width <= $breakpoint-md) {
+      padding-inline: $spacer-xl;
     }
   }
 
   @media (width >= $breakpoint-xl) {
+    padding-block-start: 0;
     flex-direction: row-reverse;
     justify-content: end;
-    padding-block-start: 0;
     .layout-img {
+      margin-inline: 0;
       display: flex;
-      justify-content: end;
+      justify-content: start;
       width: 50vw;
-      max-width: 100%;
+      max-height: 600px;
       transform: translateY(calc($spacer-big * -1));
-      animation: scroll linear;
-      animation-timeline: scroll();
     }
     .layout-content {
       display: flex;
       margin-inline-start: 10%;
       width: 50vw;
-      padding-block: $spacer-xxl $spacer-big;
+      padding-block: 0 $spacer-big;
+      @media (width <= $breakpoint-sm) {
+        padding-inline: $spacer-xl;
+      }
     }
   }
 }

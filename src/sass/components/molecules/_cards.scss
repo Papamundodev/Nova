@@ -10,6 +10,8 @@
   gap: $spacer-md;
   padding: $spacer-md;
   background-color: $background-color;
+  color: $default-color;
+  text-decoration: none;
 }
 
 @mixin blog-card {
@@ -27,6 +29,39 @@
     object-fit: cover;
     aspect-ratio: 1/1;
     width: 500px;
+    transition: transform 0.3s ease-in-out;
+  }
+  a {
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.5s ease;
+    transform: scale(0.975);
+    &:hover {
+      transform: scale(1);
+      transition: transform 0.5s ease;
+    }
+    &:hover::before {
+      opacity: 1;
+      transform: rotate(-45deg) translateY(100%);
+    }
+    &::before {
+      content: "";
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(
+        0deg,
+        transparent,
+        transparent 30%,
+        color-mix(in srgb, $primary-color 50%, transparent)
+      );
+      transform: rotate(-45deg);
+      transition: all 0.5s ease;
+      opacity: 0;
+      z-index: 10;
+    }
   }
   .cat-container {
     span {

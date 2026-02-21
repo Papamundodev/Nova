@@ -6,20 +6,21 @@ $content = get_the_content();
 $title = get_the_title();
 ?>
 
-    <main id="main-<?=$theme_template_name?>">
+<main id="main-<?= $theme_template_name ?>">
 
-        <section class="section container">
+    <section class="section container">
 
-            <!-- Page Title -->
-            <div class="wrapper">
-                <div class="page-title">
-                    <h1 class="title-gradient"><?=$title; ?></h1>
-                </div><!-- End Page Title -->
-            </div>
+        <!-- Page Title -->
+        <div class="page-title">
+            <h1 class="title-gradient"><?= $title; ?></h1>
+        </div><!-- End Page Title -->
 
-        </section>
+        <div class="content-wysiwyg">
+            <?= wpautop($content); ?>
+        </div>
+    </section>
 
-    </main>
+</main>
 
 <?php
 get_footer();

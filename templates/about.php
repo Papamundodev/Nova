@@ -13,27 +13,28 @@ $content = wpautop($object->post_content);
 
 <main id="main-<?= $theme_template_name ?>" class="main">
 
-    <section aria-labelledby="intro-title" class="section-intro container">
-        <?php
-        $intro = get_field('intro', $object);
-        ?>
-        <div class="intro-content-container">
-            <h1 id="intro-title" class="title-gradient"><?= $intro['title']; ?></h1>
-            <p><?= $intro['text']; ?></p>
-        </div>
-        <div class="animation-moving">
-            <div class="flying-img-container-primary">
-                <?php echo file_get_contents(get_template_directory() . '/assets/images/star-1.svg'); ?>
+    <div class="section-light">
+        <section aria-labelledby="intro-title" class="section-intro container">
+            <?php
+            $intro = get_field('intro', $object);
+            ?>
+            <div class="intro-content-container">
+                <h1 id="intro-title" class="title-gradient"><?= $intro['title']; ?></h1>
+                <p><?= $intro['text']; ?></p>
             </div>
-            <div class="flying-img-container-secondary">
-                <?php echo file_get_contents(get_template_directory() . '/assets/images/star-2.svg'); ?>
+            <div class="animation-moving">
+                <div class="flying-img-container-primary">
+                    <?php echo file_get_contents(get_template_directory() . '/assets/images/star-1.svg'); ?>
+                </div>
+                <div class="flying-img-container-secondary">
+                    <?php echo file_get_contents(get_template_directory() . '/assets/images/star-2.svg'); ?>
+                </div>
+                <div class="flying-img-container-tertiary">
+                    <?php echo file_get_contents(get_template_directory() . '/assets/images/star-3.svg'); ?>
+                </div>
             </div>
-            <div class="flying-img-container-tertiary">
-                <?php echo file_get_contents(get_template_directory() . '/assets/images/star-3.svg'); ?>
-            </div>
-        </div>
-    </section>
-
+        </section>
+    </div>
 
     <section aria-labelledby="section-advantages-title" class="section-advantages">
         <?php
@@ -99,21 +100,23 @@ $content = wpautop($object->post_content);
         </div>
     </section>
 
-    <section aria-labelledby="section-our_values-title" class="section-our_values">
-        <?php
-        $our_values = get_field('our_values', $object);
-        ?>
-        <h2 id="section-our_values-title" class="section-title"><?= $our_values['title']; ?></h2>
-        <div class="our-values-container">
-            <?php foreach ($our_values['value'] as $item) : ?>
-                <div>
-                    <img src="<?= $item['image']['url']; ?>" alt="<?= $item['image']['alt']; ?>">
-                    <h3><?= $item['title']; ?></h3>
-                    <p><?= $item['text']; ?></p>
-                </div>
-            <?php endforeach; ?>
-        </div>
-    </section>
+    <div class="section-light">
+        <section aria-labelledby="section-our_values-title" class="section-our_values">
+            <?php
+            $our_values = get_field('our_values', $object);
+            ?>
+            <h2 id="section-our_values-title" class="section-title"><?= $our_values['title']; ?></h2>
+            <div class="our-values-container">
+                <?php foreach ($our_values['value'] as $item) : ?>
+                    <div>
+                        <img src="<?= $item['image']['url']; ?>" alt="<?= $item['image']['alt']; ?>">
+                        <h3><?= $item['title']; ?></h3>
+                        <p><?= $item['text']; ?></p>
+                    </div>
+                <?php endforeach; ?>
+            </div>
+        </section>
+    </div>
 
 
 </main>

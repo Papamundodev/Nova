@@ -31,34 +31,37 @@ document.addEventListener("DOMContentLoaded", () => {
    * Cursor-following blur effect in .section-intro
    * animation-moving-item can be in header or section - find it from document
    */
-  const sectionIntro = document.querySelector(".section-intro");
-  const sectionFooter = document.querySelector(".section-footer");
+
   const cursorFollowItem = document.querySelector(".animation-moving-item");
+  const sectionLight = document.querySelectorAll(".section-light");
 
-  if (sectionIntro && cursorFollowItem || sectionFooter && cursorFollowItem) {
+  if (sectionLight && cursorFollowItem && sectionLight.length > 0) {
+    sectionLight.forEach(section => {
+      section.addEventListener("mouseenter", () => {
+        if (document.body.classList.contains("dark-theme")) {
+          cursorFollowItem.classList.add("animation-moving-item--cursor-follow");
+        }
+      });
 
-    sectionIntro.addEventListener("mouseenter", () => {
-      cursorFollowItem.classList.add("animation-moving-item--cursor-follow");
-    });
-    sectionFooter.addEventListener("mouseenter", () => {
-      cursorFollowItem.classList.add("animation-moving-item--cursor-follow");
+      section.addEventListener("mousemove", (e) => {
+        if (document.body.classList.contains("dark-theme")) {
+          document.documentElement.style.setProperty("--mouse-x", `${e.clientX}px`);
+          document.documentElement.style.setProperty("--mouse-y", `${e.clientY}px`);
+        }
+      });
+
+      section.addEventListener("mouseleave", () => {
+        cursorFollowItem.classList.remove("animation-moving-item--cursor-follow");
+      });
     });
 
-    sectionIntro.addEventListener("mousemove", (e) => {
-      document.documentElement.style.setProperty("--mouse-x", `${e.clientX}px`);
-      document.documentElement.style.setProperty("--mouse-y", `${e.clientY}px`);
+    // Remove cursor effect when switching to light theme
+    const themeObserver = new MutationObserver(() => {
+      if (!document.body.classList.contains("dark-theme")) {
+        cursorFollowItem.classList.remove("animation-moving-item--cursor-follow");
+      }
     });
-    sectionFooter.addEventListener("mousemove", (e) => {
-      document.documentElement.style.setProperty("--mouse-x", `${e.clientX}px`);
-      document.documentElement.style.setProperty("--mouse-y", `${e.clientY}px`);
-    });
-
-    sectionIntro.addEventListener("mouseleave", () => {
-      cursorFollowItem.classList.remove("animation-moving-item--cursor-follow");
-    });
-    sectionFooter.addEventListener("mouseleave", () => {
-      cursorFollowItem.classList.remove("animation-moving-item--cursor-follow");
-    });
+    themeObserver.observe(document.body, { attributes: true, attributeFilter: ["class"] });
   }
 
 

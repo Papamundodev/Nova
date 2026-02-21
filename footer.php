@@ -18,44 +18,46 @@
         </div>
     </section>
 
-    <section aria-labelledby="section-faq-title" class="section-faq">
-        <div class="container">
-            <h2 id="section-faq-title" class="section-title">Faq</h2>
+    <div class="section-light">
+        <section aria-labelledby="section-faq-title" class="section-faq">
+            <div class="container">
+                <h2 id="section-faq-title" class="section-title">Faq</h2>
 
-            <?php
-            $taxonomy = "category";
-            $object = get_queried_object();
-            $is_wp_post = $object instanceof WP_Post;
-            $faq_categories = get_field('faq_categories', $object);
-            if ($is_wp_post && !empty($faq_categories)) {
-                if (!empty($faq_categories) && !is_wp_error($faq_categories)) {
-                    $tax_query[] = array(
-                        'taxonomy' => $taxonomy,
-                        'field' => 'term_id',
-                        'terms' => $faq_categories
-                    );
+                <?php
+                $taxonomy = "category";
+                $object = get_queried_object();
+                $is_wp_post = $object instanceof WP_Post;
+                $faq_categories = get_field('faq_categories', $object);
+                if ($is_wp_post && !empty($faq_categories)) {
+                    if (!empty($faq_categories) && !is_wp_error($faq_categories)) {
+                        $tax_query[] = array(
+                            'taxonomy' => $taxonomy,
+                            'field' => 'term_id',
+                            'terms' => $faq_categories
+                        );
+                    }
                 }
-            }
-            $args = array(
-                'post_type' => 'faq',
-                'post_status' => 'publish',
-                'posts_per_page' => -1,
-                'orderby' => 'date',
-                'order' => 'DESC',
-            );
-            if (!empty($tax_query)) {
-                $args['tax_query'] = $tax_query;
-            }
-            $query = new WP_Query($args);
-            wp_reset_postdata();
-            ?>
-            <?php $faq_i = 0; ?>
-            <?php foreach ($query->posts as $faq) : ?>
-                <?php $faq_i++; ?>
-                <?php get_template_part('partials/faq', null, ['faq' => $faq, 'i' => $faq_i]); ?>
-            <?php endforeach; ?>
-        </div>
-    </section>
+                $args = array(
+                    'post_type' => 'faq',
+                    'post_status' => 'publish',
+                    'posts_per_page' => -1,
+                    'orderby' => 'date',
+                    'order' => 'DESC',
+                );
+                if (!empty($tax_query)) {
+                    $args['tax_query'] = $tax_query;
+                }
+                $query = new WP_Query($args);
+                wp_reset_postdata();
+                ?>
+                <?php $faq_i = 0; ?>
+                <?php foreach ($query->posts as $faq) : ?>
+                    <?php $faq_i++; ?>
+                    <?php get_template_part('partials/faq', null, ['faq' => $faq, 'i' => $faq_i]); ?>
+                <?php endforeach; ?>
+            </div>
+        </section>
+    </div>
 
     <section class="section-banner">
         <div class="scroller">
@@ -73,45 +75,59 @@
         </div>
     </section>
 
-    <section class="section-footer container">
-        <?php
-        $text = get_field('text', 'option');
-        $button_text = get_field('button_text', 'option');
-        $button_link = get_field('button_link', 'option');
-        $num_fr = get_field('num_fr', 'option');
-        $num_en = get_field('num_en', 'option');
-        $cities = get_field('cities', 'option');
-        ?>
-        <div>
-            <h2><?= $text; ?></h2>
-            <div class="button-container button-background-primary button-background-animation">
-                <a href="<?= $button_link; ?>" class="btn"><?= $button_text; ?></a>
-                <span class="hover-bg"></span>
+    <div class="section-light">
+        <div class="animation-moving">
+            <div class="flying-img-container-primary">
+                <?php echo file_get_contents(get_template_directory() . '/assets/images/star-1.svg'); ?>
+            </div>
+            <div class="flying-img-container-secondary">
+                <?php echo file_get_contents(get_template_directory() . '/assets/images/star-2.svg'); ?>
+            </div>
+            <div class="flying-img-container-tertiary">
+                <?php echo file_get_contents(get_template_directory() . '/assets/images/star-3.svg'); ?>
             </div>
         </div>
-        <div>
-            <h3><?= __('Contact', 'theme_base'); ?></h3>
-            <p><?= $num_fr; ?></p>
-            <p><?= $num_en; ?></p>
-        </div>
-        <div>
-            <h3><?= __('Où sommes-nous ?', 'theme_base'); ?></h3>
-            <?php foreach ($cities as $city) : ?>
-                <p><?= $city['city']; ?></p>
-            <?php endforeach; ?>
-        </div>
-    </section>
+        <section class="section-footer container">
+            <?php
+            $text = get_field('text', 'option');
+            $button_text = get_field('button_text', 'option');
+            $button_link = get_field('button_link', 'option');
+            $num_fr = get_field('num_fr', 'option');
+            $num_en = get_field('num_en', 'option');
+            $cities = get_field('cities', 'option');
+            ?>
+            <div>
+                <h2><?= $text; ?></h2>
+                <div class="button-container button-background-primary button-background-animation">
+                    <a href="<?= $button_link; ?>" class="btn"><?= $button_text; ?></a>
+                    <span class="hover-bg"></span>
+                </div>
+            </div>
+            <div>
+                <h3><?= __('Contact', 'theme_base'); ?></h3>
+                <p><?= $num_fr; ?></p>
+                <p><?= $num_en; ?></p>
+            </div>
+            <div>
+                <h3><?= __('Où sommes-nous ?', 'theme_base'); ?></h3>
+                <?php foreach ($cities as $city) : ?>
+                    <p><?= $city['city']; ?></p>
+                <?php endforeach; ?>
+            </div>
+        </section>
 
-    <section class="section-footer-nav container">
-        <div class="footer-nav-container">
-            <div class="wrapper-navbar">
-                <?php get_template_part('partials/header/navbar-desktop', null, ['theme_location' => 'footer']); ?>
+        <section class="section-footer-nav container">
+            <div class="footer-nav-container">
+                <div class="wrapper-navbar">
+                    <?php get_template_part('partials/header/navbar-desktop', null, ['theme_location' => 'footer']); ?>
+                </div>
+                <div class="wrapper-navbar footer-logo">
+                    <p>@ <?= date('Y'); ?> </p>
+                </div>
             </div>
-            <div class="wrapper-navbar footer-logo">
-                <p>@ <?= date('Y'); ?> </p>
-            </div>
-        </div>
-    </section>
+        </section>
+
+    </div>
 </footer>
 <a href="#" id="scroll-top" class="scroll-top">
     <?php echo file_get_contents(get_template_directory() . '/assets/images/arrow-bold.svg'); ?>

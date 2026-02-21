@@ -34,7 +34,7 @@
 
             <div class="button-wrapper">
                 <div class="button-container button-background-primary button-background-animation">
-                    <a href="<?= home_url() . '/contact'; ?>" class="">C’est super</a>
+                    <a href="<?= home_url() . '/#section-form-title'; ?>" class=""><?= __('Contactez-nous', 'theme_base'); ?></a>
                     <span class="hover-bg"></span>
                 </div>
             </div>

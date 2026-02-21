@@ -12,34 +12,37 @@ $logo = get_field('logo', 'option');
 
 <main id="main-<?= $theme_template_name ?>" class="main">
 
+    <div class="section-light">
 
-    <section aria-labelledby="intro-title" class="section-intro container">
-        <?php
-        $intro = get_field('intro', $object);
-        ?>
-        <div class="section-content">
-            <div class="intro-content-container">
-                <h1 id="intro-title" class="title-gradient"><?= $intro['title']; ?></h1>
-                <p><?= $intro['text']; ?></p>
+        <section aria-labelledby="intro-title" class="section-intro container">
+            <?php
+            $intro = get_field('intro', $object);
+            ?>
+            <div class="section-content">
+                <div class="intro-content-container">
+                    <h1 id="intro-title" class="title-gradient"><?= $intro['title']; ?></h1>
+                    <p><?= $intro['text']; ?></p>
+                </div>
+                <div class="button-background-primary button-background-animation">
+                    <a href="<?= $intro['button_link']; ?>" class="btn"><?= $intro['button_text']; ?></a>
+                    <span class="hover-bg"></span>
+                </div>
             </div>
-            <div class="button-background-primary button-background-animation">
-                <a href="<?= $intro['button_link']; ?>" class="btn"><?= $intro['button_text']; ?></a>
-                <span class="hover-bg"></span>
-            </div>
-        </div>
-        <div class="animation-moving">
+            <div class="animation-moving">
 
-            <div class="flying-img-container-primary">
-                <?php echo file_get_contents(get_template_directory() . '/assets/images/star-1.svg'); ?>
+                <div class="flying-img-container-primary">
+                    <?php echo file_get_contents(get_template_directory() . '/assets/images/star-1.svg'); ?>
+                </div>
+                <div class="flying-img-container-secondary">
+                    <?php echo file_get_contents(get_template_directory() . '/assets/images/star-2.svg'); ?>
+                </div>
+                <div class="flying-img-container-tertiary">
+                    <?php echo file_get_contents(get_template_directory() . '/assets/images/star-3.svg'); ?>
+                </div>
             </div>
-            <div class="flying-img-container-secondary">
-                <?php echo file_get_contents(get_template_directory() . '/assets/images/star-2.svg'); ?>
-            </div>
-            <div class="flying-img-container-tertiary">
-                <?php echo file_get_contents(get_template_directory() . '/assets/images/star-3.svg'); ?>
-            </div>
-        </div>
-    </section>
+        </section>
+
+    </div>
 
     <section aria-labelledby="section-our_values-title layout-left-right" class="section-our_values">
         <?php
@@ -120,24 +123,37 @@ $logo = get_field('logo', 'option');
         </div>
     </section>
 
-    <section aria-labelledby="section-team-title" class="section-team container">
-        <?php
-        $team = get_field('team', "option");
-        $section_team_title = get_field('section_team_title', $object);
-        ?>
-        <h2 id="section-team-title" class="section-title"><?= $section_team_title; ?></h2>
-        <div class="team-container">
-            <?php foreach ($team as $item) : ?>
-                <div class="team-member card">
-                    <a href="<?= home_url('/about/#member-' . sanitize_title($item['title'])); ?>">
-                        <img src="<?= $item['image']['url']; ?>" class="team-member-picture" alt="<?= $item['image']['alt']; ?>">
-                    </a>
-                    <h3><?= $item['title']; ?></h3>
-                    <p><?= $item['text']; ?></p>
+    <div class="section-light">
+        <section aria-labelledby="section-team-title" class="section-team container">
+            <?php
+            $team = get_field('team', "option");
+            $section_team_title = get_field('section_team_title', $object);
+            ?>
+            <h2 id="section-team-title" class="section-title"><?= $section_team_title; ?></h2>
+            <div class="team-container">
+                <?php foreach ($team as $item) : ?>
+                    <div class="team-member card">
+                        <a href="<?= home_url('/about/#member-' . sanitize_title($item['title'])); ?>">
+                            <img src="<?= $item['image']['url']; ?>" class="team-member-picture" alt="<?= $item['image']['alt']; ?>">
+                        </a>
+                        <h3><?= $item['title']; ?></h3>
+                        <p><?= $item['text']; ?></p>
+                    </div>
+                <?php endforeach; ?>
+            </div>
+            <div class="animation-moving">
+                <div class="flying-img-container-primary">
+                    <?php echo file_get_contents(get_template_directory() . '/assets/images/star-1.svg'); ?>
                 </div>
-            <?php endforeach; ?>
-        </div>
-    </section>
+                <div class="flying-img-container-secondary">
+                    <?php echo file_get_contents(get_template_directory() . '/assets/images/star-2.svg'); ?>
+                </div>
+                <div class="flying-img-container-tertiary">
+                    <?php echo file_get_contents(get_template_directory() . '/assets/images/star-3.svg'); ?>
+                </div>
+            </div>
+        </section>
+    </div>
 
 
 </main>

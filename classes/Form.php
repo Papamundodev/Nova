@@ -104,7 +104,7 @@ class Form
         
         $headers = [
             'Content-Type: text/html; charset=UTF-8',
-            sprintf('From: %s <%s>', get_option('blogname'), get_option('admin_email')),
+            sprintf('From: %s <mail_php@collective-nova.fr>', get_option('blogname')),
             sprintf('Reply-To: %s <%s>', esc_html($data['name']), sanitize_email($data['email'])),
         ];
 

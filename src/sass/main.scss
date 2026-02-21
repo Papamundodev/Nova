@@ -29,6 +29,7 @@ body {
   font-family: $text-font;
   background-color: $background-color;
   color: $default-color;
+  overflow-x: hidden;
 }
 
 #tld-theme-toggle-button {

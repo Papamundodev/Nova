@@ -122,14 +122,22 @@
   }
 }
 
-.team-container {
-  @include card-layout;
+.section-team {
+  @media (width >= $breakpoint-xl) {
+    margin-block-end: $spacer-bigger;
+  }
+  .team-container {
+    @include card-layout;
+  }
 }
 
 .section-reviews {
   margin-block: $spacer-xxl;
   h2 {
     @include heading-large-1;
+    @media (width >= $breakpoint-xl) {
+      margin-block-start: $spacer-xxl;
+    }
   }
   .review {
     background-color: $purple-color;

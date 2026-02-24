@@ -102,19 +102,18 @@ $logo = get_field('logo', 'option');
 
     <section aria-labelledby="section-reviews-title" class="section-reviews ">
         <?php
-        $portfolio = get_field('portfolio', "option");
+        $section_portfolio = get_field('section_portfolio', $object);
         ?>
-        <?php $section_reviews_title = get_field('section_reviews_title', $object); ?>
         <div class="review">
             <div class="layout-img">
-                <img src="<?= $portfolio['url']; ?>" alt="<?= "découvrez notre portfolio"; ?>">
+                <img src="<?= $section_portfolio['image']['url']; ?>" alt="<?= $section_portfolio['image']['alt']; ?>">
             </div>
             <div class="layout-content review-content">
                 <div>
-                    <h2 id="section-reviews-title" class=""><?= $section_reviews_title; ?></h2>
+                    <h2 id="section-reviews-title" class=""><?= $section_portfolio['title']; ?></h2>
                     <div class="button-container button-background-secondary-icon">
-                        <a href="<?= home_url(); ?>" class="btn">
-                            <span class="button-text">Découvrez notre Portfolio</span>
+                        <a href="<?= $section_portfolio['link']['url']; ?>" class="btn" target="<?= $section_portfolio['link']['target']; ?>">
+                            <span class="button-text"><?= $section_portfolio['link']['title']; ?></span>
                             <?php echo file_get_contents(get_template_directory() . '/assets/images/arrow-up-right-bold.svg'); ?>
                         </a>
                     </div>

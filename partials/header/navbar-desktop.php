@@ -17,7 +17,7 @@ $menu_items = \Theme_base\Base::wp_get_menu_array($theme_location);
                         <div class="svg-container">
                             <?= file_get_contents(get_template_directory() . '/assets/images/chevron.svg'); ?>
                         </div>
-                        <p class="dropdown-title" class="">Expertise</p>
+                        <p class="dropdown-title" class=""><?= __('Expertises', 'theme_base') ?></p>
                     </div>
                     <?php
                     $expertises = get_terms(array(

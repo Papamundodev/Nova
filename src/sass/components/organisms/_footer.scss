@@ -155,7 +155,8 @@ footer {
     color: $primary-color;
     vertical-align: bottom;
   }
-  p {
+  p,
+  a {
     color: $default-color;
   }
   & > *:not(:first-child) {
@@ -181,6 +182,9 @@ footer {
       margin-block-end: 0;
       grid-template-rows: $font-size-xxl $font-size-sm $font-size-sm;
     }
+  }
+  .button-container a {
+    color: $contrast-color;
   }
 }
 

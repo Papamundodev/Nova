@@ -129,6 +129,11 @@
   .team-container {
     @include card-layout;
   }
+  .button-container {
+    width: fit-content;
+    margin-inline: auto;
+    margin-block-start: $spacer-xxl;
+  }
 }
 
 .section-reviews {

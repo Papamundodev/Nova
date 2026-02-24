@@ -90,8 +90,7 @@
         <section class="section-footer container">
             <?php
             $text = get_field('text', 'option');
-            $button_text = get_field('button_text', 'option');
-            $button_link = get_field('button_link', 'option');
+            $button_contact_footer = get_field('button_contact_footer', 'option');
             $num_fr = get_field('num_fr', 'option');
             $num_en = get_field('num_en', 'option');
             $cities = get_field('cities', 'option');
@@ -99,7 +98,7 @@
             <div>
                 <h2><?= $text; ?></h2>
                 <div class="button-container button-background-primary button-background-animation">
-                    <a href="<?= $button_link; ?>" class="btn"><?= $button_text; ?></a>
+                    <a href="<?= $button_contact_footer['url']; ?>" class="btn"><?= $button_contact_footer['title']; ?></a>
                     <span class="hover-bg"></span>
                 </div>
             </div>
@@ -129,7 +128,7 @@
 
     </div>
 </footer>
-<a href="#" id="scroll-top" class="scroll-top">
+<a href="#" id="scroll-top" class="scroll-top" aria-label="<?php esc_attr_e('Retour en haut de la page', 'theme_base'); ?>" title="<?php esc_attr_e('Retour en haut de la page', 'theme_base'); ?>">
     <?php echo file_get_contents(get_template_directory() . '/assets/images/arrow-bold.svg'); ?>
 </a>
 <?php wp_footer(); ?>

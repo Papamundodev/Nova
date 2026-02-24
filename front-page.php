@@ -24,7 +24,7 @@ $logo = get_field('logo', 'option');
                     <p><?= $intro['text']; ?></p>
                 </div>
                 <div class="button-background-primary button-background-animation">
-                    <a href="<?= $intro['button_link']; ?>" class="btn"><?= $intro['button_text']; ?></a>
+                    <a href="<?= $intro['button_link']['url']; ?>" class="btn"><?= $intro['button_link']['title']; ?> </a>
                     <span class="hover-bg"></span>
                 </div>
             </div>
@@ -127,9 +127,9 @@ $logo = get_field('logo', 'option');
         <section aria-labelledby="section-team-title" class="section-team container">
             <?php
             $team = get_field('team', "option");
-            $section_team_title = get_field('section_team_title', $object);
+            $section_team = get_field('section_team', $object);
             ?>
-            <h2 id="section-team-title" class="section-title"><?= $section_team_title; ?></h2>
+            <h2 id="section-team-title" class="section-title"><?= $section_team['title']; ?></h2>
             <div class="team-container">
                 <?php foreach ($team as $item) : ?>
                     <div class="team-member card">
@@ -151,6 +151,10 @@ $logo = get_field('logo', 'option');
                 <div class="flying-img-container-tertiary">
                     <?php echo file_get_contents(get_template_directory() . '/assets/images/star-3.svg'); ?>
                 </div>
+            </div>
+            <div class="button-container button-background-primary button-background-animation">
+                <a href="<?= $section_team['link']; ?>" class="btn"><?= __('Découvrez notre équipe', 'theme_base') ?></a>
+                <span class="hover-bg"></span>
             </div>
         </section>
     </div>

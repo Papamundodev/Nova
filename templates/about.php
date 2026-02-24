@@ -79,10 +79,10 @@ $content = wpautop($object->post_content);
                             $link = $item['link'];
 
                             ?>
-                            <a class="social-item" href="<?= $malt; ?>" target="_blank">
+                            <a class="social-item" href="<?= $malt; ?>" target="_blank" rel="noopener noreferrer" aria-label="<?php printf(esc_attr__('Profil Malt de %s', 'theme_base'), esc_attr($item['title'])); ?>" title="<?php printf(esc_attr__('Profil Malt de %s', 'theme_base'), esc_attr($item['title'])); ?>">
                                 <?php echo file_get_contents(get_template_directory() . '/assets/images/malt.svg'); ?>
                             </a>
-                            <a class="social-item" href="<?= $linkedin; ?>" target="_blank">
+                            <a class="social-item" href="<?= $linkedin; ?>" target="_blank" rel="noopener noreferrer" aria-label="<?php printf(esc_attr__('Profil LinkedIn de %s', 'theme_base'), esc_attr($item['title'])); ?>" title="<?php printf(esc_attr__('Profil LinkedIn de %s', 'theme_base'), esc_attr($item['title'])); ?>">
                                 <?php echo file_get_contents(get_template_directory() . '/assets/images/linkedin.svg'); ?>
                             </a>
                             <div class="button-wrapper">

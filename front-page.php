@@ -65,20 +65,20 @@ $logo = get_field('logo', 'option');
 
     <section aria-labelledby="section-expertise-title" class="section-expertise container">
         <?php
-        $expertises = get_field('expertises', $object);
+        $expertises = get_terms(array(
+            'taxonomy'   => 'expertises',
+            'hide_empty' => false,
+        ));
         ?>
-        <h2 id="section-expertise-title" class="section-title"><?= $expertises['title']; ?></h2>
+        <h2 id="section-expertise-title" class="section-title"><?= __('Nos expertises en communication digitale', 'theme_base') ?></h2>
         <div class="expertise-container">
             <?php $i = 0;
-            foreach ($expertises['expertise'] as $item) : ?>
+            foreach ($expertises as $item) : ?>
                 <?php
-                $term_id = $item['category'];
-                $term = get_term_by('term_id', $term_id, 'expertises');
-                $color = get_field('color', $term);
-                $term_link = get_term_link($term);
+                $color = get_field('color', $item);
+                $term_link = get_term_link($item);
                 ?>
-
-                <div id="expertise-<?= sanitize_title($item['title']); ?>" class="expertise accent-<?= $color; ?>-color" aria-labelledby="expertise-title">
+                <div id="expertise-<?= sanitize_title($item->name); ?>" class="expertise accent-<?= $color; ?>-color" aria-labelledby="expertise-title">
                     <style>
                         #main-<?= $theme_template_name ?>.section-expertise .expertise.accent-<?= $color; ?>-color:hover {
                             svg path {
@@ -92,8 +92,8 @@ $logo = get_field('logo', 'option');
                         }
                     </style>
                     <span class="expertise-number <?= $color; ?>-color">0<?= $i + 1; ?></span>
-                    <h3 id="expertise-title-<?= $i; ?>" class="expertise-title <?= $color; ?>-color"><?= $item['title']; ?></h3>
-                    <p class="expertise-text"><?= $item['text']; ?></p>
+                    <h3 id="expertise-title-<?= $i; ?>" class="expertise-title <?= $color; ?>-color"><?= $item->name; ?></h3>
+                    <p class="expertise-text"><?= $item->description; ?></p>
                 </div>
             <?php $i++;
             endforeach; ?>

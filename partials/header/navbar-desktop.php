@@ -25,8 +25,8 @@ $menu_items = \Theme_base\Base::wp_get_menu_array($theme_location);
                         'hide_empty' => false,
                     ));
                     ?>
-                    <ul class="dropdown-menu">
-                        <div>
+                    <div class="dropdown-menu">
+                        <ul>
                             <?php foreach ($expertises as $item): ?>
                                 <?php
                                 $image = get_field('image', $item);
@@ -39,14 +39,14 @@ $menu_items = \Theme_base\Base::wp_get_menu_array($theme_location);
                                     </div>
                                     <div class="flex-between">
                                         <a class="<?= $color; ?>-color" href="<?= home_url(); ?>#expertise-<?= sanitize_title($item->name); ?>""><?= $item->name ?></a>
-                        <div class=" svg-container svg-<?= $color; ?>-color">
+                                        <div class=" svg-container svg-<?= $color; ?>-color">
                                             <?= file_get_contents(get_template_directory() . '/assets/images/arrow-up-right-bold.svg'); ?>
                                     </div>
-                        </div>
+                    </div>
                 </li>
             <?php endforeach; ?>
-            </div>
         </ul>
+        </div>
         </li>
     <?php endif; ?>
     <?php foreach ($menu_items as $item): ?>

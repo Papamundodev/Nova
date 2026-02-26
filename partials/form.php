@@ -49,8 +49,9 @@
         </div>
         
         <!-- Honeypot anti-spam -->
-        <div style="position: absolute; left: -9999px;">
-            <input type="text" name="cf_honeypot" tabindex="-1" autocomplete="off">
+        <div style="position: absolute; left: -9999px;" aria-hidden="true">
+            <label for="cf_honeypot" class="visually-hidden">Ne pas remplir ce champ</label>
+            <input type="text" name="cf_honeypot" id="cf_honeypot" tabindex="-1" autocomplete="off" aria-hidden="true">
         </div>
         
         <div class="button-background-primary button-background-animation form-submit">

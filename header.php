@@ -6,6 +6,8 @@
     <title><?php wp_title('|', true, 'right'); ?></title>
     <meta name="description" content="<?= \Theme_base\Base::get_meta_description() ?>">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preload" href="<?= get_template_directory_uri(); ?>/assets/fonts/Coda.ttf" as="font" type="font/ttf" crossorigin>
+    <link rel="preload" href="<?= get_template_directory_uri(); ?>/assets/fonts/RussoOne.ttf" as="font" type="font/ttf" crossorigin>
     <?php wp_head(); ?>
 </head>
 

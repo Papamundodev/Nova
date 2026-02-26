@@ -49,6 +49,8 @@ class Base
             add_image_size('tablet', 768, '', true); // Pour les tablettes
             add_image_size('medium', 992, '', true); // Medium 
             add_image_size('large', 1200, '', true); // Large 
+            add_image_size('team_member', 500, 500, true);   // Team cards (displayed 500×500)
+            add_image_size('layout_img', 700, 700, false);   // our_values, portfolio (max 700px)
 
         }, 99);
     }

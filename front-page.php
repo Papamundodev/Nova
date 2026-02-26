@@ -49,7 +49,7 @@ $logo = get_field('logo', 'option');
         $our_values = get_field('our_values', $object);
         ?>
         <div class="layout-img">
-            <img src="<?= $our_values['image']['url']; ?>" alt="<?= $our_values['image']['alt']; ?>">
+            <img src="<?= $our_values['image']['sizes']['layout_img'] ?? $our_values['image']['url']; ?>" alt="<?= esc_attr($our_values['image']['alt']); ?>" fetchpriority="high">
         </div>
         <div class="layout-content">
             <div>
@@ -106,7 +106,7 @@ $logo = get_field('logo', 'option');
         ?>
         <div class="review">
             <div class="layout-img">
-                <img src="<?= $section_portfolio['image']['url']; ?>" alt="<?= $section_portfolio['image']['alt']; ?>">
+                <img src="<?= $section_portfolio['image']['sizes']['layout_img'] ?? $section_portfolio['image']['url']; ?>" alt="<?= esc_attr($section_portfolio['image']['alt']); ?>" loading="lazy">
             </div>
             <div class="layout-content review-content">
                 <div>
@@ -133,7 +133,7 @@ $logo = get_field('logo', 'option');
                 <?php foreach ($team as $item) : ?>
                     <div class="team-member card">
                         <a href="<?= home_url('/about/#member-' . sanitize_title($item['title'])); ?>">
-                            <img src="<?= $item['image']['url']; ?>" class="team-member-picture" alt="<?= $item['image']['alt']; ?>">
+                            <img src="<?= $item['image']['sizes']['team_member'] ?? $item['image']['url']; ?>" class="team-member-picture" alt="<?= esc_attr($item['image']['alt']); ?>" loading="lazy">
                         </a>
                         <h3><?= $item['title']; ?></h3>
                         <p><?= $item['text']; ?></p>

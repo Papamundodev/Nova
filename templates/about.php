@@ -50,7 +50,7 @@ $content = wpautop($object->post_content);
             <div class="container">
                 <?php foreach ($advantages['value'] as $item) : ?>
                     <div class="advantage-item">
-                        <img src="<?= $item['image']['url']; ?>" alt="<?= $item['image']['alt']; ?>">
+                        <img src="<?= $item['image']['sizes']['layout_img'] ?? $item['image']['url']; ?>" alt="<?= esc_attr($item['image']['alt']); ?>" loading="lazy">
                         <h3><?= $item['title']; ?></h3>
                         <div> <?= wpautop($item['text']); ?></div>
                     </div>
@@ -68,7 +68,7 @@ $content = wpautop($object->post_content);
             <h2 id="section-our_team-title" class="section-title"><?= $section_team_title; ?></h2>
             <?php foreach ($team as $item) : ?>
                 <div id="member-<?= sanitize_title($item['title']); ?>" class="our-team-member">
-                    <img src="<?= $item['image']['url']; ?>" class="team-member-picture" alt="<?= $item['image']['alt']; ?>">
+                    <img src="<?= $item['image']['sizes']['team_member'] ?? $item['image']['url']; ?>" class="team-member-picture" alt="<?= esc_attr($item['image']['alt']); ?>" loading="lazy">
                     <div>
                         <h3><?= $item['title']; ?></h3>
                         <div><?= wpautop($item['long_text']); ?></div>
@@ -109,7 +109,7 @@ $content = wpautop($object->post_content);
             <div class="our-values-container">
                 <?php foreach ($our_values['value'] as $item) : ?>
                     <div>
-                        <img src="<?= $item['image']['url']; ?>" alt="<?= $item['image']['alt']; ?>">
+                        <img src="<?= $item['image']['sizes']['layout_img'] ?? $item['image']['url']; ?>" alt="<?= esc_attr($item['image']['alt']); ?>" loading="lazy">
                         <h3><?= $item['title']; ?></h3>
                         <p><?= $item['text']; ?></p>
                     </div>

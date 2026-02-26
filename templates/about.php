@@ -71,7 +71,7 @@ $content = wpautop($object->post_content);
                     <img src="<?= $item['image']['sizes']['team_member'] ?? $item['image']['url']; ?>" class="team-member-picture" alt="<?= esc_attr($item['image']['alt']); ?>" loading="lazy">
                     <div>
                         <h3><?= $item['title']; ?></h3>
-                        <div><?= wpautop($item['long_text']); ?></div>
+                        <div class="content-wysiwyg"><?= wpautop($item['long_text']); ?></div>
                         <div class="social-container">
                             <?php
                             $malt = $item['malt'];

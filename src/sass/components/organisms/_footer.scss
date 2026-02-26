@@ -203,6 +203,17 @@ footer {
       gap: 0;
     }
   }
+  .wrapper-navbar-policy {
+    display: flex;
+    flex-direction: column;
+    gap: $spacer-lg;
+    @media (width >= $breakpoint-lg) {
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0;
+    }
+  }
 }
 
 @media (width <= $breakpoint-lg) {

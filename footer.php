@@ -42,7 +42,6 @@
                     'post_status' => 'publish',
                     'posts_per_page' => -1,
                     'orderby' => 'date',
-                    'order' => 'DESC',
                 );
                 if (!empty($tax_query)) {
                     $args['tax_query'] = $tax_query;
@@ -120,8 +119,11 @@
                 <div class="wrapper-navbar">
                     <?php get_template_part('partials/header/navbar-desktop', null, ['theme_location' => 'footer']); ?>
                 </div>
-                <div class="wrapper-navbar footer-logo">
-                    <p>@ <?= date('Y'); ?> </p>
+                <div class="wrapper-navbar-policy">
+                    <?php get_template_part('partials/header/navbar-desktop', null, ['theme_location' => 'policy']); ?>
+                    <div class="wrapper-navbar footer-logo">
+                        <p>@ <?= date('Y'); ?> </p>
+                    </div>
                 </div>
             </div>
         </section>

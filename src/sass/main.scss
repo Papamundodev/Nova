@@ -61,6 +61,9 @@ body {
     margin-block-end: $spacer-lg;
     @include text-paragraph-1;
   }
+  strong {
+    font-weight: $font-weight-700;
+  }
 
   ul,
   ol {

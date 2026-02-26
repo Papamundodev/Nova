@@ -25,8 +25,10 @@
   }
 }
 
-.nav-item {
-  .nav-link {
+.nav-item,
+.footer-logo {
+  .nav-link,
+  p {
     @include text-nav;
     text-decoration: none;
     color: $default-color;

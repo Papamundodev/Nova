@@ -7,6 +7,7 @@ $menu_items = \Theme_base\Base::wp_get_menu_array($theme_location);
 ?>
 
 
+
 <?php if (is_array($menu_items) && count($menu_items) > 0): ?>
     <nav id="navmenu-<?= $theme_location ?>" class="navmenu navmenu-desktop">
         <ul class="">
@@ -38,20 +39,22 @@ $menu_items = \Theme_base\Base::wp_get_menu_array($theme_location);
                                         <div class=" svg-container svg-<?= $color; ?>-color">
                                             <?= file_get_contents(get_template_directory() . '/assets/images/arrow-up-right-bold.svg'); ?>
                                     </div>
-                                </li>
-                            <? endforeach; ?>
-                        </ul>
                     </div>
                 </li>
-            <?php endif; ?>
-            <?php foreach ($menu_items as $item): ?>
-                <li class="<?= \Theme_base\Base::get_active_class($item) ?> <?= \Theme_base\Base::get_parent_active_class($item, $object) ?> nav-item">
-                    <a class="nav-link"
-                        href="<?= $item['url'] ?>"
-                        target="<?= $item['target'] ?>"
-                        rel="<?= $item['target'] === '_blank' ? 'noopener' : '' ?>"><?= $item['title'] ?></a>
-                </li>
             <?php endforeach; ?>
+            </li>
         </ul>
+        </div>
+        </li>
+    <?php endif; ?>
+    <?php foreach ($menu_items as $item): ?>
+        <li class="<?= \Theme_base\Base::get_active_class($item) ?> <?= \Theme_base\Base::get_parent_active_class($item, $object) ?> nav-item">
+            <a class="nav-link"
+                href="<?= $item['url'] ?>"
+                target="<?= $item['target'] ?>"
+                rel="<?= $item['target'] === '_blank' ? 'noopener' : '' ?>"><?= $item['title'] ?></a>
+        </li>
+    <?php endforeach; ?>
+    </ul>
     </nav>
 <?php endif; ?>

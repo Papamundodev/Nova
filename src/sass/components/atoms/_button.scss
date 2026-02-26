@@ -121,6 +121,7 @@
     grid-template-columns: 1fr auto;
     align-items: end;
     display: inline-block;
+    transition: border-color 0.3s ease-in-out;
     svg {
       width: var(--font-size-xs);
       height: var(--font-size-xs);
@@ -155,6 +156,27 @@
 .button-background-secondary-icon {
   @include button-background-secondary;
   @include button-icon-container;
+  &:hover {
+    background-color: $white-color;
+    transition: background-color 0.3s ease-in-out;
+    a {
+      border-color: $white-color;
+      transition: border-color 0.3s ease-in-out;
+    }
+    span {
+      transition: color 0.3s ease-in-out;
+      color: $secondary-color;
+    }
+    svg {
+      path {
+        stroke: $secondary-color;
+        fill: $secondary-color;
+        transition:
+          stroke 0.3s ease-in-out,
+          fill 0.3s ease-in-out;
+      }
+    }
+  }
 }
 
 @keyframes arrow-animation-up {
@@ -234,11 +256,11 @@
   &:hover {
     background-color: $primary-color;
     .hover-bg {
-      background-color: $secondary-color;
+      background-color: $button-primary-hover-color;
     }
   }
   .hover-bg {
-    background-color: $secondary-color;
+    background-color: $button-primary-hover-color;
   }
 }
 

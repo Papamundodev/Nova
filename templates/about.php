@@ -42,7 +42,7 @@ $content = wpautop($object->post_content);
         ?>
         <div class="container">
             <h2 id="section-our_values-title"><?= $advantages['title']; ?></h2>
-            <div class="text-container">
+            <div class="text-container content-wysiwyg">
                 <?= wpautop($advantages['text']); ?>
             </div>
         </div>
@@ -52,7 +52,7 @@ $content = wpautop($object->post_content);
                     <div class="advantage-item">
                         <img src="<?= $item['image']['sizes']['layout_img'] ?? $item['image']['url']; ?>" alt="<?= esc_attr($item['image']['alt']); ?>" loading="lazy">
                         <h3><?= $item['title']; ?></h3>
-                        <div> <?= wpautop($item['text']); ?></div>
+                        <div><?= wpautop($item['text']); ?></div>
                     </div>
                 <?php endforeach; ?>
             </div>

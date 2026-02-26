@@ -65,15 +65,12 @@ $logo = get_field('logo', 'option');
 
     <section aria-labelledby="section-expertise-title" class="section-expertise container">
         <?php
-        $expertises = get_terms(array(
-            'taxonomy'   => 'expertises',
-            'hide_empty' => false,
-        ));
+        $expertises = get_field('expertises', "option");
         ?>
-        <h2 id="section-expertise-title" class="section-title"><?= __('Nos expertises en communication digitale', 'theme_base') ?></h2>
+        <h2 id="section-expertise-title" class="section-title"><?= $expertises['title']; ?></h2>
         <div class="expertise-container">
             <?php $i = 0;
-            foreach ($expertises as $item) : ?>
+            foreach ($expertises['expertises_list'] as $item) : ?>
                 <?php
                 $color = get_field('color', $item);
                 $term_link = get_term_link($item);

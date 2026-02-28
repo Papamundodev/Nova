@@ -60,17 +60,6 @@
   navigation: auto;
 }
 
-header {
-  view-transition-name: header;
-}
-
-.team-member-picture {
-  view-transition-name: team-member;
-  animation-duration: 1s;
-  animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  animation-name: fade-in;
-}
-
 .animation-moving {
   @media (width <= $breakpoint-sm) {
     display: none;

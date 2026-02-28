@@ -238,7 +238,8 @@
   }
 }
 
-.dark-theme {
+.dark-theme,
+.dark-theme-transition {
   .button-background-white {
     &:hover {
       .hover-bg {

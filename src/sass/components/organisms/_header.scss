@@ -1,4 +1,5 @@
 @use "../../design-tokens/_colors" as *;
+@use "../../design-tokens/_tokens" as *;
 @use "../../utilities/_container-wrapper" as *;
 @use "../../components/atoms/burger" as *;
 @use "../../design-tokens/_fonts" as *;
@@ -14,6 +15,9 @@
   .button-container {
     position: relative;
     z-index: 100;
+  }
+  .img-container-logo-sm {
+    width: 100px;
   }
 }
 
@@ -34,6 +38,9 @@
 }
 
 /* ----- NAVBAR MOBILE ----- */
+body:has(.navmenu-mobile:popover-open) {
+  overflow: hidden;
+}
 
 @media (width <= $breakpoint-lg) {
   .header {
@@ -49,28 +56,32 @@
   .navmenu-mobile {
     background-color: $background-color;
     position: fixed;
-    top: 70px;
-    right: auto;
-    width: 100vw;
-    height: 100%;
-    margin: 0;
+    inset: 0;
     opacity: 0;
+    width: fit-content;
     display: none;
     transition:
-      display 0.5s,
-      opacity 0.5s;
-    transition-behavior: allow-discrete;
-    animation: fade-out 0.3s ease-out;
+      display 0.3s ease-out,
+      opacity 0.3s ease-out;
+    animation: fade-in 0.3s ease-out;
+    z-index: 50;
+    overflow: auto;
+    height: 100vh;
+    padding-block-start: $spacer-xl;
     .nav-menu-item,
     .megamenu-services-button {
       margin-block-end: $spacer-vi-md;
     }
   }
 
-  #navmenu-header-mobile:popover-open {
-    opacity: 1;
-    display: flex;
-    animation: fade-in 0.3s ease-out;
+  @media (width <=$breakpoint-xl) {
+    #navmenu-header-mobile:popover-open {
+      opacity: 1;
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      animation: fade-in 0.3s ease-out;
+    }
   }
 }
 
@@ -86,7 +97,34 @@
   }
 }
 
-.navmenu-mobile {
+#navmenu-header-mobile {
+  .section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    margin-block-end: $spacer-xxl;
+
+    .btn {
+      width: $icon-sm;
+      height: $icon-sm;
+      min-width: $icon-sm;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+
+      svg {
+        width: 100%;
+        height: 100%;
+
+        path {
+          fill: $primary-color;
+          stroke: $primary-color;
+        }
+      }
+    }
+  }
   & > ul {
     display: flex;
     width: 100%;

@@ -25,9 +25,30 @@
   }
 }
 
-.nav-item,
+.nav-item {
+  .nav-link {
+    @include text-nav;
+    text-decoration: none;
+    color: $default-color;
+    padding-inline: $spacer-vi-lg;
+    padding-block: $spacer-xs;
+    transition: background-color 0.2s ease-in-out;
+  }
+  &:hover .nav-link {
+    transition: background-color 0.2s ease-in-out;
+    background-color: $gray-color;
+  }
+  &.active .nav-link {
+    background-color: initial;
+    text-decoration: underline;
+    text-underline-offset: $spacer-xs;
+    text-decoration-thickness: 2px;
+    text-decoration-color: $primary-color;
+    color: $primary-color;
+  }
+}
+
 .footer-logo {
-  .nav-link,
   p {
     @include text-nav;
     text-decoration: none;

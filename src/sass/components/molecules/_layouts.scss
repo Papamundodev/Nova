@@ -43,7 +43,6 @@
   .layout-content {
     & > div:first-child {
       margin-inline: auto;
-      max-width: 30ch;
       @media (width >= $breakpoint-lg) {
         max-width: 75ch;
       }

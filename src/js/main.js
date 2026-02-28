@@ -9,7 +9,13 @@ document.addEventListener("DOMContentLoaded", () => {
   popover.addEventListener("toggle", (event) => {
     if (event.newState === "closed") {
       burger.classList.remove("open");
-    } 
+    }
+  });
+
+  popover.addEventListener("click", (e) => {
+    if (e.target.closest("a")) {
+      popover.hidePopover();
+    }
   });
 
 

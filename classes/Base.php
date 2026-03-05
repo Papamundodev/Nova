@@ -1,11 +1,11 @@
 <?php
 
 namespace Theme_base;
-    
+
 class Base
 {
     private string $theme_name;
-    private string $theme_slug; 
+    private string $theme_slug;
 
     public function __construct(string $theme_name, string $theme_slug)
     {
@@ -13,14 +13,14 @@ class Base
         $this->theme_slug = $theme_slug;
     }
 
-    public function includeStyles() : void
+    public function includeStyles(): void
     {
         add_action('wp_enqueue_scripts', function () {
             wp_enqueue_style('main', get_template_directory_uri() . '/assets/css/main.css', [], null);
         });
-    }   
+    }
 
-    public function includeScripts() : void
+    public function includeScripts(): void
     {
         add_action('wp_enqueue_scripts', function () {
             wp_register_script('main', get_template_directory_uri() . '/assets/js/main.js', [], null, true);
@@ -28,7 +28,7 @@ class Base
         });
     }
 
-    public function themeSupports() : void
+    public function themeSupports(): void
     {
         add_action('after_setup_theme', function () {
             // Menus
@@ -55,7 +55,7 @@ class Base
         }, 99);
     }
 
-    public function registerMenus() : void
+    public function registerMenus(): void
     {
         register_nav_menus([
             'header' => __('Header', 'theme_base'),
@@ -64,7 +64,7 @@ class Base
         ]);
     }
 
-    public function allowSVGUploads() :void
+    public function allowSVGUploads(): void
     {
         add_action('init', function () {
 
@@ -82,12 +82,10 @@ class Base
                     'proper_filename' => $data['proper_filename']
                 ];
             }, 10, 4);
-
         });
-
     }
 
-    public function addSVGSupport() :void
+    public function addSVGSupport(): void
     {
         add_action('init', function () {
 
@@ -96,29 +94,29 @@ class Base
 
                 return $mimes;
             });
-
         });
-
     }
 
 
-    public static function get_meta_description(){
-        if (is_category()){
+    public static function get_meta_description()
+    {
+        if (is_category()) {
             return get_queried_object()->description;
-        }elseif(is_page() || is_single()){
+        } elseif (is_page() || is_single()) {
             return get_the_excerpt();
-        }else{
+        } else {
             return bloginfo('description');
         }
     }
 
-    public static function get_breadcrumbs(){
+    public static function get_breadcrumbs()
+    {
         $links = array();
         $cats = get_the_category();
-        if ( ! empty( $cats ) ) {
+        if (! empty($cats)) {
             foreach ($cats as $cat) {
                 $cat_link = array(
-                    'url' => get_category_link( $cat->term_id ),
+                    'url' => get_category_link($cat->term_id),
                     'text' => $cat->name
                 );
                 array_push($links, $cat_link);
@@ -138,8 +136,8 @@ class Base
      *
      * @param string|null $location The menu location id
      */
-    public static function  wp_get_menu_array(?string $location = null, $args = []) : array
-    {   
+    public static function  wp_get_menu_array(?string $location = null, $args = []): array
+    {
         // Get all locations
         $locations = get_nav_menu_locations();
 
@@ -150,13 +148,13 @@ class Base
         // Get object id by location
         $object = wp_get_nav_menu_object($locations[$location]);
         // Get menu items by menu name
-        $menu_items = wp_get_nav_menu_items($object->name, array( 'update_post_term_cache' => false ));
-        _wp_menu_item_classes_by_context( $menu_items );
+        $menu_items = wp_get_nav_menu_items($object->name, array('update_post_term_cache' => false));
+        _wp_menu_item_classes_by_context($menu_items);
         // Return menu post objects
         $menu = [];
 
         foreach ($menu_items as $k => $m) {
-       
+
             if (empty($m->menu_item_parent)) {
                 $menu[$m->ID] = [];
                 $menu[$m->ID]['ID'] = intval($m->ID);
@@ -164,21 +162,18 @@ class Base
                 $menu[$m->ID]['classes'] = $m->classes;
                 $menu[$m->ID]['url'] = $m->url;
                 $menu[$m->ID]['object_id'] = intval($m->object_id);
-                if($m->type === 'post_type'){
+                if ($m->type === 'post_type') {
                     $object = get_post($m->object_id);
-                }elseif($m->type === 'taxonomy'){
+                } elseif ($m->type === 'taxonomy') {
                     $object = get_term($m->object_id);
                 }
                 $menu[$m->ID]['object'] = $object;
                 $menu[$m->ID]['target'] = $m->target;
                 unset($menu_items[$k]);
                 $menu[$m->ID]['children'] = self::populate_children($menu_items, $m);
-
-                    
             }
         }
         return $menu;
-
     }
 
     /**
@@ -186,7 +181,7 @@ class Base
      *
      */
 
-    public static function populate_children( array $menu_array = null, \WP_Post $menu_item = null) : array
+    public static function populate_children(array $menu_array = null, \WP_Post $menu_item = null): array
     {
         $children = [];
         if (!empty($menu_array)) {
@@ -214,9 +209,9 @@ class Base
         return $children;
     }
 
-    public static function get_active_class($item) : string
+    public static function get_active_class($item): string
     {
-        if(in_array('current-menu-item', $item['classes'] ?? [])){
+        if (in_array('current-menu-item', $item['classes'] ?? [])) {
             return 'active';
         }
         return '';
@@ -227,7 +222,7 @@ class Base
      * @param mixed $object The object to check
      * @return string 'post'|'term'|'unknown'
      */
-    public static function get_object_type($object) : string
+    public static function get_object_type($object): string
     {
         if ($object instanceof \WP_Post) {
             return 'post';
@@ -244,16 +239,16 @@ class Base
      * @param int $page_for_posts ID of the posts page
      * @return string Active class if conditions are met
      */
-    public static function get_parent_active_class($item, $object) : string
+    public static function get_parent_active_class($item, $object): string
     {
         $active_class = '';
         $page_for_posts = get_option('page_for_posts');
-        if(self::get_object_type($item['object']) === 'post' && $object && $object->post_type === 'post'){
-            if($item['object']->ID === intval($page_for_posts)){
+        if (self::get_object_type($item['object']) === 'post' && $object && $object->post_type === 'post') {
+            if ($item['object']->ID === intval($page_for_posts)) {
                 $active_class = 'active';
             }
-        }elseif(self::get_object_type($item['object']) === 'term' && $object){
-            if($item['object']->term_id === intval($object->parent)){
+        } elseif (self::get_object_type($item['object']) === 'term' && $object) {
+            if ($item['object']->term_id === intval($object->parent)) {
                 $active_class = 'active';
             }
         }
@@ -266,7 +261,7 @@ class Base
      * search
      *
      */
-    public function registerWidgets() :void
+    public function registerWidgets(): void
     {
         add_action('widgets_init', function () {
 
@@ -279,27 +274,27 @@ class Base
      * @return void
      * add widget for language selector if wpml is active
      */
-    public function sidebar_widgets_language_selector_init() : void
+    public function sidebar_widgets_language_selector_init(): void
     {
-        add_action( 'widgets_init',  function(){
-            register_sidebar( array(
+        add_action('widgets_init',  function () {
+            register_sidebar(array(
                 'name'          => 'language_selector_theme_base',
                 'id'            => 'language_selector',
                 'before_widget' => '<ul class="language-selector">',
                 'after_widget'  => '</ul>',
                 'before_title'  => '<li>',
                 'after_title'   => '</li>',
-            ) );
+            ));
         });
     }
-    
+
 
     /**
      * Calcule le temps de lecture estimé d'un contenu
      * @param string $content Le contenu du post
      * @return string Le temps de lecture formaté
      */
-    public static function get_reading_time(string $content = '') : string 
+    public static function get_reading_time(string $content = ''): string
     {
         // Si pas de contenu, utiliser le contenu du post courant
         if (empty($content)) {
@@ -308,14 +303,14 @@ class Base
 
         // Nettoyer le contenu des balises HTML
         $clean_content = strip_tags($content);
-        
+
         // Nombre de caractères par minute (vitesse moyenne de lecture)
         $chars_per_minute = 1500;
-        
+
         // Calculer le temps en minutes
         $chars_count = strlen($clean_content);
         $minutes = ceil($chars_count / $chars_per_minute);
-        
+
         // Formater le résultat
         if ($minutes <= 1) {
             return __('1 min read', 'theme_base');
@@ -324,4 +319,255 @@ class Base
         }
     }
 
+    /**
+     * Get schema.org JSON-LD for homepage
+     * @return string JSON-LD script or empty string
+     */
+    public static function get_homepage_schema(): string
+    {
+        if (!is_front_page()) {
+            return '';
+        }
+
+        $logo = get_field('logo_landscape', 'option');
+        $logo_url = is_array($logo) ? ($logo['url'] ?? '') : '';
+        $schema = [
+            '@context' => 'https://schema.org',
+            '@graph'   => [
+                [
+                    '@type'           => 'WebSite',
+                    '@id'             => home_url('/#website'),
+                    'url'             => home_url(),
+                    'name'            => get_bloginfo('name'),
+                    'description'     => get_bloginfo('description'),
+                ],
+                [
+                    '@type'       => 'WebPage',
+                    '@id'         => home_url('/#webpage'),
+                    'url'         => home_url(),
+                    'name'        => get_bloginfo('name') . ' - ' . get_bloginfo('description'),
+                    'description' => Base::get_meta_description(),
+                ],
+            ],
+        ];
+
+        return '<script type="application/ld+json">' . wp_json_encode($schema) . '</script>';
+    }
+
+    /**
+     * Make PageSpeed Insights API call for a single category
+     * @param string $websiteUrl The URL to analyze
+     * @param string $category Category name: performance, accessibility, best-practices, seo
+     * @return array|null Decoded JSON response or null on failure
+     */
+    private static function makePageSpeedApiCall(string $websiteUrl, string $category): ?array
+    {
+        $apiEndpoint = 'https://www.googleapis.com/pagespeedonline/v5/runPagespeed';
+        $args = [
+            'url' => $websiteUrl,
+            'strategy' => 'mobile',
+            'category' => $category,
+        ];
+
+        $cle_api_pagespeed = get_field('cle_api_pagespeed', 'option');
+        if ($cle_api_pagespeed) {
+            $args['key'] = $cle_api_pagespeed;
+        }
+
+        $url = add_query_arg($args, $apiEndpoint);
+        $response = wp_remote_get($url, ['timeout' => 120]);
+
+        if (is_wp_error($response) || wp_remote_retrieve_response_code($response) !== 200) {
+            return null;
+        }
+
+        $body = wp_remote_retrieve_body($response);
+        $decoded = json_decode($body, true);
+
+        if (json_last_error() !== JSON_ERROR_NONE) {
+            return null;
+        }
+
+        return $decoded;
+    }
+
+    /**
+     * Make PageSpeed API call for all 4 categories in one request
+     * @param string $websiteUrl The URL to analyze
+     * @return array|null ['performance' => int, 'accessibility' => int, ...] or null on failure
+     */
+    private static function makePageSpeedApiCallAllCategories(string $websiteUrl): ?array
+    {
+        $apiEndpoint = 'https://www.googleapis.com/pagespeedonline/v5/runPagespeed';
+        $args = [
+            'url' => $websiteUrl,
+            'strategy' => 'mobile',
+        ];
+
+        $cle_api_pagespeed = get_field('cle_api_pagespeed', 'option');
+        if ($cle_api_pagespeed) {
+            $args['key'] = $cle_api_pagespeed;
+        }
+
+        $url = add_query_arg($args, $apiEndpoint);
+        $categories = ['performance', 'accessibility', 'best-practices', 'seo'];
+        $categoryParams = implode('&', array_map(function ($c) {
+            return 'category=' . urlencode($c);
+        }, $categories));
+        $url .= (strpos($url, '?') !== false ? '&' : '?') . $categoryParams;
+
+        $response = wp_remote_get($url, ['timeout' => 120]);
+
+        if (is_wp_error($response) || wp_remote_retrieve_response_code($response) !== 200) {
+            return null;
+        }
+
+        $body = wp_remote_retrieve_body($response);
+        $decoded = json_decode($body, true);
+
+        if (json_last_error() !== JSON_ERROR_NONE) {
+            return null;
+        }
+
+        $categoriesData = $decoded['lighthouseResult']['categories'] ?? null;
+        if ($categoriesData === null) {
+            return null;
+        }
+
+        $scores = [];
+        foreach ($categories as $cat) {
+            $score = $categoriesData[$cat]['score'] ?? null;
+            $scores[$cat] = ($score !== null && is_numeric($score)) ? (int) round((float) $score * 100) : null;
+        }
+
+        return $scores;
+    }
+
+    /**
+     * Cron callback: fetch all PageSpeed scores and store in options
+     */
+    public static function runPageSpeedCron(): void
+    {
+        if (get_template() !== 'theme_base_vite') {
+            return;
+        }
+
+        $url = home_url('/');
+        $scores = self::makePageSpeedApiCallAllCategories($url);
+
+        if ($scores === null) {
+            return;
+        }
+
+        $data = array_merge($scores, [
+            'last_updated' => current_time('mysql'),
+        ]);
+
+        update_option('pagespeed_scores', $data);
+    }
+
+    /**
+     * Get cached PageSpeed score from options (populated by weekly cron)
+     * @param string $category performance, accessibility, best-practices, seo
+     * @return int|null Score 0-100 or null if not cached
+     */
+    public static function getPageSpeedCachedScore(string $category): ?int
+    {
+        $data = get_option('pagespeed_scores', []);
+        if (!is_array($data) || !isset($data[$category])) {
+            return null;
+        }
+        $score = $data[$category];
+        return is_numeric($score) ? (int) $score : null;
+    }
+
+    /**
+     * Get PageSpeed score by category. Routes to the specific category function.
+     * @param string $websiteUrl URL to analyze
+     * @param string $category performance, accessibility, best-practices, seo
+     * @return int|null Score 0-100 or null on error
+     */
+    public static function getPageSpeedStats(string $websiteUrl, string $category): ?int
+    {
+        switch ($category) {
+            case 'performance':
+                return self::getPageSpeedPerformanceScore($websiteUrl);
+            case 'accessibility':
+                return self::getPageSpeedAccessibilityScore($websiteUrl);
+            case 'best-practices':
+                return self::getPageSpeedBestPracticesScore($websiteUrl);
+            case 'seo':
+                return self::getPageSpeedSeoScore($websiteUrl);
+            default:
+                return null;
+        }
+    }
+
+    /**
+     * Get PageSpeed Performance score (0-100)
+     * Handles API response and error checking
+     */
+    public static function getPageSpeedPerformanceScore(string $websiteUrl): ?int
+    {
+        $result = self::makePageSpeedApiCall($websiteUrl, 'performance');
+        if ($result === null) {
+            return null;
+        }
+        $score = $result['lighthouseResult']['categories']['performance']['score'] ?? null;
+        if ($score === null || !is_numeric($score)) {
+            return null;
+        }
+        return (int) round((float) $score * 100);
+    }
+
+    /**
+     * Get PageSpeed Accessibility score (0-100)
+     * Handles API response and error checking
+     */
+    public static function getPageSpeedAccessibilityScore(string $websiteUrl): ?int
+    {
+        $result = self::makePageSpeedApiCall($websiteUrl, 'accessibility');
+        if ($result === null) {
+            return null;
+        }
+        $score = $result['lighthouseResult']['categories']['accessibility']['score'] ?? null;
+        if ($score === null || !is_numeric($score)) {
+            return null;
+        }
+        return (int) round((float) $score * 100);
+    }
+
+    /**
+     * Get PageSpeed Best Practices score (0-100)
+     * Handles API response and error checking
+     */
+    public static function getPageSpeedBestPracticesScore(string $websiteUrl): ?int
+    {
+        $result = self::makePageSpeedApiCall($websiteUrl, 'best-practices');
+        if ($result === null) {
+            return null;
+        }
+        $score = $result['lighthouseResult']['categories']['best-practices']['score'] ?? null;
+        if ($score === null || !is_numeric($score)) {
+            return null;
+        }
+        return (int) round((float) $score * 100);
+    }
+
+    /**
+     * Get PageSpeed SEO score (0-100)
+     * Handles API response and error checking
+     */
+    public static function getPageSpeedSeoScore(string $websiteUrl): ?int
+    {
+        $result = self::makePageSpeedApiCall($websiteUrl, 'seo');
+        if ($result === null) {
+            return null;
+        }
+        $score = $result['lighthouseResult']['categories']['seo']['score'] ?? null;
+        if ($score === null || !is_numeric($score)) {
+            return null;
+        }
+        return (int) round((float) $score * 100);
+    }
 }

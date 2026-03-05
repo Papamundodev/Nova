@@ -138,12 +138,10 @@
 
 <script>
     (function() {
-        // Nettoyer l'URL après affichage des messages de formulaire
         const urlParams = new URLSearchParams(window.location.search);
         const hasFormParams = urlParams.has('form_success') || urlParams.has('form_error') || urlParams.has('form_errors');
 
         if (hasFormParams) {
-            // Nettoyer l'URL sans recharger la page après un court délai
             setTimeout(function() {
                 const cleanUrl = window.location.pathname;
                 window.history.replaceState({}, document.title, cleanUrl);

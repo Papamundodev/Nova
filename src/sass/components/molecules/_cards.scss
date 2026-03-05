@@ -15,54 +15,37 @@
 }
 
 @mixin blog-card {
-  display: flex;
-  flex-direction: column;
-  margin-inline: auto;
-  max-width: 400px;
+  display: grid;
+  grid-template-columns: 450px;
+  grid-template-rows: 450px 1fr 1fr;
+  max-width: 450px;
   @media (width >= $breakpoint-xl) {
     max-width: 100%;
   }
   h3 {
     @include heading-medium-1;
   }
-  img {
+  img.team-member-picture {
     object-fit: cover;
-    aspect-ratio: 1/1;
-    width: 500px;
-    transition: transform 0.3s ease-in-out;
+    width: 450px;
+    height: 450px;
+    max-width: none;
+    scale: 1;
   }
   a {
+    width: 450px;
+    height: 450px;
     position: relative;
     overflow: hidden;
-    transition: transform 0.5s ease;
-    transform: scale(0.975);
+    display: block;
+    transition: scale 0.3s ease;
+
     &:hover {
-      transform: scale(1);
-      transition: transform 0.5s ease;
-    }
-    &:hover::before {
-      opacity: 1;
-      transform: rotate(-45deg) translateY(100%);
-    }
-    &::before {
-      content: "";
-      position: absolute;
-      top: -50%;
-      left: -50%;
-      width: 200%;
-      height: 200%;
-      background: linear-gradient(
-        0deg,
-        transparent,
-        transparent 30%,
-        color-mix(in srgb, $primary-color 50%, transparent)
-      );
-      transform: rotate(-45deg);
-      transition: all 0.5s ease;
-      opacity: 0;
-      z-index: 10;
+      scale: 1.05;
+      transition: scale 0.3s ease;
     }
   }
+
   .cat-container {
     span {
       a {

@@ -31,9 +31,6 @@ add_action('template_redirect', function () {
 add_action('theme_base_pagespeed_weekly', [Base::class, 'runPageSpeedCron']);
 
 add_action('init', function () {
-    if (get_template() !== 'theme_base_vite') {
-        return;
-    }
     if (wp_next_scheduled('theme_base_pagespeed_weekly')) {
         return;
     }

@@ -375,7 +375,7 @@ class Base
         }
 
         $url = add_query_arg($args, $apiEndpoint);
-        $response = wp_remote_get($url, ['timeout' => 120]);
+        $response = wp_remote_get($url, ['timeout' => 6000]);
 
         if (is_wp_error($response) || wp_remote_retrieve_response_code($response) !== 200) {
             return null;
@@ -389,6 +389,15 @@ class Base
         }
 
         return $decoded;
+    }
+
+    /**
+     * Store PageSpeed debug info for troubleshooting
+     */
+    private static function setPageSpeedDebug(array $debug): void
+    {
+        $debug['timestamp'] = current_time('mysql');
+        update_option('pagespeed_scores_debug', $debug);
     }
 
     /**
@@ -418,7 +427,26 @@ class Base
 
         $response = wp_remote_get($url, ['timeout' => 120]);
 
-        if (is_wp_error($response) || wp_remote_retrieve_response_code($response) !== 200) {
+        if (is_wp_error($response)) {
+            self::setPageSpeedDebug([
+                'step' => 'wp_remote_get',
+                'error' => 'WP_Error: ' . $response->get_error_message(),
+                'url_analyzed' => $websiteUrl,
+                'api_url' => $url,
+            ]);
+            return null;
+        }
+
+        $responseCode = wp_remote_retrieve_response_code($response);
+        if ($responseCode !== 200) {
+            $body = wp_remote_retrieve_body($response);
+            self::setPageSpeedDebug([
+                'step' => 'response_code',
+                'error' => 'HTTP ' . $responseCode,
+                'url_analyzed' => $websiteUrl,
+                'api_url' => $url,
+                'body_preview' => substr($body, 0, 500),
+            ]);
             return null;
         }
 
@@ -426,11 +454,23 @@ class Base
         $decoded = json_decode($body, true);
 
         if (json_last_error() !== JSON_ERROR_NONE) {
+            self::setPageSpeedDebug([
+                'step' => 'json_decode',
+                'error' => 'JSON error: ' . json_last_error_msg(),
+                'url_analyzed' => $websiteUrl,
+                'body_preview' => substr($body, 0, 500),
+            ]);
             return null;
         }
 
         $categoriesData = $decoded['lighthouseResult']['categories'] ?? null;
         if ($categoriesData === null) {
+            self::setPageSpeedDebug([
+                'step' => 'lighthouse_result',
+                'error' => 'Missing lighthouseResult.categories in response',
+                'url_analyzed' => $websiteUrl,
+                'response_keys' => array_keys($decoded),
+            ]);
             return null;
         }
 
@@ -448,14 +488,13 @@ class Base
      */
     public static function runPageSpeedCron(): void
     {
-        if (get_template() !== 'theme_base_vite') {
-            return;
-        }
-
         $url = home_url('/');
         $scores = self::makePageSpeedApiCallAllCategories($url);
 
         if ($scores === null) {
+            $existing = get_option('pagespeed_scores_debug', []);
+            $existing['cron_note'] = 'API returned null, scores not saved';
+            self::setPageSpeedDebug($existing);
             return;
         }
 
@@ -464,6 +503,11 @@ class Base
         ]);
 
         update_option('pagespeed_scores', $data);
+        self::setPageSpeedDebug([
+            'step' => 'success',
+            'url_analyzed' => $url,
+            'scores' => $scores,
+        ]);
     }
 
     /**

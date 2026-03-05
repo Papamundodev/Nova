@@ -392,15 +392,6 @@ class Base
     }
 
     /**
-     * Store PageSpeed debug info for troubleshooting
-     */
-    private static function setPageSpeedDebug(array $debug): void
-    {
-        $debug['timestamp'] = current_time('mysql');
-        update_option('pagespeed_scores_debug', $debug);
-    }
-
-    /**
      * Make PageSpeed API call for all 4 categories in one request
      * @param string $websiteUrl The URL to analyze
      * @return array|null ['performance' => int, 'accessibility' => int, ...] or null on failure
@@ -427,26 +418,7 @@ class Base
 
         $response = wp_remote_get($url, ['timeout' => 120]);
 
-        if (is_wp_error($response)) {
-            self::setPageSpeedDebug([
-                'step' => 'wp_remote_get',
-                'error' => 'WP_Error: ' . $response->get_error_message(),
-                'url_analyzed' => $websiteUrl,
-                'api_url' => $url,
-            ]);
-            return null;
-        }
-
-        $responseCode = wp_remote_retrieve_response_code($response);
-        if ($responseCode !== 200) {
-            $body = wp_remote_retrieve_body($response);
-            self::setPageSpeedDebug([
-                'step' => 'response_code',
-                'error' => 'HTTP ' . $responseCode,
-                'url_analyzed' => $websiteUrl,
-                'api_url' => $url,
-                'body_preview' => substr($body, 0, 500),
-            ]);
+        if (is_wp_error($response) || wp_remote_retrieve_response_code($response) !== 200) {
             return null;
         }
 
@@ -454,23 +426,11 @@ class Base
         $decoded = json_decode($body, true);
 
         if (json_last_error() !== JSON_ERROR_NONE) {
-            self::setPageSpeedDebug([
-                'step' => 'json_decode',
-                'error' => 'JSON error: ' . json_last_error_msg(),
-                'url_analyzed' => $websiteUrl,
-                'body_preview' => substr($body, 0, 500),
-            ]);
             return null;
         }
 
         $categoriesData = $decoded['lighthouseResult']['categories'] ?? null;
         if ($categoriesData === null) {
-            self::setPageSpeedDebug([
-                'step' => 'lighthouse_result',
-                'error' => 'Missing lighthouseResult.categories in response',
-                'url_analyzed' => $websiteUrl,
-                'response_keys' => array_keys($decoded),
-            ]);
             return null;
         }
 
@@ -484,6 +444,21 @@ class Base
     }
 
     /**
+     * Register PageSpeed cron: weekly API call, store scores in options
+     */
+    public function registerPageSpeedCron(): void
+    {
+        add_action('theme_base_pagespeed_weekly', [self::class, 'runPageSpeedCron']);
+
+        add_action('init', function () {
+            if (wp_next_scheduled('theme_base_pagespeed_weekly')) {
+                return;
+            }
+            wp_schedule_event(time(), 'weekly', 'theme_base_pagespeed_weekly');
+        }, 99);
+    }
+
+    /**
      * Cron callback: fetch all PageSpeed scores and store in options
      */
     public static function runPageSpeedCron(): void
@@ -492,9 +467,6 @@ class Base
         $scores = self::makePageSpeedApiCallAllCategories($url);
 
         if ($scores === null) {
-            $existing = get_option('pagespeed_scores_debug', []);
-            $existing['cron_note'] = 'API returned null, scores not saved';
-            self::setPageSpeedDebug($existing);
             return;
         }
 
@@ -503,11 +475,6 @@ class Base
         ]);
 
         update_option('pagespeed_scores', $data);
-        self::setPageSpeedDebug([
-            'step' => 'success',
-            'url_analyzed' => $url,
-            'scores' => $scores,
-        ]);
     }
 
     /**

@@ -12,12 +12,11 @@ $theme_template_name = basename(__FILE__, ".php");
 $url = 'https://collective-nova.fr/';
 
 // Cached scores (from weekly cron) - use in production
-$perfCached = Base::getPageSpeedCachedScore('performance');
-$accCached = Base::getPageSpeedCachedScore('accessibility');
-$bestCached = Base::getPageSpeedCachedScore('best-practices');
-$seoCached = Base::getPageSpeedCachedScore('seo');
-$scoresData = get_option('pagespeed_scores', []);
-$lastUpdated = $scoresData['last_updated'] ?? null;
+$perfCached = get_option('pagespeed_scores', [])['performance'] ?? null;
+$accCached = get_option('pagespeed_scores', [])['accessibility'] ?? null;
+$bestCached = get_option('pagespeed_scores', [])['best-practices'] ?? null;
+$seoCached = get_option('pagespeed_scores', [])['seo'] ?? null;
+$lastUpdated = get_option('pagespeed_scores', [])['last_updated'] ?? null;
 
 ?>
 

@@ -1,1 +1,110 @@
-document.addEventListener("DOMContentLoaded",()=>{const r=document.querySelector("#theme-navbar-toggler"),i=document.getElementById("navmenu-header-mobile");r.addEventListener("click",()=>{r.classList.toggle("open")}),i.addEventListener("toggle",e=>{e.newState==="closed"&&r.classList.remove("open")}),i.addEventListener("click",e=>{e.target.closest("a")&&i.hidePopover()}),document.addEventListener("mouseover",function(e){const t=e.target.closest(".button-background-animation");if(t){const o=t.querySelector(".hover-bg");if(o){const s=t.getBoundingClientRect(),l=e.clientX-s.left,m=e.clientY-s.top;o.style.setProperty("--creative-hover-top",`${m}px`),o.style.setProperty("--creative-hover-left",`${l}px`)}}});const n=document.querySelector(".animation-moving-item"),d=document.querySelectorAll(".section-light");d&&n&&d.length>0&&(d.forEach(t=>{t.addEventListener("mouseenter",()=>{document.body.classList.contains("dark-theme")&&n.classList.add("animation-moving-item--cursor-follow")}),t.addEventListener("mousemove",o=>{document.body.classList.contains("dark-theme")&&(document.documentElement.style.setProperty("--mouse-x",`${o.clientX}px`),document.documentElement.style.setProperty("--mouse-y",`${o.clientY}px`))}),t.addEventListener("mouseleave",()=>{n.classList.remove("animation-moving-item--cursor-follow")})}),new MutationObserver(()=>{document.body.classList.contains("dark-theme")||n.classList.remove("animation-moving-item--cursor-follow")}).observe(document.body,{attributes:!0,attributeFilter:["class"]})),scrollers=document.querySelectorAll(".scroller"),scrollers.length>0&&u();function u(){scrollers.forEach(e=>{e.setAttribute("data-infinite-scroll","true");const t=e.querySelector(".scroller-inner"),o=Array.from(t.children);o.forEach(s=>{let l=s.cloneNode(!0);l.setAttribute("aria-hidden","true"),t.appendChild(l)}),o.forEach(s=>{let l=s.cloneNode(!0);l.setAttribute("aria-hidden","true"),t.appendChild(l)})})}let c=document.querySelector(".scroll-top");function a(){c&&(window.scrollY>100?c.classList.add("active"):c.classList.remove("active"))}c.addEventListener("click",e=>{e.preventDefault(),window.scrollTo({top:0,behavior:"smooth"})}),window.addEventListener("load",a),document.addEventListener("scroll",a)});function v(r){requestAnimationFrame(()=>{r.scrollIntoView({behavior:"smooth",block:"start"})})}function h(r){const i=document.querySelectorAll(r);i.length&&i.forEach(n=>{n.addEventListener("toggle",()=>{n.open&&v(n)})})}document.addEventListener("DOMContentLoaded",()=>{h('details.dropdown-details[id^="faq-details-"]')});
+document.addEventListener("DOMContentLoaded", () => {
+  const burger = document.querySelector("#theme-navbar-toggler");
+  const popover = document.getElementById("navmenu-header-mobile");
+  burger.addEventListener("click", () => {
+    burger.classList.toggle("open");
+  });
+  popover.addEventListener("toggle", (event) => {
+    if (event.newState === "closed") {
+      burger.classList.remove("open");
+    }
+  });
+  popover.addEventListener("click", (e) => {
+    if (e.target.closest("a")) {
+      popover.hidePopover();
+    }
+  });
+  document.addEventListener("mouseover", function(a) {
+    const o = a.target.closest(".button-background-animation");
+    if (o) {
+      const c = o.querySelector(".hover-bg");
+      if (c) {
+        const v = o.getBoundingClientRect(), h = a.clientX - v.left, s = a.clientY - v.top;
+        c.style.setProperty("--creative-hover-top", `${s}px`), c.style.setProperty("--creative-hover-left", `${h}px`);
+      }
+    }
+  });
+  const cursorFollowItem = document.querySelector(".animation-moving-item");
+  const sectionLight = document.querySelectorAll(".section-light");
+  if (sectionLight && cursorFollowItem && sectionLight.length > 0) {
+    sectionLight.forEach((section) => {
+      section.addEventListener("mouseenter", () => {
+        if (document.body.classList.contains("dark-theme")) {
+          cursorFollowItem.classList.add("animation-moving-item--cursor-follow");
+        }
+      });
+      section.addEventListener("mousemove", (e) => {
+        if (document.body.classList.contains("dark-theme")) {
+          document.documentElement.style.setProperty("--mouse-x", `${e.clientX}px`);
+          document.documentElement.style.setProperty("--mouse-y", `${e.clientY}px`);
+        }
+      });
+      section.addEventListener("mouseleave", () => {
+        cursorFollowItem.classList.remove("animation-moving-item--cursor-follow");
+      });
+    });
+    const themeObserver = new MutationObserver(() => {
+      if (!document.body.classList.contains("dark-theme")) {
+        cursorFollowItem.classList.remove("animation-moving-item--cursor-follow");
+      }
+    });
+    themeObserver.observe(document.body, { attributes: true, attributeFilter: ["class"] });
+  }
+  scrollers = document.querySelectorAll(".scroller");
+  if (scrollers.length > 0) {
+    addInfiniteScroll();
+  }
+  function addInfiniteScroll() {
+    scrollers.forEach((scroller) => {
+      scroller.setAttribute("data-infinite-scroll", "true");
+      const scrollerInner = scroller.querySelector(".scroller-inner");
+      const scrollerContent = Array.from(scrollerInner.children);
+      scrollerContent.forEach((child) => {
+        let duplicatedChild = child.cloneNode(true);
+        duplicatedChild.setAttribute("aria-hidden", "true");
+        scrollerInner.appendChild(duplicatedChild);
+      });
+      scrollerContent.forEach((child) => {
+        let duplicatedChild = child.cloneNode(true);
+        duplicatedChild.setAttribute("aria-hidden", "true");
+        scrollerInner.appendChild(duplicatedChild);
+      });
+    });
+  }
+  let scrollTop = document.querySelector(".scroll-top");
+  function toggleScrollTop() {
+    if (scrollTop) {
+      window.scrollY > 100 ? scrollTop.classList.add("active") : scrollTop.classList.remove("active");
+    }
+  }
+  scrollTop.addEventListener("click", (e) => {
+    e.preventDefault();
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+  });
+  window.addEventListener("load", toggleScrollTop);
+  document.addEventListener("scroll", toggleScrollTop);
+});
+function scrollDetailsIntoView(details) {
+  requestAnimationFrame(() => {
+    details.scrollIntoView({ behavior: "smooth", block: "start" });
+  });
+}
+function bindMobileScrollForDetails(selector) {
+  const detailsEls = document.querySelectorAll(selector);
+  if (!detailsEls.length)
+    return;
+  detailsEls.forEach((details) => {
+    details.addEventListener("toggle", () => {
+      if (!details.open)
+        return;
+      scrollDetailsIntoView(details);
+    });
+  });
+}
+document.addEventListener("DOMContentLoaded", () => {
+  bindMobileScrollForDetails('details.dropdown-details[id^="faq-details-"]');
+});
+//# sourceMappingURL=main.js.map

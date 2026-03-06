@@ -168,6 +168,9 @@
   @media (width >= $breakpoint-xxl) {
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: 1fr;
+    gap: $spacer-xl;
+    margin-inline: auto;
+    max-width: calc(400px * 3 + $spacer-xl * 2);
   }
 
   .card {

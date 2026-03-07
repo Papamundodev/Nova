@@ -1,3 +1,5 @@
+import "./odometer.js";
+
 document.addEventListener("DOMContentLoaded", () => {
   const burger = document.querySelector("#theme-navbar-toggler");
   const popover = document.getElementById("navmenu-header-mobile");
@@ -32,6 +34,8 @@ document.addEventListener("DOMContentLoaded", () => {
       }
   }
 });
+
+
 
   /**
    * Cursor-following blur effect in .section-intro
@@ -70,9 +74,28 @@ document.addEventListener("DOMContentLoaded", () => {
     themeObserver.observe(document.body, { attributes: true, attributeFilter: ["class"] });
   }
 
+  /**
+   * Cursor-following effect for .interactive when hovering .gradient-container
+   */
+  const gradientContainer = document.querySelector(".gradient-container");
+  const interactiveItem = document.querySelector(".gradient-container .interactive");
 
+  if (gradientContainer && interactiveItem) {
+    gradientContainer.addEventListener("mouseenter", () => {
+      interactiveItem.classList.add("interactive--cursor-follow");
+    });
 
-scrollers = document.querySelectorAll('.scroller');
+    gradientContainer.addEventListener("mousemove", (e) => {
+      document.documentElement.style.setProperty("--mouse-x", `${e.clientX}px`);
+      document.documentElement.style.setProperty("--mouse-y", `${e.clientY}px`);
+    });
+
+    gradientContainer.addEventListener("mouseleave", () => {
+      interactiveItem.classList.remove("interactive--cursor-follow");
+    });
+  }
+
+  scrollers = document.querySelectorAll('.scroller');
 if (scrollers.length > 0) {
   addInfiniteScroll();
 }
@@ -144,4 +167,6 @@ function bindMobileScrollForDetails(selector) {
 document.addEventListener("DOMContentLoaded", () => {
   bindMobileScrollForDetails('details.dropdown-details[id^="faq-details-"]');
 });
+
+
 

@@ -49,5 +49,8 @@
     "postcss-cli": "^10.1.0",
     "sass": "^1.77.8",
     "vite": "^4.3.9"
+  },
+  "dependencies": {
+    "odometer": "^0.4.8"
   }
 }

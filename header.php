@@ -11,6 +11,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="preload" href="<?= get_template_directory_uri(); ?>/assets/fonts/Coda.ttf" as="font" type="font/ttf" crossorigin>
     <link rel="preload" href="<?= get_template_directory_uri(); ?>/assets/fonts/RussoOne.ttf" as="font" type="font/ttf" crossorigin>
+    <?php
+    $schema_file = get_template_directory() . '/assets/schema-org.json';
+    if (file_exists($schema_file)) {
+        $schema = json_decode(file_get_contents($schema_file), true);
+        if ($schema) {
+            $schema_json = str_replace('https://collective-nova.fr', untrailingslashit(home_url()), wp_json_encode($schema));
+            echo '<script type="application/ld+json">' . $schema_json . '</script>' . "\n";
+        }
+    }
+    ?>
     <?php wp_head(); ?>
 </head>
 

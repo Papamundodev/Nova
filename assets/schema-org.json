@@ -1,0 +1,116 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://collective-nova.fr/#organization",
+      "name": "Collective Nova",
+      "legalName": "Collective Nova",
+      "url": "https://collective-nova.fr",
+      "logo": "https://collective-nova.fr/wp-content/uploads/logo.png",
+      "description": "Nova, c'est un collectif de freelances experts en communication, design, développement web et marketing digital. Des indépendants passionnés qui collaborent ensemble pour contribuer au succès de votre marque. Notre mission : vous offrir la qualité d'une agence de communication, agence de publicité ou agence digitale sans en subir les charges lourdes.",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "27 rue Edouard Scoffier",
+        "addressLocality": "Nice",
+        "postalCode": "06300",
+        "addressCountry": "FR"
+      },
+      "email": "hello@collective-nova.fr",
+      "telephone": "+33789518439",
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "+33789518439",
+        "email": "hello@collective-nova.fr",
+        "contactType": "sales",
+        "areaServed": "Nice",
+        "availableLanguage": "fr",
+        "hoursAvailable": {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+          "opens": "09:00",
+          "closes": "18:00"
+        }
+      },
+      "sameAs": [],
+      "foundingDate": "2026",
+      "founder": [
+        { "@type": "Person", "name": "Marilyn Chesneau" },
+        { "@type": "Person", "name": "Joan Fernandez" },
+        { "@type": "Person", "name": "Marie Gianti" }
+      ],
+      "employee": [
+        { "@type": "Person", "name": "Marilyn Chesneau" },
+        { "@type": "Person", "name": "Joan Fernandez" },
+        { "@type": "Person", "name": "Marie Gianti" }
+      ],
+      "numberOfEmployees": {
+        "@type": "QuantitativeValue",
+        "value": 3
+      },
+      "slogan": "Créateurs de communications cohérentes et d'écosystème digitaux performants.",
+      "areaServed": ["France", "Monaco"],
+      "knowsAbout": [
+        "Branding Design",
+        "Design graphique",
+        "site internet",
+        "publicités digitales",
+        "référencement",
+        "SEO",
+        "SEA",
+        "SMA",
+        "graphisme",
+        "webdesign",
+        "wordpress",
+        "woocommerce",
+        "developpement web"
+      ],
+      "keywords": "Branding Design, Design graphique, site internet, publicités digitales, référencement, SEO, SEA, SMA, graphisme, webdesign, wordpress, woocommerce, developpement web, graphiste, développeur web, développeur wordpress, stratégie digitale, google ads, webdesigner, développeur worpress, développeur woocommerce"
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://collective-nova.fr/#website",
+      "name": "collective nova",
+      "url": "https://collective-nova.fr",
+      "description": "Nova, c'est avant tout une équipe d'experts passionnés en communication digitale. Un collectif à taille humaine, où chaque freelance est spécialisé dans un domaine précis de la communication. De la stratégie à la création, du développement web à l'acquisition digitale, nous couvrons l'ensemble de vos besoins en communication avec une expertise pointue.",
+      "publisher": { "@id": "https://collective-nova.fr/#organization" },
+      "inLanguage": "fr",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": {
+          "@type": "EntryPoint",
+          "urlTemplate": "https://collective-nova.fr/?s={search_term_string}"
+        },
+        "query-input": "required name=search_term_string"
+      }
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://collective-nova.fr/#webpage",
+      "name": "Collectif de freelances | Nova",
+      "url": "https://collective-nova.fr/",
+      "description": "Nova, c'est avant tout une équipe d'experts passionnés en communication digitale. Un collectif à taille humaine, où chaque freelance est spécialisé dans un domaine précis de la communication. De la stratégie à la création, du développement web à l'acquisition digitale, nous couvrons l'ensemble de vos besoins en communication avec une expertise pointue.",
+      "isPartOf": { "@id": "https://collective-nova.fr/#website" },
+      "breadcrumb": {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Accueil",
+            "item": "https://collective-nova.fr/"
+          }
+        ]
+      }
+    },
+    {
+      "@type": "Person",
+      "@id": "https://collective-nova.fr/about/#member-joan",
+      "name": "Joan Fernandez",
+      "jobTitle": "Développeur web",
+      "url": "https://collective-nova.fr/about/#member-joan",
+      "email": "hello@collective-nova.fr",
+      "sameAs": "https://www.linkedin.com/in/joan-fernandez-dev/"
+    }
+  ]
+}

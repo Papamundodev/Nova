@@ -95,28 +95,63 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  scrollers = document.querySelectorAll('.scroller');
+
+const scrollers = document.querySelectorAll(".scroller");
 if (scrollers.length > 0) {
   addInfiniteScroll();
 }
 
 function addInfiniteScroll() {
-    scrollers.forEach(scroller => {
-      scroller.setAttribute('data-infinite-scroll', 'true');
-      const scrollerInner = scroller.querySelector('.scroller-inner');
-      const scrollerContent = Array.from(scrollerInner.children);
-      scrollerContent.forEach(child => {
-        let duplicatedChild = child.cloneNode(true);
-        duplicatedChild.setAttribute('aria-hidden', 'true');
-        scrollerInner.appendChild(duplicatedChild);
-      });
-            scrollerContent.forEach(child => {
-        let duplicatedChild = child.cloneNode(true);
-        duplicatedChild.setAttribute('aria-hidden', 'true');
-        scrollerInner.appendChild(duplicatedChild);
-      });
+  scrollers.forEach((scroller) => {
+    scroller.setAttribute("data-infinite-scroll", "true");
+    const scrollerInner = scroller.querySelector(".scroller-inner");
+    const scrollerContent = Array.from(scrollerInner.children);
+    scroller.dataset.originalCount = String(scrollerContent.length);
+
+    // Speed: base is 30s for 5 items (≈ 6s per item)
+    const baseItems = 5;
+    const baseSeconds = 30;
+    const count = scrollerContent.length;
+    const durationSeconds = (count / baseItems) * baseSeconds;
+    const minSeconds = 12;
+    const maxSeconds = 120;
+    const finalSeconds = Math.min(maxSeconds, Math.max(minSeconds, durationSeconds));
+    scroller.style.setProperty("--scroll-duration", `${finalSeconds}s`);
+
+    setScrollDistance(scroller);
+    scrollerContent.forEach((child) => {
+      let duplicatedChild = child.cloneNode(true);
+      duplicatedChild.setAttribute("aria-hidden", "true");
+      scrollerInner.appendChild(duplicatedChild);
     });
+    scrollerContent.forEach((child) => {
+      let duplicatedChild = child.cloneNode(true);
+      duplicatedChild.setAttribute("aria-hidden", "true");
+      scrollerInner.appendChild(duplicatedChild);
+    });
+  });
 }
+
+function setScrollDistance(scroller) {
+  const scrollerInner = scroller.querySelector(".scroller-inner");
+  const originalCount = Number(scroller.dataset.originalCount || 0);
+  if (originalCount === 0) {
+    return;
+  }
+  const children = Array.from(scrollerInner.children).slice(0, originalCount);
+  const originalWidth = children.reduce((total, child) => {
+    return total + child.getBoundingClientRect().width;
+  }, 0);
+  if (originalWidth > 0) {
+    scroller.style.setProperty("--scroll-distance", `${originalWidth}px`);
+  }
+}
+
+window.addEventListener("load", () => {
+  scrollers.forEach((scroller) => {
+    setScrollDistance(scroller);
+  });
+});
 
   /**
    * Scroll top button

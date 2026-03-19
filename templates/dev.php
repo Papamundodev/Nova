@@ -229,39 +229,24 @@ $lastUpdated = get_option('pagespeed_scores', [])['last_updated'] ?? null;
     </section>
 
 
-    <section class="section-vanilla-stack container">
+    <section class="section-vanilla-stack section-infinite-scroll container">
         <img src="<?= get_template_directory_uri(); ?>/assets/images/vanilla-stack.png" alt="Vanilla stack">
         <p>
             Vanilla stack is a stack of technologies that helps you create a consistent and reusable design system for your website. It is a stack of technologies that helps you create a consistent and reusable design system for your website.
             Vanilla stack is a stack of technologies that helps you create a consistent and reusable design system for your website. It is a stack of technologies that helps you create a consistent and reusable design system for your website.Vanilla stack is a stack of technologies that helps you create a consistent and reusable design system for your website. It is a stack of technologies that helps you create a consistent and reusable design system for your website.
         </p>
-        <ul class="banner-list">
-            <li>
-                <img src="<?= get_template_directory_uri(); ?>/assets/images/logo.svg" alt="HTML">
-            </li>
-            <li>
-                <img src="<?= get_template_directory_uri(); ?>/assets/images/logo.svg" alt="CSS">
-            </li>
-            <li>
-                <img src="<?= get_template_directory_uri(); ?>/assets/images/logo.svg" alt="JavaScript">
-            </li>
-            <li>
-                <img src="<?= get_template_directory_uri(); ?>/assets/images/logo.svg" alt="PHP">
-            </li>
-            <li>
-                <img src="<?= get_template_directory_uri(); ?>/assets/images/logo.svg" alt="MySQL">
-            </li>
-            <li>
-                <img src="<?= get_template_directory_uri(); ?>/assets/images/logo.svg" alt="WordPress">
-            </li>
-            <li>
-                <img src="<?= get_template_directory_uri(); ?>/assets/images/logo.svg" alt="WooCommerce">
-            </li>
-            <li>
-                <img src="<?= get_template_directory_uri(); ?>/assets/images/logo.svg" alt="Astro">
-            </li>
-        </ul>
+        <div class="scroller">
+            <div class="scroller-inner">
+                <?php for ($i = 0; $i < 10; $i++) : ?>
+                    <div class="img-container">
+                        <img src="<?= get_template_directory_uri(); ?>/assets/images/logo.png" alt="Vanilla stack" class="logo-stack">
+                    </div>
+                <?php endfor; ?>
+            </div>
+        </div>
     </section>
+
+
 
     <section class="section-website">
         <h2 class="section-title">The website in the ecosystem</h2>

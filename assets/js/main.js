@@ -732,7 +732,7 @@ document.addEventListener("DOMContentLoaded", () => {
       interactiveItem.classList.remove("interactive--cursor-follow");
     });
   }
-  scrollers = document.querySelectorAll(".scroller");
+  const scrollers = document.querySelectorAll(".scroller");
   if (scrollers.length > 0) {
     addInfiniteScroll();
   }
@@ -741,6 +741,16 @@ document.addEventListener("DOMContentLoaded", () => {
       scroller.setAttribute("data-infinite-scroll", "true");
       const scrollerInner = scroller.querySelector(".scroller-inner");
       const scrollerContent = Array.from(scrollerInner.children);
+      scroller.dataset.originalCount = String(scrollerContent.length);
+      const baseItems = 5;
+      const baseSeconds = 30;
+      const count = scrollerContent.length;
+      const durationSeconds = count / baseItems * baseSeconds;
+      const minSeconds = 12;
+      const maxSeconds = 120;
+      const finalSeconds = Math.min(maxSeconds, Math.max(minSeconds, durationSeconds));
+      scroller.style.setProperty("--scroll-duration", `${finalSeconds}s`);
+      setScrollDistance(scroller);
       scrollerContent.forEach((child) => {
         let duplicatedChild = child.cloneNode(true);
         duplicatedChild.setAttribute("aria-hidden", "true");
@@ -753,6 +763,25 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     });
   }
+  function setScrollDistance(scroller) {
+    const scrollerInner = scroller.querySelector(".scroller-inner");
+    const originalCount = Number(scroller.dataset.originalCount || 0);
+    if (originalCount === 0) {
+      return;
+    }
+    const children = Array.from(scrollerInner.children).slice(0, originalCount);
+    const originalWidth = children.reduce((total, child) => {
+      return total + child.getBoundingClientRect().width;
+    }, 0);
+    if (originalWidth > 0) {
+      scroller.style.setProperty("--scroll-distance", `${originalWidth}px`);
+    }
+  }
+  window.addEventListener("load", () => {
+    scrollers.forEach((scroller) => {
+      setScrollDistance(scroller);
+    });
+  });
   let scrollTop = document.querySelector(".scroll-top");
   function toggleScrollTop() {
     if (scrollTop) {

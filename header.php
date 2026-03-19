@@ -6,15 +6,11 @@
     <script>
         document.documentElement.classList.add('js');
     </script>
+    <meta name="title" content="<?= get_the_title() ?: get_bloginfo('name'); ?>">
     <meta name="description" content="<?= \Theme_base\Base::get_meta_description() ?>">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="preload" href="<?= get_template_directory_uri(); ?>/assets/fonts/Coda.ttf" as="font" type="font/ttf" crossorigin>
     <link rel="preload" href="<?= get_template_directory_uri(); ?>/assets/fonts/RussoOne.ttf" as="font" type="font/ttf" crossorigin>
-    <meta property="og:title" content="<?= get_bloginfo('name'); ?>" />
-    <meta property="og:description" content="<?= get_bloginfo('description'); ?>" />
-    <meta property="og:image" content="<?= get_field('logo_landscape', 'option')['url']; ?>" />
-    <meta property="og:url" content="<?= home_url(); ?>" />
-    <meta property="og:type" content="website" />
     <?php wp_head(); ?>
 </head>
 

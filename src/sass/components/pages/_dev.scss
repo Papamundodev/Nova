@@ -418,30 +418,10 @@
     max-height: 500px;
     object-fit: cover;
   }
-  .banner-list {
-    display: flex;
-    flex-direction: column;
-    gap: $spacer-md;
-    list-style: none;
-    padding-block: $spacer-xxl;
-    margin-block-end: $spacer-xxl;
-    @media (width >= $breakpoint-md) {
-      flex-direction: row;
-      justify-content: space-around;
-    }
-    li {
-      width: 100px;
-      height: 100px;
-      background-color: $gray-color;
+  .scroller {
+    .img-container {
       border-radius: $border-radius-md;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      img {
-        width: 100%;
-        height: 100%;
-        object-fit: contain;
-      }
+      padding: $spacer-xl;
     }
   }
 }
@@ -507,4 +487,84 @@
 
 .button-wrapper {
   margin-block: $spacer-xl;
+}
+
+.section-infinite-scroll {
+  --items-banner: 1;
+  overflow: hidden;
+
+  @media (width >=$breakpoint-md) {
+    --items-banner: 2;
+  }
+
+  @media (width >=$breakpoint-xl) {
+    --items-banner: 8;
+    --width-img: 250px;
+  }
+
+  .scroller {
+    max-width: calc(var(--width-img) * var(--items-banner));
+    margin-inline: auto;
+    overflow: hidden;
+    position: relative;
+
+    .scroller-inner {
+      padding-block: $spacer-xl;
+      display: flex;
+      align-items: center;
+      justify-content: start;
+      flex-wrap: nowrap;
+      overflow: hidden;
+      will-change: transform;
+      transform: translate3d(0, 0, 0);
+    }
+
+    .img-container {
+      max-width: var(--width-img);
+      max-height: 125px;
+      margin-inline: auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      padding-inline: $spacer-lg;
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+      }
+    }
+
+    &[data-infinite-scroll="true"] {
+      .scroller-inner {
+        animation: infinite-scroll-banner var(--scroll-duration, 30s) linear
+          infinite;
+        width: max-content;
+        margin-inline: auto;
+      }
+      &::after {
+        @include container;
+        content: "";
+        position: absolute;
+        inset: 0;
+        height: 100%;
+        background: linear-gradient(
+          to right,
+          transparent 0%,
+          $background-color 10%,
+          $background-color 90%,
+          transparent 100%
+        );
+      }
+    }
+  }
+}
+
+@keyframes infinite-scroll-banner {
+  to {
+    transform: translateX(
+      calc(-1 * var(--scroll-distance, calc(100% / var(--items-banner))))
+    );
+  }
 }

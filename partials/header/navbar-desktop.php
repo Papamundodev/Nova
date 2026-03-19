@@ -16,7 +16,7 @@ $menu_items = \Theme_base\Base::wp_get_menu_array($theme_location);
                         <div class="svg-container">
                             <?= file_get_contents(get_template_directory() . '/assets/images/chevron.svg'); ?>
                         </div>
-                        <p class="dropdown-title" class=""><?= __('Expertises', 'theme_base') ?></p>
+                        <p class="dropdown-title"><?= __('Expertises', 'theme_base') ?></p>
                     </div>
                     <?php
                     $expertises = get_field('expertises', "option");
@@ -34,10 +34,10 @@ $menu_items = \Theme_base\Base::wp_get_menu_array($theme_location);
                                         <img src="<?= $image['url']; ?>" alt="<?= $image['alt']; ?>">
                                     </div>
                                     <div class="flex-between">
-                                        <a class="<?= $color; ?>-color" href="<?= home_url(); ?>#expertise-<?= sanitize_title($item->name); ?>""><?= $item->name ?></a>
+                                        <a class="<?= $color; ?>-color" href="<?= home_url(); ?>#expertise-<?= sanitize_title($item->name); ?>"><?= $item->name ?></a>
                                         <div class=" svg-container svg-<?= $color; ?>-color">
                                             <?= file_get_contents(get_template_directory() . '/assets/images/arrow-up-right-bold.svg'); ?>
-                                    </div>
+                                        </div>
                                 </li>
                             <? endforeach; ?>
                         </ul>

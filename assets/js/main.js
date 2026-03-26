@@ -1,1 +1,821 @@
-var mt=typeof globalThis<"u"?globalThis:typeof window<"u"?window:typeof global<"u"?global:typeof self<"u"?self:{};function ft(m){return m&&m.__esModule&&Object.prototype.hasOwnProperty.call(m,"default")?m.default:m}var rt={exports:{}};(function(m,E){(function(){var w,T,A,x,h,g,v,y,L,d,b,p,f,O,D,F,j,C,P,N,S,X,Q,G,H,V,Y,it,z,K,ot,st,at=[].slice;j='<span class="odometer-value"></span>',O='<span class="odometer-ribbon"><span class="odometer-ribbon-inner">'+j+"</span></span>",x='<span class="odometer-digit"><span class="odometer-digit-spacer">8</span><span class="odometer-digit-inner">'+O+"</span></span>",v='<span class="odometer-formatting-mark"></span>',A="(,ddd).dd",y=/^\(?([^)]*)\)?(?:(.)(d+))?$/,L=30,g=2e3,w=20,d=2,h=.5,b=1e3/L,T=1e3/w,D="transitionend webkitTransitionEnd oTransitionEnd otransitionend MSTransitionEnd",H=document.createElement("div").style,F=H.transition!=null||H.webkitTransition!=null||H.mozTransition!=null||H.oTransition!=null,Q=window.requestAnimationFrame||window.mozRequestAnimationFrame||window.webkitRequestAnimationFrame||window.msRequestAnimationFrame,p=window.MutationObserver||window.WebKitMutationObserver||window.MozMutationObserver,P=function(n){var t;return t=document.createElement("div"),t.innerHTML=n,t.children[0]},X=function(n,t){return n.className=n.className.replace(new RegExp("(^| )"+t.split(" ").join("|")+"( |$)","gi")," ")},C=function(n,t){return X(n,t),n.className+=" "+t},V=function(n,t){var e;if(document.createEvent!=null)return e=document.createEvent("HTMLEvents"),e.initEvent(t,!0,!0),n.dispatchEvent(e)},S=function(){var n,t;return(n=(t=window.performance)!=null&&typeof t.now=="function"?t.now():void 0)!=null?n:+new Date},G=function(n,t){return t==null&&(t=0),t?(n*=Math.pow(10,t),n+=.5,n=Math.floor(n),n/=Math.pow(10,t)):Math.round(n)},Y=function(n){return n<0?Math.ceil(n):Math.floor(n)},N=function(n){return n-G(n)},z=!1,(it=function(){var n,t,e,r,o;if(!z&&window.jQuery!=null){for(z=!0,r=["html","text"],o=[],t=0,e=r.length;t<e;t++)n=r[t],o.push(function(i){var s;return s=window.jQuery.fn[i],window.jQuery.fn[i]=function(a){var l;return a==null||((l=this[0])!=null?l.odometer:void 0)==null?s.apply(this,arguments):this[0].odometer.update(a)}}(n));return o}})(),setTimeout(it,0),f=function(){function n(t){var e,r,o,i,s,a,l,_,M,u=this;if(this.options=t,this.el=this.options.el,this.el.odometer!=null)return this.el.odometer;this.el.odometer=this,l=n.options;for(e in l)o=l[e],this.options[e]==null&&(this.options[e]=o);(i=this.options).duration==null&&(i.duration=g),this.MAX_VALUES=this.options.duration/b/d|0,this.resetFormat(),this.value=this.cleanValue((_=this.options.value)!=null?_:""),this.renderInside(),this.render();try{for(M=["innerHTML","innerText","textContent"],s=0,a=M.length;s<a;s++)r=M[s],this.el[r]!=null&&function(c){return Object.defineProperty(u.el,c,{get:function(){var I;return c==="innerHTML"?u.inside.outerHTML:(I=u.inside.innerText)!=null?I:u.inside.textContent},set:function(I){return u.update(I)}})}(r)}catch{this.watchForMutations()}}return n.prototype.renderInside=function(){return this.inside=document.createElement("div"),this.inside.className="odometer-inside",this.el.innerHTML="",this.el.appendChild(this.inside)},n.prototype.watchForMutations=function(){var t=this;if(p!=null)try{return this.observer==null&&(this.observer=new p(function(e){var r;return r=t.el.innerText,t.renderInside(),t.render(t.value),t.update(r)})),this.watchMutations=!0,this.startWatchingMutations()}catch{}},n.prototype.startWatchingMutations=function(){if(this.watchMutations)return this.observer.observe(this.el,{childList:!0})},n.prototype.stopWatchingMutations=function(){var t;return(t=this.observer)!=null?t.disconnect():void 0},n.prototype.cleanValue=function(t){var e;return typeof t=="string"&&(t=t.replace((e=this.format.radix)!=null?e:".","<radix>"),t=t.replace(/[.,]/g,""),t=t.replace("<radix>","."),t=parseFloat(t,10)||0),G(t,this.format.precision)},n.prototype.bindTransitionEnd=function(){var t,e,r,o,i,s,a=this;if(!this.transitionEndBound){for(this.transitionEndBound=!0,e=!1,i=D.split(" "),s=[],r=0,o=i.length;r<o;r++)t=i[r],s.push(this.el.addEventListener(t,function(){return e||(e=!0,setTimeout(function(){return a.render(),e=!1,V(a.el,"odometerdone")},0)),!0},!1));return s}},n.prototype.resetFormat=function(){var t,e,r,o,i,s,a,l;if(t=(a=this.options.format)!=null?a:A,t||(t="d"),r=y.exec(t),!r)throw new Error("Odometer: Unparsable digit format");return l=r.slice(1,4),s=l[0],i=l[1],e=l[2],o=(e!=null?e.length:void 0)||0,this.format={repeating:s,radix:i,precision:o}},n.prototype.render=function(t){var e,r,o,i,s,a,l;for(t==null&&(t=this.value),this.stopWatchingMutations(),this.resetFormat(),this.inside.innerHTML="",s=this.options.theme,e=this.el.className.split(" "),i=[],a=0,l=e.length;a<l;a++)if(r=e[a],!!r.length){if(o=/^odometer-theme-(.+)$/.exec(r)){s=o[1];continue}/^odometer(-|$)/.test(r)||i.push(r)}return i.push("odometer"),F||i.push("odometer-no-transitions"),s?i.push("odometer-theme-"+s):i.push("odometer-auto-theme"),this.el.className=i.join(" "),this.ribbons={},this.formatDigits(t),this.startWatchingMutations()},n.prototype.formatDigits=function(t){var e,r,o,i,s,a,l,_,M,u;if(this.digits=[],this.options.formatFunction)for(o=this.options.formatFunction(t),M=o.split("").reverse(),s=0,l=M.length;s<l;s++)r=M[s],r.match(/0-9/)?(e=this.renderDigit(),e.querySelector(".odometer-value").innerHTML=r,this.digits.push(e),this.insertDigit(e)):this.addSpacer(r);else for(i=!this.format.precision||!N(t)||!1,u=t.toString().split("").reverse(),a=0,_=u.length;a<_;a++)e=u[a],e==="."&&(i=!0),this.addDigit(e,i)},n.prototype.update=function(t){var e,r=this;if(t=this.cleanValue(t),!!(e=t-this.value))return X(this.el,"odometer-animating-up odometer-animating-down odometer-animating"),e>0?C(this.el,"odometer-animating-up"):C(this.el,"odometer-animating-down"),this.stopWatchingMutations(),this.animate(t),this.startWatchingMutations(),setTimeout(function(){return r.el.offsetHeight,C(r.el,"odometer-animating")},0),this.value=t},n.prototype.renderDigit=function(){return P(x)},n.prototype.insertDigit=function(t,e){return e!=null?this.inside.insertBefore(t,e):this.inside.children.length?this.inside.insertBefore(t,this.inside.children[0]):this.inside.appendChild(t)},n.prototype.addSpacer=function(t,e,r){var o;return o=P(v),o.innerHTML=t,r&&C(o,r),this.insertDigit(o,e)},n.prototype.addDigit=function(t,e){var r,o,i,s;if(e==null&&(e=!0),t==="-")return this.addSpacer(t,null,"odometer-negation-mark");if(t===".")return this.addSpacer((s=this.format.radix)!=null?s:".",null,"odometer-radix-mark");if(e)for(i=!1;;){if(!this.format.repeating.length){if(i)throw new Error("Bad odometer format without digits");this.resetFormat(),i=!0}if(r=this.format.repeating[this.format.repeating.length-1],this.format.repeating=this.format.repeating.substring(0,this.format.repeating.length-1),r==="d")break;this.addSpacer(r)}return o=this.renderDigit(),o.querySelector(".odometer-value").innerHTML=t,this.digits.push(o),this.insertDigit(o)},n.prototype.animate=function(t){return!F||this.options.animation==="count"?this.animateCount(t):this.animateSlide(t)},n.prototype.animateCount=function(t){var e,r,o,i,s,a=this;if(r=+t-this.value)return i=o=S(),e=this.value,(s=function(){var l,_,M;if(S()-i>a.options.duration){a.value=t,a.render(),V(a.el,"odometerdone");return}return l=S()-o,l>T&&(o=S(),M=l/a.options.duration,_=r*M,e+=_,a.render(Math.round(e))),Q!=null?Q(s):setTimeout(s,T)})()},n.prototype.getDigitCount=function(){var t,e,r,o,i,s;for(o=1<=arguments.length?at.call(arguments,0):[],t=i=0,s=o.length;i<s;t=++i)r=o[t],o[t]=Math.abs(r);return e=Math.max.apply(Math,o),Math.ceil(Math.log(e+1)/Math.log(10))},n.prototype.getFractionalDigitCount=function(){var t,e,r,o,i,s,a;for(i=1<=arguments.length?at.call(arguments,0):[],e=/^\-?\d*\.(\d*?)0*$/,t=s=0,a=i.length;s<a;t=++s)o=i[t],i[t]=o.toString(),r=e.exec(i[t]),r==null?i[t]=0:i[t]=r[1].length;return Math.max.apply(Math,i)},n.prototype.resetDigits=function(){return this.digits=[],this.ribbons=[],this.inside.innerHTML="",this.resetFormat()},n.prototype.animateSlide=function(t){var e,r,o,i,s,a,l,_,M,u,c,I,B,W,k,q,R,lt,$,J,Z,dt,ut,ct,tt,et,nt;if(q=this.value,_=this.getFractionalDigitCount(q,t),_&&(t=t*Math.pow(10,_),q=q*Math.pow(10,_)),!!(o=t-q)){for(this.bindTransitionEnd(),i=this.getDigitCount(q,t),s=[],e=0,c=$=0;0<=i?$<i:$>i;c=0<=i?++$:--$){if(R=Y(q/Math.pow(10,i-c-1)),l=Y(t/Math.pow(10,i-c-1)),a=l-R,Math.abs(a)>this.MAX_VALUES){for(u=[],I=a/(this.MAX_VALUES+this.MAX_VALUES*e*h),r=R;a>0&&r<l||a<0&&r>l;)u.push(Math.round(r)),r+=I;u[u.length-1]!==l&&u.push(l),e++}else u=(function(){nt=[];for(var U=R;R<=l?U<=l:U>=l;R<=l?U++:U--)nt.push(U);return nt}).apply(this);for(c=J=0,dt=u.length;J<dt;c=++J)M=u[c],u[c]=Math.abs(M%10);s.push(u)}for(this.resetDigits(),et=s.reverse(),c=Z=0,ut=et.length;Z<ut;c=++Z)for(u=et[c],this.digits[c]||this.addDigit(" ",c>=_),(lt=this.ribbons)[c]==null&&(lt[c]=this.digits[c].querySelector(".odometer-ribbon-inner")),this.ribbons[c].innerHTML="",o<0&&(u=u.reverse()),B=tt=0,ct=u.length;tt<ct;B=++tt)M=u[B],k=document.createElement("div"),k.className="odometer-value",k.innerHTML=M,this.ribbons[c].appendChild(k),B===u.length-1&&C(k,"odometer-last-value"),B===0&&C(k,"odometer-first-value");if(R<0&&this.addDigit("-"),W=this.inside.querySelector(".odometer-radix-mark"),W!=null&&W.parent.removeChild(W),_)return this.addSpacer(this.format.radix,this.digits[_-1],"odometer-radix-mark")}},n}(),f.options=(ot=window.odometerOptions)!=null?ot:{},setTimeout(function(){var n,t,e,r,o;if(window.odometerOptions){r=window.odometerOptions,o=[];for(n in r)t=r[n],o.push((e=f.options)[n]!=null?(e=f.options)[n]:e[n]=t);return o}},0),f.init=function(){var n,t,e,r,o,i;if(document.querySelectorAll!=null){for(t=document.querySelectorAll(f.options.selector||".odometer"),i=[],e=0,r=t.length;e<r;e++)n=t[e],i.push(n.odometer=new f({el:n,value:(o=n.innerText)!=null?o:n.textContent}));return i}},((st=document.documentElement)!=null?st.doScroll:void 0)!=null&&document.createEventObject!=null?(K=document.onreadystatechange,document.onreadystatechange=function(){return document.readyState==="complete"&&f.options.auto!==!1&&f.init(),K!=null?K.apply(this,arguments):void 0}):document.addEventListener("DOMContentLoaded",function(){if(f.options.auto!==!1)return f.init()},!1),E!==null?m.exports=f:window.Odometer=f}).call(mt)})(rt,rt.exports);var pt=rt.exports;const ht=ft(pt);ht.options.auto=!1;function gt(){var A,x;const m=document.querySelectorAll(".border-animation[data-pourcentage]");if(m.length===0)return;const E=(x=(A=window.matchMedia)==null?void 0:A.call(window,"(prefers-reduced-motion: reduce)"))==null?void 0:x.matches,w=(h,g)=>{const v=h.querySelector(".border-odometer.odometer[data-odometer-value]");if(!v||v.dataset.odometerInit==="1")return null;v.dataset.odometerInit="1";const y=v.dataset.odometerValue??String(g??"0"),L=Math.min(100,Math.max(0,parseFloat(y)));if(!Number.isFinite(L))return null;v.textContent="0";const d=new ht({el:v,value:0,duration:2e3,theme:"default",format:"d"});return()=>d.update(L)},T=h=>{const g=parseFloat(h.dataset.pourcentage);if(isNaN(g))return;const v=g/100*360;if(h.style.setProperty("--pourcentage",g+"%"),h.style.setProperty("--degree",v+"deg"),E){h.classList.add("is-animated");const L=w(h,g);L&&L();return}const y=w(h,g);requestAnimationFrame(()=>{h.classList.add("is-animated"),y&&y()})};if("IntersectionObserver"in window&&!E){const h=new IntersectionObserver((g,v)=>{g.forEach(y=>{y.isIntersecting&&(T(y.target),v.unobserve(y.target))})},{rootMargin:"0px 0px -10% 0px",threshold:.15});m.forEach(g=>h.observe(g))}else m.forEach(h=>T(h))}document.addEventListener("DOMContentLoaded",()=>{gt()});document.addEventListener("DOMContentLoaded",()=>{const m=document.querySelector("#theme-navbar-toggler"),E=document.getElementById("navmenu-header-mobile");m.addEventListener("click",()=>{m.classList.toggle("open")}),E.addEventListener("toggle",d=>{d.newState==="closed"&&m.classList.remove("open")}),E.addEventListener("click",d=>{d.target.closest("a")&&E.hidePopover()}),document.addEventListener("mouseover",function(d){const b=d.target.closest(".button-background-animation");if(b){const p=b.querySelector(".hover-bg");if(p){const f=b.getBoundingClientRect(),O=d.clientX-f.left,D=d.clientY-f.top;p.style.setProperty("--creative-hover-top",`${D}px`),p.style.setProperty("--creative-hover-left",`${O}px`)}}});const w=document.querySelector(".animation-moving-item"),T=document.querySelectorAll(".section-light");T&&w&&T.length>0&&(T.forEach(b=>{b.addEventListener("mouseenter",()=>{document.body.classList.contains("dark-theme")&&w.classList.add("animation-moving-item--cursor-follow")}),b.addEventListener("mousemove",p=>{document.body.classList.contains("dark-theme")&&(document.documentElement.style.setProperty("--mouse-x",`${p.clientX}px`),document.documentElement.style.setProperty("--mouse-y",`${p.clientY}px`))}),b.addEventListener("mouseleave",()=>{w.classList.remove("animation-moving-item--cursor-follow")})}),new MutationObserver(()=>{document.body.classList.contains("dark-theme")||w.classList.remove("animation-moving-item--cursor-follow")}).observe(document.body,{attributes:!0,attributeFilter:["class"]}));const A=document.querySelector(".gradient-container"),x=document.querySelector(".gradient-container .interactive");A&&x&&(A.addEventListener("mouseenter",()=>{x.classList.add("interactive--cursor-follow")}),A.addEventListener("mousemove",d=>{document.documentElement.style.setProperty("--mouse-x",`${d.clientX}px`),document.documentElement.style.setProperty("--mouse-y",`${d.clientY}px`)}),A.addEventListener("mouseleave",()=>{x.classList.remove("interactive--cursor-follow")}));const h=document.querySelectorAll(".scroller");h.length>0&&g();function g(){h.forEach(d=>{d.setAttribute("data-infinite-scroll","true");const b=d.querySelector(".scroller-inner"),p=Array.from(b.children);d.dataset.originalCount=String(p.length);const f=5,O=30,F=p.length/f*O,P=Math.min(120,Math.max(12,F));d.style.setProperty("--scroll-duration",`${P}s`),v(d),p.forEach(N=>{let S=N.cloneNode(!0);S.setAttribute("aria-hidden","true"),b.appendChild(S)}),p.forEach(N=>{let S=N.cloneNode(!0);S.setAttribute("aria-hidden","true"),b.appendChild(S)})})}function v(d){const b=d.querySelector(".scroller-inner"),p=Number(d.dataset.originalCount||0);if(p===0)return;const O=Array.from(b.children).slice(0,p).reduce((D,F)=>D+F.getBoundingClientRect().width,0);O>0&&d.style.setProperty("--scroll-distance",`${O}px`)}window.addEventListener("load",()=>{h.forEach(d=>{v(d)})});let y=document.querySelector(".scroll-top");function L(){y&&(window.scrollY>100?y.classList.add("active"):y.classList.remove("active"))}y.addEventListener("click",d=>{d.preventDefault(),window.scrollTo({top:0,behavior:"smooth"})}),window.addEventListener("load",L),document.addEventListener("scroll",L)});function vt(m){requestAnimationFrame(()=>{m.scrollIntoView({behavior:"smooth",block:"start"})})}function yt(m){const E=document.querySelectorAll(m);E.length&&E.forEach(w=>{w.addEventListener("toggle",()=>{w.open&&vt(w)})})}document.addEventListener("DOMContentLoaded",()=>{yt('details.dropdown-details[id^="faq-details-"]')});
+var commonjsGlobal = typeof globalThis !== "undefined" ? globalThis : typeof window !== "undefined" ? window : typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : {};
+function getDefaultExportFromCjs(x) {
+  return x && x.__esModule && Object.prototype.hasOwnProperty.call(x, "default") ? x["default"] : x;
+}
+var odometer = { exports: {} };
+(function(module, exports) {
+  (function() {
+    var COUNT_FRAMERATE, COUNT_MS_PER_FRAME, DIGIT_FORMAT, DIGIT_HTML, DIGIT_SPEEDBOOST, DURATION, FORMAT_MARK_HTML, FORMAT_PARSER, FRAMERATE, FRAMES_PER_VALUE, MS_PER_FRAME, MutationObserver2, Odometer2, RIBBON_HTML, TRANSITION_END_EVENTS, TRANSITION_SUPPORT, VALUE_HTML, addClass, createFromHTML, fractionalPart, now, removeClass, requestAnimationFrame2, round, transitionCheckStyles, trigger, truncate, wrapJQuery, _jQueryWrapped, _old, _ref, _ref1, __slice = [].slice;
+    VALUE_HTML = '<span class="odometer-value"></span>';
+    RIBBON_HTML = '<span class="odometer-ribbon"><span class="odometer-ribbon-inner">' + VALUE_HTML + "</span></span>";
+    DIGIT_HTML = '<span class="odometer-digit"><span class="odometer-digit-spacer">8</span><span class="odometer-digit-inner">' + RIBBON_HTML + "</span></span>";
+    FORMAT_MARK_HTML = '<span class="odometer-formatting-mark"></span>';
+    DIGIT_FORMAT = "(,ddd).dd";
+    FORMAT_PARSER = /^\(?([^)]*)\)?(?:(.)(d+))?$/;
+    FRAMERATE = 30;
+    DURATION = 2e3;
+    COUNT_FRAMERATE = 20;
+    FRAMES_PER_VALUE = 2;
+    DIGIT_SPEEDBOOST = 0.5;
+    MS_PER_FRAME = 1e3 / FRAMERATE;
+    COUNT_MS_PER_FRAME = 1e3 / COUNT_FRAMERATE;
+    TRANSITION_END_EVENTS = "transitionend webkitTransitionEnd oTransitionEnd otransitionend MSTransitionEnd";
+    transitionCheckStyles = document.createElement("div").style;
+    TRANSITION_SUPPORT = transitionCheckStyles.transition != null || transitionCheckStyles.webkitTransition != null || transitionCheckStyles.mozTransition != null || transitionCheckStyles.oTransition != null;
+    requestAnimationFrame2 = window.requestAnimationFrame || window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame || window.msRequestAnimationFrame;
+    MutationObserver2 = window.MutationObserver || window.WebKitMutationObserver || window.MozMutationObserver;
+    createFromHTML = function(html) {
+      var el;
+      el = document.createElement("div");
+      el.innerHTML = html;
+      return el.children[0];
+    };
+    removeClass = function(el, name) {
+      return el.className = el.className.replace(new RegExp("(^| )" + name.split(" ").join("|") + "( |$)", "gi"), " ");
+    };
+    addClass = function(el, name) {
+      removeClass(el, name);
+      return el.className += " " + name;
+    };
+    trigger = function(el, name) {
+      var evt;
+      if (document.createEvent != null) {
+        evt = document.createEvent("HTMLEvents");
+        evt.initEvent(name, true, true);
+        return el.dispatchEvent(evt);
+      }
+    };
+    now = function() {
+      var _ref2, _ref12;
+      return (_ref2 = (_ref12 = window.performance) != null ? typeof _ref12.now === "function" ? _ref12.now() : void 0 : void 0) != null ? _ref2 : +/* @__PURE__ */ new Date();
+    };
+    round = function(val, precision) {
+      if (precision == null) {
+        precision = 0;
+      }
+      if (!precision) {
+        return Math.round(val);
+      }
+      val *= Math.pow(10, precision);
+      val += 0.5;
+      val = Math.floor(val);
+      return val /= Math.pow(10, precision);
+    };
+    truncate = function(val) {
+      if (val < 0) {
+        return Math.ceil(val);
+      } else {
+        return Math.floor(val);
+      }
+    };
+    fractionalPart = function(val) {
+      return val - round(val);
+    };
+    _jQueryWrapped = false;
+    (wrapJQuery = function() {
+      var property, _i, _len, _ref2, _results;
+      if (_jQueryWrapped) {
+        return;
+      }
+      if (window.jQuery != null) {
+        _jQueryWrapped = true;
+        _ref2 = ["html", "text"];
+        _results = [];
+        for (_i = 0, _len = _ref2.length; _i < _len; _i++) {
+          property = _ref2[_i];
+          _results.push(function(property2) {
+            var old;
+            old = window.jQuery.fn[property2];
+            return window.jQuery.fn[property2] = function(val) {
+              var _ref12;
+              if (val == null || ((_ref12 = this[0]) != null ? _ref12.odometer : void 0) == null) {
+                return old.apply(this, arguments);
+              }
+              return this[0].odometer.update(val);
+            };
+          }(property));
+        }
+        return _results;
+      }
+    })();
+    setTimeout(wrapJQuery, 0);
+    Odometer2 = function() {
+      function Odometer3(options) {
+        var k, property, v, _base, _i, _len, _ref2, _ref12, _ref22, _this = this;
+        this.options = options;
+        this.el = this.options.el;
+        if (this.el.odometer != null) {
+          return this.el.odometer;
+        }
+        this.el.odometer = this;
+        _ref2 = Odometer3.options;
+        for (k in _ref2) {
+          v = _ref2[k];
+          if (this.options[k] == null) {
+            this.options[k] = v;
+          }
+        }
+        if ((_base = this.options).duration == null) {
+          _base.duration = DURATION;
+        }
+        this.MAX_VALUES = this.options.duration / MS_PER_FRAME / FRAMES_PER_VALUE | 0;
+        this.resetFormat();
+        this.value = this.cleanValue((_ref12 = this.options.value) != null ? _ref12 : "");
+        this.renderInside();
+        this.render();
+        try {
+          _ref22 = ["innerHTML", "innerText", "textContent"];
+          for (_i = 0, _len = _ref22.length; _i < _len; _i++) {
+            property = _ref22[_i];
+            if (this.el[property] != null) {
+              (function(property2) {
+                return Object.defineProperty(_this.el, property2, {
+                  get: function() {
+                    var _ref3;
+                    if (property2 === "innerHTML") {
+                      return _this.inside.outerHTML;
+                    } else {
+                      return (_ref3 = _this.inside.innerText) != null ? _ref3 : _this.inside.textContent;
+                    }
+                  },
+                  set: function(val) {
+                    return _this.update(val);
+                  }
+                });
+              })(property);
+            }
+          }
+        } catch (_error) {
+          this.watchForMutations();
+        }
+      }
+      Odometer3.prototype.renderInside = function() {
+        this.inside = document.createElement("div");
+        this.inside.className = "odometer-inside";
+        this.el.innerHTML = "";
+        return this.el.appendChild(this.inside);
+      };
+      Odometer3.prototype.watchForMutations = function() {
+        var _this = this;
+        if (MutationObserver2 == null) {
+          return;
+        }
+        try {
+          if (this.observer == null) {
+            this.observer = new MutationObserver2(function(mutations) {
+              var newVal;
+              newVal = _this.el.innerText;
+              _this.renderInside();
+              _this.render(_this.value);
+              return _this.update(newVal);
+            });
+          }
+          this.watchMutations = true;
+          return this.startWatchingMutations();
+        } catch (_error) {
+        }
+      };
+      Odometer3.prototype.startWatchingMutations = function() {
+        if (this.watchMutations) {
+          return this.observer.observe(this.el, {
+            childList: true
+          });
+        }
+      };
+      Odometer3.prototype.stopWatchingMutations = function() {
+        var _ref2;
+        return (_ref2 = this.observer) != null ? _ref2.disconnect() : void 0;
+      };
+      Odometer3.prototype.cleanValue = function(val) {
+        var _ref2;
+        if (typeof val === "string") {
+          val = val.replace((_ref2 = this.format.radix) != null ? _ref2 : ".", "<radix>");
+          val = val.replace(/[.,]/g, "");
+          val = val.replace("<radix>", ".");
+          val = parseFloat(val, 10) || 0;
+        }
+        return round(val, this.format.precision);
+      };
+      Odometer3.prototype.bindTransitionEnd = function() {
+        var event, renderEnqueued, _i, _len, _ref2, _results, _this = this;
+        if (this.transitionEndBound) {
+          return;
+        }
+        this.transitionEndBound = true;
+        renderEnqueued = false;
+        _ref2 = TRANSITION_END_EVENTS.split(" ");
+        _results = [];
+        for (_i = 0, _len = _ref2.length; _i < _len; _i++) {
+          event = _ref2[_i];
+          _results.push(this.el.addEventListener(event, function() {
+            if (renderEnqueued) {
+              return true;
+            }
+            renderEnqueued = true;
+            setTimeout(function() {
+              _this.render();
+              renderEnqueued = false;
+              return trigger(_this.el, "odometerdone");
+            }, 0);
+            return true;
+          }, false));
+        }
+        return _results;
+      };
+      Odometer3.prototype.resetFormat = function() {
+        var format, fractional, parsed, precision, radix, repeating, _ref2, _ref12;
+        format = (_ref2 = this.options.format) != null ? _ref2 : DIGIT_FORMAT;
+        format || (format = "d");
+        parsed = FORMAT_PARSER.exec(format);
+        if (!parsed) {
+          throw new Error("Odometer: Unparsable digit format");
+        }
+        _ref12 = parsed.slice(1, 4), repeating = _ref12[0], radix = _ref12[1], fractional = _ref12[2];
+        precision = (fractional != null ? fractional.length : void 0) || 0;
+        return this.format = {
+          repeating,
+          radix,
+          precision
+        };
+      };
+      Odometer3.prototype.render = function(value) {
+        var classes, cls, match, newClasses, theme, _i, _len;
+        if (value == null) {
+          value = this.value;
+        }
+        this.stopWatchingMutations();
+        this.resetFormat();
+        this.inside.innerHTML = "";
+        theme = this.options.theme;
+        classes = this.el.className.split(" ");
+        newClasses = [];
+        for (_i = 0, _len = classes.length; _i < _len; _i++) {
+          cls = classes[_i];
+          if (!cls.length) {
+            continue;
+          }
+          if (match = /^odometer-theme-(.+)$/.exec(cls)) {
+            theme = match[1];
+            continue;
+          }
+          if (/^odometer(-|$)/.test(cls)) {
+            continue;
+          }
+          newClasses.push(cls);
+        }
+        newClasses.push("odometer");
+        if (!TRANSITION_SUPPORT) {
+          newClasses.push("odometer-no-transitions");
+        }
+        if (theme) {
+          newClasses.push("odometer-theme-" + theme);
+        } else {
+          newClasses.push("odometer-auto-theme");
+        }
+        this.el.className = newClasses.join(" ");
+        this.ribbons = {};
+        this.formatDigits(value);
+        return this.startWatchingMutations();
+      };
+      Odometer3.prototype.formatDigits = function(value) {
+        var digit, valueDigit, valueString, wholePart, _i, _j, _len, _len1, _ref2, _ref12;
+        this.digits = [];
+        if (this.options.formatFunction) {
+          valueString = this.options.formatFunction(value);
+          _ref2 = valueString.split("").reverse();
+          for (_i = 0, _len = _ref2.length; _i < _len; _i++) {
+            valueDigit = _ref2[_i];
+            if (valueDigit.match(/0-9/)) {
+              digit = this.renderDigit();
+              digit.querySelector(".odometer-value").innerHTML = valueDigit;
+              this.digits.push(digit);
+              this.insertDigit(digit);
+            } else {
+              this.addSpacer(valueDigit);
+            }
+          }
+        } else {
+          wholePart = !this.format.precision || !fractionalPart(value) || false;
+          _ref12 = value.toString().split("").reverse();
+          for (_j = 0, _len1 = _ref12.length; _j < _len1; _j++) {
+            digit = _ref12[_j];
+            if (digit === ".") {
+              wholePart = true;
+            }
+            this.addDigit(digit, wholePart);
+          }
+        }
+      };
+      Odometer3.prototype.update = function(newValue) {
+        var diff, _this = this;
+        newValue = this.cleanValue(newValue);
+        if (!(diff = newValue - this.value)) {
+          return;
+        }
+        removeClass(this.el, "odometer-animating-up odometer-animating-down odometer-animating");
+        if (diff > 0) {
+          addClass(this.el, "odometer-animating-up");
+        } else {
+          addClass(this.el, "odometer-animating-down");
+        }
+        this.stopWatchingMutations();
+        this.animate(newValue);
+        this.startWatchingMutations();
+        setTimeout(function() {
+          _this.el.offsetHeight;
+          return addClass(_this.el, "odometer-animating");
+        }, 0);
+        return this.value = newValue;
+      };
+      Odometer3.prototype.renderDigit = function() {
+        return createFromHTML(DIGIT_HTML);
+      };
+      Odometer3.prototype.insertDigit = function(digit, before) {
+        if (before != null) {
+          return this.inside.insertBefore(digit, before);
+        } else if (!this.inside.children.length) {
+          return this.inside.appendChild(digit);
+        } else {
+          return this.inside.insertBefore(digit, this.inside.children[0]);
+        }
+      };
+      Odometer3.prototype.addSpacer = function(chr, before, extraClasses) {
+        var spacer;
+        spacer = createFromHTML(FORMAT_MARK_HTML);
+        spacer.innerHTML = chr;
+        if (extraClasses) {
+          addClass(spacer, extraClasses);
+        }
+        return this.insertDigit(spacer, before);
+      };
+      Odometer3.prototype.addDigit = function(value, repeating) {
+        var chr, digit, resetted, _ref2;
+        if (repeating == null) {
+          repeating = true;
+        }
+        if (value === "-") {
+          return this.addSpacer(value, null, "odometer-negation-mark");
+        }
+        if (value === ".") {
+          return this.addSpacer((_ref2 = this.format.radix) != null ? _ref2 : ".", null, "odometer-radix-mark");
+        }
+        if (repeating) {
+          resetted = false;
+          while (true) {
+            if (!this.format.repeating.length) {
+              if (resetted) {
+                throw new Error("Bad odometer format without digits");
+              }
+              this.resetFormat();
+              resetted = true;
+            }
+            chr = this.format.repeating[this.format.repeating.length - 1];
+            this.format.repeating = this.format.repeating.substring(0, this.format.repeating.length - 1);
+            if (chr === "d") {
+              break;
+            }
+            this.addSpacer(chr);
+          }
+        }
+        digit = this.renderDigit();
+        digit.querySelector(".odometer-value").innerHTML = value;
+        this.digits.push(digit);
+        return this.insertDigit(digit);
+      };
+      Odometer3.prototype.animate = function(newValue) {
+        if (!TRANSITION_SUPPORT || this.options.animation === "count") {
+          return this.animateCount(newValue);
+        } else {
+          return this.animateSlide(newValue);
+        }
+      };
+      Odometer3.prototype.animateCount = function(newValue) {
+        var cur, diff, last, start, tick, _this = this;
+        if (!(diff = +newValue - this.value)) {
+          return;
+        }
+        start = last = now();
+        cur = this.value;
+        return (tick = function() {
+          var delta, dist, fraction;
+          if (now() - start > _this.options.duration) {
+            _this.value = newValue;
+            _this.render();
+            trigger(_this.el, "odometerdone");
+            return;
+          }
+          delta = now() - last;
+          if (delta > COUNT_MS_PER_FRAME) {
+            last = now();
+            fraction = delta / _this.options.duration;
+            dist = diff * fraction;
+            cur += dist;
+            _this.render(Math.round(cur));
+          }
+          if (requestAnimationFrame2 != null) {
+            return requestAnimationFrame2(tick);
+          } else {
+            return setTimeout(tick, COUNT_MS_PER_FRAME);
+          }
+        })();
+      };
+      Odometer3.prototype.getDigitCount = function() {
+        var i, max, value, values, _i, _len;
+        values = 1 <= arguments.length ? __slice.call(arguments, 0) : [];
+        for (i = _i = 0, _len = values.length; _i < _len; i = ++_i) {
+          value = values[i];
+          values[i] = Math.abs(value);
+        }
+        max = Math.max.apply(Math, values);
+        return Math.ceil(Math.log(max + 1) / Math.log(10));
+      };
+      Odometer3.prototype.getFractionalDigitCount = function() {
+        var i, parser, parts, value, values, _i, _len;
+        values = 1 <= arguments.length ? __slice.call(arguments, 0) : [];
+        parser = /^\-?\d*\.(\d*?)0*$/;
+        for (i = _i = 0, _len = values.length; _i < _len; i = ++_i) {
+          value = values[i];
+          values[i] = value.toString();
+          parts = parser.exec(values[i]);
+          if (parts == null) {
+            values[i] = 0;
+          } else {
+            values[i] = parts[1].length;
+          }
+        }
+        return Math.max.apply(Math, values);
+      };
+      Odometer3.prototype.resetDigits = function() {
+        this.digits = [];
+        this.ribbons = [];
+        this.inside.innerHTML = "";
+        return this.resetFormat();
+      };
+      Odometer3.prototype.animateSlide = function(newValue) {
+        var boosted, cur, diff, digitCount, digits, dist, end, fractionalCount, frame, frames, i, incr, j, mark, numEl, oldValue, start, _base, _i, _k, _l, _len, _len1, _len2, _m, _ref2, _results;
+        oldValue = this.value;
+        fractionalCount = this.getFractionalDigitCount(oldValue, newValue);
+        if (fractionalCount) {
+          newValue = newValue * Math.pow(10, fractionalCount);
+          oldValue = oldValue * Math.pow(10, fractionalCount);
+        }
+        if (!(diff = newValue - oldValue)) {
+          return;
+        }
+        this.bindTransitionEnd();
+        digitCount = this.getDigitCount(oldValue, newValue);
+        digits = [];
+        boosted = 0;
+        for (i = _i = 0; 0 <= digitCount ? _i < digitCount : _i > digitCount; i = 0 <= digitCount ? ++_i : --_i) {
+          start = truncate(oldValue / Math.pow(10, digitCount - i - 1));
+          end = truncate(newValue / Math.pow(10, digitCount - i - 1));
+          dist = end - start;
+          if (Math.abs(dist) > this.MAX_VALUES) {
+            frames = [];
+            incr = dist / (this.MAX_VALUES + this.MAX_VALUES * boosted * DIGIT_SPEEDBOOST);
+            cur = start;
+            while (dist > 0 && cur < end || dist < 0 && cur > end) {
+              frames.push(Math.round(cur));
+              cur += incr;
+            }
+            if (frames[frames.length - 1] !== end) {
+              frames.push(end);
+            }
+            boosted++;
+          } else {
+            frames = (function() {
+              _results = [];
+              for (var _j = start; start <= end ? _j <= end : _j >= end; start <= end ? _j++ : _j--) {
+                _results.push(_j);
+              }
+              return _results;
+            }).apply(this);
+          }
+          for (i = _k = 0, _len = frames.length; _k < _len; i = ++_k) {
+            frame = frames[i];
+            frames[i] = Math.abs(frame % 10);
+          }
+          digits.push(frames);
+        }
+        this.resetDigits();
+        _ref2 = digits.reverse();
+        for (i = _l = 0, _len1 = _ref2.length; _l < _len1; i = ++_l) {
+          frames = _ref2[i];
+          if (!this.digits[i]) {
+            this.addDigit(" ", i >= fractionalCount);
+          }
+          if ((_base = this.ribbons)[i] == null) {
+            _base[i] = this.digits[i].querySelector(".odometer-ribbon-inner");
+          }
+          this.ribbons[i].innerHTML = "";
+          if (diff < 0) {
+            frames = frames.reverse();
+          }
+          for (j = _m = 0, _len2 = frames.length; _m < _len2; j = ++_m) {
+            frame = frames[j];
+            numEl = document.createElement("div");
+            numEl.className = "odometer-value";
+            numEl.innerHTML = frame;
+            this.ribbons[i].appendChild(numEl);
+            if (j === frames.length - 1) {
+              addClass(numEl, "odometer-last-value");
+            }
+            if (j === 0) {
+              addClass(numEl, "odometer-first-value");
+            }
+          }
+        }
+        if (start < 0) {
+          this.addDigit("-");
+        }
+        mark = this.inside.querySelector(".odometer-radix-mark");
+        if (mark != null) {
+          mark.parent.removeChild(mark);
+        }
+        if (fractionalCount) {
+          return this.addSpacer(this.format.radix, this.digits[fractionalCount - 1], "odometer-radix-mark");
+        }
+      };
+      return Odometer3;
+    }();
+    Odometer2.options = (_ref = window.odometerOptions) != null ? _ref : {};
+    setTimeout(function() {
+      var k, v, _base, _ref12, _results;
+      if (window.odometerOptions) {
+        _ref12 = window.odometerOptions;
+        _results = [];
+        for (k in _ref12) {
+          v = _ref12[k];
+          _results.push((_base = Odometer2.options)[k] != null ? (_base = Odometer2.options)[k] : _base[k] = v);
+        }
+        return _results;
+      }
+    }, 0);
+    Odometer2.init = function() {
+      var el, elements, _i, _len, _ref12, _results;
+      if (document.querySelectorAll == null) {
+        return;
+      }
+      elements = document.querySelectorAll(Odometer2.options.selector || ".odometer");
+      _results = [];
+      for (_i = 0, _len = elements.length; _i < _len; _i++) {
+        el = elements[_i];
+        _results.push(el.odometer = new Odometer2({
+          el,
+          value: (_ref12 = el.innerText) != null ? _ref12 : el.textContent
+        }));
+      }
+      return _results;
+    };
+    if (((_ref1 = document.documentElement) != null ? _ref1.doScroll : void 0) != null && document.createEventObject != null) {
+      _old = document.onreadystatechange;
+      document.onreadystatechange = function() {
+        if (document.readyState === "complete" && Odometer2.options.auto !== false) {
+          Odometer2.init();
+        }
+        return _old != null ? _old.apply(this, arguments) : void 0;
+      };
+    } else {
+      document.addEventListener("DOMContentLoaded", function() {
+        if (Odometer2.options.auto !== false) {
+          return Odometer2.init();
+        }
+      }, false);
+    }
+    if (exports !== null) {
+      module.exports = Odometer2;
+    } else {
+      window.Odometer = Odometer2;
+    }
+  }).call(commonjsGlobal);
+})(odometer, odometer.exports);
+var odometerExports = odometer.exports;
+const Odometer = /* @__PURE__ */ getDefaultExportFromCjs(odometerExports);
+Odometer.options.auto = false;
+function initBorderAnimations() {
+  var _a, _b;
+  const borderAnimations = document.querySelectorAll(
+    ".border-animation[data-pourcentage]"
+  );
+  if (borderAnimations.length === 0) {
+    return;
+  }
+  const prefersReduce = (_b = (_a = window.matchMedia) == null ? void 0 : _a.call(window, "(prefers-reduced-motion: reduce)")) == null ? void 0 : _b.matches;
+  const initBorderOdometer = (borderEl, target) => {
+    const odEl = borderEl.querySelector(
+      ".border-odometer.odometer[data-odometer-value]"
+    );
+    if (!odEl)
+      return null;
+    if (odEl.dataset.odometerInit === "1")
+      return null;
+    odEl.dataset.odometerInit = "1";
+    const rawTarget = odEl.dataset.odometerValue ?? String(target ?? "0");
+    const targetNumber = Math.min(100, Math.max(0, parseFloat(rawTarget)));
+    if (!Number.isFinite(targetNumber))
+      return null;
+    odEl.textContent = "0";
+    const od = new Odometer({
+      el: odEl,
+      value: 0,
+      duration: 2e3,
+      theme: "default",
+      format: "d"
+    });
+    return () => od.update(targetNumber);
+  };
+  const apply = (el) => {
+    const pourcentage = parseFloat(el.dataset.pourcentage);
+    if (isNaN(pourcentage)) {
+      return;
+    }
+    const degree = pourcentage / 100 * 360;
+    el.style.setProperty("--pourcentage", pourcentage + "%");
+    el.style.setProperty("--degree", degree + "deg");
+    if (prefersReduce) {
+      el.classList.add("is-animated");
+      const odTrigger2 = initBorderOdometer(el, pourcentage);
+      if (odTrigger2)
+        odTrigger2();
+      return;
+    }
+    const odTrigger = initBorderOdometer(el, pourcentage);
+    requestAnimationFrame(() => {
+      el.classList.add("is-animated");
+      if (odTrigger)
+        odTrigger();
+    });
+  };
+  if ("IntersectionObserver" in window && !prefersReduce) {
+    const borderObserver = new IntersectionObserver(
+      (entries, observer) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting)
+            return;
+          apply(entry.target);
+          observer.unobserve(entry.target);
+        });
+      },
+      { rootMargin: "0px 0px -10% 0px", threshold: 0.15 }
+    );
+    borderAnimations.forEach((el) => borderObserver.observe(el));
+  } else {
+    borderAnimations.forEach((el) => apply(el));
+  }
+}
+document.addEventListener("DOMContentLoaded", () => {
+  initBorderAnimations();
+});
+document.addEventListener("DOMContentLoaded", () => {
+  const burger = document.querySelector("#theme-navbar-toggler");
+  const popover = document.getElementById("navmenu-header-mobile");
+  burger.addEventListener("click", () => {
+    burger.classList.toggle("open");
+  });
+  popover.addEventListener("toggle", (event) => {
+    if (event.newState === "closed") {
+      burger.classList.remove("open");
+    }
+  });
+  popover.addEventListener("click", (e) => {
+    if (e.target.closest("a")) {
+      popover.hidePopover();
+    }
+  });
+  document.addEventListener("mouseover", function(a) {
+    const o = a.target.closest(".button-background-animation");
+    if (o) {
+      const c = o.querySelector(".hover-bg");
+      if (c) {
+        const v = o.getBoundingClientRect(), h = a.clientX - v.left, s = a.clientY - v.top;
+        c.style.setProperty("--creative-hover-top", `${s}px`), c.style.setProperty("--creative-hover-left", `${h}px`);
+      }
+    }
+  });
+  const cursorFollowItem = document.querySelector(".animation-moving-item");
+  const sectionLight = document.querySelectorAll(".section-light");
+  if (sectionLight && cursorFollowItem && sectionLight.length > 0) {
+    sectionLight.forEach((section) => {
+      section.addEventListener("mouseenter", () => {
+        if (document.body.classList.contains("dark-theme")) {
+          cursorFollowItem.classList.add("animation-moving-item--cursor-follow");
+        }
+      });
+      section.addEventListener("mousemove", (e) => {
+        if (document.body.classList.contains("dark-theme")) {
+          document.documentElement.style.setProperty("--mouse-x", `${e.clientX}px`);
+          document.documentElement.style.setProperty("--mouse-y", `${e.clientY}px`);
+        }
+      });
+      section.addEventListener("mouseleave", () => {
+        cursorFollowItem.classList.remove("animation-moving-item--cursor-follow");
+      });
+    });
+    const themeObserver = new MutationObserver(() => {
+      if (!document.body.classList.contains("dark-theme")) {
+        cursorFollowItem.classList.remove("animation-moving-item--cursor-follow");
+      }
+    });
+    themeObserver.observe(document.body, { attributes: true, attributeFilter: ["class"] });
+  }
+  const gradientContainer = document.querySelector(".gradient-container");
+  const interactiveItem = document.querySelector(".gradient-container .interactive");
+  if (gradientContainer && interactiveItem) {
+    gradientContainer.addEventListener("mouseenter", () => {
+      interactiveItem.classList.add("interactive--cursor-follow");
+    });
+    gradientContainer.addEventListener("mousemove", (e) => {
+      document.documentElement.style.setProperty("--mouse-x", `${e.clientX}px`);
+      document.documentElement.style.setProperty("--mouse-y", `${e.clientY}px`);
+    });
+    gradientContainer.addEventListener("mouseleave", () => {
+      interactiveItem.classList.remove("interactive--cursor-follow");
+    });
+  }
+  const scrollers = document.querySelectorAll(".scroller");
+  if (scrollers.length > 0) {
+    addInfiniteScroll();
+  }
+  function addInfiniteScroll() {
+    scrollers.forEach((scroller) => {
+      scroller.setAttribute("data-infinite-scroll", "true");
+      const scrollerInner = scroller.querySelector(".scroller-inner");
+      const scrollerContent = Array.from(scrollerInner.children);
+      scroller.dataset.originalCount = String(scrollerContent.length);
+      const baseItems = 5;
+      const baseSeconds = 30;
+      const count = scrollerContent.length;
+      const durationSeconds = count / baseItems * baseSeconds;
+      const minSeconds = 12;
+      const maxSeconds = 120;
+      const finalSeconds = Math.min(maxSeconds, Math.max(minSeconds, durationSeconds));
+      scroller.style.setProperty("--scroll-duration", `${finalSeconds}s`);
+      setScrollDistance(scroller);
+      scrollerContent.forEach((child) => {
+        let duplicatedChild = child.cloneNode(true);
+        duplicatedChild.setAttribute("aria-hidden", "true");
+        scrollerInner.appendChild(duplicatedChild);
+      });
+      scrollerContent.forEach((child) => {
+        let duplicatedChild = child.cloneNode(true);
+        duplicatedChild.setAttribute("aria-hidden", "true");
+        scrollerInner.appendChild(duplicatedChild);
+      });
+    });
+  }
+  function setScrollDistance(scroller) {
+    const scrollerInner = scroller.querySelector(".scroller-inner");
+    const originalCount = Number(scroller.dataset.originalCount || 0);
+    if (originalCount === 0) {
+      return;
+    }
+    const children = Array.from(scrollerInner.children).slice(0, originalCount);
+    const originalWidth = children.reduce((total, child) => {
+      return total + child.getBoundingClientRect().width;
+    }, 0);
+    if (originalWidth > 0) {
+      scroller.style.setProperty("--scroll-distance", `${originalWidth}px`);
+    }
+  }
+  window.addEventListener("load", () => {
+    scrollers.forEach((scroller) => {
+      setScrollDistance(scroller);
+    });
+  });
+  let scrollTop = document.querySelector(".scroll-top");
+  function toggleScrollTop() {
+    if (scrollTop) {
+      window.scrollY > 100 ? scrollTop.classList.add("active") : scrollTop.classList.remove("active");
+    }
+  }
+  scrollTop.addEventListener("click", (e) => {
+    e.preventDefault();
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+  });
+  window.addEventListener("load", toggleScrollTop);
+  document.addEventListener("scroll", toggleScrollTop);
+});
+function scrollDetailsIntoView(details) {
+  requestAnimationFrame(() => {
+    details.scrollIntoView({ behavior: "smooth", block: "start" });
+  });
+}
+function bindMobileScrollForDetails(selector) {
+  const detailsEls = document.querySelectorAll(selector);
+  if (!detailsEls.length)
+    return;
+  detailsEls.forEach((details) => {
+    details.addEventListener("toggle", () => {
+      if (!details.open)
+        return;
+      scrollDetailsIntoView(details);
+    });
+  });
+}
+document.addEventListener("DOMContentLoaded", () => {
+  bindMobileScrollForDetails('details.dropdown-details[id^="faq-details-"]');
+});
+//# sourceMappingURL=main.js.map

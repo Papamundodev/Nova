@@ -158,10 +158,17 @@ footer {
   p,
   a {
     color: $default-color;
+    text-decoration: none;
+    @include text-paragraph-1;
+    cursor: pointer;
+    &:hover {
+      color: $primary-color;
+    }
   }
   & > *:not(:first-child) {
     display: grid;
     grid-template-rows: $font-size-lg $font-size-sm $font-size-sm;
+    gap: $spacer-sm;
   }
   @media (width >= $breakpoint-lg) {
     grid-template-columns: auto auto;

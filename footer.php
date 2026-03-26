@@ -93,7 +93,9 @@
             $num_fr = get_field('num_fr', 'option');
             $num_en = get_field('num_en', 'option');
             $cities = get_field('cities', 'option');
+            $email = "hello@collective-nova.fr";
             ?>
+
             <div>
                 <h2><?= $text; ?></h2>
                 <div class="button-container button-background-primary button-background-animation">
@@ -105,6 +107,7 @@
                 <h3><?= __('Contact', 'theme_base'); ?></h3>
                 <p><?= $num_fr; ?></p>
                 <p><?= $num_en; ?></p>
+                <a href="mailto:<?= $email; ?>"><?= $email; ?></a>
             </div>
             <div>
                 <h3><?= __('Où sommes-nous ?', 'theme_base'); ?></h3>

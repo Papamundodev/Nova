@@ -21,7 +21,8 @@
     @media (width >= $breakpoint-lg) {
       max-width: 80ch;
     }
-    h1 {
+    h1,
+    p {
       margin-block-end: $spacer-xxl;
     }
   }

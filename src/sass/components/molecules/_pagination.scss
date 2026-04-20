@@ -1,8 +1,54 @@
 @use "../../utilities/container-wrapper" as *;
+@use "../../design-tokens/colors" as *;
+@use "../../design-tokens/tokens" as *;
 
 .pagination {
   display: flex;
   gap: $spacer-xl;
   align-items: center;
   justify-content: center;
+  padding-block: $spacer-big $spacer-xl;
+  margin-block: $spacer-md;
+  list-style: none;
+
+  .page-item.active {
+    .page-link {
+      background-color: $secondary-color;
+    }
+  }
+
+  .page-link {
+    width: $icon-lg;
+    height: $icon-lg;
+    opacity: 1;
+    border: 1px solid $default-color;
+    border-radius: $border-radius-circle;
+    padding: $spacer-xs;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    color: $default-color;
+
+    .img-container {
+      display: inherit;
+      vertical-align: middle;
+    }
+    svg {
+      path {
+        stroke: $default-color;
+        fill: $default-color;
+      }
+    }
+
+    &:hover {
+      background-color: $secondary-color;
+      cursor: pointer;
+
+      svg path {
+        stroke: $default-color;
+        fill: $default-color;
+      }
+    }
+  }
 }

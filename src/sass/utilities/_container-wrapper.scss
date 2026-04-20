@@ -21,6 +21,7 @@ $breakpoints: (
 
 /* ------- Spacer ------- */
 :root {
+  --spacer-xxs: 3px;
   --spacer-xs: 5px;
   --spacer-sm: 12px;
   --spacer-md: 15px;
@@ -31,6 +32,7 @@ $breakpoints: (
   --spacer-bigger: 200px;
 }
 
+$spacer-xxs: var(--spacer-xxs);
 $spacer-xs: var(--spacer-xs);
 $spacer-sm: var(--spacer-sm);
 $spacer-md: var(--spacer-md);
@@ -49,6 +51,7 @@ $spacer-vi-big: calc($spacer-big + 0.5vi);
 $spacer-vi-bigger: calc($spacer-bigger + 0.5vi);
 
 $spacers: (
+  "xxs": $spacer-xxs,
   "xs": $spacer-xs,
   "sm": $spacer-sm,
   "md": $spacer-md,

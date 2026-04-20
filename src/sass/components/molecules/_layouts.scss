@@ -2,6 +2,7 @@
 @use "../../design-tokens/colors" as *;
 @use "../../components/atoms/title" as *;
 @use "../../components/atoms/text" as *;
+@use "../../components/atoms/post-preview" as *;
 @use "../../utilities/animations" as *;
 @use "../../components/molecules/cards" as *;
 
@@ -174,6 +175,29 @@
   }
 
   .card {
-    @include blog-card;
+    @include post-preview;
   }
+}
+
+@mixin product-grid {
+  display: grid;
+  width: 100%;
+  grid-template-columns: 1fr;
+  gap: $spacer-xl;
+
+  @media (width >=$breakpoint-lg) {
+    grid-template-columns: repeat(2, 1fr);
+    max-width: calc(400px * 2 + $spacer-xl);
+    margin-inline: auto;
+  }
+
+  @media (width >=$breakpoint-xxl) {
+    grid-template-columns: repeat(3, 1fr);
+    margin-inline: auto;
+    max-width: calc(400px * 3 + $spacer-xl * 2);
+    gap: $spacer-xxl;
+  }
+}
+.product-grid {
+  @include product-grid;
 }

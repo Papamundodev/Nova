@@ -1,4 +1,6 @@
 @use "../../design-tokens/tokens" as *;
+@use "../../design-tokens/colors" as *;
+@use "../../components/atoms/post-preview" as *;
 @use "../../components/atoms/text" as *;
 @use "../../components/atoms/title" as *;
 @use "../../components/molecules/cards" as *;
@@ -10,16 +12,27 @@
 #main-taxonomy {
   .section-intro {
     @include section-intro;
+    margin-block-end: $spacer-big;
+    display: flex;
+    flex-direction: row;
+    .section-content {
+      display: flex;
+      flex-direction: column;
+      align-items: start;
+      justify-content: start;
+      gap: $spacer-xxl;
+    }
   }
   .section-blog {
+    padding-block-end: $spacer-big;
     .blog-container {
       display: grid;
       grid-template-columns: 1fr;
       gap: $spacer-xl;
-      .blog-item {
+      .post-preview {
         padding-block: $spacer-xl;
         padding-inline: 0;
-        @include blog-card;
+        @include post-preview;
         @media (width >= $breakpoint-xl) {
           display: grid;
           grid-template-columns: 1fr 1fr;
@@ -60,5 +73,36 @@
   .section-intro {
     margin-block-end: 0;
     align-items: center;
+  }
+}
+
+#section-featured-posts {
+  background-color: $gray-color;
+  padding-block-end: $spacer-big;
+  padding-inline: $spacer-xl;
+  @media (width >= $breakpoint-md) {
+    padding-inline: $spacer-big;
+  }
+  @media (width >= $breakpoint-xl) {
+    padding-inline-start: 10%;
+  }
+  .section-featured-posts-header {
+    display: flex;
+    flex-direction: column;
+    gap: $spacer-xl;
+    margin-block-end: $spacer-xl;
+    @media (width >= $breakpoint-md) {
+      padding-inline-end: 10%;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .section-title {
+      @include heading-large-1;
+      color: $default-color;
+      max-width: 25ch;
+      text-align: start;
+      margin-block-end: 0;
+    }
   }
 }

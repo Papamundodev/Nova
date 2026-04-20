@@ -581,4 +581,27 @@ class Base
         }
         return (int) round((float) $score * 100);
     }
+
+    /**
+     * Generate pagination for a query
+     * @param \WP_Query $query The query to generate pagination for
+     * @return array The pagination array
+     */
+    public static function complus_pagination(?\WP_Query $query = null): array
+    {
+        $query = $query ?? ($GLOBALS['wp_query'] ?? null);
+        if (!$query instanceof \WP_Query) {
+            return [];
+        }
+
+        $currentPage = max(1, get_query_var('paged', 1));
+        $pages = range(1, max(1, (int) $query->max_num_pages));
+        return array_map(function ($page) use ($currentPage) {
+            return (object) array(
+                "isCurrent" => $page == $currentPage,
+                "page" => $page,
+                "url" => get_pagenum_link($page)
+            );
+        }, $pages);
+    }
 }

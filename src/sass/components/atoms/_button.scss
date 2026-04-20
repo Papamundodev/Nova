@@ -493,3 +493,17 @@
 .dropdown-details {
   @include dropdown-details;
 }
+
+.category-link {
+  display: flex;
+  justify-content: center;
+  .btn {
+    font-family: $heading-font;
+    font-size: $font-size-xs;
+    line-height: 1.2;
+    padding-block: $spacer-xs;
+    padding-inline: $spacer-sm;
+    color: $contrast-color;
+    text-decoration: none;
+  }
+}

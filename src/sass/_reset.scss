@@ -1,6 +1,7 @@
 @use "design-tokens/colors" as *;
 @use "design-tokens/fonts" as *;
 @use "utilities/container-wrapper" as *;
+@use "components/atoms/text" as *;
 
 @view-transition {
   navigation: auto;
@@ -119,4 +120,10 @@ ul {
 
 ::-webkit-scrollbar-thumb:hover {
   background: $primary-color;
+}
+
+.stretched-link {
+  &::after {
+    @include stretched-link;
+  }
 }

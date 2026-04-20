@@ -40,15 +40,26 @@
 @mixin heading-medium-large-1 {
   font-size: $font-size-md-lg;
   @include heading-base;
+  @media (width <= $breakpoint-md) {
+    font-size: $font-size-sm;
+  }
 }
 
 @mixin heading-medium-1 {
   font-size: $font-size-md;
   @include heading-base;
+  @media (width <= $breakpoint-md) {
+    font-size: $font-size-sm;
+  }
 }
 
 @mixin heading-small-1 {
   font-size: $font-size-sm;
+  @include heading-base;
+}
+
+@mixin heading-default-1 {
+  font-size: $font-size-default;
   @include heading-base;
 }
 
@@ -91,6 +102,10 @@
 
 .heading-small-1 {
   @include heading-small-1;
+}
+
+.heading-default-1 {
+  @include heading-default-1;
 }
 
 .section-title {

@@ -4,6 +4,7 @@
 @use "../../components/atoms/text" as *;
 @use "../../components/atoms/title" as *;
 @use "../../components/molecules/cards" as *;
+@use "../../components/molecules/layouts" as *;
 @use "../../components/organisms/sections" as *;
 @use "../../utilities/container-wrapper" as *;
 
@@ -76,8 +77,10 @@
   }
 }
 
-#section-featured-posts {
-  background-color: $gray-color;
+#section-featured-posts,
+#section-related-posts {
+  background: $gray-color;
+  background-size: 50% 100%;
   padding-block-end: $spacer-big;
   padding-inline: $spacer-xl;
   @media (width >= $breakpoint-md) {
@@ -86,11 +89,13 @@
   @media (width >= $breakpoint-xl) {
     padding-inline-start: 10%;
   }
-  .section-featured-posts-header {
+  .section-featured-posts-header,
+  .section-related-posts-header {
     display: flex;
     flex-direction: column;
     gap: $spacer-xl;
     margin-block-end: $spacer-xl;
+    padding-block-start: $spacer-xxl;
     @media (width >= $breakpoint-md) {
       padding-inline-end: 10%;
       flex-direction: row;
@@ -102,7 +107,27 @@
       color: $default-color;
       max-width: 25ch;
       text-align: start;
-      margin-block-end: 0;
+      margin-block: 0;
+    }
+  }
+}
+
+.blog-container {
+  @include card-layout;
+  .blog-item {
+    position: relative;
+    .cat-container {
+      span {
+        margin-inline-end: $spacer-sm;
+      }
+    }
+    @media (width >= $breakpoint-xxl) {
+      .cat-container {
+        min-height: 3.3em;
+      }
+      h3 {
+        min-height: 3.3em;
+      }
     }
   }
 }

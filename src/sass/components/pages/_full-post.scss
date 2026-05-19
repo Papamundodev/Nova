@@ -8,21 +8,16 @@
 @use "../../design-tokens/tokens" as *;
 
 @mixin post-content() {
-  max-width: 100ch;
-  margin-inline: auto;
-  background: linear-gradient(90deg, $pink-color 80%, $orange-color 100%)
-    no-repeat;
-  border-radius: $border-radius-rounded;
-  padding: $spacer-xxl;
+  padding-block-end: $spacer-xxl;
   h2 {
-    @include heading-medium-1;
+    @include heading-small-1;
     margin-block: $spacer-xl $spacer-lg;
-    color: $primary-color;
+    color: $orange-color;
   }
   h3 {
-    @include heading-small-1;
+    @include heading-default-1;
     margin-block: $spacer-lg $spacer-md;
-    color: color-mix(in srgb, $dark-blue-color, $default-color 30%);
+    color: $purple-color;
   }
   ul,
   ol {
@@ -52,18 +47,22 @@
     margin-block: $spacer-lg;
   }
   a {
-    color: color-mix(in srgb, $dark-blue-color, $default-color 30%);
+    color: $primary-color;
+    text-decoration: none;
     &:hover {
-      color: $primary-color;
+      color: color-mix(in srgb, $primary-color, $contrast-color 30%);
     }
   }
 }
 
 .post-full {
+  display: flex;
+  flex-direction: column;
+  gap: $spacer-xl;
   .post-header {
     display: flex;
     flex-direction: column;
-    padding-block: $spacer-xxl;
+    padding-block: $spacer-xl;
     @media (width >= $breakpoint-sm) {
       gap: $spacer-lg;
     }
@@ -82,11 +81,9 @@
           a,
           span {
             text-decoration: none;
-            color: $primary-color;
+            color: $default-color;
             text-transform: uppercase;
-            @media (width >= $breakpoint-lg) {
-              @include heading-small-1;
-            }
+            @include text-paragraph-1;
             &[aria-current="page"] {
               color: $purple-color;
             }
@@ -98,7 +95,7 @@
             display: none;
           }
           .separator {
-            background-color: $primary-color;
+            background-color: $contrast-color;
           }
         }
       }
@@ -107,20 +104,20 @@
       display: flex;
       align-items: center;
       gap: $spacer-md;
+      @include text-paragraph-1;
       .separator {
         background-color: $default-color;
       }
 
       @media (width >= $breakpoint-lg) {
-        @include heading-small-1;
         span:first-child {
-          color: $orange-color;
+          color: $default-color;
         }
         span:last-child {
-          color: $orange-color;
+          color: $default-color;
         }
         .separator {
-          background-color: $orange-color;
+          background-color: $default-color;
         }
       }
     }
@@ -137,10 +134,14 @@
     }
   }
 
+  .title-gradient {
+    line-height: 1;
+    margin-block: $spacer-xl;
+  }
   .img-container {
     width: 100%;
-    height: 100%;
-    margin-block-end: $spacer-xxl;
+    height: 500px;
+    margin-block-start: $spacer-xxl;
     img {
       width: 100%;
       height: 100%;
@@ -152,22 +153,16 @@
   }
 }
 
-.blog-container {
-  @include card-layout;
-  .blog-item {
-    position: relative;
-    .cat-container {
-      span {
-        margin-inline-end: $spacer-sm;
-      }
-    }
-    @media (width >= $breakpoint-xxl) {
-      .cat-container {
-        min-height: 3.3em;
-      }
-      h3 {
-        min-height: 3.3em;
-      }
-    }
+.post-categories {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $spacer-sm;
+  align-items: center;
+  span {
+    margin-inline-end: $spacer-sm;
   }
+}
+
+#section-related-posts {
+  margin-block-end: calc($spacer-big * 2);
 }

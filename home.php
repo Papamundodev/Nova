@@ -15,10 +15,6 @@ global $wp_query;
             <div class="intro-content-container">
                 <h1 id="intro-title" class="title-gradient"><?= $intro['title']; ?></h1>
                 <p><?= $intro['text']; ?></p>
-                <div class="button-background-primary button-background-animation">
-                    <a href="<?= $intro['link']['url']; ?>" class="btn"><?= $intro['link']['title']; ?></a>
-                    <span class="hover-bg"></span>
-                </div>
             </div>
         </div>
         <div class="animation-moving">
@@ -36,7 +32,7 @@ global $wp_query;
     </section>
 
     <?php
-    if ($wp_query->have_posts()): ?>
+    if ($wp_query->have_posts() && count($wp_query->posts) > 10): ?>
         <section aria-labelledby="section-featured-posts-title" id="section-featured-posts" class="section-featured-posts slider " data-slider-featured-posts data-count="<?= count($wp_query->posts); ?>">
             <div class="section-featured-posts-header ">
                 <h2 id="section-featured-posts-title" class="section-title">Regarder nos derniers articles en vedette</h2>

@@ -1,8 +1,7 @@
 <?php
 global $post;
 $title = get_the_title();
-$content = get_the_content();
-$content = wpautop($content);
+$content = $post->post_content;
 $featured_image = get_the_post_thumbnail_url($post, "large");
 $date_published = get_the_date();
 $reading_time = \Theme_base\Base::get_reading_time($content);
@@ -50,8 +49,8 @@ $categories = get_the_terms($post->ID, 'category');
             <span><?= $reading_time; ?></span>
         </div>
     </div> -->
-    <div class="post-content">
-        <?= wpautop($content); ?>
+    <div class="post-content content-wysiwyg">
+        <?= $content; ?>
     </div>
 
 </article>

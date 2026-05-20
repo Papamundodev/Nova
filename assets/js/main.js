@@ -1,1 +1,965 @@
-var ft=typeof globalThis<"u"?globalThis:typeof window<"u"?window:typeof global<"u"?global:typeof self<"u"?self:{};function pt(w){return w&&w.__esModule&&Object.prototype.hasOwnProperty.call(w,"default")?w.default:w}var nt={exports:{}};(function(w,f){(function(){var d,b,T,x,c,m,M,g,y,s,h,S,E,A,O,I,B,D,N,k,C,G,V,X,W,Q,Y,it,z,K,ot,st,at=[].slice;B='<span class="odometer-value"></span>',A='<span class="odometer-ribbon"><span class="odometer-ribbon-inner">'+B+"</span></span>",x='<span class="odometer-digit"><span class="odometer-digit-spacer">8</span><span class="odometer-digit-inner">'+A+"</span></span>",M='<span class="odometer-formatting-mark"></span>',T="(,ddd).dd",g=/^\(?([^)]*)\)?(?:(.)(d+))?$/,y=30,m=2e3,d=20,s=2,c=.5,h=1e3/y,b=1e3/d,O="transitionend webkitTransitionEnd oTransitionEnd otransitionend MSTransitionEnd",W=document.createElement("div").style,I=W.transition!=null||W.webkitTransition!=null||W.mozTransition!=null||W.oTransition!=null,V=window.requestAnimationFrame||window.mozRequestAnimationFrame||window.webkitRequestAnimationFrame||window.msRequestAnimationFrame,S=window.MutationObserver||window.WebKitMutationObserver||window.MozMutationObserver,N=function(r){var t;return t=document.createElement("div"),t.innerHTML=r,t.children[0]},G=function(r,t){return r.className=r.className.replace(new RegExp("(^| )"+t.split(" ").join("|")+"( |$)","gi")," ")},D=function(r,t){return G(r,t),r.className+=" "+t},Q=function(r,t){var e;if(document.createEvent!=null)return e=document.createEvent("HTMLEvents"),e.initEvent(t,!0,!0),r.dispatchEvent(e)},C=function(){var r,t;return(r=(t=window.performance)!=null&&typeof t.now=="function"?t.now():void 0)!=null?r:+new Date},X=function(r,t){return t==null&&(t=0),t?(r*=Math.pow(10,t),r+=.5,r=Math.floor(r),r/=Math.pow(10,t)):Math.round(r)},Y=function(r){return r<0?Math.ceil(r):Math.floor(r)},k=function(r){return r-X(r)},z=!1,(it=function(){var r,t,e,n,o;if(!z&&window.jQuery!=null){for(z=!0,n=["html","text"],o=[],t=0,e=n.length;t<e;t++)r=n[t],o.push(function(i){var a;return a=window.jQuery.fn[i],window.jQuery.fn[i]=function(l){var u;return l==null||((u=this[0])!=null?u.odometer:void 0)==null?a.apply(this,arguments):this[0].odometer.update(l)}}(r));return o}})(),setTimeout(it,0),E=function(){function r(t){var e,n,o,i,a,l,u,_,L,p=this;if(this.options=t,this.el=this.options.el,this.el.odometer!=null)return this.el.odometer;this.el.odometer=this,u=r.options;for(e in u)o=u[e],this.options[e]==null&&(this.options[e]=o);(i=this.options).duration==null&&(i.duration=m),this.MAX_VALUES=this.options.duration/h/s|0,this.resetFormat(),this.value=this.cleanValue((_=this.options.value)!=null?_:""),this.renderInside(),this.render();try{for(L=["innerHTML","innerText","textContent"],a=0,l=L.length;a<l;a++)n=L[a],this.el[n]!=null&&function(v){return Object.defineProperty(p.el,v,{get:function(){var F;return v==="innerHTML"?p.inside.outerHTML:(F=p.inside.innerText)!=null?F:p.inside.textContent},set:function(F){return p.update(F)}})}(n)}catch{this.watchForMutations()}}return r.prototype.renderInside=function(){return this.inside=document.createElement("div"),this.inside.className="odometer-inside",this.el.innerHTML="",this.el.appendChild(this.inside)},r.prototype.watchForMutations=function(){var t=this;if(S!=null)try{return this.observer==null&&(this.observer=new S(function(e){var n;return n=t.el.innerText,t.renderInside(),t.render(t.value),t.update(n)})),this.watchMutations=!0,this.startWatchingMutations()}catch{}},r.prototype.startWatchingMutations=function(){if(this.watchMutations)return this.observer.observe(this.el,{childList:!0})},r.prototype.stopWatchingMutations=function(){var t;return(t=this.observer)!=null?t.disconnect():void 0},r.prototype.cleanValue=function(t){var e;return typeof t=="string"&&(t=t.replace((e=this.format.radix)!=null?e:".","<radix>"),t=t.replace(/[.,]/g,""),t=t.replace("<radix>","."),t=parseFloat(t,10)||0),X(t,this.format.precision)},r.prototype.bindTransitionEnd=function(){var t,e,n,o,i,a,l=this;if(!this.transitionEndBound){for(this.transitionEndBound=!0,e=!1,i=O.split(" "),a=[],n=0,o=i.length;n<o;n++)t=i[n],a.push(this.el.addEventListener(t,function(){return e||(e=!0,setTimeout(function(){return l.render(),e=!1,Q(l.el,"odometerdone")},0)),!0},!1));return a}},r.prototype.resetFormat=function(){var t,e,n,o,i,a,l,u;if(t=(l=this.options.format)!=null?l:T,t||(t="d"),n=g.exec(t),!n)throw new Error("Odometer: Unparsable digit format");return u=n.slice(1,4),a=u[0],i=u[1],e=u[2],o=(e!=null?e.length:void 0)||0,this.format={repeating:a,radix:i,precision:o}},r.prototype.render=function(t){var e,n,o,i,a,l,u;for(t==null&&(t=this.value),this.stopWatchingMutations(),this.resetFormat(),this.inside.innerHTML="",a=this.options.theme,e=this.el.className.split(" "),i=[],l=0,u=e.length;l<u;l++)if(n=e[l],!!n.length){if(o=/^odometer-theme-(.+)$/.exec(n)){a=o[1];continue}/^odometer(-|$)/.test(n)||i.push(n)}return i.push("odometer"),I||i.push("odometer-no-transitions"),a?i.push("odometer-theme-"+a):i.push("odometer-auto-theme"),this.el.className=i.join(" "),this.ribbons={},this.formatDigits(t),this.startWatchingMutations()},r.prototype.formatDigits=function(t){var e,n,o,i,a,l,u,_,L,p;if(this.digits=[],this.options.formatFunction)for(o=this.options.formatFunction(t),L=o.split("").reverse(),a=0,u=L.length;a<u;a++)n=L[a],n.match(/0-9/)?(e=this.renderDigit(),e.querySelector(".odometer-value").innerHTML=n,this.digits.push(e),this.insertDigit(e)):this.addSpacer(n);else for(i=!this.format.precision||!k(t)||!1,p=t.toString().split("").reverse(),l=0,_=p.length;l<_;l++)e=p[l],e==="."&&(i=!0),this.addDigit(e,i)},r.prototype.update=function(t){var e,n=this;if(t=this.cleanValue(t),!!(e=t-this.value))return G(this.el,"odometer-animating-up odometer-animating-down odometer-animating"),e>0?D(this.el,"odometer-animating-up"):D(this.el,"odometer-animating-down"),this.stopWatchingMutations(),this.animate(t),this.startWatchingMutations(),setTimeout(function(){return n.el.offsetHeight,D(n.el,"odometer-animating")},0),this.value=t},r.prototype.renderDigit=function(){return N(x)},r.prototype.insertDigit=function(t,e){return e!=null?this.inside.insertBefore(t,e):this.inside.children.length?this.inside.insertBefore(t,this.inside.children[0]):this.inside.appendChild(t)},r.prototype.addSpacer=function(t,e,n){var o;return o=N(M),o.innerHTML=t,n&&D(o,n),this.insertDigit(o,e)},r.prototype.addDigit=function(t,e){var n,o,i,a;if(e==null&&(e=!0),t==="-")return this.addSpacer(t,null,"odometer-negation-mark");if(t===".")return this.addSpacer((a=this.format.radix)!=null?a:".",null,"odometer-radix-mark");if(e)for(i=!1;;){if(!this.format.repeating.length){if(i)throw new Error("Bad odometer format without digits");this.resetFormat(),i=!0}if(n=this.format.repeating[this.format.repeating.length-1],this.format.repeating=this.format.repeating.substring(0,this.format.repeating.length-1),n==="d")break;this.addSpacer(n)}return o=this.renderDigit(),o.querySelector(".odometer-value").innerHTML=t,this.digits.push(o),this.insertDigit(o)},r.prototype.animate=function(t){return!I||this.options.animation==="count"?this.animateCount(t):this.animateSlide(t)},r.prototype.animateCount=function(t){var e,n,o,i,a,l=this;if(n=+t-this.value)return i=o=C(),e=this.value,(a=function(){var u,_,L;if(C()-i>l.options.duration){l.value=t,l.render(),Q(l.el,"odometerdone");return}return u=C()-o,u>b&&(o=C(),L=u/l.options.duration,_=n*L,e+=_,l.render(Math.round(e))),V!=null?V(a):setTimeout(a,b)})()},r.prototype.getDigitCount=function(){var t,e,n,o,i,a;for(o=1<=arguments.length?at.call(arguments,0):[],t=i=0,a=o.length;i<a;t=++i)n=o[t],o[t]=Math.abs(n);return e=Math.max.apply(Math,o),Math.ceil(Math.log(e+1)/Math.log(10))},r.prototype.getFractionalDigitCount=function(){var t,e,n,o,i,a,l;for(i=1<=arguments.length?at.call(arguments,0):[],e=/^\-?\d*\.(\d*?)0*$/,t=a=0,l=i.length;a<l;t=++a)o=i[t],i[t]=o.toString(),n=e.exec(i[t]),n==null?i[t]=0:i[t]=n[1].length;return Math.max.apply(Math,i)},r.prototype.resetDigits=function(){return this.digits=[],this.ribbons=[],this.inside.innerHTML="",this.resetFormat()},r.prototype.animateSlide=function(t){var e,n,o,i,a,l,u,_,L,p,v,F,H,j,R,q,P,lt,U,J,Z,dt,ut,ct,tt,et,rt;if(q=this.value,_=this.getFractionalDigitCount(q,t),_&&(t=t*Math.pow(10,_),q=q*Math.pow(10,_)),!!(o=t-q)){for(this.bindTransitionEnd(),i=this.getDigitCount(q,t),a=[],e=0,v=U=0;0<=i?U<i:U>i;v=0<=i?++U:--U){if(P=Y(q/Math.pow(10,i-v-1)),u=Y(t/Math.pow(10,i-v-1)),l=u-P,Math.abs(l)>this.MAX_VALUES){for(p=[],F=l/(this.MAX_VALUES+this.MAX_VALUES*e*c),n=P;l>0&&n<u||l<0&&n>u;)p.push(Math.round(n)),n+=F;p[p.length-1]!==u&&p.push(u),e++}else p=(function(){rt=[];for(var $=P;P<=u?$<=u:$>=u;P<=u?$++:$--)rt.push($);return rt}).apply(this);for(v=J=0,dt=p.length;J<dt;v=++J)L=p[v],p[v]=Math.abs(L%10);a.push(p)}for(this.resetDigits(),et=a.reverse(),v=Z=0,ut=et.length;Z<ut;v=++Z)for(p=et[v],this.digits[v]||this.addDigit(" ",v>=_),(lt=this.ribbons)[v]==null&&(lt[v]=this.digits[v].querySelector(".odometer-ribbon-inner")),this.ribbons[v].innerHTML="",o<0&&(p=p.reverse()),H=tt=0,ct=p.length;tt<ct;H=++tt)L=p[H],R=document.createElement("div"),R.className="odometer-value",R.innerHTML=L,this.ribbons[v].appendChild(R),H===p.length-1&&D(R,"odometer-last-value"),H===0&&D(R,"odometer-first-value");if(P<0&&this.addDigit("-"),j=this.inside.querySelector(".odometer-radix-mark"),j!=null&&j.parent.removeChild(j),_)return this.addSpacer(this.format.radix,this.digits[_-1],"odometer-radix-mark")}},r}(),E.options=(ot=window.odometerOptions)!=null?ot:{},setTimeout(function(){var r,t,e,n,o;if(window.odometerOptions){n=window.odometerOptions,o=[];for(r in n)t=n[r],o.push((e=E.options)[r]!=null?(e=E.options)[r]:e[r]=t);return o}},0),E.init=function(){var r,t,e,n,o,i;if(document.querySelectorAll!=null){for(t=document.querySelectorAll(E.options.selector||".odometer"),i=[],e=0,n=t.length;e<n;e++)r=t[e],i.push(r.odometer=new E({el:r,value:(o=r.innerText)!=null?o:r.textContent}));return i}},((st=document.documentElement)!=null?st.doScroll:void 0)!=null&&document.createEventObject!=null?(K=document.onreadystatechange,document.onreadystatechange=function(){return document.readyState==="complete"&&E.options.auto!==!1&&E.init(),K!=null?K.apply(this,arguments):void 0}):document.addEventListener("DOMContentLoaded",function(){if(E.options.auto!==!1)return E.init()},!1),f!==null?w.exports=E:window.Odometer=E}).call(ft)})(nt,nt.exports);var mt=nt.exports;const ht=pt(mt);ht.options.auto=!1;function gt(){var T,x;const w=document.querySelectorAll(".border-animation[data-pourcentage]");if(w.length===0)return;const f=(x=(T=window.matchMedia)==null?void 0:T.call(window,"(prefers-reduced-motion: reduce)"))==null?void 0:x.matches,d=(c,m)=>{const M=c.querySelector(".border-odometer.odometer[data-odometer-value]");if(!M||M.dataset.odometerInit==="1")return null;M.dataset.odometerInit="1";const g=M.dataset.odometerValue??String(m??"0"),y=Math.min(100,Math.max(0,parseFloat(g)));if(!Number.isFinite(y))return null;M.textContent="0";const s=new ht({el:M,value:0,duration:2e3,theme:"default",format:"d"});return()=>s.update(y)},b=c=>{const m=parseFloat(c.dataset.pourcentage);if(isNaN(m))return;const M=m/100*360;if(c.style.setProperty("--pourcentage",m+"%"),c.style.setProperty("--degree",M+"deg"),f){c.classList.add("is-animated");const y=d(c,m);y&&y();return}const g=d(c,m);requestAnimationFrame(()=>{c.classList.add("is-animated"),g&&g()})};if("IntersectionObserver"in window&&!f){const c=new IntersectionObserver((m,M)=>{m.forEach(g=>{g.isIntersecting&&(b(g.target),M.unobserve(g.target))})},{rootMargin:"0px 0px -10% 0px",threshold:.15});w.forEach(m=>c.observe(m))}else w.forEach(c=>b(c))}document.addEventListener("DOMContentLoaded",()=>{gt()});document.addEventListener("DOMContentLoaded",()=>{const w=document.querySelector("#theme-navbar-toggler"),f=document.getElementById("navmenu-header-mobile");w.addEventListener("click",()=>{w.classList.toggle("open")}),f.addEventListener("toggle",s=>{s.newState==="closed"&&w.classList.remove("open")}),f.addEventListener("click",s=>{s.target.closest("a")&&f.hidePopover()}),document.addEventListener("mouseover",function(s){const h=s.target.closest(".button-background-animation");if(h){const A=h.querySelector(".hover-bg");if(A){const O=h.getBoundingClientRect(),I=s.clientX-O.left,B=s.clientY-O.top;A.style.setProperty("--creative-hover-top",`${B}px`),A.style.setProperty("--creative-hover-left",`${I}px`)}}const S=document.querySelector("[data-slider-featured-posts]");S&&new yt(S);const E=document.querySelector("[data-slider-related-posts]");E&&new bt(E)});const d=document.querySelector(".animation-moving-item"),b=document.querySelectorAll(".section-light");b&&d&&b.length>0&&(b.forEach(h=>{h.addEventListener("mouseenter",()=>{document.body.classList.contains("dark-theme")&&d.classList.add("animation-moving-item--cursor-follow")}),h.addEventListener("mousemove",S=>{document.body.classList.contains("dark-theme")&&(document.documentElement.style.setProperty("--mouse-x",`${S.clientX}px`),document.documentElement.style.setProperty("--mouse-y",`${S.clientY}px`))}),h.addEventListener("mouseleave",()=>{d.classList.remove("animation-moving-item--cursor-follow")})}),new MutationObserver(()=>{document.body.classList.contains("dark-theme")||d.classList.remove("animation-moving-item--cursor-follow")}).observe(document.body,{attributes:!0,attributeFilter:["class"]}));const T=document.querySelector(".gradient-container"),x=document.querySelector(".gradient-container .interactive");T&&x&&(T.addEventListener("mouseenter",()=>{x.classList.add("interactive--cursor-follow")}),T.addEventListener("mousemove",s=>{document.documentElement.style.setProperty("--mouse-x",`${s.clientX}px`),document.documentElement.style.setProperty("--mouse-y",`${s.clientY}px`)}),T.addEventListener("mouseleave",()=>{x.classList.remove("interactive--cursor-follow")}));const c=document.querySelectorAll(".scroller");c.length>0&&m();function m(){c.forEach(s=>{s.setAttribute("data-infinite-scroll","true");const h=s.querySelector(".scroller-inner"),S=Array.from(h.children);s.dataset.originalCount=String(S.length);const E=5,A=30,I=S.length/E*A,N=Math.min(120,Math.max(12,I));s.style.setProperty("--scroll-duration",`${N}s`),M(s),S.forEach(k=>{let C=k.cloneNode(!0);C.setAttribute("aria-hidden","true"),h.appendChild(C)}),S.forEach(k=>{let C=k.cloneNode(!0);C.setAttribute("aria-hidden","true"),h.appendChild(C)})})}function M(s){const h=s.querySelector(".scroller-inner"),S=Number(s.dataset.originalCount||0);if(S===0)return;const A=Array.from(h.children).slice(0,S).reduce((O,I)=>O+I.getBoundingClientRect().width,0);A>0&&s.style.setProperty("--scroll-distance",`${A}px`)}window.addEventListener("load",()=>{c.forEach(s=>{M(s)})});let g=document.querySelector(".scroll-top");function y(){g&&(window.scrollY>100?g.classList.add("active"):g.classList.remove("active"))}g.addEventListener("click",s=>{s.preventDefault(),window.scrollTo({top:0,behavior:"smooth"})}),window.addEventListener("load",y),document.addEventListener("scroll",y)});function vt(w){requestAnimationFrame(()=>{w.scrollIntoView({behavior:"smooth",block:"start"})})}function wt(w){const f=document.querySelectorAll(w);f.length&&f.forEach(d=>{d.addEventListener("toggle",()=>{d.open&&vt(d)})})}document.addEventListener("DOMContentLoaded",()=>{wt('details.dropdown-details[id^="faq-details-"]')});class yt{constructor(f){this.nextButton=f.querySelector("[data-slider-next-featured-posts]"),this.prevButton=f.querySelector("[data-slider-prev-featured-posts]"),this.wrapper=f.querySelector("[data-slider-wrapper-featured-posts]"),this.nextButton.addEventListener("click",()=>this.move(1)),this.prevButton.addEventListener("click",()=>this.move(-1)),this.updateUi(),this.wrapper.addEventListener("scroll",()=>{this.updateUi()})}get itemToScroll(){return parseInt(window.getComputedStyle(this.wrapper).getPropertyValue("--items"),10)}updateUi(){const f=this.wrapper.scrollLeft,d=this.wrapper.scrollWidth,b=this.wrapper.offsetWidth;f<=1?this.prevButton.setAttribute("hidden","hidden"):this.prevButton.removeAttribute("hidden"),f+b>=d-1?this.nextButton.setAttribute("hidden","hidden"):this.nextButton.removeAttribute("hidden")}move(f){const d=this.itemToScroll,b=this.wrapper.scrollLeft,T=this.wrapper.offsetWidth,x=this.wrapper.scrollWidth,c=Array.from(this.wrapper.children||[]);let m=0;if(b+T>=x-1){const s=Math.floor((c.length-1)/d)*d,h=Math.max(0,c.length-d);m=Math.min(s,h)}else{let s=0;for(let h=0;h<c.length;h++)if(c[h].offsetLeft>=b){s=h;break}m=Math.floor(s/d)*d}let g=m+f*d,y;if(g<0)y=0;else if(g>=this.wrapper.children.length){const s=this.wrapper.children.length-d;y=this.wrapper.children[s].offsetLeft}else y=this.wrapper.children[g].offsetLeft;this.wrapper.scrollTo({left:y,behavior:"smooth"})}}class bt{constructor(f){this.nextButton=f.querySelector("[data-slider-next-related-posts]"),this.prevButton=f.querySelector("[data-slider-prev-related-posts]"),this.wrapper=f.querySelector("[data-slider-wrapper-related-posts]"),this.nextButton.addEventListener("click",()=>this.move(1)),this.prevButton.addEventListener("click",()=>this.move(-1)),this.updateUi(),this.wrapper.addEventListener("scroll",()=>{this.updateUi()})}get itemToScroll(){return parseInt(window.getComputedStyle(this.wrapper).getPropertyValue("--items"),10)}updateUi(){const f=this.wrapper.scrollLeft,d=this.wrapper.scrollWidth,b=this.wrapper.offsetWidth;f<=1?this.prevButton.setAttribute("hidden","hidden"):this.prevButton.removeAttribute("hidden"),f+b>=d-1?this.nextButton.setAttribute("hidden","hidden"):this.nextButton.removeAttribute("hidden")}move(f){const d=this.itemToScroll,b=this.wrapper.scrollLeft,T=this.wrapper.offsetWidth,x=this.wrapper.scrollWidth,c=Array.from(this.wrapper.children||[]);let m=0;if(b+T>=x-1){const s=Math.floor((c.length-1)/d)*d,h=Math.max(0,c.length-d);m=Math.min(s,h)}else{let s=0;for(let h=0;h<c.length;h++)if(c[h].offsetLeft>=b){s=h;break}m=Math.floor(s/d)*d}let g=m+f*d,y;if(g<0)y=0;else if(g>=this.wrapper.children.length){const s=this.wrapper.children.length-d;y=this.wrapper.children[s].offsetLeft}else y=this.wrapper.children[g].offsetLeft;this.wrapper.scrollTo({left:y,behavior:"smooth"})}}
+var commonjsGlobal = typeof globalThis !== "undefined" ? globalThis : typeof window !== "undefined" ? window : typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : {};
+function getDefaultExportFromCjs(x) {
+  return x && x.__esModule && Object.prototype.hasOwnProperty.call(x, "default") ? x["default"] : x;
+}
+var odometer = { exports: {} };
+(function(module, exports) {
+  (function() {
+    var COUNT_FRAMERATE, COUNT_MS_PER_FRAME, DIGIT_FORMAT, DIGIT_HTML, DIGIT_SPEEDBOOST, DURATION, FORMAT_MARK_HTML, FORMAT_PARSER, FRAMERATE, FRAMES_PER_VALUE, MS_PER_FRAME, MutationObserver2, Odometer2, RIBBON_HTML, TRANSITION_END_EVENTS, TRANSITION_SUPPORT, VALUE_HTML, addClass, createFromHTML, fractionalPart, now, removeClass, requestAnimationFrame2, round, transitionCheckStyles, trigger, truncate, wrapJQuery, _jQueryWrapped, _old, _ref, _ref1, __slice = [].slice;
+    VALUE_HTML = '<span class="odometer-value"></span>';
+    RIBBON_HTML = '<span class="odometer-ribbon"><span class="odometer-ribbon-inner">' + VALUE_HTML + "</span></span>";
+    DIGIT_HTML = '<span class="odometer-digit"><span class="odometer-digit-spacer">8</span><span class="odometer-digit-inner">' + RIBBON_HTML + "</span></span>";
+    FORMAT_MARK_HTML = '<span class="odometer-formatting-mark"></span>';
+    DIGIT_FORMAT = "(,ddd).dd";
+    FORMAT_PARSER = /^\(?([^)]*)\)?(?:(.)(d+))?$/;
+    FRAMERATE = 30;
+    DURATION = 2e3;
+    COUNT_FRAMERATE = 20;
+    FRAMES_PER_VALUE = 2;
+    DIGIT_SPEEDBOOST = 0.5;
+    MS_PER_FRAME = 1e3 / FRAMERATE;
+    COUNT_MS_PER_FRAME = 1e3 / COUNT_FRAMERATE;
+    TRANSITION_END_EVENTS = "transitionend webkitTransitionEnd oTransitionEnd otransitionend MSTransitionEnd";
+    transitionCheckStyles = document.createElement("div").style;
+    TRANSITION_SUPPORT = transitionCheckStyles.transition != null || transitionCheckStyles.webkitTransition != null || transitionCheckStyles.mozTransition != null || transitionCheckStyles.oTransition != null;
+    requestAnimationFrame2 = window.requestAnimationFrame || window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame || window.msRequestAnimationFrame;
+    MutationObserver2 = window.MutationObserver || window.WebKitMutationObserver || window.MozMutationObserver;
+    createFromHTML = function(html) {
+      var el;
+      el = document.createElement("div");
+      el.innerHTML = html;
+      return el.children[0];
+    };
+    removeClass = function(el, name) {
+      return el.className = el.className.replace(new RegExp("(^| )" + name.split(" ").join("|") + "( |$)", "gi"), " ");
+    };
+    addClass = function(el, name) {
+      removeClass(el, name);
+      return el.className += " " + name;
+    };
+    trigger = function(el, name) {
+      var evt;
+      if (document.createEvent != null) {
+        evt = document.createEvent("HTMLEvents");
+        evt.initEvent(name, true, true);
+        return el.dispatchEvent(evt);
+      }
+    };
+    now = function() {
+      var _ref2, _ref12;
+      return (_ref2 = (_ref12 = window.performance) != null ? typeof _ref12.now === "function" ? _ref12.now() : void 0 : void 0) != null ? _ref2 : +/* @__PURE__ */ new Date();
+    };
+    round = function(val, precision) {
+      if (precision == null) {
+        precision = 0;
+      }
+      if (!precision) {
+        return Math.round(val);
+      }
+      val *= Math.pow(10, precision);
+      val += 0.5;
+      val = Math.floor(val);
+      return val /= Math.pow(10, precision);
+    };
+    truncate = function(val) {
+      if (val < 0) {
+        return Math.ceil(val);
+      } else {
+        return Math.floor(val);
+      }
+    };
+    fractionalPart = function(val) {
+      return val - round(val);
+    };
+    _jQueryWrapped = false;
+    (wrapJQuery = function() {
+      var property, _i, _len, _ref2, _results;
+      if (_jQueryWrapped) {
+        return;
+      }
+      if (window.jQuery != null) {
+        _jQueryWrapped = true;
+        _ref2 = ["html", "text"];
+        _results = [];
+        for (_i = 0, _len = _ref2.length; _i < _len; _i++) {
+          property = _ref2[_i];
+          _results.push(function(property2) {
+            var old;
+            old = window.jQuery.fn[property2];
+            return window.jQuery.fn[property2] = function(val) {
+              var _ref12;
+              if (val == null || ((_ref12 = this[0]) != null ? _ref12.odometer : void 0) == null) {
+                return old.apply(this, arguments);
+              }
+              return this[0].odometer.update(val);
+            };
+          }(property));
+        }
+        return _results;
+      }
+    })();
+    setTimeout(wrapJQuery, 0);
+    Odometer2 = function() {
+      function Odometer3(options) {
+        var k, property, v, _base, _i, _len, _ref2, _ref12, _ref22, _this = this;
+        this.options = options;
+        this.el = this.options.el;
+        if (this.el.odometer != null) {
+          return this.el.odometer;
+        }
+        this.el.odometer = this;
+        _ref2 = Odometer3.options;
+        for (k in _ref2) {
+          v = _ref2[k];
+          if (this.options[k] == null) {
+            this.options[k] = v;
+          }
+        }
+        if ((_base = this.options).duration == null) {
+          _base.duration = DURATION;
+        }
+        this.MAX_VALUES = this.options.duration / MS_PER_FRAME / FRAMES_PER_VALUE | 0;
+        this.resetFormat();
+        this.value = this.cleanValue((_ref12 = this.options.value) != null ? _ref12 : "");
+        this.renderInside();
+        this.render();
+        try {
+          _ref22 = ["innerHTML", "innerText", "textContent"];
+          for (_i = 0, _len = _ref22.length; _i < _len; _i++) {
+            property = _ref22[_i];
+            if (this.el[property] != null) {
+              (function(property2) {
+                return Object.defineProperty(_this.el, property2, {
+                  get: function() {
+                    var _ref3;
+                    if (property2 === "innerHTML") {
+                      return _this.inside.outerHTML;
+                    } else {
+                      return (_ref3 = _this.inside.innerText) != null ? _ref3 : _this.inside.textContent;
+                    }
+                  },
+                  set: function(val) {
+                    return _this.update(val);
+                  }
+                });
+              })(property);
+            }
+          }
+        } catch (_error) {
+          this.watchForMutations();
+        }
+      }
+      Odometer3.prototype.renderInside = function() {
+        this.inside = document.createElement("div");
+        this.inside.className = "odometer-inside";
+        this.el.innerHTML = "";
+        return this.el.appendChild(this.inside);
+      };
+      Odometer3.prototype.watchForMutations = function() {
+        var _this = this;
+        if (MutationObserver2 == null) {
+          return;
+        }
+        try {
+          if (this.observer == null) {
+            this.observer = new MutationObserver2(function(mutations) {
+              var newVal;
+              newVal = _this.el.innerText;
+              _this.renderInside();
+              _this.render(_this.value);
+              return _this.update(newVal);
+            });
+          }
+          this.watchMutations = true;
+          return this.startWatchingMutations();
+        } catch (_error) {
+        }
+      };
+      Odometer3.prototype.startWatchingMutations = function() {
+        if (this.watchMutations) {
+          return this.observer.observe(this.el, {
+            childList: true
+          });
+        }
+      };
+      Odometer3.prototype.stopWatchingMutations = function() {
+        var _ref2;
+        return (_ref2 = this.observer) != null ? _ref2.disconnect() : void 0;
+      };
+      Odometer3.prototype.cleanValue = function(val) {
+        var _ref2;
+        if (typeof val === "string") {
+          val = val.replace((_ref2 = this.format.radix) != null ? _ref2 : ".", "<radix>");
+          val = val.replace(/[.,]/g, "");
+          val = val.replace("<radix>", ".");
+          val = parseFloat(val, 10) || 0;
+        }
+        return round(val, this.format.precision);
+      };
+      Odometer3.prototype.bindTransitionEnd = function() {
+        var event, renderEnqueued, _i, _len, _ref2, _results, _this = this;
+        if (this.transitionEndBound) {
+          return;
+        }
+        this.transitionEndBound = true;
+        renderEnqueued = false;
+        _ref2 = TRANSITION_END_EVENTS.split(" ");
+        _results = [];
+        for (_i = 0, _len = _ref2.length; _i < _len; _i++) {
+          event = _ref2[_i];
+          _results.push(this.el.addEventListener(event, function() {
+            if (renderEnqueued) {
+              return true;
+            }
+            renderEnqueued = true;
+            setTimeout(function() {
+              _this.render();
+              renderEnqueued = false;
+              return trigger(_this.el, "odometerdone");
+            }, 0);
+            return true;
+          }, false));
+        }
+        return _results;
+      };
+      Odometer3.prototype.resetFormat = function() {
+        var format, fractional, parsed, precision, radix, repeating, _ref2, _ref12;
+        format = (_ref2 = this.options.format) != null ? _ref2 : DIGIT_FORMAT;
+        format || (format = "d");
+        parsed = FORMAT_PARSER.exec(format);
+        if (!parsed) {
+          throw new Error("Odometer: Unparsable digit format");
+        }
+        _ref12 = parsed.slice(1, 4), repeating = _ref12[0], radix = _ref12[1], fractional = _ref12[2];
+        precision = (fractional != null ? fractional.length : void 0) || 0;
+        return this.format = {
+          repeating,
+          radix,
+          precision
+        };
+      };
+      Odometer3.prototype.render = function(value) {
+        var classes, cls, match, newClasses, theme, _i, _len;
+        if (value == null) {
+          value = this.value;
+        }
+        this.stopWatchingMutations();
+        this.resetFormat();
+        this.inside.innerHTML = "";
+        theme = this.options.theme;
+        classes = this.el.className.split(" ");
+        newClasses = [];
+        for (_i = 0, _len = classes.length; _i < _len; _i++) {
+          cls = classes[_i];
+          if (!cls.length) {
+            continue;
+          }
+          if (match = /^odometer-theme-(.+)$/.exec(cls)) {
+            theme = match[1];
+            continue;
+          }
+          if (/^odometer(-|$)/.test(cls)) {
+            continue;
+          }
+          newClasses.push(cls);
+        }
+        newClasses.push("odometer");
+        if (!TRANSITION_SUPPORT) {
+          newClasses.push("odometer-no-transitions");
+        }
+        if (theme) {
+          newClasses.push("odometer-theme-" + theme);
+        } else {
+          newClasses.push("odometer-auto-theme");
+        }
+        this.el.className = newClasses.join(" ");
+        this.ribbons = {};
+        this.formatDigits(value);
+        return this.startWatchingMutations();
+      };
+      Odometer3.prototype.formatDigits = function(value) {
+        var digit, valueDigit, valueString, wholePart, _i, _j, _len, _len1, _ref2, _ref12;
+        this.digits = [];
+        if (this.options.formatFunction) {
+          valueString = this.options.formatFunction(value);
+          _ref2 = valueString.split("").reverse();
+          for (_i = 0, _len = _ref2.length; _i < _len; _i++) {
+            valueDigit = _ref2[_i];
+            if (valueDigit.match(/0-9/)) {
+              digit = this.renderDigit();
+              digit.querySelector(".odometer-value").innerHTML = valueDigit;
+              this.digits.push(digit);
+              this.insertDigit(digit);
+            } else {
+              this.addSpacer(valueDigit);
+            }
+          }
+        } else {
+          wholePart = !this.format.precision || !fractionalPart(value) || false;
+          _ref12 = value.toString().split("").reverse();
+          for (_j = 0, _len1 = _ref12.length; _j < _len1; _j++) {
+            digit = _ref12[_j];
+            if (digit === ".") {
+              wholePart = true;
+            }
+            this.addDigit(digit, wholePart);
+          }
+        }
+      };
+      Odometer3.prototype.update = function(newValue) {
+        var diff, _this = this;
+        newValue = this.cleanValue(newValue);
+        if (!(diff = newValue - this.value)) {
+          return;
+        }
+        removeClass(this.el, "odometer-animating-up odometer-animating-down odometer-animating");
+        if (diff > 0) {
+          addClass(this.el, "odometer-animating-up");
+        } else {
+          addClass(this.el, "odometer-animating-down");
+        }
+        this.stopWatchingMutations();
+        this.animate(newValue);
+        this.startWatchingMutations();
+        setTimeout(function() {
+          _this.el.offsetHeight;
+          return addClass(_this.el, "odometer-animating");
+        }, 0);
+        return this.value = newValue;
+      };
+      Odometer3.prototype.renderDigit = function() {
+        return createFromHTML(DIGIT_HTML);
+      };
+      Odometer3.prototype.insertDigit = function(digit, before) {
+        if (before != null) {
+          return this.inside.insertBefore(digit, before);
+        } else if (!this.inside.children.length) {
+          return this.inside.appendChild(digit);
+        } else {
+          return this.inside.insertBefore(digit, this.inside.children[0]);
+        }
+      };
+      Odometer3.prototype.addSpacer = function(chr, before, extraClasses) {
+        var spacer;
+        spacer = createFromHTML(FORMAT_MARK_HTML);
+        spacer.innerHTML = chr;
+        if (extraClasses) {
+          addClass(spacer, extraClasses);
+        }
+        return this.insertDigit(spacer, before);
+      };
+      Odometer3.prototype.addDigit = function(value, repeating) {
+        var chr, digit, resetted, _ref2;
+        if (repeating == null) {
+          repeating = true;
+        }
+        if (value === "-") {
+          return this.addSpacer(value, null, "odometer-negation-mark");
+        }
+        if (value === ".") {
+          return this.addSpacer((_ref2 = this.format.radix) != null ? _ref2 : ".", null, "odometer-radix-mark");
+        }
+        if (repeating) {
+          resetted = false;
+          while (true) {
+            if (!this.format.repeating.length) {
+              if (resetted) {
+                throw new Error("Bad odometer format without digits");
+              }
+              this.resetFormat();
+              resetted = true;
+            }
+            chr = this.format.repeating[this.format.repeating.length - 1];
+            this.format.repeating = this.format.repeating.substring(0, this.format.repeating.length - 1);
+            if (chr === "d") {
+              break;
+            }
+            this.addSpacer(chr);
+          }
+        }
+        digit = this.renderDigit();
+        digit.querySelector(".odometer-value").innerHTML = value;
+        this.digits.push(digit);
+        return this.insertDigit(digit);
+      };
+      Odometer3.prototype.animate = function(newValue) {
+        if (!TRANSITION_SUPPORT || this.options.animation === "count") {
+          return this.animateCount(newValue);
+        } else {
+          return this.animateSlide(newValue);
+        }
+      };
+      Odometer3.prototype.animateCount = function(newValue) {
+        var cur, diff, last, start, tick, _this = this;
+        if (!(diff = +newValue - this.value)) {
+          return;
+        }
+        start = last = now();
+        cur = this.value;
+        return (tick = function() {
+          var delta, dist, fraction;
+          if (now() - start > _this.options.duration) {
+            _this.value = newValue;
+            _this.render();
+            trigger(_this.el, "odometerdone");
+            return;
+          }
+          delta = now() - last;
+          if (delta > COUNT_MS_PER_FRAME) {
+            last = now();
+            fraction = delta / _this.options.duration;
+            dist = diff * fraction;
+            cur += dist;
+            _this.render(Math.round(cur));
+          }
+          if (requestAnimationFrame2 != null) {
+            return requestAnimationFrame2(tick);
+          } else {
+            return setTimeout(tick, COUNT_MS_PER_FRAME);
+          }
+        })();
+      };
+      Odometer3.prototype.getDigitCount = function() {
+        var i, max, value, values, _i, _len;
+        values = 1 <= arguments.length ? __slice.call(arguments, 0) : [];
+        for (i = _i = 0, _len = values.length; _i < _len; i = ++_i) {
+          value = values[i];
+          values[i] = Math.abs(value);
+        }
+        max = Math.max.apply(Math, values);
+        return Math.ceil(Math.log(max + 1) / Math.log(10));
+      };
+      Odometer3.prototype.getFractionalDigitCount = function() {
+        var i, parser, parts, value, values, _i, _len;
+        values = 1 <= arguments.length ? __slice.call(arguments, 0) : [];
+        parser = /^\-?\d*\.(\d*?)0*$/;
+        for (i = _i = 0, _len = values.length; _i < _len; i = ++_i) {
+          value = values[i];
+          values[i] = value.toString();
+          parts = parser.exec(values[i]);
+          if (parts == null) {
+            values[i] = 0;
+          } else {
+            values[i] = parts[1].length;
+          }
+        }
+        return Math.max.apply(Math, values);
+      };
+      Odometer3.prototype.resetDigits = function() {
+        this.digits = [];
+        this.ribbons = [];
+        this.inside.innerHTML = "";
+        return this.resetFormat();
+      };
+      Odometer3.prototype.animateSlide = function(newValue) {
+        var boosted, cur, diff, digitCount, digits, dist, end, fractionalCount, frame, frames, i, incr, j, mark, numEl, oldValue, start, _base, _i, _k, _l, _len, _len1, _len2, _m, _ref2, _results;
+        oldValue = this.value;
+        fractionalCount = this.getFractionalDigitCount(oldValue, newValue);
+        if (fractionalCount) {
+          newValue = newValue * Math.pow(10, fractionalCount);
+          oldValue = oldValue * Math.pow(10, fractionalCount);
+        }
+        if (!(diff = newValue - oldValue)) {
+          return;
+        }
+        this.bindTransitionEnd();
+        digitCount = this.getDigitCount(oldValue, newValue);
+        digits = [];
+        boosted = 0;
+        for (i = _i = 0; 0 <= digitCount ? _i < digitCount : _i > digitCount; i = 0 <= digitCount ? ++_i : --_i) {
+          start = truncate(oldValue / Math.pow(10, digitCount - i - 1));
+          end = truncate(newValue / Math.pow(10, digitCount - i - 1));
+          dist = end - start;
+          if (Math.abs(dist) > this.MAX_VALUES) {
+            frames = [];
+            incr = dist / (this.MAX_VALUES + this.MAX_VALUES * boosted * DIGIT_SPEEDBOOST);
+            cur = start;
+            while (dist > 0 && cur < end || dist < 0 && cur > end) {
+              frames.push(Math.round(cur));
+              cur += incr;
+            }
+            if (frames[frames.length - 1] !== end) {
+              frames.push(end);
+            }
+            boosted++;
+          } else {
+            frames = (function() {
+              _results = [];
+              for (var _j = start; start <= end ? _j <= end : _j >= end; start <= end ? _j++ : _j--) {
+                _results.push(_j);
+              }
+              return _results;
+            }).apply(this);
+          }
+          for (i = _k = 0, _len = frames.length; _k < _len; i = ++_k) {
+            frame = frames[i];
+            frames[i] = Math.abs(frame % 10);
+          }
+          digits.push(frames);
+        }
+        this.resetDigits();
+        _ref2 = digits.reverse();
+        for (i = _l = 0, _len1 = _ref2.length; _l < _len1; i = ++_l) {
+          frames = _ref2[i];
+          if (!this.digits[i]) {
+            this.addDigit(" ", i >= fractionalCount);
+          }
+          if ((_base = this.ribbons)[i] == null) {
+            _base[i] = this.digits[i].querySelector(".odometer-ribbon-inner");
+          }
+          this.ribbons[i].innerHTML = "";
+          if (diff < 0) {
+            frames = frames.reverse();
+          }
+          for (j = _m = 0, _len2 = frames.length; _m < _len2; j = ++_m) {
+            frame = frames[j];
+            numEl = document.createElement("div");
+            numEl.className = "odometer-value";
+            numEl.innerHTML = frame;
+            this.ribbons[i].appendChild(numEl);
+            if (j === frames.length - 1) {
+              addClass(numEl, "odometer-last-value");
+            }
+            if (j === 0) {
+              addClass(numEl, "odometer-first-value");
+            }
+          }
+        }
+        if (start < 0) {
+          this.addDigit("-");
+        }
+        mark = this.inside.querySelector(".odometer-radix-mark");
+        if (mark != null) {
+          mark.parent.removeChild(mark);
+        }
+        if (fractionalCount) {
+          return this.addSpacer(this.format.radix, this.digits[fractionalCount - 1], "odometer-radix-mark");
+        }
+      };
+      return Odometer3;
+    }();
+    Odometer2.options = (_ref = window.odometerOptions) != null ? _ref : {};
+    setTimeout(function() {
+      var k, v, _base, _ref12, _results;
+      if (window.odometerOptions) {
+        _ref12 = window.odometerOptions;
+        _results = [];
+        for (k in _ref12) {
+          v = _ref12[k];
+          _results.push((_base = Odometer2.options)[k] != null ? (_base = Odometer2.options)[k] : _base[k] = v);
+        }
+        return _results;
+      }
+    }, 0);
+    Odometer2.init = function() {
+      var el, elements, _i, _len, _ref12, _results;
+      if (document.querySelectorAll == null) {
+        return;
+      }
+      elements = document.querySelectorAll(Odometer2.options.selector || ".odometer");
+      _results = [];
+      for (_i = 0, _len = elements.length; _i < _len; _i++) {
+        el = elements[_i];
+        _results.push(el.odometer = new Odometer2({
+          el,
+          value: (_ref12 = el.innerText) != null ? _ref12 : el.textContent
+        }));
+      }
+      return _results;
+    };
+    if (((_ref1 = document.documentElement) != null ? _ref1.doScroll : void 0) != null && document.createEventObject != null) {
+      _old = document.onreadystatechange;
+      document.onreadystatechange = function() {
+        if (document.readyState === "complete" && Odometer2.options.auto !== false) {
+          Odometer2.init();
+        }
+        return _old != null ? _old.apply(this, arguments) : void 0;
+      };
+    } else {
+      document.addEventListener("DOMContentLoaded", function() {
+        if (Odometer2.options.auto !== false) {
+          return Odometer2.init();
+        }
+      }, false);
+    }
+    if (exports !== null) {
+      module.exports = Odometer2;
+    } else {
+      window.Odometer = Odometer2;
+    }
+  }).call(commonjsGlobal);
+})(odometer, odometer.exports);
+var odometerExports = odometer.exports;
+const Odometer = /* @__PURE__ */ getDefaultExportFromCjs(odometerExports);
+Odometer.options.auto = false;
+function initBorderAnimations() {
+  var _a, _b;
+  const borderAnimations = document.querySelectorAll(
+    ".border-animation[data-pourcentage]"
+  );
+  if (borderAnimations.length === 0) {
+    return;
+  }
+  const prefersReduce = (_b = (_a = window.matchMedia) == null ? void 0 : _a.call(window, "(prefers-reduced-motion: reduce)")) == null ? void 0 : _b.matches;
+  const initBorderOdometer = (borderEl, target) => {
+    const odEl = borderEl.querySelector(
+      ".border-odometer.odometer[data-odometer-value]"
+    );
+    if (!odEl)
+      return null;
+    if (odEl.dataset.odometerInit === "1")
+      return null;
+    odEl.dataset.odometerInit = "1";
+    const rawTarget = odEl.dataset.odometerValue ?? String(target ?? "0");
+    const targetNumber = Math.min(100, Math.max(0, parseFloat(rawTarget)));
+    if (!Number.isFinite(targetNumber))
+      return null;
+    odEl.textContent = "0";
+    const od = new Odometer({
+      el: odEl,
+      value: 0,
+      duration: 2e3,
+      theme: "default",
+      format: "d"
+    });
+    return () => od.update(targetNumber);
+  };
+  const apply = (el) => {
+    const pourcentage = parseFloat(el.dataset.pourcentage);
+    if (isNaN(pourcentage)) {
+      return;
+    }
+    const degree = pourcentage / 100 * 360;
+    el.style.setProperty("--pourcentage", pourcentage + "%");
+    el.style.setProperty("--degree", degree + "deg");
+    if (prefersReduce) {
+      el.classList.add("is-animated");
+      const odTrigger2 = initBorderOdometer(el, pourcentage);
+      if (odTrigger2)
+        odTrigger2();
+      return;
+    }
+    const odTrigger = initBorderOdometer(el, pourcentage);
+    requestAnimationFrame(() => {
+      el.classList.add("is-animated");
+      if (odTrigger)
+        odTrigger();
+    });
+  };
+  if ("IntersectionObserver" in window && !prefersReduce) {
+    const borderObserver = new IntersectionObserver(
+      (entries, observer) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting)
+            return;
+          apply(entry.target);
+          observer.unobserve(entry.target);
+        });
+      },
+      { rootMargin: "0px 0px -10% 0px", threshold: 0.15 }
+    );
+    borderAnimations.forEach((el) => borderObserver.observe(el));
+  } else {
+    borderAnimations.forEach((el) => apply(el));
+  }
+}
+document.addEventListener("DOMContentLoaded", () => {
+  initBorderAnimations();
+});
+document.addEventListener("DOMContentLoaded", () => {
+  const burger = document.querySelector("#theme-navbar-toggler");
+  const popover = document.getElementById("navmenu-header-mobile");
+  burger.addEventListener("click", () => {
+    burger.classList.toggle("open");
+  });
+  popover.addEventListener("toggle", (event) => {
+    if (event.newState === "closed") {
+      burger.classList.remove("open");
+    }
+  });
+  popover.addEventListener("click", (e) => {
+    if (e.target.closest("a")) {
+      popover.hidePopover();
+    }
+  });
+  document.addEventListener("mouseover", function(a) {
+    const o = a.target.closest(".button-background-animation");
+    if (o) {
+      const c = o.querySelector(".hover-bg");
+      if (c) {
+        const v = o.getBoundingClientRect(), h = a.clientX - v.left, s = a.clientY - v.top;
+        c.style.setProperty("--creative-hover-top", `${s}px`), c.style.setProperty("--creative-hover-left", `${h}px`);
+      }
+    }
+    const sliderFeaturedPosts = document.querySelector("[data-slider-featured-posts]");
+    if (sliderFeaturedPosts) {
+      new SliderPrevNextDesktopFeaturedPosts(sliderFeaturedPosts);
+    }
+    const sliderRelatedPosts = document.querySelector("[data-slider-related-posts]");
+    if (sliderRelatedPosts) {
+      new SliderPrevNextDesktopRelatedPosts(sliderRelatedPosts);
+    }
+  });
+  const cursorFollowItem = document.querySelector(".animation-moving-item");
+  const sectionLight = document.querySelectorAll(".section-light");
+  if (sectionLight && cursorFollowItem && sectionLight.length > 0) {
+    sectionLight.forEach((section) => {
+      section.addEventListener("mouseenter", () => {
+        if (document.body.classList.contains("dark-theme")) {
+          cursorFollowItem.classList.add("animation-moving-item--cursor-follow");
+        }
+      });
+      section.addEventListener("mousemove", (e) => {
+        if (document.body.classList.contains("dark-theme")) {
+          document.documentElement.style.setProperty("--mouse-x", `${e.clientX}px`);
+          document.documentElement.style.setProperty("--mouse-y", `${e.clientY}px`);
+        }
+      });
+      section.addEventListener("mouseleave", () => {
+        cursorFollowItem.classList.remove("animation-moving-item--cursor-follow");
+      });
+    });
+    const themeObserver = new MutationObserver(() => {
+      if (!document.body.classList.contains("dark-theme")) {
+        cursorFollowItem.classList.remove("animation-moving-item--cursor-follow");
+      }
+    });
+    themeObserver.observe(document.body, { attributes: true, attributeFilter: ["class"] });
+  }
+  const gradientContainer = document.querySelector(".gradient-container");
+  const interactiveItem = document.querySelector(".gradient-container .interactive");
+  if (gradientContainer && interactiveItem) {
+    gradientContainer.addEventListener("mouseenter", () => {
+      interactiveItem.classList.add("interactive--cursor-follow");
+    });
+    gradientContainer.addEventListener("mousemove", (e) => {
+      document.documentElement.style.setProperty("--mouse-x", `${e.clientX}px`);
+      document.documentElement.style.setProperty("--mouse-y", `${e.clientY}px`);
+    });
+    gradientContainer.addEventListener("mouseleave", () => {
+      interactiveItem.classList.remove("interactive--cursor-follow");
+    });
+  }
+  const scrollers = document.querySelectorAll(".scroller");
+  if (scrollers.length > 0) {
+    addInfiniteScroll();
+  }
+  function addInfiniteScroll() {
+    scrollers.forEach((scroller) => {
+      scroller.setAttribute("data-infinite-scroll", "true");
+      const scrollerInner = scroller.querySelector(".scroller-inner");
+      const scrollerContent = Array.from(scrollerInner.children);
+      scroller.dataset.originalCount = String(scrollerContent.length);
+      const baseItems = 5;
+      const baseSeconds = 30;
+      const count = scrollerContent.length;
+      const durationSeconds = count / baseItems * baseSeconds;
+      const minSeconds = 12;
+      const maxSeconds = 120;
+      const finalSeconds = Math.min(maxSeconds, Math.max(minSeconds, durationSeconds));
+      scroller.style.setProperty("--scroll-duration", `${finalSeconds}s`);
+      setScrollDistance(scroller);
+      scrollerContent.forEach((child) => {
+        let duplicatedChild = child.cloneNode(true);
+        duplicatedChild.setAttribute("aria-hidden", "true");
+        scrollerInner.appendChild(duplicatedChild);
+      });
+      scrollerContent.forEach((child) => {
+        let duplicatedChild = child.cloneNode(true);
+        duplicatedChild.setAttribute("aria-hidden", "true");
+        scrollerInner.appendChild(duplicatedChild);
+      });
+    });
+  }
+  function setScrollDistance(scroller) {
+    const scrollerInner = scroller.querySelector(".scroller-inner");
+    const originalCount = Number(scroller.dataset.originalCount || 0);
+    if (originalCount === 0) {
+      return;
+    }
+    const children = Array.from(scrollerInner.children).slice(0, originalCount);
+    const originalWidth = children.reduce((total, child) => {
+      return total + child.getBoundingClientRect().width;
+    }, 0);
+    if (originalWidth > 0) {
+      scroller.style.setProperty("--scroll-distance", `${originalWidth}px`);
+    }
+  }
+  window.addEventListener("load", () => {
+    scrollers.forEach((scroller) => {
+      setScrollDistance(scroller);
+    });
+  });
+  let scrollTop = document.querySelector(".scroll-top");
+  function toggleScrollTop() {
+    if (scrollTop) {
+      window.scrollY > 100 ? scrollTop.classList.add("active") : scrollTop.classList.remove("active");
+    }
+  }
+  scrollTop.addEventListener("click", (e) => {
+    e.preventDefault();
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+  });
+  window.addEventListener("load", toggleScrollTop);
+  document.addEventListener("scroll", toggleScrollTop);
+});
+function scrollDetailsIntoView(details) {
+  requestAnimationFrame(() => {
+    details.scrollIntoView({ behavior: "smooth", block: "start" });
+  });
+}
+function bindMobileScrollForDetails(selector) {
+  const detailsEls = document.querySelectorAll(selector);
+  if (!detailsEls.length)
+    return;
+  detailsEls.forEach((details) => {
+    details.addEventListener("toggle", () => {
+      if (!details.open)
+        return;
+      scrollDetailsIntoView(details);
+    });
+  });
+}
+document.addEventListener("DOMContentLoaded", () => {
+  bindMobileScrollForDetails('details.dropdown-details[id^="faq-details-"]');
+});
+class SliderPrevNextDesktopFeaturedPosts {
+  constructor(el) {
+    this.nextButton = el.querySelector("[data-slider-next-featured-posts]");
+    this.prevButton = el.querySelector("[data-slider-prev-featured-posts]");
+    this.wrapper = el.querySelector("[data-slider-wrapper-featured-posts]");
+    this.nextButton.addEventListener("click", () => this.move(1));
+    this.prevButton.addEventListener("click", () => this.move(-1));
+    this.updateUi();
+    this.wrapper.addEventListener("scroll", () => {
+      this.updateUi();
+    });
+  }
+  get itemToScroll() {
+    return parseInt(window.getComputedStyle(this.wrapper).getPropertyValue("--items"), 10);
+  }
+  updateUi() {
+    const scrollLeft = this.wrapper.scrollLeft;
+    const scrollWidth = this.wrapper.scrollWidth;
+    const offsetWidth = this.wrapper.offsetWidth;
+    if (scrollLeft <= 1) {
+      this.prevButton.setAttribute("hidden", "hidden");
+    } else {
+      this.prevButton.removeAttribute("hidden");
+    }
+    if (scrollLeft + offsetWidth >= scrollWidth - 1) {
+      this.nextButton.setAttribute("hidden", "hidden");
+    } else {
+      this.nextButton.removeAttribute("hidden");
+    }
+  }
+  move(n) {
+    const itemToScroll = this.itemToScroll;
+    const currentScrollLeft = this.wrapper.scrollLeft;
+    const offsetWidth = this.wrapper.offsetWidth;
+    const scrollWidth = this.wrapper.scrollWidth;
+    const children = Array.from(this.wrapper.children || []);
+    let currentIndex = 0;
+    const isAtEnd = currentScrollLeft + offsetWidth >= scrollWidth - 1;
+    if (isAtEnd) {
+      const lastAlignedGroupStart = Math.floor((children.length - 1) / itemToScroll) * itemToScroll;
+      const lastPossibleGroupStart = Math.max(0, children.length - itemToScroll);
+      currentIndex = Math.min(lastAlignedGroupStart, lastPossibleGroupStart);
+    } else {
+      let firstVisibleIndex = 0;
+      for (let i = 0; i < children.length; i++) {
+        if (children[i].offsetLeft >= currentScrollLeft) {
+          firstVisibleIndex = i;
+          break;
+        }
+      }
+      currentIndex = Math.floor(firstVisibleIndex / itemToScroll) * itemToScroll;
+    }
+    let targetIndex = currentIndex + n * itemToScroll;
+    let scrollPosition;
+    if (targetIndex < 0) {
+      scrollPosition = 0;
+    } else if (targetIndex >= this.wrapper.children.length) {
+      const lastIndex = this.wrapper.children.length - itemToScroll;
+      scrollPosition = this.wrapper.children[lastIndex].offsetLeft;
+    } else {
+      scrollPosition = this.wrapper.children[targetIndex].offsetLeft;
+    }
+    this.wrapper.scrollTo({
+      left: scrollPosition,
+      behavior: "smooth"
+    });
+  }
+}
+class SliderPrevNextDesktopRelatedPosts {
+  constructor(el) {
+    this.nextButton = el.querySelector("[data-slider-next-related-posts]");
+    this.prevButton = el.querySelector("[data-slider-prev-related-posts]");
+    this.wrapper = el.querySelector("[data-slider-wrapper-related-posts]");
+    this.nextButton.addEventListener("click", () => this.move(1));
+    this.prevButton.addEventListener("click", () => this.move(-1));
+    this.updateUi();
+    this.wrapper.addEventListener("scroll", () => {
+      this.updateUi();
+    });
+  }
+  get itemToScroll() {
+    return parseInt(window.getComputedStyle(this.wrapper).getPropertyValue("--items"), 10);
+  }
+  updateUi() {
+    const scrollLeft = this.wrapper.scrollLeft;
+    const scrollWidth = this.wrapper.scrollWidth;
+    const offsetWidth = this.wrapper.offsetWidth;
+    if (scrollLeft <= 1) {
+      this.prevButton.setAttribute("hidden", "hidden");
+    } else {
+      this.prevButton.removeAttribute("hidden");
+    }
+    if (scrollLeft + offsetWidth >= scrollWidth - 1) {
+      this.nextButton.setAttribute("hidden", "hidden");
+    } else {
+      this.nextButton.removeAttribute("hidden");
+    }
+  }
+  move(n) {
+    const itemToScroll = this.itemToScroll;
+    const currentScrollLeft = this.wrapper.scrollLeft;
+    const offsetWidth = this.wrapper.offsetWidth;
+    const scrollWidth = this.wrapper.scrollWidth;
+    const children = Array.from(this.wrapper.children || []);
+    let currentIndex = 0;
+    const isAtEnd = currentScrollLeft + offsetWidth >= scrollWidth - 1;
+    if (isAtEnd) {
+      const lastAlignedGroupStart = Math.floor((children.length - 1) / itemToScroll) * itemToScroll;
+      const lastPossibleGroupStart = Math.max(0, children.length - itemToScroll);
+      currentIndex = Math.min(lastAlignedGroupStart, lastPossibleGroupStart);
+    } else {
+      let firstVisibleIndex = 0;
+      for (let i = 0; i < children.length; i++) {
+        if (children[i].offsetLeft >= currentScrollLeft) {
+          firstVisibleIndex = i;
+          break;
+        }
+      }
+      currentIndex = Math.floor(firstVisibleIndex / itemToScroll) * itemToScroll;
+    }
+    let targetIndex = currentIndex + n * itemToScroll;
+    let scrollPosition;
+    if (targetIndex < 0) {
+      scrollPosition = 0;
+    } else if (targetIndex >= this.wrapper.children.length) {
+      const lastIndex = this.wrapper.children.length - itemToScroll;
+      scrollPosition = this.wrapper.children[lastIndex].offsetLeft;
+    } else {
+      scrollPosition = this.wrapper.children[targetIndex].offsetLeft;
+    }
+    this.wrapper.scrollTo({
+      left: scrollPosition,
+      behavior: "smooth"
+    });
+  }
+}
+//# sourceMappingURL=main.js.map

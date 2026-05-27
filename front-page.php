@@ -128,7 +128,7 @@ $logo = get_field('logo', 'option');
             <h2 id="section-team-title" class="section-title"><?= $section_team['title']; ?></h2>
             <div class="team-container">
                 <?php foreach ($team as $item) : ?>
-                    <div class="team-member card">
+                    <div class="team-member card-team-member">
                         <a href="<?= home_url('/about/#member-' . sanitize_title($item['title'])); ?>">
                             <img src="<?= $item['image']['sizes']['team_member'] ?? $item['image']['url']; ?>" class="team-member-picture" alt="<?= esc_attr($item['image']['alt']); ?>" loading="lazy">
                         </a>

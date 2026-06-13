@@ -16,14 +16,20 @@ class Base
     public function includeStyles(): void
     {
         add_action('wp_enqueue_scripts', function () {
-            wp_enqueue_style('main', get_template_directory_uri() . '/assets/css/main.css', [], null);
+            $css_path = get_template_directory() . '/assets/css/main.css';
+            $css_uri  = get_template_directory_uri() . '/assets/css/main.css';
+            $version  = file_exists($css_path) ? filemtime($css_path) : null;
+            wp_enqueue_style('main', $css_uri, [], $version);
         });
     }
 
     public function includeScripts(): void
     {
         add_action('wp_enqueue_scripts', function () {
-            wp_register_script('main', get_template_directory_uri() . '/assets/js/main.js', [], null, true);
+            $js_path = get_template_directory() . '/assets/js/main.js';
+            $js_uri  = get_template_directory_uri() . '/assets/js/main.js';
+            $version = file_exists($js_path) ? filemtime($js_path) : null;
+            wp_register_script('main', $js_uri, [], $version, true);
             wp_enqueue_script('main');
         });
     }

@@ -29,7 +29,7 @@ $menu_items = \Theme_base\Base::wp_get_menu_array($theme_location);
                                 $color = get_field('color', $item);
                                 $link = get_term_link($item);
                                 ?>
-                                <li class="card border-<?= $color; ?>-color card-hover-<?= $color; ?>-color">
+                                <li class="card-nav border-<?= $color; ?>-color card-hover-<?= $color; ?>-color">
                                     <div class="img-container bg-<?= $color; ?>-color">
                                         <img src="<?= $image['url']; ?>" alt="<?= $image['alt']; ?>">
                                     </div>

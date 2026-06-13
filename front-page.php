@@ -9,7 +9,7 @@ $logo_square = get_field('logo_square', 'option');
 $logo = get_field('logo', 'option');
 ?>
 
-
+<h1>Front page</h1>
 <main id="main-<?= $theme_template_name ?>" class="main">
 
     <div class="section-light">

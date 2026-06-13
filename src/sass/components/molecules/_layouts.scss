@@ -44,14 +44,14 @@
   .layout-content {
     & > div:first-child {
       margin-inline: auto;
-      @media (width >= $breakpoint-lg) {
-        max-width: 75ch;
-      }
       display: flex;
       flex-direction: column;
       justify-content: start;
       align-items: start;
       gap: $spacer-xl;
+      @media (width >= $breakpoint-lg) {
+        max-width: 75ch;
+      }
     }
   }
   @media (width >= $breakpoint-xl) {

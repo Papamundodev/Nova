@@ -11,10 +11,10 @@
 
 #main-about {
   .section-intro {
-    @include section-intro;
     margin-block-end: $spacer-big;
     display: flex;
     flex-direction: row;
+    @include section-intro;
   }
 
   .section-advantages {
@@ -29,13 +29,13 @@
       margin-block-end: $spacer-xxl;
     }
     h2 {
-      @include heading-large-1;
       text-align: center;
+      @include heading-large-1;
     }
     h3 {
-      @include heading-small-1;
       min-height: calc($spacer-xl * 2.5);
       color: $primary-color;
+      @include heading-small-1;
     }
     img {
       width: 100px;
@@ -118,8 +118,8 @@
         justify-content: center;
         gap: $spacer-xl;
         h3 {
-          @include heading-medium-1;
           color: $primary-color;
+          @include heading-medium-1;
         }
         color {
           color: $primary-color;
@@ -136,14 +136,14 @@
       padding-inline: $spacer-big;
     }
     h2 {
-      @include heading-large-1;
       text-align: center;
       margin-block-end: $spacer-xxl;
+      @include heading-large-1;
     }
     h3 {
-      @include heading-small-1;
       min-height: calc($spacer-xl * 2.5);
       color: $primary-color;
+      @include heading-small-1;
     }
     p {
       max-width: 75ch;

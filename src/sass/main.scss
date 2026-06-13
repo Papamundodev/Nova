@@ -48,16 +48,13 @@ body {
 
 .content-wysiwyg {
   h2 {
+    margin-block-end: $spacer-xl;
     @include heading-medium-1;
-
-    & {
-      margin-block-end: $spacer-xl;
-    }
   }
 
   h3 {
-    @include heading-small-1;
     margin-block-end: $spacer-lg;
+    @include heading-small-1;
   }
 
   p {

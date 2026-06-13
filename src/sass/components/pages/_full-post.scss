@@ -10,14 +10,14 @@
 @mixin post-content() {
   padding-block-end: $spacer-xxl;
   h2 {
-    @include heading-small-1;
     margin-block: $spacer-xl $spacer-lg;
     color: $orange-color;
+    @include heading-small-1;
   }
   h3 {
-    @include heading-default-1;
     margin-block: $spacer-lg $spacer-md;
     color: $purple-color;
+    @include heading-default-1;
   }
   ul,
   ol {

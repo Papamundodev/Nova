@@ -12,10 +12,10 @@
 #main-category,
 #main-taxonomy {
   .section-intro {
-    @include section-intro;
     margin-block-end: $spacer-big;
     display: flex;
     flex-direction: row;
+    @include section-intro;
     .section-content {
       display: flex;
       flex-direction: column;
@@ -103,11 +103,11 @@
       align-items: center;
     }
     .section-title {
-      @include heading-large-1;
       color: $default-color;
       max-width: 25ch;
       text-align: start;
       margin-block: 0;
+      @include heading-large-1;
     }
   }
 }

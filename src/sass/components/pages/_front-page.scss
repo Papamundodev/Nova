@@ -10,9 +10,9 @@
 
 #main-front-page {
   .section-intro {
-    @include section-intro;
     display: flex;
     flex-direction: row;
+    @include section-intro;
     .section-content {
       display: flex;
       flex-direction: column;
@@ -60,12 +60,12 @@
         grid-column: 2 / 4;
       }
       span {
-        @include heading-small-1;
         padding-inline-start: $spacer-sm;
+        @include heading-small-1;
       }
       h3 {
-        @include heading-medium-1;
         padding-inline-start: $spacer-lg;
+        @include heading-medium-1;
       }
       a {
         vertical-align: top;

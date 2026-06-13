@@ -18,12 +18,12 @@
   }
 
   .intro-content-container {
-    @media (width >= $breakpoint-lg) {
-      max-width: 80ch;
-    }
     h1,
     p {
       margin-block-end: $spacer-xxl;
+    }
+    @media (width >= $breakpoint-lg) {
+      max-width: 80ch;
     }
   }
 }

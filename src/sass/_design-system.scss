@@ -91,19 +91,19 @@
     margin-inline: auto;
   }
   h2 {
-    @include heading-medium-1;
     color: $primary-color;
     text-align: center;
     margin-block: $spacer-xl;
+    @include heading-medium-1;
   }
   .table-component,
   .background-color-system {
     padding-block: $spacer-xl;
     h2 {
       margin-block: $spacer-md $spacer-lg;
-      @include heading-medium-1;
       color: $primary-color;
       text-align: center;
+      @include heading-medium-1;
     }
   }
 }
@@ -118,6 +118,7 @@
   display: flex;
   justify-content: space-between;
   margin-block: $spacer-xl;
+  margin-inline: auto;
   a {
     max-width: 200px;
   }
@@ -127,7 +128,6 @@
     height: 100%;
     object-fit: contain;
   }
-  margin-inline: auto;
 }
 
 .text-system {

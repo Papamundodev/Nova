@@ -109,10 +109,10 @@
 }
 
 .section-title {
-  @include heading-large-1;
   color: $primary-color;
   text-align: center;
   margin-block: $spacer-xxl;
+  @include heading-large-1;
 }
 
 .page-title {

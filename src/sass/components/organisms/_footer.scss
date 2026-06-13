@@ -22,10 +22,10 @@ footer {
     justify-content: start;
     gap: $spacer-xl;
     h2 {
-      @include heading-large-1;
       color: $contrast-color;
       text-align: start;
       margin-block-end: 0;
+      @include heading-large-1;
     }
     input::placeholder,
     textarea::placeholder {
@@ -151,9 +151,9 @@ footer {
     @include heading-big-2;
   }
   h3 {
-    @include heading-small-1;
     color: $primary-color;
     vertical-align: bottom;
+    @include heading-small-1;
   }
   p,
   a {

@@ -18,7 +18,7 @@ $theme_location = $args['theme_location'] ?? "header";
     <ul class="">
       <?php foreach ($menu_items as $item): ?>
         <?php if (empty($item['children'])): ?>
-          <li class="<?= \Theme_base\Base::get_active_class($item) ?> card border-primary-color card-hover-primary-color">
+          <li class="<?= \Theme_base\Base::get_active_class($item) ?> card-nav border-primary-color card-hover-primary-color">
             <div class="flex-between">
               <a class="primary-color" href="<?= $item['url'] ?>" popovertarget="navmenu-<?= $theme_location ?>-mobile" popoveraction="hide"><?= $item['title'] ?></a>
               <div class="svg-container svg-primary-color">
@@ -39,7 +39,7 @@ $theme_location = $args['theme_location'] ?? "header";
         $image = get_field('image', $item);
         $color = get_field('color', $item);
         ?>
-        <li class="card border-<?= $color; ?>-color card-hover-<?= $color; ?>-color">
+        <li class="card-nav border-<?= $color; ?>-color card-hover-<?= $color; ?>-color">
           <div class="flex-between">
             <a class="<?= $color; ?>-color" href="<?= home_url() . "#expertise-" . sanitize_title($item->name); ?>" popovertarget="navmenu-<?= $theme_location ?>-mobile" popoveraction="hide"><?= $item->name ?></a>
             <div class=" svg-container svg-<?= $color; ?>-color">

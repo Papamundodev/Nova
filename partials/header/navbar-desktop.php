@@ -10,7 +10,7 @@ $menu_items = \Theme_base\Base::wp_get_menu_array($theme_location);
 <?php if (is_array($menu_items) && count($menu_items) > 0): ?>
     <nav id="navmenu-<?= $theme_location ?>" class="navmenu navmenu-desktop">
         <ul class="">
-            <?php if ($theme_location === "error"): ?>
+            <?php if ($theme_location === "header"): ?>
                 <li class="nav-item dropdown-hover dropdown">
                     <div class="dropdown-link nav-link">
                         <div class="svg-container">

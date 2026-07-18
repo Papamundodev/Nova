@@ -79,7 +79,7 @@ body:has(.navmenu-mobile:popover-open) {
     animation: fade-in 0.3s ease-out;
     z-index: 50;
     overflow: auto;
-    height: 100vh;
+    height: calc(100vh - $spacer-xl * 2);
     padding-block-start: $spacer-xl;
     .nav-menu-item,
     .megamenu-services-button {

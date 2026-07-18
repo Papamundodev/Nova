@@ -9,12 +9,7 @@ $theme_location = $args['theme_location'] ?? "header";
 <?php $menu_items = \Theme_base\Base::wp_get_menu_array($theme_location); ?>
 <?php if (is_array($menu_items) && count($menu_items) > 0): ?>
   <nav popover id="navmenu-<?= $theme_location ?>-mobile" class="navmenu navmenu-mobile container">
-    <div class="section-header">
-      <?php get_template_part('partials/header/logo'); ?>
-      <button class="btn" popovertarget="navmenu-<?= $theme_location ?>-mobile" popoveraction="hide">
-        <?= file_get_contents(get_template_directory() . '/assets/images/close.svg'); ?>
-      </button>
-    </div>
+
     <ul class="">
       <?php foreach ($menu_items as $item): ?>
         <?php if (empty($item['children'])): ?>

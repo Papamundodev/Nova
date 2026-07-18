@@ -44,10 +44,23 @@ body:has(.navmenu-mobile:popover-open) {
 
 @media (width <= $breakpoint-lg) {
   .header {
+    margin-block: 0;
+    padding-block: $spacer-xl;
+    .button-wrapper {
+      margin-block: 0;
+      a {
+        padding: $spacer-xs;
+        font-size: $font-size-xs;
+      }
+    }
     .burger-menu-container {
       display: flex;
       align-items: center;
       gap: $spacer-vi-md;
+      button {
+        width: 30px;
+        height: 30px;
+      }
     }
   }
   .navmenu-desktop#navmenu-header {
@@ -98,37 +111,12 @@ body:has(.navmenu-mobile:popover-open) {
 }
 
 #navmenu-header-mobile {
-  .section-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 100%;
-    margin-block-end: $spacer-xxl;
-
-    .btn {
-      width: $icon-sm;
-      height: $icon-sm;
-      min-width: $icon-sm;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-
-      svg {
-        width: 100%;
-        height: 100%;
-
-        path {
-          fill: $primary-color;
-          stroke: $primary-color;
-        }
-      }
-    }
-  }
+  margin-block-start: 100px;
+  padding-block-start: 0;
   & > ul {
     display: flex;
     width: 100%;
-    padding: $spacer-xl $spacer-xxl;
+    padding: $spacer-xl 0;
     align-items: initial;
   }
   .img-container {
@@ -141,6 +129,9 @@ body:has(.navmenu-mobile:popover-open) {
     }
   }
   .card-nav {
+    @media (width <=$breakpoint-sm) {
+      max-width: 250px;
+    }
     width: 100%;
     position: relative;
     height: fit-content;

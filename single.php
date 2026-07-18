@@ -50,7 +50,7 @@ $theme_template_name = basename(__FILE__, ".php");
     }
     $query = new WP_Query($args);
     if ($query->have_posts()): ?>
-        <section aria-labelledby="section-related-posts-title" id="section-related-posts" class="section-related-posts slider " data-slider-related-posts data-count="<?= count($wp_query->posts); ?>">
+        <section aria-labelledby="section-related-posts-title" id="section-related-posts" class="section-related-posts slider " data-slider-related-posts data-count="<?= count($query->posts); ?>">
             <div class="section-related-posts-header ">
                 <h2 id="section-related-posts-title" class="section-title">Articles liés</h2>
                 <?php if (count($query->posts) > 1) : ?>

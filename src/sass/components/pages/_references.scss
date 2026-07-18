@@ -1,0 +1,92 @@
+@use "../../utilities/container-wrapper" as *;
+@use "../../design-tokens/colors" as *;
+@use "../../design-tokens/fonts" as *;
+@use "../../design-tokens/tokens" as *;
+@use "../../components/atoms/title" as *;
+@use "../../components/molecules/layouts" as *;
+@use "../../components/atoms/text" as *;
+@use "../../components/molecules/layouts" as *;
+@use "../../components/organisms/slider" as *;
+@use "../../components/organisms/sections" as *;
+
+#main-references {
+  margin-block-end: calc($spacer-big * 2);
+  .section-intro {
+    display: flex;
+    flex-direction: row;
+    @include section-intro;
+    margin-block-end: 0;
+  }
+
+  .section-references {
+    padding: 0;
+
+    h3 {
+      @include heading-large-1;
+    }
+
+    strong {
+      @include heading-small-1;
+      font-weight: 800;
+    }
+
+    .content-wysiwyg {
+      padding-inline-end: $spacer-xl;
+    }
+    .expertise-container,
+    .category-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: $spacer-sm;
+      align-items: center;
+
+      span {
+        a {
+          text-decoration: none;
+        }
+      }
+    }
+
+    .reference-item {
+      background-color: $gray-color;
+      margin-block-end: $spacer-big;
+      padding-block: 0;
+
+      @media (width >= $breakpoint-lg) and (width < $breakpoint-xl) {
+        padding-block-start: $spacer-xxl;
+      }
+    }
+    .layout-img {
+      transform: translateY(0);
+      height: auto;
+    }
+
+    .layout-content {
+      padding-inline: $spacer-md;
+      @media (width >= $breakpoint-sm) and (width < $breakpoint-xl) {
+        padding-inline: $spacer-xl;
+      }
+    }
+
+    .layout-img {
+      .slide {
+        padding-block: 0;
+      }
+      .wrapper-button-container {
+        padding-inline: $spacer-md;
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        margin-block-start: -5em;
+      }
+      .slide-button {
+        background-color: $gray-color;
+        opacity: 0.8;
+        &[hidden],
+        &.disabled {
+          opacity: 0;
+        }
+      }
+    }
+  }
+}

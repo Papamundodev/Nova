@@ -102,18 +102,6 @@ $content = wpautop($object->post_content);
     </section>
 
 
-
-    <?php if ($category) : ?>
-        <?php foreach ($category as $term_id) : ?>
-            <?php
-            $term = get_term(intval($term_id), 'expertises');
-            $color = get_field('color', $term_id);
-            ?>
-            <span><?= $term->name; ?></span>
-        <?php endforeach; ?>
-    <?php endif; ?>
-
-
 </main>
 
 

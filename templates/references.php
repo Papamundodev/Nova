@@ -100,8 +100,6 @@ $content = wpautop($object->post_content);
             </div>
         <?php endforeach; ?>
     </section>
-
-
 </main>
 
 

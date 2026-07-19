@@ -202,8 +202,8 @@
 
 .section-design-system {
   width: 100vw;
-  height: 120vh;
-  --circle: 60%;
+  height: 100vh;
+  --circle: 100%;
   position: relative;
   background: linear-gradient(to bottom, $background-color, $gray-color);
   overflow: hidden;
@@ -221,7 +221,9 @@
     transform: translate(-50%, -50%);
     z-index: 1;
     pointer-events: none;
-    @include heading-big-1;
+    font-size: 150px;
+    font-weight: $font-weight-800;
+    font-family: $heading-font;
   }
   svg {
     width: 100%;
@@ -352,6 +354,18 @@
     transform: translate(-50%, -45%);
     transition: transform 0.2s ease-in-out;
     pointer-events: none;
+  }
+}
+
+// Safari: SVG goo filter is unreliable — static screenshot fallback
+@supports (font: -apple-system-body) {
+  .section-design-system {
+    background: url("../images/branding-design.png") center / cover no-repeat;
+
+    svg,
+    .gradient-container {
+      display: none;
+    }
   }
 }
 

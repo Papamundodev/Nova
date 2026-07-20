@@ -360,8 +360,12 @@
 // Safari: SVG goo filter is unreliable — static screenshot fallback
 @supports (font: -apple-system-body) {
   .section-design-system {
-    background: url("../images/branding-design.png") center / cover no-repeat;
+    background: url("../images/branding-design-mobile.png") center / cover
+      no-repeat;
 
+    @media (width >= $breakpoint-md) {
+      background: url("../images/branding-design.png") center / cover no-repeat;
+    }
     svg,
     .gradient-container {
       display: none;

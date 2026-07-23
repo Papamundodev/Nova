@@ -180,77 +180,79 @@ $content = wpautop($object->post_content);
     <?php
     $section_projects = get_field('projects', "option");
     ?>
-    <section aria-labelledby="section-related-projects-title" id="section-related-projects" class="section-related-projects  slider " data-slider-related-projects data-count="<?= count($section_projects); ?>">
-        <div class="section-related-posts-header ">
-            <h2 id="section-related-posts-title" class="section-title">Nos projets en <?= get_the_title($object); ?></h2>
-            <?php if (count($section_projects) > 1) : ?>
-                <div class="wrapper-button-container">
-                    <div class="slide-button-container">
-                        <button class="slide-button-prev slide-button btn" data-slider-prev-related-projects type="button" aria-label="<?= esc_attr(__('Article lié précédent', 'theme_base') ?: 'Article lié précédent'); ?>">
-                            <span aria-hidden="true"><?php echo file_get_contents(get_template_directory() . '/assets/images/arrow-left.svg'); ?></span>
-                        </button>
+    <?php if (!empty($section_projects)) : ?>
+        <section aria-labelledby="section-related-projects-title" id="section-related-projects" class="section-related-projects  slider " data-slider-related-projects data-count="<?= count($section_projects); ?>">
+            <div class="section-related-posts-header ">
+                <h2 id="section-related-posts-title" class="section-title">Nos projets en <?= get_the_title($object); ?></h2>
+                <?php if (count($section_projects) > 1) : ?>
+                    <div class="wrapper-button-container">
+                        <div class="slide-button-container">
+                            <button class="slide-button-prev slide-button btn" data-slider-prev-related-projects type="button" aria-label="<?= esc_attr(__('Article lié précédent', 'theme_base') ?: 'Article lié précédent'); ?>">
+                                <span aria-hidden="true"><?php echo file_get_contents(get_template_directory() . '/assets/images/arrow-left.svg'); ?></span>
+                            </button>
+                        </div>
+                        <div class="slide-button-container">
+                            <button class="slide-button-next slide-button btn" data-slider-next-related-projects type="button" aria-label="<?= esc_attr(__('Article lié suivant', 'theme_base') ?: 'Article lié suivant'); ?>">
+                                <span aria-hidden="true"><?php echo file_get_contents(get_template_directory() . '/assets/images/arrow-right.svg'); ?></span>
+                            </button>
+                        </div>
                     </div>
-                    <div class="slide-button-container">
-                        <button class="slide-button-next slide-button btn" data-slider-next-related-projects type="button" aria-label="<?= esc_attr(__('Article lié suivant', 'theme_base') ?: 'Article lié suivant'); ?>">
-                            <span aria-hidden="true"><?php echo file_get_contents(get_template_directory() . '/assets/images/arrow-right.svg'); ?></span>
-                        </button>
-                    </div>
-                </div>
-            <?php endif; ?>
-        </div>
-        <div class="slider-wrapper related-projects-wrapper" data-slider-wrapper-related-projects>
-            <?php foreach ($section_projects as $index => $project) : ?>
-                <?php
-                $page_expertises = get_the_terms($object, 'expertises');
-                $project_expertises = $project['expertises'] ?? [];
-                $display_project = false;
-                if (!empty($page_expertises) && !is_wp_error($page_expertises) && !empty($project_expertises)) {
-                    $page_term_ids = wp_list_pluck($page_expertises, 'term_id');
-                    foreach ($project_expertises as $expertise) {
-                        if (in_array((int) $expertise->term_id, array_map('intval', $page_term_ids), true)) {
-                            $display_project = true;
-                            break;
+                <?php endif; ?>
+            </div>
+            <div class="slider-wrapper related-projects-wrapper" data-slider-wrapper-related-projects>
+                <?php foreach ($section_projects as $index => $project) : ?>
+                    <?php
+                    $page_expertises = get_the_terms($object, 'expertises');
+                    $project_expertises = $project['expertises'] ?? [];
+                    $display_project = false;
+                    if (!empty($page_expertises) && !is_wp_error($page_expertises) && !empty($project_expertises)) {
+                        $page_term_ids = wp_list_pluck($page_expertises, 'term_id');
+                        foreach ($project_expertises as $expertise) {
+                            if (in_array((int) $expertise->term_id, array_map('intval', $page_term_ids), true)) {
+                                $display_project = true;
+                                break;
+                            }
                         }
                     }
-                }
-                if (!$display_project) {
-                    continue;
-                }
-                ?>
-                <div class="slide">
-                    <div class="reference-item layout-left-right">
-                        <div class="layout-img">
-                            <?php if (!empty($project['gallery'])) : ?>
-                                <img src="<?= $project['gallery'][0]['sizes']['layout_img'] ?? $project['gallery'][0]['url']; ?>" alt="<?= esc_attr($project['gallery'][0]['alt']); ?>" loading="lazy">
-                            <?php endif; ?>
-                        </div>
-                        <div class="layout-content">
-                            <div>
-                                <h3><?= $project['title']; ?></h3>
-                                <?php $i = 0; ?>
-                                <div class="category-container">
-                                    <?php
-                                    if ($project['expertises'] && count($project['expertises']) > 0) :
-                                        foreach ($project['expertises'] as $term_id) :
-                                            if ($i < 2) :
-                                                $term = get_term(intval($term_id->term_id), 'expertises');
-                                                $cat_color = get_field('color', $term);
-                                                $category_link = get_term_link($term); ?>
-                                                <div class="category-link bg-<?= $cat_color; ?>-color"><a class="btn" href="<?= $category_link; ?>"><?= $term->name; ?></a></div>
-                                        <?php endif;
-                                            $i++;
-                                        endforeach; ?>
-                                    <?php endif; ?>
+                    if (!$display_project) {
+                        continue;
+                    }
+
+                    ?>
+                    <div class="slide <?= count($section_projects) < intval(3) ? 'no-slider' : ' ' ?>">
+                        <div class="reference-item layout-left-right">
+                            <div class="layout-img">
+                                <?php if (!empty($project['gallery'])) : ?>
+                                    <img src="<?= $project['gallery'][0]['sizes']['layout_img'] ?? $project['gallery'][0]['url']; ?>" alt="<?= esc_attr($project['gallery'][0]['alt']); ?>" loading="lazy">
+                                <?php endif; ?>
+                            </div>
+                            <div class="layout-content">
+                                <div>
+                                    <h3><?= $project['title']; ?></h3>
+                                    <?php $i = 0; ?>
+                                    <div class="category-container">
+                                        <?php
+                                        if ($project['expertises'] && count($project['expertises']) > 0) :
+                                            foreach ($project['expertises'] as $term_id) :
+                                                if ($i < 2) :
+                                                    $term = get_term(intval($term_id->term_id), 'expertises');
+                                                    $cat_color = get_field('color', $term);
+                                                    $category_link = get_term_link($term); ?>
+                                                    <div class="category-link bg-<?= $cat_color; ?>-color"><a class="btn" href="<?= $category_link; ?>"><?= $term->name; ?></a></div>
+                                            <?php endif;
+                                                $i++;
+                                            endforeach; ?>
+                                        <?php endif; ?>
+                                    </div>
+                                    <div class="description content-wysiwyg"><?= $project['text']; ?></div>
                                 </div>
-                                <div class="description content-wysiwyg"><?= $project['text']; ?></div>
                             </div>
                         </div>
                     </div>
-                </div>
-            <?php endforeach; ?>
-        </div>
-    </section>
-
+                <?php endforeach; ?>
+            </div>
+        </section>
+    <?php endif; ?>
 
 </main>
 

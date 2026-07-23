@@ -40,7 +40,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   const sliderRelatedPosts = document.querySelector("[data-slider-related-posts]");
-  if (sliderRelatedPosts) {
+  if (sliderRelatedPosts && Number(sliderRelatedPosts.dataset.count) >= 3) {
     new SliderPrevNextDesktopRelatedPosts(sliderRelatedPosts);
   }
 
@@ -48,9 +48,10 @@ document.addEventListener("DOMContentLoaded", () => {
     new SliderPrevNextGallery(el);
   });
 
-  document.querySelectorAll("[data-slider-related-projects]").forEach((el) => {
-    new SliderPrevNextDesktopRelatedProjects(el);
-  });
+  const sliderRelatedProjects = document.querySelector("[data-slider-related-projects]");
+  if (sliderRelatedProjects && Number(sliderRelatedProjects.dataset.count) >= 3) {
+    new SliderPrevNextDesktopRelatedProjects(sliderRelatedProjects);
+  }
 });
 
 

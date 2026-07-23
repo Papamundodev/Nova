@@ -53,7 +53,7 @@ $theme_template_name = basename(__FILE__, ".php");
         <section aria-labelledby="section-related-posts-title" id="section-related-posts" class="section-related-posts slider " data-slider-related-posts data-count="<?= count($query->posts); ?>">
             <div class="section-related-posts-header ">
                 <h2 id="section-related-posts-title" class="section-title">Articles liés</h2>
-                <?php if (count($query->posts) > 1) : ?>
+                <?php if (count($query->posts) >= 3) : ?>
                     <div class="wrapper-button-container">
                         <div class="slide-button-container">
                             <button class="slide-button-prev slide-button btn" data-slider-prev-related-posts type="button" aria-label="<?= esc_attr(__('Article lié précédent', 'theme_base') ?: 'Article lié précédent'); ?>">

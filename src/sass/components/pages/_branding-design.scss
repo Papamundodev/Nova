@@ -444,3 +444,17 @@
     }
   }
 }
+
+.no-slider {
+  width: 100%;
+  .reference-item {
+    width: 100%;
+    margin-inline: auto;
+  }
+  .layout-content {
+    padding-block: $spacer-md;
+    h3 {
+      height: 2em;
+    }
+  }
+}

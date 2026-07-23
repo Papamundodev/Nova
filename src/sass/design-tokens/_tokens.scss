@@ -41,3 +41,5 @@ $border-radius: (
   "retro": $border-radius-retro,
   "default": $border-radius-default,
 );
+
+$drop-shadow: 0 5px 5px 0 color-mix(in srgb, #261678 10%, transparent 90%);

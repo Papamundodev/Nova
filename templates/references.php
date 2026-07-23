@@ -38,14 +38,15 @@ $content = wpautop($object->post_content);
 
     <section aria-labelledby="section-references-title" class="section-references container">
         <?php
-        $section_references = get_field('section_ref', $object);
+        $section_projects = get_field('projects', "option");
+
         ?>
-        <?php foreach ($section_references as $index => $reference) : ?>
+        <?php foreach ($section_projects as $index => $project) : ?>
             <?php
-            $category = $reference['category'];
-            $title = $reference['title'];
-            $description = $reference['description'];
-            $gallery = $reference['gallery'];
+            $category = $project['expertises'];
+            $title = $project['title'];
+            $description = $project['text'];
+            $gallery = $project['gallery'];
             ?>
             <div class="reference-item layout-left-right">
                 <div class="layout-img">
@@ -84,7 +85,7 @@ $content = wpautop($object->post_content);
                             if ($category && count($category) > 0) :
                                 foreach ($category as $term_id) :
                                     if ($i < 2) :
-                                        $term = get_term(intval($term_id), 'expertises');
+                                        $term = get_term(intval($term_id->term_id), 'expertises');
                                         $cat_color = get_field('color', $term);
                                         $category_link = get_term_link($term); ?>
                                         <div class="category-link bg-<?= $cat_color; ?>-color"><a class="btn" href="<?= $category_link; ?>"><?= $term->name; ?></a></div>

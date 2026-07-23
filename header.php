@@ -4,7 +4,17 @@
 <head>
     <meta charset="<?php bloginfo('charset'); ?>">
     <script>
-        document.documentElement.classList.add('js');
+        (function () {
+            var root = document.documentElement;
+            root.classList.add('js');
+            try {
+                var saved = localStorage.getItem('preferred-theme');
+                var theme = (saved === 'light-theme' || saved === 'dark-theme')
+                    ? saved
+                    : 'light-theme';
+                root.classList.add(theme);
+            } catch (e) {}
+        })();
     </script>
     <meta name="title" content="<?= get_the_title() ?: get_bloginfo('name'); ?>">
     <meta name="description" content="<?= \Theme_base\Base::get_meta_description() ?>">

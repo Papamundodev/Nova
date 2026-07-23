@@ -314,4 +314,6 @@ $lastUpdated = get_option('pagespeed_scores', [])['last_updated'] ?? null;
     </section>
 </main>
 
+
+
 <?php get_footer(); ?>

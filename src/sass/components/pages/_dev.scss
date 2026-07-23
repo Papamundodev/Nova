@@ -357,15 +357,13 @@
   }
 }
 
-// Safari: SVG goo filter is unreliable — static screenshot fallback
-@supports (font: -apple-system-body) {
+// Mobile: static screenshot fallback (all browsers)
+@media (width < $breakpoint-sm) {
   .section-design-system {
+    height: 50vh;
     background: url("../images/branding-design-mobile.png") center / cover
       no-repeat;
 
-    @media (width >= $breakpoint-md) {
-      background: url("../images/branding-design.png") center / cover no-repeat;
-    }
     svg,
     .gradient-container {
       display: none;
@@ -373,6 +371,29 @@
   }
 }
 
+// Safari: SVG goo filter is unreliable — static screenshot fallback
+@supports (font: -apple-system-body) {
+  .section-design-system {
+    background: url("../images/branding-design.png") center / cover no-repeat;
+    svg,
+    .gradient-container {
+      display: none;
+    }
+  }
+}
+
+@media (width < $breakpoint-sm) {
+  .section-design-system {
+    height: 50vh;
+    background: url("../images/branding-design-mobile.png") center / cover
+      no-repeat;
+
+    svg,
+    .gradient-container {
+      display: none;
+    }
+  }
+}
 .grid-2-columns {
   display: grid;
   grid-template-columns: 1fr;

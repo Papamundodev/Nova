@@ -47,6 +47,10 @@ document.addEventListener("DOMContentLoaded", () => {
   document.querySelectorAll("[data-slider-gallery]").forEach((el) => {
     new SliderPrevNextGallery(el);
   });
+
+  document.querySelectorAll("[data-slider-related-projects]").forEach((el) => {
+    new SliderPrevNextDesktopRelatedProjects(el);
+  });
 });
 
 
@@ -367,6 +371,78 @@ class SliderPrevNextDesktopFeaturedPosts {
   }
 }
 
+class SliderPrevNextDesktopRelatedProjects {
+  constructor(el) {
+    this.nextButton = el.querySelector("[data-slider-next-related-projects]");
+    this.prevButton = el.querySelector("[data-slider-prev-related-projects]");
+    this.wrapper = el.querySelector("[data-slider-wrapper-related-projects]");
+    this.nextButton.addEventListener("click", () => this.move(1));
+    this.prevButton.addEventListener("click", () => this.move(-1));
+    this.updateUi();
+    this.wrapper.addEventListener("scroll", () => {
+      this.updateUi();
+    });
+  }
+  get itemToScroll() {
+    return parseInt(window.getComputedStyle(this.wrapper).getPropertyValue("--items"), 10);
+  }
+  updateUi() {
+    const scrollLeft = this.wrapper.scrollLeft;
+    const scrollWidth = this.wrapper.scrollWidth;
+    const offsetWidth = this.wrapper.offsetWidth;
+    if (scrollLeft <= 1) {
+      this.prevButton.setAttribute("hidden", "hidden");
+    } else {
+      this.prevButton.removeAttribute("hidden");
+    }
+    if (scrollLeft + offsetWidth >= scrollWidth - 1) {
+      this.nextButton.setAttribute("hidden", "hidden");
+    } else {
+      this.nextButton.removeAttribute("hidden");
+    }
+  }
+  move(n) {
+    const itemToScroll = this.itemToScroll;
+    const currentScrollLeft = this.wrapper.scrollLeft;
+    const offsetWidth = this.wrapper.offsetWidth;
+    const scrollWidth = this.wrapper.scrollWidth;
+    const children = Array.from(this.wrapper.children || []);
+    let currentIndex = 0;
+    const isAtEnd = currentScrollLeft + offsetWidth >= scrollWidth - 1;
+
+    if (isAtEnd) {
+      const lastAlignedGroupStart = Math.floor((children.length - 1) / itemToScroll) * itemToScroll;
+      const lastPossibleGroupStart = Math.max(0, children.length - itemToScroll);
+      currentIndex = Math.min(lastAlignedGroupStart, lastPossibleGroupStart);
+    } else {
+      let firstVisibleIndex = 0;
+      for (let i = 0; i < children.length; i++) {
+        if (children[i].offsetLeft >= currentScrollLeft) {
+          firstVisibleIndex = i;
+          break;
+        }
+      }
+      currentIndex = Math.floor(firstVisibleIndex / itemToScroll) * itemToScroll;
+    }
+
+    let targetIndex = currentIndex + n * itemToScroll;
+    let scrollPosition;
+    if (targetIndex < 0) {
+      scrollPosition = 0;
+    } else if (targetIndex >= this.wrapper.children.length) {
+      const lastIndex = this.wrapper.children.length - itemToScroll;
+      scrollPosition = this.wrapper.children[lastIndex].offsetLeft;
+    } else {
+      scrollPosition = this.wrapper.children[targetIndex].offsetLeft;
+    }
+    this.wrapper.scrollTo({
+      left: scrollPosition,
+      behavior: "smooth",
+    });
+  }
+}
+
+
 
 
 class SliderPrevNextDesktopRelatedPosts {
@@ -440,4 +516,62 @@ class SliderPrevNextDesktopRelatedPosts {
   }
 }
 
+
+const scrollers = document.querySelectorAll(".scroller-logos");
+if (scrollers.length > 0) {
+  addInfiniteScroll();
+}
+
+function addInfiniteScroll() {
+  scrollers.forEach((scroller) => {
+    scroller.setAttribute("data-infinite-scroll", "true");
+    const scrollerInner = scroller.querySelector(".scroller-inner");
+    const scrollerContent = Array.from(scrollerInner.children);
+    scroller.dataset.originalCount = String(scrollerContent.length);
+
+    // Speed: base is 30s for 5 items (≈ 6s per item)
+    const baseItems = 5;
+    const baseSeconds = 30;
+    const count = scrollerContent.length;
+    const durationSeconds = (count / baseItems) * baseSeconds;
+    const minSeconds = 12;
+    const maxSeconds = 120;
+    const finalSeconds = Math.min(maxSeconds, Math.max(minSeconds, durationSeconds));
+    scroller.style.setProperty("--scroll-duration", `${finalSeconds}s`);
+
+    setScrollDistance(scroller);
+    scrollerContent.forEach((child) => {
+      let duplicatedChild = child.cloneNode(true);
+      duplicatedChild.setAttribute("aria-hidden", "true");
+      scrollerInner.appendChild(duplicatedChild);
+    });
+    scrollerContent.forEach((child) => {
+      let duplicatedChild = child.cloneNode(true);
+      duplicatedChild.setAttribute("aria-hidden", "true");
+      scrollerInner.appendChild(duplicatedChild);
+    });
+  });
+}
+
+
+function setScrollDistance(scroller) {
+  const scrollerInner = scroller.querySelector(".scroller-inner");
+  const originalCount = Number(scroller.dataset.originalCount || 0);
+  if (originalCount === 0) {
+    return;
+  }
+  const children = Array.from(scrollerInner.children).slice(0, originalCount);
+  const originalWidth = children.reduce((total, child) => {
+    return total + child.getBoundingClientRect().width;
+  }, 0);
+  if (originalWidth > 0) {
+    scroller.style.setProperty("--scroll-distance", `${originalWidth}px`);
+  }
+}
+
+window.addEventListener("load", () => {
+  scrollers.forEach((scroller) => {
+    setScrollDistance(scroller);
+  });
+});
 

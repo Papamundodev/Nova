@@ -153,6 +153,16 @@
   }
 }
 
+#section-related-projects {
+  --items: 2;
+  padding-inline: $spacer-xxl;
+  @include slider-nav($primary-color, $secondary-color);
+  .slide {
+    padding-block: 0;
+    padding-inline: $spacer-xs;
+  }
+}
+
 .references-gallery {
   --items: 1;
   @include slider-nav($primary-color, $secondary-color);

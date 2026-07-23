@@ -76,6 +76,7 @@ $button-primary-hover-color: var(--button-primary-hover-color);
 $contrast-2-color: var(--contrast-2-color);
 $primary-color: var(--primary-color);
 $secondary-color: var(--secondary-color);
+$tertiary-color: var(--tertiary-color);
 $blue-color: var(--blue-color);
 $green-color: var(--green-color);
 $purple-color: var(--purple-color);
@@ -94,6 +95,7 @@ $colors: (
   "contrast-2-color": $contrast-2-color,
   "primary-color": $primary-color,
   "secondary-color": $secondary-color,
+  "tertiary-color": $tertiary-color,
   "blue-color": $blue-color,
   "green-color": $green-color,
   "purple-color": $purple-color,

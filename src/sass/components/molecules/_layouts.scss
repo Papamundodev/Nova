@@ -41,6 +41,10 @@
 
 @mixin layout-left-right() {
   @include layout-base;
+  gap: $spacer-lg;
+  @media (width <= $breakpoint-xl) {
+    gap: calc($spacer-xl + 2vi);
+  }
   .layout-content {
     & > div:first-child {
       margin-inline: auto;

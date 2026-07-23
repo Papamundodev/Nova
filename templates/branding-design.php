@@ -182,7 +182,7 @@ $content = wpautop($object->post_content);
     ?>
     <section aria-labelledby="section-related-projects-title" id="section-related-projects" class="section-related-projects  slider " data-slider-related-projects data-count="<?= count($section_projects); ?>">
         <div class="section-related-posts-header ">
-            <h2 id="section-related-posts-title" class="section-title">Articles liés</h2>
+            <h2 id="section-related-posts-title" class="section-title">Nos projets en <?= get_the_title($object); ?></h2>
             <?php if (count($section_projects) > 1) : ?>
                 <div class="wrapper-button-container">
                     <div class="slide-button-container">
@@ -200,13 +200,28 @@ $content = wpautop($object->post_content);
         </div>
         <div class="slider-wrapper related-projects-wrapper" data-slider-wrapper-related-projects>
             <?php foreach ($section_projects as $index => $project) : ?>
+                <?php
+                $page_expertises = get_the_terms($object, 'expertises');
+                $project_expertises = $project['expertises'] ?? [];
+                $display_project = false;
+                if (!empty($page_expertises) && !is_wp_error($page_expertises) && !empty($project_expertises)) {
+                    $page_term_ids = wp_list_pluck($page_expertises, 'term_id');
+                    foreach ($project_expertises as $expertise) {
+                        if (in_array((int) $expertise->term_id, array_map('intval', $page_term_ids), true)) {
+                            $display_project = true;
+                            break;
+                        }
+                    }
+                }
+                if (!$display_project) {
+                    continue;
+                }
+                ?>
                 <div class="slide">
                     <div class="reference-item layout-left-right">
                         <div class="layout-img">
                             <?php if (!empty($project['gallery'])) : ?>
-                                <div>
-                                    <img src="<?= $project['gallery'][0]['sizes']['layout_img'] ?? $project['gallery'][0]['url']; ?>" alt="<?= esc_attr($project['gallery'][0]['alt']); ?>" loading="lazy">
-                                </div>
+                                <img src="<?= $project['gallery'][0]['sizes']['layout_img'] ?? $project['gallery'][0]['url']; ?>" alt="<?= esc_attr($project['gallery'][0]['alt']); ?>" loading="lazy">
                             <?php endif; ?>
                         </div>
                         <div class="layout-content">

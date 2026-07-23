@@ -14,6 +14,8 @@
   background-color: $contrast-color;
   gap: $spacer-md;
   border: 2px solid $default-color;
+  overflow: hidden;
+  box-sizing: initial;
   &:hover {
     border-color: $default-color;
     h3 {
@@ -27,7 +29,7 @@
   @media (width >= $breakpoint-sm) {
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: 150px 2em 2em 4.2em auto;
+    grid-template-rows: 150px 4em 2em 4.2em auto;
     align-content: start;
   }
 
@@ -45,7 +47,6 @@
     display: flex;
     flex-wrap: wrap;
     gap: $spacer-sm;
-    align-items: center;
 
     span {
       a {

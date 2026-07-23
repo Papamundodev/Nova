@@ -154,12 +154,15 @@
 }
 
 #section-related-projects {
-  --items: 2;
+  --items: 1;
   padding-inline: $spacer-xxl;
   @include slider-nav($primary-color, $secondary-color);
   .slide {
     padding-block: 0;
-    padding-inline: $spacer-xs;
+    padding-inline: 0;
+  }
+  @media (width >=$breakpoint-md) {
+    --items: 2;
   }
 }
 

@@ -22,8 +22,10 @@ $base->sidebar_widgets_language_selector_init();
 $base->get_homepage_schema();
 $base->registerPageSpeedCron();
 
-$expertises = new Taxonomy('theme_base', 'expertises', 'Expertise', 'Expertises', array('post'));
-$expertises->associateToCustomPostType(array('post'));
+$expertises = new Taxonomy('theme_base', 'expertises', 'Expertise', 'Expertises', array('post', 'page'));
+$expertises->associateToCustomPostType(array('post', 'page'));
+
+
 
 // Initialize contact form handler
 new Form();

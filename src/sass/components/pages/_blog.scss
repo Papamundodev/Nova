@@ -12,7 +12,6 @@
 #main-category,
 #main-taxonomy {
   .section-intro {
-    margin-block-end: $spacer-big;
     display: flex;
     flex-direction: row;
     @include section-intro;
@@ -23,9 +22,11 @@
       justify-content: start;
       gap: $spacer-xxl;
     }
+    margin-block-end: $spacer-xxl;
   }
   .section-blog {
-    padding-block-end: $spacer-big;
+    padding-block-end: $spacer-xl $spacer-big;
+    margin-block-end: calc($spacer-big * 2);
     .blog-container {
       display: grid;
       grid-template-columns: 1fr;

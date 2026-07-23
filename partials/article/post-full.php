@@ -18,8 +18,11 @@ $categories = get_the_terms($post->ID, 'category');
 
     <div class="post-categories">
         <?php foreach ($categories as $category): ?>
-            <?php $color = get_field('color', $category); ?>
-            <span class="category-link bg-<?= $color; ?>-color"><a class="btn" href="<?= $category->link; ?>"><?= $category->name; ?></a></span>
+            <?php
+            $color = get_field('color', $category);
+            $link = get_term_link($category);
+            ?>
+            <span class="category-link bg-<?= $color; ?>-color"><a class="btn" href="<?= $link; ?>"><?= $category->name; ?></a></span>
         <?php endforeach; ?>
     </div>
 
@@ -32,23 +35,6 @@ $categories = get_the_terms($post->ID, 'category');
     $breadcrumbs = \Theme_base\Base::get_breadcrumbs();
     ?>
 
-    <!-- <div class="post-header">
-        <div id="breadcrumbs" class="breadcrumbs-custom">
-            <ul>
-                <?php foreach ($breadcrumbs as $breadcrumb): ?>
-                    <?php if ($breadcrumb !== end($breadcrumbs)): ?>
-                        <li><a href="<?= $breadcrumb['url'] ?>"><?= $breadcrumb['text'] ?></a></li>
-                        <li><span class="separator"></span></li>
-                    <?php endif; ?>
-                <?php endforeach; ?>
-            </ul>
-        </div>
-        <div class="post-date">
-            <span><?= $date_published; ?></span>
-            <span class="separator"></span>
-            <span><?= $reading_time; ?></span>
-        </div>
-    </div> -->
     <div class="post-content content-wysiwyg">
         <?= $content; ?>
     </div>

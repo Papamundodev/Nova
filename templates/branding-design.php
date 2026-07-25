@@ -153,29 +153,31 @@ $content = wpautop($object->post_content);
     $section_banner_title = $section_banner['title'] ?? '';
     $section_banner_logos = (isset($section_banner['logos']) && is_array($section_banner['logos'])) ? $section_banner['logos'] : [];
     ?>
-    <section aria-labelledby="section-banner-title" class="section-banner-logos container">
-        <?php if ($section_banner_title) : ?>
-            <h2 id="section-banner-title" class="section-title"><?= $section_banner_title ?></h2>
-        <?php endif; ?>
-        <div class="scroller-logos">
-            <div class="scroller-inner">
-                <?php
-                if (!empty($section_banner_logos)): ?>
-                    <?php foreach ($section_banner_logos as $banner): ?>
-                        <?php if (isset($banner['link']) && $banner['link']) : ?>
-                            <a href="<?= $banner['link']; ?>" target="_blank" class="img-container">
-                                <img src="<?= $banner['image']['sizes']['partner_logo'] ?? $banner['image']['sizes']['medium'] ?? $banner['image']['url']; ?>" alt="parterns images and link to the partner website">
-                            </a>
-                        <?php else : ?>
-                            <div class="img-container">
-                                <img src="<?= $banner['image']['sizes']['partner_logo'] ?? $banner['image']['sizes']['medium'] ?? $banner['image']['url']; ?>" alt="parterns images and link to the partner website">
-                            </div>
-                        <?php endif; ?>
-                    <?php endforeach; ?>
-                <?php endif; ?>
+    <?php if ($section_banner_logos) : ?>
+        <section aria-labelledby="section-banner-title" class="section-banner-logos container">
+            <?php if ($section_banner_title) : ?>
+                <h2 id="section-banner-title" class="section-title"><?= $section_banner_title ?></h2>
+            <?php endif; ?>
+            <div class="scroller-logos">
+                <div class="scroller-inner">
+                    <?php
+                    if (!empty($section_banner_logos)): ?>
+                        <?php foreach ($section_banner_logos as $banner): ?>
+                            <?php if (isset($banner['link']) && $banner['link']) : ?>
+                                <a href="<?= $banner['link']; ?>" target="_blank" class="img-container">
+                                    <img src="<?= $banner['image']['sizes']['partner_logo'] ?? $banner['image']['sizes']['medium'] ?? $banner['image']['url']; ?>" alt="parterns images and link to the partner website">
+                                </a>
+                            <?php else : ?>
+                                <div class="img-container">
+                                    <img src="<?= $banner['image']['sizes']['partner_logo'] ?? $banner['image']['sizes']['medium'] ?? $banner['image']['url']; ?>" alt="parterns images and link to the partner website">
+                                </div>
+                            <?php endif; ?>
+                        <?php endforeach; ?>
+                    <?php endif; ?>
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
+    <?php endif; ?>
 
     <?php
     $section_projects = get_field('projects', "option");

@@ -18,7 +18,9 @@ global $wp_query;
         <div class="product-grid">
             <?php if (is_array($wp_query->posts) && count($wp_query->posts) > 0): ?>
                 <?php foreach ($wp_query->posts as $post) : ?>
-                    <?php get_template_part('partials/article/post-preview', null, ['post' => $post]); ?>
+                    <?php if (get_post_type($post) === 'post') : ?>
+                        <?php get_template_part('partials/article/post-preview', null, ['post' => $post]); ?>
+                    <?php endif; ?>
                 <?php endforeach;
                 wp_reset_postdata(); ?>
             <?php endif; ?>

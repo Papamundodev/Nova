@@ -158,7 +158,7 @@
     }
     h3 {
       @include heading-medium-large-1;
-      color: $primary-color;
+      color: $secondary-color;
       margin-block-end: $spacer-xxl;
     }
     .btn-pill {
@@ -220,9 +220,10 @@
       flex-direction: column;
       h2 {
         @include heading-big-1;
+        line-height: 1;
         color: $primary-color;
         text-align: center;
-        margin-block-end: $spacer-xl;
+        margin-block-end: $spacer-xxl;
       }
       & > .content-wysiwyg {
         max-width: 80ch;

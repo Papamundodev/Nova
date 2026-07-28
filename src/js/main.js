@@ -1,4 +1,5 @@
 import "./odometer.js";
+import "./matrix-canvas.js";
 
 document.addEventListener("DOMContentLoaded", () => {
   const burger = document.querySelector("#theme-navbar-toggler");
@@ -575,4 +576,3 @@ window.addEventListener("load", () => {
     setScrollDistance(scroller);
   });
 });
-

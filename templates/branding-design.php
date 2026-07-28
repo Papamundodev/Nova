@@ -74,6 +74,7 @@ $content = wpautop($object->post_content);
                     <h2 class=""><?= $section_3['title']; ?></h2>
                 </div>
                 <h3><?= $section_3['subtitle']; ?></h3>
+                <canvas id="matrix-canvas"></canvas>
             </div>
             <div class="section-3-items">
                 <?php foreach ($section_3['items'] as $item) : ?>
@@ -180,13 +181,34 @@ $content = wpautop($object->post_content);
     <?php endif; ?>
 
     <?php
-    $section_projects = get_field('projects', "option");
+    $section_projects = get_field('projects', "option") ?: [];
+    $page_expertises = get_the_terms($object, 'expertises');
+    $page_term_ids = (!empty($page_expertises) && !is_wp_error($page_expertises))
+        ? array_map('intval', wp_list_pluck($page_expertises, 'term_id'))
+        : [];
+
+    $filtered_projects = [];
+    if (!empty($page_term_ids) && !empty($section_projects)) {
+        foreach ($section_projects as $project) {
+            $project_expertises = $project['expertises'] ?? [];
+            if (empty($project_expertises)) {
+                continue;
+            }
+            foreach ($project_expertises as $expertise) {
+                if (in_array((int) $expertise->term_id, $page_term_ids, true)) {
+                    $filtered_projects[] = $project;
+                    break;
+                }
+            }
+        }
+    }
+    $projects_count = count($filtered_projects);
     ?>
-    <?php if (!empty($section_projects)) : ?>
-        <section aria-labelledby="section-related-projects-title" id="section-related-projects" class="section-related-projects  slider " data-slider-related-projects data-count="<?= count($section_projects); ?>">
+    <?php if ($projects_count > 0) : ?>
+        <section aria-labelledby="section-related-projects-title" id="section-related-projects" class="section-related-projects  slider " data-slider-related-projects data-count="<?= $projects_count; ?>">
             <div class="section-related-posts-header ">
                 <h2 id="section-related-posts-title" class="section-title">Nos projets en <?= get_the_title($object); ?></h2>
-                <?php if (count($section_projects) > 1) : ?>
+                <?php if ($projects_count > 1) : ?>
                     <div class="wrapper-button-container">
                         <div class="slide-button-container">
                             <button class="slide-button-prev slide-button btn" data-slider-prev-related-projects type="button" aria-label="<?= esc_attr(__('Article lié précédent', 'theme_base') ?: 'Article lié précédent'); ?>">
@@ -202,26 +224,8 @@ $content = wpautop($object->post_content);
                 <?php endif; ?>
             </div>
             <div class="slider-wrapper related-projects-wrapper" data-slider-wrapper-related-projects>
-                <?php foreach ($section_projects as $index => $project) : ?>
-                    <?php
-                    $page_expertises = get_the_terms($object, 'expertises');
-                    $project_expertises = $project['expertises'] ?? [];
-                    $display_project = false;
-                    if (!empty($page_expertises) && !is_wp_error($page_expertises) && !empty($project_expertises)) {
-                        $page_term_ids = wp_list_pluck($page_expertises, 'term_id');
-                        foreach ($project_expertises as $expertise) {
-                            if (in_array((int) $expertise->term_id, array_map('intval', $page_term_ids), true)) {
-                                $display_project = true;
-                                break;
-                            }
-                        }
-                    }
-                    if (!$display_project) {
-                        continue;
-                    }
-
-                    ?>
-                    <div class="slide <?= count($section_projects) < intval(3) ? 'no-slider' : ' ' ?>">
+                <?php foreach ($filtered_projects as $index => $project) : ?>
+                    <div class="slide <?= $projects_count < 3 ? 'no-slider' : ' ' ?>">
                         <div class="reference-item layout-left-right">
                             <div class="layout-img">
                                 <?php if (!empty($project['gallery'])) : ?>

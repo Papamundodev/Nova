@@ -364,8 +364,8 @@
 @media (width < $breakpoint-sm) {
   .section-design-system {
     height: 50vh;
-    background: url("../images/branding-design-mobile.png") center / cover
-      no-repeat;
+    background: url("../images/branding-design-mobile-notext.png") center /
+      cover no-repeat;
 
     svg,
     .gradient-container {

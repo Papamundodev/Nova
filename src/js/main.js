@@ -22,19 +22,21 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
 
-  document.addEventListener("mouseover", function(a) {
-  const o = a.target.closest(".button-background-animation");
-  if (o) {
+  document.addEventListener("mouseover", function (a) {
+    const o = a.target.closest(".button-background-animation");
+    if (o) {
       const c = o.querySelector(".hover-bg");
       if (c) {
-          const v = o.getBoundingClientRect()
-            , h = a.clientX - v.left
-            , s = a.clientY - v.top;
-              c.style.setProperty("--creative-hover-top", `${s}px`),
-              c.style.setProperty("--creative-hover-left", `${h}px`)
+        const v = o.getBoundingClientRect(),
+          h = a.clientX - v.left,
+          s = a.clientY - v.top;
+        c.style.setProperty("--creative-hover-top", `${s}px`);
+        c.style.setProperty("--creative-hover-left", `${h}px`);
       }
-  }
+    }
+  });
 
+  // Sliders: initialized once on DOM ready
   const sliderFeaturedPosts = document.querySelector("[data-slider-featured-posts]");
   if (sliderFeaturedPosts) {
     new SliderPrevNextDesktopFeaturedPosts(sliderFeaturedPosts);
@@ -53,9 +55,6 @@ document.addEventListener("DOMContentLoaded", () => {
   if (sliderRelatedProjects && Number(sliderRelatedProjects.dataset.count) >= 3) {
     new SliderPrevNextDesktopRelatedProjects(sliderRelatedProjects);
   }
-});
-
-
 
   /**
    * Cursor-following blur effect in .section-intro
@@ -114,64 +113,6 @@ document.addEventListener("DOMContentLoaded", () => {
       interactiveItem.classList.remove("interactive--cursor-follow");
     });
   }
-
-
-const scrollers = document.querySelectorAll(".scroller");
-if (scrollers.length > 0) {
-  addInfiniteScroll();
-}
-
-function addInfiniteScroll() {
-  scrollers.forEach((scroller) => {
-    scroller.setAttribute("data-infinite-scroll", "true");
-    const scrollerInner = scroller.querySelector(".scroller-inner");
-    const scrollerContent = Array.from(scrollerInner.children);
-    scroller.dataset.originalCount = String(scrollerContent.length);
-
-    // Speed: base is 30s for 5 items (≈ 6s per item)
-    const baseItems = 5;
-    const baseSeconds = 30;
-    const count = scrollerContent.length;
-    const durationSeconds = (count / baseItems) * baseSeconds;
-    const minSeconds = 12;
-    const maxSeconds = 120;
-    const finalSeconds = Math.min(maxSeconds, Math.max(minSeconds, durationSeconds));
-    scroller.style.setProperty("--scroll-duration", `${finalSeconds}s`);
-
-    setScrollDistance(scroller);
-    scrollerContent.forEach((child) => {
-      let duplicatedChild = child.cloneNode(true);
-      duplicatedChild.setAttribute("aria-hidden", "true");
-      scrollerInner.appendChild(duplicatedChild);
-    });
-    scrollerContent.forEach((child) => {
-      let duplicatedChild = child.cloneNode(true);
-      duplicatedChild.setAttribute("aria-hidden", "true");
-      scrollerInner.appendChild(duplicatedChild);
-    });
-  });
-}
-
-function setScrollDistance(scroller) {
-  const scrollerInner = scroller.querySelector(".scroller-inner");
-  const originalCount = Number(scroller.dataset.originalCount || 0);
-  if (originalCount === 0) {
-    return;
-  }
-  const children = Array.from(scrollerInner.children).slice(0, originalCount);
-  const originalWidth = children.reduce((total, child) => {
-    return total + child.getBoundingClientRect().width;
-  }, 0);
-  if (originalWidth > 0) {
-    scroller.style.setProperty("--scroll-distance", `${originalWidth}px`);
-  }
-}
-
-window.addEventListener("load", () => {
-  scrollers.forEach((scroller) => {
-    setScrollDistance(scroller);
-  });
-});
 
   /**
    * Scroll top button
@@ -519,15 +460,29 @@ class SliderPrevNextDesktopRelatedPosts {
 }
 
 
-const scrollers = document.querySelectorAll(".scroller-logos");
-if (scrollers.length > 0) {
-  addInfiniteScroll();
-}
+document.addEventListener("DOMContentLoaded", () => {
+  const scrollers = document.querySelectorAll(".scroller, .scroller-logos");
+  if (scrollers.length === 0) return;
 
-function addInfiniteScroll() {
+  function setScrollDistance(scroller) {
+    const scrollerInner = scroller.querySelector(".scroller-inner");
+    const originalCount = Number(scroller.dataset.originalCount || 0);
+    if (originalCount === 0 || !scrollerInner) return;
+
+    const children = Array.from(scrollerInner.children).slice(0, originalCount);
+    const originalWidth = children.reduce((total, child) => {
+      return total + child.getBoundingClientRect().width;
+    }, 0);
+    if (originalWidth > 0) {
+      scroller.style.setProperty("--scroll-distance", `${originalWidth}px`);
+    }
+  }
+
   scrollers.forEach((scroller) => {
     scroller.setAttribute("data-infinite-scroll", "true");
     const scrollerInner = scroller.querySelector(".scroller-inner");
+    if (!scrollerInner) return;
+
     const scrollerContent = Array.from(scrollerInner.children);
     scroller.dataset.originalCount = String(scrollerContent.length);
 
@@ -536,43 +491,23 @@ function addInfiniteScroll() {
     const baseSeconds = 30;
     const count = scrollerContent.length;
     const durationSeconds = (count / baseItems) * baseSeconds;
-    const minSeconds = 12;
-    const maxSeconds = 120;
-    const finalSeconds = Math.min(maxSeconds, Math.max(minSeconds, durationSeconds));
+    const finalSeconds = Math.min(120, Math.max(12, durationSeconds));
     scroller.style.setProperty("--scroll-duration", `${finalSeconds}s`);
 
     setScrollDistance(scroller);
     scrollerContent.forEach((child) => {
-      let duplicatedChild = child.cloneNode(true);
+      const duplicatedChild = child.cloneNode(true);
       duplicatedChild.setAttribute("aria-hidden", "true");
       scrollerInner.appendChild(duplicatedChild);
     });
     scrollerContent.forEach((child) => {
-      let duplicatedChild = child.cloneNode(true);
+      const duplicatedChild = child.cloneNode(true);
       duplicatedChild.setAttribute("aria-hidden", "true");
       scrollerInner.appendChild(duplicatedChild);
     });
   });
-}
 
-
-function setScrollDistance(scroller) {
-  const scrollerInner = scroller.querySelector(".scroller-inner");
-  const originalCount = Number(scroller.dataset.originalCount || 0);
-  if (originalCount === 0) {
-    return;
-  }
-  const children = Array.from(scrollerInner.children).slice(0, originalCount);
-  const originalWidth = children.reduce((total, child) => {
-    return total + child.getBoundingClientRect().width;
-  }, 0);
-  if (originalWidth > 0) {
-    scroller.style.setProperty("--scroll-distance", `${originalWidth}px`);
-  }
-}
-
-window.addEventListener("load", () => {
-  scrollers.forEach((scroller) => {
-    setScrollDistance(scroller);
+  window.addEventListener("load", () => {
+    scrollers.forEach((scroller) => setScrollDistance(scroller));
   });
 });

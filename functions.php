@@ -16,6 +16,7 @@ $base->themeSupports();
 $base->registerMenus();
 $base->includeStyles();
 $base->includeScripts();
+$base->dequeueFrontEndJquery();
 $base->addSVGSupport();
 $base->registerWidgets();
 $base->sidebar_widgets_language_selector_init();

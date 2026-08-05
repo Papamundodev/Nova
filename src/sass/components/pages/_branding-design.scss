@@ -462,9 +462,13 @@
 }
 
 #matrix-canvas {
-  display: block;
-  width: 100%;
-  height: 600px;
-  box-shadow: 0 0 25px 0 $background-color;
-  border-radius: $border-radius-rounded-lg;
+  display: none;
+
+  @media (hover: hover) and (width >= $breakpoint-sm) {
+    display: block;
+    width: 100%;
+    height: 600px;
+    box-shadow: 0 0 25px 0 $background-color;
+    border-radius: $border-radius-rounded-lg;
+  }
 }

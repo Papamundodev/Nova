@@ -16,18 +16,36 @@ class Base
     public function includeStyles(): void
     {
         add_action('wp_enqueue_scripts', function () {
-            $css_uri = get_template_directory_uri() . '/assets/css/main.css';
-            wp_enqueue_style('main', $css_uri, [], (string) time());
+            $css_path = get_template_directory() . '/assets/css/main.css';
+            $css_uri  = get_template_directory_uri() . '/assets/css/main.css';
+            wp_enqueue_style('main', $css_uri, [], (string) filemtime($css_path));
         });
     }
 
     public function includeScripts(): void
     {
         add_action('wp_enqueue_scripts', function () {
-            $js_uri = get_template_directory_uri() . '/assets/js/main.js';
-            wp_register_script('main', $js_uri, [], (string) time(), true);
+            $js_path = get_template_directory() . '/assets/js/main.js';
+            $js_uri  = get_template_directory_uri() . '/assets/js/main.js';
+            wp_register_script('main', $js_uri, [], (string) filemtime($js_path), true);
             wp_enqueue_script('main');
         });
+    }
+
+    /**
+     * Theme uses vanilla JS — dequeue jQuery for logged-out front-end visitors.
+     */
+    public function dequeueFrontEndJquery(): void
+    {
+        add_action('wp_enqueue_scripts', function () {
+            if (is_admin() || is_user_logged_in()) {
+                return;
+            }
+            wp_dequeue_script('jquery');
+            wp_deregister_script('jquery');
+            wp_dequeue_script('jquery-migrate');
+            wp_deregister_script('jquery-migrate');
+        }, 100);
     }
 
     public function themeSupports(): void

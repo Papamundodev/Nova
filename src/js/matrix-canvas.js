@@ -6,6 +6,11 @@ function initMatrixCanvas() {
   const canvas = document.getElementById("matrix-canvas");
   if (!canvas) return;
 
+  // Skip on touch-only devices and when reduced motion is preferred
+  const isTouchOnly = window.matchMedia("(hover: none)").matches;
+  const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (isTouchOnly || prefersReducedMotion) return;
+
   const ctx = canvas.getContext("2d");
 
   // Resolve theme colors from CSS custom properties (canvas can't use var() directly)

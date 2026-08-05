@@ -80,7 +80,11 @@ $content = wpautop($object->post_content);
                 <?php foreach ($section_3['items'] as $item) : ?>
                     <div class="section-3-item">
                         <div class="section-3-item-image">
-                            <img src="<?= $item['image']['url']; ?>" alt="<?= $item['image']['alt'] ?? $item['title']; ?>">
+                            <img src="<?= $item['image']['sizes']['tablet'] ?? $item['image']['url']; ?>"
+                                 alt="<?= esc_attr($item['image']['alt'] ?? $item['title']); ?>"
+                                 loading="lazy" decoding="async"
+                                 width="<?= esc_attr($item['image']['sizes']['tablet-width'] ?? ''); ?>"
+                                 height="<?= esc_attr($item['image']['sizes']['tablet-height'] ?? ''); ?>">
                         </div>
                         <div class="section-3-item-content">
                             <h4><?= $item['title']; ?></h4>
@@ -125,7 +129,11 @@ $content = wpautop($object->post_content);
                                         <?php if ($image) : ?>
                                             <div class="section-4-img-content-image">
                                                 <div class="section-4-item-image">
-                                                    <img src="<?= $image['url']; ?>" alt="<?= $image['alt'] ?? $img_title; ?>">
+                                                    <img src="<?= $image['sizes']['tablet'] ?? $image['url']; ?>"
+                                                         alt="<?= esc_attr($image['alt'] ?? $img_title); ?>"
+                                                         loading="lazy" decoding="async"
+                                                         width="<?= esc_attr($image['sizes']['tablet-width'] ?? ''); ?>"
+                                                         height="<?= esc_attr($image['sizes']['tablet-height'] ?? ''); ?>">
                                                 </div>
                                             </div>
                                         <?php endif; ?>
@@ -166,11 +174,11 @@ $content = wpautop($object->post_content);
                         <?php foreach ($section_banner_logos as $banner): ?>
                             <?php if (isset($banner['link']) && $banner['link']) : ?>
                                 <a href="<?= $banner['link']; ?>" target="_blank" class="img-container">
-                                    <img src="<?= $banner['image']['sizes']['partner_logo'] ?? $banner['image']['sizes']['medium'] ?? $banner['image']['url']; ?>" alt="parterns images and link to the partner website">
+                                    <img src="<?= $banner['image']['sizes']['partner_logo'] ?? $banner['image']['sizes']['medium'] ?? $banner['image']['url']; ?>" alt="parterns images and link to the partner website" loading="lazy" decoding="async">
                                 </a>
                             <?php else : ?>
                                 <div class="img-container">
-                                    <img src="<?= $banner['image']['sizes']['partner_logo'] ?? $banner['image']['sizes']['medium'] ?? $banner['image']['url']; ?>" alt="parterns images and link to the partner website">
+                                    <img src="<?= $banner['image']['sizes']['partner_logo'] ?? $banner['image']['sizes']['medium'] ?? $banner['image']['url']; ?>" alt="parterns images and link to the partner website" loading="lazy" decoding="async">
                                 </div>
                             <?php endif; ?>
                         <?php endforeach; ?>

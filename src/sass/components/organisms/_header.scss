@@ -13,8 +13,7 @@
   margin-block: $spacer-vi-md $spacer-vi-xxl;
   position: relative;
   .button-container {
-    position: relative;
-    z-index: 100;
+    margin-inline: $spacer-lg;
   }
   .img-container-logo-sm {
     width: 100px;
@@ -22,7 +21,7 @@
 }
 
 /* ----- NAVBAR DESKTOP ----- */
-@media (width >= $breakpoint-lg) {
+@media (width >= $breakpoint-xl) {
   .navmenu-mobile {
     display: none;
   }
@@ -42,7 +41,7 @@ body:has(.navmenu-mobile:popover-open) {
   overflow: hidden;
 }
 
-@media (width <= $breakpoint-lg) {
+@media (width <= $breakpoint-xl) {
   .header {
     margin-block: 0;
     padding-block: $spacer-xl;
@@ -98,7 +97,7 @@ body:has(.navmenu-mobile:popover-open) {
   }
 }
 
-@media (width >= $breakpoint-lg) {
+@media (width >= $breakpoint-xl) {
   .header {
     grid-template-rows: 30px;
   }

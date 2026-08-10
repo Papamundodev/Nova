@@ -9,20 +9,6 @@ $categories = get_the_terms($post->ID, 'category');
 ?>
 <article class="post-preview  card-hover-primary-color">
     <img src="<?= get_the_post_thumbnail_url($post->ID); ?>" alt="<?= get_the_title($post->ID); ?>">
-    <div class="expertise-container">
-        <?php $i = 0;
-        $expertises = get_the_terms($post->ID, 'expertises');
-        if ($expertises && count($expertises) > 0) :
-            foreach ($expertises as $expertise) :
-                if ($i < 2) :
-                    $cat_color = get_field('color', $expertise);
-                    $category_link = get_term_link($expertise); ?>
-                    <span class="expertise-link"><a class="btn <?= $cat_color; ?>-color" href="<?= $category_link; ?>"><?= $expertise->name; ?></a></span>
-            <?php endif;
-                $i++;
-            endforeach; ?>
-        <?php endif; ?>
-    </div>
     <div class="category-container">
         <?php $i = 0;
         $categories = get_the_terms($post->ID, 'category');

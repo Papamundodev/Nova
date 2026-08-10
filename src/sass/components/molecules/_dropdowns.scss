@@ -82,6 +82,9 @@
         width: 100%;
         border: 2px solid $default-color;
         padding: $spacer-xl;
+        @media (width <= $breakpoint-xl) {
+          gap: $spacer-md;
+        }
       }
       .img-container {
         padding: $spacer-sm;

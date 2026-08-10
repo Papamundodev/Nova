@@ -534,6 +534,7 @@
 .category-link {
   display: flex;
   justify-content: center;
+  height: fit-content;
   .btn {
     font-family: $heading-font;
     font-size: $font-size-xs;

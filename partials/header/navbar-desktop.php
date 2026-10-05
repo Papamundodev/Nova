@@ -27,17 +27,18 @@ $menu_items = \Theme_base\Base::wp_get_menu_array($theme_location);
                                 <?php
                                 $image = get_field('image', $item);
                                 $color = get_field('color', $item);
-                                $link = get_term_link($item);
+                                $link = get_field('link', $item);
                                 ?>
                                 <li class="card-nav border-<?= $color; ?>-color card-hover-<?= $color; ?>-color">
                                     <div class="img-container bg-<?= $color; ?>-color">
                                         <img src="<?= $image['url']; ?>" alt="<?= $image['alt']; ?>">
                                     </div>
                                     <div class="flex-between">
-                                        <a class="<?= $color; ?>-color" href="<?= home_url(); ?>#expertise-<?= sanitize_title($item->name); ?>"><?= $item->name ?></a>
+                                        <a class="<?= $color; ?>-color" href="<?= $link['url']; ?>"><?= $link['title']; ?></a>
                                         <div class=" svg-container svg-<?= $color; ?>-color">
                                             <?= file_get_contents(get_template_directory() . '/assets/images/arrow-up-right-bold.svg'); ?>
                                         </div>
+                                    </div>
                                 </li>
                             <? endforeach; ?>
                         </ul>

@@ -69,6 +69,7 @@ class Base
             add_image_size('tablet', 768, '', true); // Pour les tablettes
             add_image_size('medium', 992, '', true); // Medium 
             add_image_size('large', 1200, '', true); // Large 
+            add_image_size('xlarge', 1400, '', true); // Xlarge
             add_image_size('team_member', 500, 500, true);   // Team cards (displayed 500×500)
             add_image_size('layout_img', 700, 700, false);   // our_values, portfolio (max 700px)
 
@@ -115,6 +116,115 @@ class Base
                 return $mimes;
             });
         });
+    }
+
+    /**
+     * Inline a theme SVG file from /assets/images/.
+     * Returns the raw SVG markup, or an empty string if the file is unreadable.
+     *
+     * @param string $filename Filename (e.g. "arrow-right.svg") or sub-path inside assets/images/.
+     */
+    public static function inline_svg(string $filename): string
+    {
+        $filename = ltrim($filename, '/');
+        $path = get_template_directory() . '/assets/images/' . $filename;
+
+        if (is_readable($path)) {
+            return (string) file_get_contents($path);
+        }
+
+        return '';
+    }
+
+    /**
+     * Allowed tags/attributes whitelist for sanitizing SVG markup via wp_kses().
+     * Used by inline_svg_from_attachment() since media library SVGs are not trusted.
+     *
+     * @return array<string, array<string, bool>>
+     */
+    public static function svg_allowed_tags(): array
+    {
+        $common_attrs = [
+            'id'               => true,
+            'class'            => true,
+            'style'            => true,
+            'fill'             => true,
+            'fill-rule'        => true,
+            'fill-opacity'     => true,
+            'stroke'           => true,
+            'stroke-width'     => true,
+            'stroke-linecap'   => true,
+            'stroke-linejoin'  => true,
+            'stroke-opacity'   => true,
+            'stroke-dasharray' => true,
+            'opacity'          => true,
+            'transform'        => true,
+            'clip-path'        => true,
+            'mask'             => true,
+        ];
+
+        return [
+            'svg' => array_merge($common_attrs, [
+                'xmlns'       => true,
+                'xmlns:xlink' => true,
+                'width'       => true,
+                'height'      => true,
+                'viewbox'     => true,
+                'viewBox'     => true,
+                'preserveaspectratio' => true,
+                'aria-hidden' => true,
+                'aria-label'  => true,
+                'role'        => true,
+                'focusable'   => true,
+            ]),
+            'g'              => array_merge($common_attrs, []),
+            'defs'           => [],
+            'title'          => [],
+            'desc'           => [],
+            'path'           => array_merge($common_attrs, ['d' => true]),
+            'circle'         => array_merge($common_attrs, ['cx' => true, 'cy' => true, 'r' => true]),
+            'ellipse'        => array_merge($common_attrs, ['cx' => true, 'cy' => true, 'rx' => true, 'ry' => true]),
+            'rect'           => array_merge($common_attrs, ['x' => true, 'y' => true, 'width' => true, 'height' => true, 'rx' => true, 'ry' => true]),
+            'line'           => array_merge($common_attrs, ['x1' => true, 'y1' => true, 'x2' => true, 'y2' => true]),
+            'polyline'       => array_merge($common_attrs, ['points' => true]),
+            'polygon'        => array_merge($common_attrs, ['points' => true]),
+            'text'           => array_merge($common_attrs, ['x' => true, 'y' => true, 'dx' => true, 'dy' => true, 'font-family' => true, 'font-size' => true, 'font-weight' => true, 'text-anchor' => true]),
+            'tspan'          => array_merge($common_attrs, ['x' => true, 'y' => true, 'dx' => true, 'dy' => true]),
+            'use'            => array_merge($common_attrs, ['href' => true, 'xlink:href' => true, 'x' => true, 'y' => true, 'width' => true, 'height' => true]),
+            'symbol'         => array_merge($common_attrs, ['viewbox' => true, 'viewBox' => true]),
+            'lineargradient' => ['id' => true, 'x1' => true, 'y1' => true, 'x2' => true, 'y2' => true, 'gradientunits' => true, 'gradienttransform' => true],
+            'radialgradient' => ['id' => true, 'cx' => true, 'cy' => true, 'r' => true, 'fx' => true, 'fy' => true, 'gradientunits' => true, 'gradienttransform' => true],
+            'stop'           => ['offset' => true, 'stop-color' => true, 'stop-opacity' => true, 'style' => true],
+            'clippath'       => ['id' => true, 'clippathunits' => true],
+            'mask'           => ['id' => true, 'x' => true, 'y' => true, 'width' => true, 'height' => true, 'maskunits' => true, 'maskcontentunits' => true],
+            'filter'         => ['id' => true, 'x' => true, 'y' => true, 'width' => true, 'height' => true],
+        ];
+    }
+
+    /**
+     * Inline an SVG uploaded to the media library (sanitized via wp_kses()).
+     *
+     * @param int|array $attachment Attachment ID or ACF image array (['ID' => int, ...]).
+     */
+    public static function inline_svg_from_attachment($attachment): string
+    {
+        $id = is_array($attachment) ? (int) ($attachment['ID'] ?? 0) : (int) $attachment;
+        if ($id <= 0) {
+            return '';
+        }
+
+        $path = get_attached_file($id);
+        if (! $path || ! is_readable($path)) {
+            return '';
+        }
+
+        if (strtolower(pathinfo($path, PATHINFO_EXTENSION)) !== 'svg') {
+            return '';
+        }
+
+        $svg = (string) file_get_contents($path);
+
+        return wp_kses($svg, self::svg_allowed_tags());
     }
 
 

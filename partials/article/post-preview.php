@@ -2,13 +2,13 @@
 $post = $args['post'] ?? null;
 $title = wp_trim_words($post->post_title, 8, '...');
 $content = wp_trim_words(apply_filters('the_content', $post->post_excerpt), 30, '...');
-$featured_image = get_the_post_thumbnail_url($post, 'medium');
+$featured_image = get_the_post_thumbnail_url($post, 'team_member');
 $link = get_the_permalink($post->ID);
 $expertises = get_the_terms($post->ID, 'expertises');
 $categories = get_the_terms($post->ID, 'category');
 ?>
 <article class="post-preview  card-hover-primary-color">
-    <img src="<?= get_the_post_thumbnail_url($post->ID); ?>" alt="<?= get_the_title($post->ID); ?>">
+    <img src="<?= $featured_image; ?>" alt="<?= get_the_title($post->ID); ?>">
     <div class="category-container">
         <?php $i = 0;
         $categories = get_the_terms($post->ID, 'category');

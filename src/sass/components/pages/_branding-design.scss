@@ -140,6 +140,7 @@
     flex-direction: column;
     gap: $spacer-xl;
     padding-block: $spacer-xxl;
+
     @media (width >= $breakpoint-xl) {
       flex-direction: row;
     }
@@ -148,6 +149,7 @@
     display: flex;
     flex-direction: column;
     gap: $spacer-xl;
+    position: relative;
     @media (width >= $breakpoint-xl) {
       min-width: 50%;
     }
@@ -469,6 +471,10 @@
     width: 100%;
     height: 600px;
     box-shadow: 0 0 25px 0 $background-color;
-    border-radius: $border-radius-rounded-lg;
+    border-radius: $border-radius-circle;
+    position: sticky;
+    top: $spacer-xxl;
+    left: 50%;
+    transform: translateX(-25%);
   }
 }

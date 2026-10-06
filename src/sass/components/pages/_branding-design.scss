@@ -473,10 +473,10 @@
     height: var(--size-canvas);
     border-radius: $border-radius-circle;
     position: sticky;
-    top: calc(var(--size-canvas) * 2);
+    top: calc($spacer-xxl * 2);
     margin-block-end: $spacer-xxl;
     align-self: center;
-    box-shadow: 0px 6px 25px 5px $yellow-color;
-    border: 2px solid $yellow-color;
+    box-shadow: 0px 6px 25px 5px $primary-color;
+    background-color: $dark-color;
   }
 }

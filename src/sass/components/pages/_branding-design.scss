@@ -464,17 +464,18 @@
 }
 
 #matrix-canvas {
+  --size-canvas: 450px;
   display: none;
 
   @media (hover: hover) and (width >= $breakpoint-sm) {
     display: block;
-    width: 450px;
-    height: 450px;
+    width: var(--size-canvas);
+    height: var(--size-canvas);
     box-shadow: 0 0 25px 0 $background-color;
     border-radius: $border-radius-circle;
     position: sticky;
     top: $spacer-xxl;
     left: 50%;
-    transform: translateX(-25%);
+    transform: translateX(calc(var(--size-canvas) / 2 * -1));
   }
 }
